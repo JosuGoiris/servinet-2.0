@@ -378,7 +378,7 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
         txtApellido.setText(tblUsuarios.getValueAt(fila, 2).toString());
         txtCedula.setText(tblUsuarios.getValueAt(fila, 3).toString());
         txtTelefono.setText(tblUsuarios.getValueAt(fila, 4).toString());
-        cmbTipoServicio.setSelectedItem(tblUsuarios.getValueAt(fila, 5).toString());
+        /*cmbTipoServicio.setSelectedItem(tblUsuarios.getValueAt(fila, 5).toString());*/
         cmbEstadoTrabajador.setSelectedItem(tblUsuarios.getValueAt(fila, 6).toString());
     }//GEN-LAST:event_tblUsuariosMouseClicked
 

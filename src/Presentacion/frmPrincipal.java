@@ -7,6 +7,7 @@ package Presentacion;
 
 import java.awt.Image;
 import java.beans.PropertyVetoException;
+import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -24,29 +25,34 @@ public class frmPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
         
-        ImageIcon icServicios = new ImageIcon(getClass().getResource("/Imagenes/servicios.png"));
+        URL imageUrl = this.getClass().getResource("/Imagenes/servicios.png");
+        ImageIcon icoservicio = new ImageIcon(imageUrl);
+        Icon iconoSer = new ImageIcon(icoservicio.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
+        btnServicios.setIcon(iconoSer);
+        
+        /*ImageIcon icServicios = new ImageIcon(getClass().getResource("Imagenes/servicios.png"));
         Icon iconoSer = new ImageIcon(icServicios.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
         btnServicios.setIcon(iconoSer);
         
-        ImageIcon icTrabajadores = new ImageIcon(getClass().getResource("/Imagenes/Trabajadores.png"));
+        ImageIcon icTrabajadores = new ImageIcon(getClass().getResource("Imagenes/Trabajadores.png"));
         Icon iconoTrab = new ImageIcon(icTrabajadores.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
         btnTrabajadores.setIcon(iconoTrab);
         
-        ImageIcon icUsuarios = new ImageIcon(getClass().getResource("/Imagenes/Usuarios.png"));
+        ImageIcon icUsuarios = new ImageIcon(getClass().getResource("Imagenes/Usuarios.png"));
         Icon iconoUsu = new ImageIcon(icUsuarios.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
         btnUsuarios.setIcon(iconoUsu);
         
-        ImageIcon icConfigP = new ImageIcon(getClass().getResource("/Imagenes/ConfigPagos.png"));
+        ImageIcon icConfigP = new ImageIcon(getClass().getResource("Imagenes/ConfigPagos.png"));
         Icon iconoConfigP = new ImageIcon(icConfigP.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
         btnConfigPagos.setIcon(iconoConfigP);
         
-        ImageIcon icZonas = new ImageIcon(getClass().getResource("/Imagenes/zonas.png"));
+        ImageIcon icZonas = new ImageIcon(getClass().getResource("Imagenes/zonas.png"));
         Icon iconoZonas = new ImageIcon(icZonas.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
         btnZonas.setIcon(iconoZonas);
         
-        ImageIcon icCuadrilla = new ImageIcon(getClass().getResource("/Imagenes/CuadrillasCamion.png"));
+        ImageIcon icCuadrilla = new ImageIcon(getClass().getResource("Imagenes/CuadrillasCamion.png"));
         Icon iconoCuadrilla = new ImageIcon(icCuadrilla.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
-        btnCuadrillas.setIcon(iconoCuadrilla);
+        btnCuadrillas.setIcon(iconoCuadrilla);*/
     }
 
     /**

@@ -303,11 +303,11 @@ public class frmDireccion extends javax.swing.JInternalFrame {
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
         int fila = tblUsuarios.rowAtPoint(evt.getPoint());
         txtId.setText(tblUsuarios.getValueAt(fila, 0).toString());
-        txtNombre.setText(tblUsuarios.getValueAt(fila, 1).toString());
+        /*txtNombre.setText(tblUsuarios.getValueAt(fila, 1).toString());
         txtApellido.setText(tblUsuarios.getValueAt(fila, 2).toString());
         txtCedula.setText(tblUsuarios.getValueAt(fila, 3).toString());
         txtTelefono.setText(tblUsuarios.getValueAt(fila, 4).toString());
-        cmbTipoServicio.setSelectedItem(tblUsuarios.getValueAt(fila, 5).toString());
+        cmbTipoServicio.setSelectedItem(tblUsuarios.getValueAt(fila, 5).toString());*/
         cmbEstado.setSelectedItem(tblUsuarios.getValueAt(fila, 6).toString());
     }//GEN-LAST:event_tblUsuariosMouseClicked
 
