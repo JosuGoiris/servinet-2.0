@@ -37,7 +37,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
         initComponents();
         mostrarBuscar("");
         
-        cmbEstado.setModel(es.llenarCombo());
+        cmbEstado.setModel(es.llenarComboServicio());
         
         txtId.setVisible(false);
         txtNombre.setVisible(false);

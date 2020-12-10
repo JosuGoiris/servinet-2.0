@@ -44,7 +44,7 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
         initComponents();
         mostrarBuscar("");
         
-        cmbEstado.setModel(es.llenarCombo());
+        cmbEstado.setModel(es.llenarComboTipoUsuario());
         
         txtId.setVisible(false);
         txtTipoUsuario.setVisible(false);

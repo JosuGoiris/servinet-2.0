@@ -43,7 +43,7 @@ public class frmPuestos extends javax.swing.JInternalFrame {
         initComponents();
         mostrarBuscar("");
         
-        cmbEstado.setModel(es.llenarCombo());
+        cmbEstado.setModel(es.llenarComboPuestos());
         
         txtId.setVisible(false);
         txtPuesto.setVisible(false);

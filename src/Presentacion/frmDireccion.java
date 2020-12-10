@@ -40,7 +40,7 @@ public class frmDireccion extends javax.swing.JInternalFrame {
         initComponents();
         mostrarBuscar("");
         
-        cmbEstado.setModel(es.llenarCombo());
+        cmbEstado.setModel(es.llenarComboPersona());
         
         txtId.setVisible(false);
         txtDireccion.setVisible(false);

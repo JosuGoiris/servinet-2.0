@@ -44,7 +44,7 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
         initComponents();
         mostrarBuscar("");
         
-        cmbEstadoTrabajador.setModel(es.llenarCombo());
+        cmbEstadoTrabajador.setModel(es.llenarComboPersona());
         
         txtId.setVisible(false);
         txtNombre.setVisible(false);
