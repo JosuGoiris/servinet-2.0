@@ -11,14 +11,14 @@ package Datos;
  */
 public class DTipoUsuario {
     int IdTipoUsuario;
-    String Tipo;
+    String nombre;
 
     public DTipoUsuario() {
     }
 
-    public DTipoUsuario(int IdTipoUsuario, String Tipo) {
+    public DTipoUsuario(int IdTipoUsuario, String nombre) {
         this.IdTipoUsuario = IdTipoUsuario;
-        this.Tipo = Tipo;
+        this.nombre = nombre;
     }
 
     public int getIdTipoUsuario() {
@@ -29,12 +29,12 @@ public class DTipoUsuario {
         this.IdTipoUsuario = IdTipoUsuario;
     }
 
-    public String getTipo() {
-        return Tipo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTipo(String Tipo) {
-        this.Tipo = Tipo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     

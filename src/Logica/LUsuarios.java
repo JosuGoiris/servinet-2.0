@@ -29,12 +29,12 @@ public class LUsuarios {
     public DefaultTableModel mostrarUsuarios(String buscar) {
         DefaultTableModel miModelo = null;
         
-            String titulos [] = {"Id", "Usuario", "Clave", "Nombre", "Apellido", "Cédula", "Dirección", "Telefono", "Tipo"};
-            String dts [] = new String[9];
+            String titulos [] = {"Id", "Usuario", "Clave", "Nombre", "Apellido", "Cédula", "Dirección", "Telefono", "Tipo", "Estado"};
+            String dts [] = new String[10];
             
             miModelo = new DefaultTableModel(null, titulos);
             sSQL = "select p.idPersona, u.loginUsuario, u.passwordUsuario, p.nombres, p.apellidos, p.cedulaIdent, \n"
-                    + "d.nombreDireccion, p.telefono, t.nombre from tblpersona as p inner join tblusuario as u on p.idPersona = u.personaId inner join tbldireccion as d on p.direccionId = d.idDireccion inner join tbltipousuario as t on u.tipoUsuarioId = t.idTipoUsuario \n"
+                    + "d.nombreDireccion, p.telefono, t.nombre, e.estado from tblpersona as p inner join tblusuario as u on p.idPersona = u.personaId inner join tbldireccion as d on p.direccionId = d.idDireccion inner join tbltipousuario as t on u.tipoUsuarioId = t.idTipoUsuario inner join tblestadopersona as e on p.estadopersonaId = e.idEstadoPersona \n"
                     + "where p.idPersona = '" + buscar + "' or p.nombres like '%" + buscar + "%'\n"
                     + "or p.apellidos like '%" + buscar + "%' or p.cedulaIdent like '%" + buscar + "%' order by p.idPersona";
             try {
@@ -50,6 +50,7 @@ public class LUsuarios {
                     dts[6] = rs.getString("nombreDireccion");
                     dts[7] = rs.getString("telefono");
                     dts[8] = rs.getString("nombre");
+                    dts[9] = rs.getString("estado");
                     miModelo.addRow(dts);
                 }
                 return miModelo;
@@ -61,8 +62,10 @@ public class LUsuarios {
     
     public String insertarUsuarios(DUsuarios misDUsuarios, DPersona misDPersona, DTipoUsuario misDTipoUsuario) {
         String msg = null;
-        sSQL = "insert into tblpersona(nombres, apellidos, cedulaIdent, telefono, direccionId) value(?,?,?,?, (select idDireccion from tbldireccion order by idDireccion desc limit 1))";
-        sSQL1 = "insert into tbltipousuario(nombre) value(?)";
+        sSQL = "insert into tblpersona(nombres, apellidos, cedulaIdent, telefono, direccionId, estadopersonaId) value(?,?,?,?, \n"
+                + "(select idDireccion from tbldireccion order by idDireccion desc limit 1) \n"
+                + "(select idEstadoPersona from tblestadopersona order by idEstadoPersona desc limit 1))";
+        sSQL1 = "insert into tbltipousuario(nombre, estadotipoId) value(?, (select idEstadoTipoU from tblestadotipousuario order by idEstadoTipoU desc limit 1))";
         sSQL2 = "insert into tblusuario(loginUsuario, passwordUsuario, personaId, tipoUsuarioId) "
                 + "value(?,?, (select idPersona from tblPersona order by idPersona desc limit 1), "
                 + "(select idTipoUsuario from tbltipousuario order by idTipoUsuario desc limit 1))";
@@ -76,7 +79,7 @@ public class LUsuarios {
             pst.setString(3, misDPersona.getCedulaIdent());
             pst.setString(4, misDPersona.getTelefono());
             
-            pst1.setString(1, misDTipoUsuario.getTipo());
+            pst1.setString(1, misDTipoUsuario.getNombre());
             pst2.setString(1, misDUsuarios.getLoginUsuario());
             pst2.setString(2, misDUsuarios.getPasswordUsuario());
             
@@ -121,7 +124,7 @@ public class LUsuarios {
             pst.setInt(5, misDPersona.getDireccionId());
             pst.setInt(6, misDPersona.getIdPersona());
             
-            pst1.setString(1, misDTipoUsuario.getTipo());
+            pst1.setString(1, misDTipoUsuario.getNombre());
             pst1.setInt(2, misDTipoUsuario.getIdTipoUsuario());
             
             pst2.setString(1, misDUsuarios.getLoginUsuario());

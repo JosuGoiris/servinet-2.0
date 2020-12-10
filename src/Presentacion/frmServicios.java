@@ -12,6 +12,7 @@ import Datos.DTipoServicio;
 import Datos.DTipoUsuario;
 import Datos.DUsuarios;
 import Datos.guardarDatos;
+import Logica.LEstados;
 import Logica.LServicios;
 import Logica.LTipoUsuario;
 import Logica.LUsuarios;
@@ -26,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
  * @author josug
  */
 public class frmServicios extends javax.swing.JInternalFrame {
-
+    private LEstados es = new LEstados();
     /**
      * Creates new form frmUsuario
      */
@@ -35,6 +36,9 @@ public class frmServicios extends javax.swing.JInternalFrame {
     public frmServicios() {
         initComponents();
         mostrarBuscar("");
+        
+        cmbEstado.setModel(es.llenarCombo());
+        
         txtId.setVisible(false);
         txtNombre.setVisible(false);
         txtVelocidad.setVisible(false);

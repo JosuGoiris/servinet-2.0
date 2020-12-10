@@ -9,6 +9,8 @@ import Datos.DPersona;
 import Datos.DTipoUsuario;
 import Datos.DUsuarios;
 import Datos.guardarDatos;
+import Logica.LConnection;
+import Logica.LEstados;
 import Logica.LUsuarios;
 import java.awt.Image;
 import javax.swing.Icon;
@@ -22,6 +24,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmUsuario extends javax.swing.JInternalFrame {
     public static int control = 0;
+    private LEstados es = new LEstados();
     /**
      * Creates new form frmUsuario
      */
@@ -30,6 +33,9 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     public frmUsuario() {
         initComponents();
         mostrarBuscar("");
+        
+        cmbEstado.setModel(es.llenarCombo());
+        
         txtId.setVisible(false);
         txtId.setEditable(false);
         txtUsuario.setVisible(false);
@@ -38,11 +44,11 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtApellido.setVisible(false);
         txtCedula.setVisible(false);
         txtTelefono.setVisible(false);
-        txtIdDireccion.setVisible(false);
-        txtIdDireccion.setEditable(false);
-        txtDireccion.setVisible(false);
-        txtDireccion.setEditable(false);
-        cmbTipo.setVisible(false);
+        txtIdTipoU.setVisible(false);
+        txtIdTipoU.setEditable(false);
+        txtTipoU.setVisible(false);
+        txtTipoU.setEditable(false);
+        cmbEstado.setVisible(false);
         
         btnGuardar.setVisible(false);
         btnCancelar.setVisible(false);
@@ -79,11 +85,11 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtApellido.setVisible(true);
         txtCedula.setVisible(true);
         txtTelefono.setVisible(true);
-        txtIdDireccion.setVisible(true);
-        txtIdDireccion.setEditable(false);
-        txtDireccion.setVisible(true);
-        txtDireccion.setEditable(false);
-        cmbTipo.setVisible(true);
+        txtIdTipoU.setVisible(true);
+        txtIdTipoU.setEditable(false);
+        txtTipoU.setVisible(true);
+        txtTipoU.setEditable(false);
+        cmbEstado.setVisible(true);
         
         btnGuardar.setVisible(true);
         btnCancelar.setVisible(true);
@@ -114,11 +120,11 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtApellido.setVisible(false);
         txtCedula.setVisible(false);
         txtTelefono.setVisible(false);
-        txtIdDireccion.setVisible(false);
-        txtIdDireccion.setEditable(false);
-        txtDireccion.setVisible(false);
-        txtDireccion.setEditable(false);
-        cmbTipo.setVisible(false);
+        txtIdTipoU.setVisible(false);
+        txtIdTipoU.setEditable(false);
+        txtTipoU.setVisible(false);
+        txtTipoU.setEditable(false);
+        cmbEstado.setVisible(false);
         
         btnGuardar.setVisible(false);
         btnCancelar.setVisible(false);
@@ -154,7 +160,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         btnEditar = new javax.swing.JButton();
         btnCancelarForm = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        txtIdDireccion = new javax.swing.JTextField();
+        txtIdTipoU = new javax.swing.JTextField();
         txtId = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         txtClave = new javax.swing.JTextField();
@@ -168,14 +174,18 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         lblApellidos = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         lblCedula = new javax.swing.JLabel();
-        cmbTipo = new javax.swing.JComboBox<>();
         lblDireccion = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        txtDireccion = new javax.swing.JTextField();
+        txtTipoU = new javax.swing.JTextField();
         lblTelefono = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
         btnBuscarDireccion = new javax.swing.JToggleButton();
+        txtIdDireccion = new javax.swing.JTextField();
+        txtDireccion = new javax.swing.JTextField();
+        btnBuscarTipoU = new javax.swing.JToggleButton();
+        lblEstado = new javax.swing.JLabel();
+        cmbEstado = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
@@ -216,41 +226,38 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, 104, 30));
-        jPanel1.add(txtIdDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 60, -1));
-        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 60, -1));
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 250, -1));
-        jPanel1.add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 250, -1));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 250, -1));
-        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 250, -1));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 104, 30));
+        jPanel1.add(txtIdTipoU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 60, -1));
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 60, -1));
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 250, -1));
+        jPanel1.add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 250, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 250, -1));
+        jPanel1.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 250, -1));
 
         lblTipo.setText("Tipo de Usuario:");
-        jPanel1.add(lblTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, -1, -1));
+        jPanel1.add(lblTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, -1, -1));
 
         lblId.setText("ID:");
         jPanel1.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         lblUsuario.setText("Usuario:");
-        jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        jPanel1.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         lblContraseña.setText("Contraseña:");
-        jPanel1.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        jPanel1.add(lblContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         lblNombres.setText("Nombres:");
-        jPanel1.add(lblNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        jPanel1.add(lblNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         lblApellidos.setText("Apellidos:");
-        jPanel1.add(lblApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
-        jPanel1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 250, -1));
+        jPanel1.add(lblApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
+        jPanel1.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 250, -1));
 
         lblCedula.setText("Cédula de Identidad:");
-        jPanel1.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
-
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el Tipo de Usuario", "Administrador", "Encargado de Clientes", "Encargado de Cuadrillas", "Encargado de Atención al Cliente" }));
-        jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 550, 250, 20));
+        jPanel1.add(lblCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         lblDireccion.setText("Dirección");
-        jPanel1.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, -1, -1));
+        jPanel1.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -258,7 +265,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 104, 30));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 540, 104, 30));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -267,20 +274,34 @@ public class frmUsuario extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 104, 88));
-        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 490, 180, -1));
+        jPanel1.add(txtTipoU, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 460, 180, -1));
 
         lblTelefono.setText("Telefono:");
-        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
-        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 250, -1));
+        jPanel1.add(lblTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+        jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 250, -1));
 
         btnBuscarDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarDireccionActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscarDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 480, 40, 30));
+        jPanel1.add(btnBuscarDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 400, 40, 30));
+        jPanel1.add(txtIdDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 60, -1));
+        jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 180, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 330, 630));
+        btnBuscarTipoU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarTipoUActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscarTipoU, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 40, 30));
+
+        lblEstado.setText("Estado:");
+        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
+
+        jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 160, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 330, 590));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -312,7 +333,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -332,11 +353,11 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 531, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 11, 690, 630));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(354, 11, 730, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -353,9 +374,9 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtNombre.setText(tblUsuarios.getValueAt(fila, 3).toString());
         txtApellido.setText(tblUsuarios.getValueAt(fila, 4).toString());
         txtCedula.setText(tblUsuarios.getValueAt(fila, 5).toString());
-        txtDireccion.setText(tblUsuarios.getValueAt(fila, 6).toString());
+        txtTipoU.setText(tblUsuarios.getValueAt(fila, 6).toString());
         txtTelefono.setText(tblUsuarios.getValueAt(fila, 7).toString());
-        cmbTipo.setSelectedItem(tblUsuarios.getValueAt(fila, 8).toString());
+        cmbEstado.setSelectedItem(tblUsuarios.getValueAt(fila, 8).toString());
         
     }//GEN-LAST:event_tblUsuariosMouseClicked
 
@@ -394,7 +415,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
             return;
         }    
         
-        if(cmbTipo.getSelectedIndex() == 0){
+        if(cmbEstado.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(rootPane, "Campo Tipo de Usuario obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
             txtApellido.requestFocusInWindow();
             return;
@@ -409,7 +430,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
             DPersona dtp = new DPersona();
             DTipoUsuario dtt = new DTipoUsuario();
             
-            String tipo = String.valueOf(cmbTipo.getSelectedItem());
+            String tipo = String.valueOf(cmbEstado.getSelectedItem());
             dtp.setNombre(txtNombre.getText());
             dtp.setApellido(txtApellido.getText());
             dtp.setCedulaIdent(txtCedula.getText());
@@ -417,7 +438,8 @@ public class frmUsuario extends javax.swing.JInternalFrame {
             dts.setLoginUsuario(txtUsuario.getText());
             dts.setPasswordUsuario(txtClave.getText());
             dtp.setDireccionId(Integer.parseInt(txtIdDireccion.getText()));
-            dtt.setTipo(tipo);
+            dts.setTipoUsuarioId(Integer.parseInt(txtIdTipoU.getText()));
+            dtt.setNombre(tipo);
             msg = fun.insertarUsuarios(dts, dtp, dtt);
             mostrarBuscar("");
             if(msg == "si"){
@@ -431,18 +453,18 @@ public class frmUsuario extends javax.swing.JInternalFrame {
             DPersona dtp = new DPersona();
             DTipoUsuario dtt = new DTipoUsuario();
             
-            String tipo = String.valueOf(cmbTipo.getSelectedItem());
+            String tipo = String.valueOf(cmbEstado.getSelectedItem());
             dts.setIdUsuario(Integer.parseInt(txtId.getText()));
             dtp.setIdPersona(Integer.parseInt(txtId.getText()));
             dtt.setIdTipoUsuario(Integer.parseInt(txtId.getText()));
-            dtp.setDireccionId(Integer.parseInt(txtIdDireccion.getText()));
+            dtp.setDireccionId(Integer.parseInt(txtIdTipoU.getText()));
             dtp.setNombre(txtNombre.getText());
             dtp.setApellido(txtApellido.getText());
             dtp.setCedulaIdent(txtCedula.getText());
             dtp.setTelefono(txtTelefono.getText());
             dts.setLoginUsuario(txtUsuario.getText());
             dts.setPasswordUsuario(txtClave.getText());
-            dtt.setTipo(tipo);
+            dtt.setNombre(tipo);
             msg = fun.editarUsuarios(dts, dtp, dtt);
             mostrarBuscar("");
             modificar();
@@ -479,17 +501,25 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         control = 2;
     }//GEN-LAST:event_btnBuscarDireccionActionPerformed
 
+    private void btnBuscarTipoUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarTipoUActionPerformed
+        frmVistaTipoU form = new frmVistaTipoU();
+        form.setVisible(true);
+        form.toFront();
+        control = 1;
+    }//GEN-LAST:event_btnBuscarTipoUActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JToggleButton btnBuscarDireccion;
+    private javax.swing.JToggleButton btnBuscarTipoU;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelarForm;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JTextField buscar;
-    private javax.swing.JComboBox<String> cmbTipo;
+    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -499,6 +529,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblContraseña;
     private javax.swing.JLabel lblDireccion;
+    private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNombres;
     private javax.swing.JLabel lblTelefono;
@@ -511,8 +542,10 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     public static javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtId;
     public static javax.swing.JTextField txtIdDireccion;
+    public static javax.swing.JTextField txtIdTipoU;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
+    public static javax.swing.JTextField txtTipoU;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

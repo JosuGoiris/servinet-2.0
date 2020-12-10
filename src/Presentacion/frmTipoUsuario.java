@@ -9,6 +9,7 @@ import Datos.DDireccion;
 import Datos.DEstadoDireccion;
 import Datos.DEstadoPuesto;
 import Datos.DEstadoServicio;
+import Datos.DEstadoTipoU;
 import Datos.DPersona;
 import Datos.DPuestos;
 import Datos.DServicios;
@@ -32,21 +33,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author josug
  */
-public class frmPuestos extends javax.swing.JInternalFrame {
+public class frmTipoUsuario extends javax.swing.JInternalFrame {
     private LEstados es = new LEstados();
     /**
      * Creates new form frmUsuario
      */
     String accion = null;
     
-    public frmPuestos() {
+    public frmTipoUsuario() {
         initComponents();
         mostrarBuscar("");
         
         cmbEstado.setModel(es.llenarCombo());
         
         txtId.setVisible(false);
-        txtPuesto.setVisible(false);
+        txtTipoUsuario.setVisible(false);
         cmbEstado.setVisible(false);
         
         btnGuardar.setVisible(false);
@@ -60,9 +61,9 @@ public class frmPuestos extends javax.swing.JInternalFrame {
     public void mostrarBuscar(String buscar){
         try {
             DefaultTableModel miModelo;
-            LPuestos log = new LPuestos();
-            miModelo = log.mostrarPuestos(buscar);
-            tblUsuarios.setModel(miModelo);
+            LTipoUsuario log = new LTipoUsuario();
+            miModelo = log.mostrarTipos(buscar);
+            tblTipoUsuario.setModel(miModelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -70,7 +71,7 @@ public class frmPuestos extends javax.swing.JInternalFrame {
     
     public void modificar(){
         txtId.setVisible(true);
-        txtPuesto.setVisible(true);
+        txtTipoUsuario.setVisible(true);
         cmbEstado.setVisible(true);
         
         btnGuardar.setVisible(true);
@@ -89,7 +90,7 @@ public class frmPuestos extends javax.swing.JInternalFrame {
     public void mostrarBotones(){
         txtId.setVisible(false);
         cmbEstado.setVisible(false);
-        txtPuesto.setVisible(false);
+        txtTipoUsuario.setVisible(false);
         
         btnGuardar.setVisible(false);
         btnCancelar.setVisible(false);
@@ -125,10 +126,10 @@ public class frmPuestos extends javax.swing.JInternalFrame {
         lblNombre = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
         lblEstado = new javax.swing.JLabel();
-        txtPuesto = new javax.swing.JTextField();
+        txtTipoUsuario = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblUsuarios = new javax.swing.JTable();
+        tblTipoUsuario = new javax.swing.JTable();
         buscar = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
@@ -187,19 +188,19 @@ public class frmPuestos extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 104, 88));
 
-        lblNombre.setText("Nombre del Puesto:");
+        lblNombre.setText("Tipo de Usuario:");
         jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el Estado del Puesto", "Activo", "Inactivo" }));
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el Estado del Tipo", "Activo", "Inactivo" }));
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 170, 20));
 
-        lblEstado.setText("Estado del Puesto:");
+        lblEstado.setText("Estado del Tipo:");
         jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
-        jPanel1.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 190, -1));
+        jPanel1.add(txtTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 190, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
+        tblTipoUsuario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -210,12 +211,12 @@ public class frmPuestos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblTipoUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblUsuariosMouseClicked(evt);
+                tblTipoUsuarioMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblUsuarios);
+        jScrollPane1.setViewportView(tblTipoUsuario);
 
         jButton5.setText("Buscar");
 
@@ -282,7 +283,7 @@ public class frmPuestos extends javax.swing.JInternalFrame {
         btnEliminar.setVisible(false);
         
         txtId.setVisible(true);
-        txtPuesto.setVisible(true);
+        txtTipoUsuario.setVisible(true);
         cmbEstado.setVisible(true);
         
         btnGuardar.setVisible(true);
@@ -293,19 +294,19 @@ public class frmPuestos extends javax.swing.JInternalFrame {
         lblEstado.setVisible(true);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
-        int fila = tblUsuarios.rowAtPoint(evt.getPoint());
-        txtId.setText(tblUsuarios.getValueAt(fila, 0).toString());
+    private void tblTipoUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoUsuarioMouseClicked
+        int fila = tblTipoUsuario.rowAtPoint(evt.getPoint());
+        txtId.setText(tblTipoUsuario.getValueAt(fila, 0).toString());
         /*txtNombre.setText(tblUsuarios.getValueAt(fila, 1).toString());
         txtApellido.setText(tblUsuarios.getValueAt(fila, 2).toString());
         txtCedula.setText(tblUsuarios.getValueAt(fila, 3).toString());
         txtTelefono.setText(tblUsuarios.getValueAt(fila, 4).toString());
         cmbTipoServicio.setSelectedItem(tblUsuarios.getValueAt(fila, 5).toString());*/
-        cmbEstado.setSelectedItem(tblUsuarios.getValueAt(fila, 6).toString());
-    }//GEN-LAST:event_tblUsuariosMouseClicked
+        cmbEstado.setSelectedItem(tblTipoUsuario.getValueAt(fila, 6).toString());
+    }//GEN-LAST:event_tblTipoUsuarioMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if(tblUsuarios.getSelectedRows().length > 0){
+        if(tblTipoUsuario.getSelectedRows().length > 0){
             accion = "modificar";
             modificar();
         }else{
@@ -315,9 +316,9 @@ public class frmPuestos extends javax.swing.JInternalFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         String actualizar = null;
-        if(txtPuesto.getText().equals("")){
+        if(txtTipoUsuario.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane, "Campo Dirección obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
-            txtPuesto.requestFocusInWindow();
+            txtTipoUsuario.requestFocusInWindow();
             return;
         }
         
@@ -331,14 +332,14 @@ public class frmPuestos extends javax.swing.JInternalFrame {
         String msg1 = null;
         String msg2 = null;
         if(txtId.getText().equals("")){
-            DPuestos dts = new DPuestos();
-            LPuestos fun = new LPuestos();
-            DEstadoPuesto dep = new DEstadoPuesto();
+            DTipoUsuario dts = new DTipoUsuario();
+            LTipoUsuario fun = new LTipoUsuario();
+            DEstadoTipoU det = new DEstadoTipoU();
             
             String estado = String.valueOf(cmbEstado.getSelectedItem());
-            dts.setNombrePuesto(txtPuesto.getText());
-            dep.setEstado(estado);
-            msg = fun.insertarPuestos(dts, dep);
+            dts.setNombre(txtTipoUsuario.getText());
+            det.setEstado(estado);
+            msg = fun.insertarTipos(dts, det);
             mostrarBuscar("");
             if(msg == "si"){
                 JOptionPane.showMessageDialog(rootPane, "Se insertó de forma correcta", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -404,8 +405,8 @@ public class frmPuestos extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblEstado;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JTable tblUsuarios;
+    private javax.swing.JTable tblTipoUsuario;
     private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtPuesto;
+    private javax.swing.JTextField txtTipoUsuario;
     // End of variables declaration//GEN-END:variables
 }

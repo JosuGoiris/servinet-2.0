@@ -15,6 +15,7 @@ import Datos.DTipoUsuario;
 import Datos.DUsuarios;
 import Datos.guardarDatos;
 import Logica.LDireccion;
+import Logica.LEstados;
 import Logica.LServicios;
 import Logica.LTipoUsuario;
 import Logica.LUsuarios;
@@ -29,7 +30,7 @@ import javax.swing.table.DefaultTableModel;
  * @author josug
  */
 public class frmDireccion extends javax.swing.JInternalFrame {
-
+    private LEstados es = new LEstados();
     /**
      * Creates new form frmUsuario
      */
@@ -38,6 +39,9 @@ public class frmDireccion extends javax.swing.JInternalFrame {
     public frmDireccion() {
         initComponents();
         mostrarBuscar("");
+        
+        cmbEstado.setModel(es.llenarCombo());
+        
         txtId.setVisible(false);
         txtDireccion.setVisible(false);
         txtDescripcion.setVisible(false);
@@ -159,7 +163,7 @@ public class frmDireccion extends javax.swing.JInternalFrame {
         jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 104, 88));
 
         btnCancelarForm.setText("Cancelar");
-        jPanel1.add(btnCancelarForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 104, 88));
+        jPanel1.add(btnCancelarForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 104, 88));
 
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {

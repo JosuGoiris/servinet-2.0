@@ -30,7 +30,7 @@ public class LPuestos {
         String dts [] = new String[3];
         
         miModelo = new DefaultTableModel(null, titulos);
-        sSQL = "select pt.idPuestoTrabajo, pt.nombrePuesto, e.estado from tblpuestotrabajo as pt inner join tblestadopuesto as e on pt.estadopuestoId = e.idEstadoPuesto where pt.idPuestoTrabajo = '" + buscar + "' or pt.nombrePuesto like '%" + buscar + "%'";
+        sSQL = "select pt.idPuestoTrabajo, pt.nombrePuesto, e.estado from tblpuestotrabajo as pt inner join tblestadopuesto as e on pt.puestoestadoId = e.idEstadoPuesto where pt.idPuestoTrabajo = '" + buscar + "' or pt.nombrePuesto like '%" + buscar + "%'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);

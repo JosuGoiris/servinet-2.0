@@ -17,6 +17,7 @@ import Datos.DTrabajadores;
 import Datos.DUsuarios;
 import Datos.guardarDatos;
 import Logica.LDireccion;
+import Logica.LEstados;
 import Logica.LServicios;
 import Logica.LTipoUsuario;
 import Logica.LTrabajadores;
@@ -33,6 +34,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmTrabajadores extends javax.swing.JInternalFrame {
     public static int control = 0;
+    private LEstados es = new LEstados();
     /**
      * Creates new form frmUsuario
      */
@@ -41,6 +43,9 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
     public frmTrabajadores() {
         initComponents();
         mostrarBuscar("");
+        
+        cmbEstadoTrabajador.setModel(es.llenarCombo());
+        
         txtId.setVisible(false);
         txtNombre.setVisible(false);
         txtApellido.setVisible(false);
