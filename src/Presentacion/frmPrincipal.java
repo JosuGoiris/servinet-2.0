@@ -25,34 +25,35 @@ public class frmPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
         
-        URL imageUrl = this.getClass().getResource("/Imagenes/servicios.png");
-        ImageIcon icoservicio = new ImageIcon(imageUrl);
+        URL imageUrlServicios = this.getClass().getResource("/Imagenes/servicios.png");
+        ImageIcon icoservicio = new ImageIcon(imageUrlServicios);
         Icon iconoSer = new ImageIcon(icoservicio.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
         btnServicios.setIcon(iconoSer);
         
-        /*ImageIcon icServicios = new ImageIcon(getClass().getResource("Imagenes/servicios.png"));
-        Icon iconoSer = new ImageIcon(icServicios.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
-        btnServicios.setIcon(iconoSer);
+        URL imageUrlTrabajador = this.getClass().getResource("/Imagenes/Trabajadores.png");
+        ImageIcon icoTraba = new ImageIcon(imageUrlTrabajador);
+        Icon iconoTraba = new ImageIcon(icoTraba.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
+        btnTrabajadores.setIcon(iconoTraba);
         
-        ImageIcon icTrabajadores = new ImageIcon(getClass().getResource("Imagenes/Trabajadores.png"));
-        Icon iconoTrab = new ImageIcon(icTrabajadores.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
-        btnTrabajadores.setIcon(iconoTrab);
+        URL imageUrlUsuarios = this.getClass().getResource("/Imagenes/Usuarios.png");
+        ImageIcon icoUsuarios = new ImageIcon(imageUrlUsuarios);
+        Icon iconoUsua = new ImageIcon(icoUsuarios.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
+        btnUsuarios.setIcon(iconoUsua);
         
-        ImageIcon icUsuarios = new ImageIcon(getClass().getResource("Imagenes/Usuarios.png"));
-        Icon iconoUsu = new ImageIcon(icUsuarios.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
-        btnUsuarios.setIcon(iconoUsu);
+        URL imageUrlConPag = this.getClass().getResource("/Imagenes/ConfigPagos.png");
+        ImageIcon icoConPag = new ImageIcon(imageUrlConPag);
+        Icon iconoConPag = new ImageIcon(icoConPag.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
+        btnConfigPagos.setIcon(iconoConPag);
         
-        ImageIcon icConfigP = new ImageIcon(getClass().getResource("Imagenes/ConfigPagos.png"));
-        Icon iconoConfigP = new ImageIcon(icConfigP.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
-        btnConfigPagos.setIcon(iconoConfigP);
-        
-        ImageIcon icZonas = new ImageIcon(getClass().getResource("Imagenes/zonas.png"));
-        Icon iconoZonas = new ImageIcon(icZonas.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
+        URL imageUrlZonas = this.getClass().getResource("/Imagenes/zonas.png");
+        ImageIcon icoZonas = new ImageIcon(imageUrlZonas);
+        Icon iconoZonas = new ImageIcon(icoZonas.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
         btnZonas.setIcon(iconoZonas);
         
-        ImageIcon icCuadrilla = new ImageIcon(getClass().getResource("Imagenes/CuadrillasCamion.png"));
-        Icon iconoCuadrilla = new ImageIcon(icCuadrilla.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
-        btnCuadrillas.setIcon(iconoCuadrilla);*/
+        URL imageUrlCuadrillas = this.getClass().getResource("/Imagenes/CuadrillasCamion.png");
+        ImageIcon icoCuadrillas = new ImageIcon(imageUrlCuadrillas);
+        Icon iconoCuadrillas = new ImageIcon(icoCuadrillas.getImage().getScaledInstance(60, 70, Image.SCALE_DEFAULT));
+        btnCuadrillas.setIcon(iconoCuadrillas);
     }
 
     /**

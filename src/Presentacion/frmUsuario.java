@@ -44,15 +44,20 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtApellido.setVisible(false);
         txtCedula.setVisible(false);
         txtTelefono.setVisible(false);
+        txtIdDireccion.setVisible(false);
+        txtIdDireccion.setEnabled(false);
+        txtDireccion.setVisible(false);
+        txtDireccion.setEnabled(false);
         txtIdTipoU.setVisible(false);
-        txtIdTipoU.setEditable(false);
+        txtIdTipoU.setEnabled(false);
         txtTipoU.setVisible(false);
-        txtTipoU.setEditable(false);
+        txtTipoU.setEnabled(false);
         cmbEstado.setVisible(false);
         
         btnGuardar.setVisible(false);
         btnCancelar.setVisible(false);
         btnBuscarDireccion.setVisible(false);
+        btnBuscarTipoU.setVisible(false);
         
         lblId.setVisible(false);
         lblUsuario.setVisible(false);
@@ -85,15 +90,20 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtApellido.setVisible(true);
         txtCedula.setVisible(true);
         txtTelefono.setVisible(true);
+        txtIdDireccion.setVisible(false);
+        txtIdDireccion.setEnabled(false);
+        txtDireccion.setVisible(false);
+        txtDireccion.setEnabled(false);
         txtIdTipoU.setVisible(true);
-        txtIdTipoU.setEditable(false);
+        txtIdTipoU.setEnabled(false);
         txtTipoU.setVisible(true);
-        txtTipoU.setEditable(false);
+        txtTipoU.setEnabled(false);
         cmbEstado.setVisible(true);
         
         btnGuardar.setVisible(true);
         btnCancelar.setVisible(true);
         btnBuscarDireccion.setVisible(true);
+        btnBuscarTipoU.setVisible(true);
         
         lblId.setVisible(true);
         lblUsuario.setVisible(true);
@@ -120,15 +130,20 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtApellido.setVisible(false);
         txtCedula.setVisible(false);
         txtTelefono.setVisible(false);
+        txtIdDireccion.setVisible(false);
+        txtIdDireccion.setEnabled(false);
+        txtDireccion.setVisible(false);
+        txtDireccion.setEnabled(false);
         txtIdTipoU.setVisible(false);
-        txtIdTipoU.setEditable(false);
+        txtIdTipoU.setEnabled(false);
         txtTipoU.setVisible(false);
-        txtTipoU.setEditable(false);
+        txtTipoU.setEnabled(false);
         cmbEstado.setVisible(false);
         
         btnGuardar.setVisible(false);
         btnCancelar.setVisible(false);
         btnBuscarDireccion.setVisible(false);
+        btnBuscarTipoU.setEnabled(false);
         
         lblId.setVisible(false);
         lblUsuario.setVisible(false);
