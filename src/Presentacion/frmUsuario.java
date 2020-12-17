@@ -12,6 +12,7 @@ import Datos.guardarDatos;
 import Logica.LConnection;
 import Logica.LEstados;
 import Logica.LUsuarios;
+import static Presentacion.frmMantenimiento.dpnEscritorio;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -120,6 +121,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         btnEditar.setVisible(false);
         btnCancelarForm.setVisible(false);
         btnEliminar.setVisible(false);
+        btnTipoUsuario.setVisible(false);
     }
     
     public void mostrarBotones(){
@@ -160,6 +162,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         btnEditar.setVisible(true);
         btnCancelarForm.setVisible(true);
         btnEliminar.setVisible(true);
+        btnTipoUsuario.setVisible(true);
     }
 
     public void limpiarCampos(){
@@ -215,6 +218,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         btnBuscarTipoU = new javax.swing.JToggleButton();
         lblEstado = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
+        btnTipoUsuario = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
@@ -250,6 +254,11 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 104, 88));
 
         btnCancelarForm.setText("Cancelar");
+        btnCancelarForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarFormActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnCancelarForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 104, 88));
         jPanel1.add(txtIdTipoU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 60, -1));
         jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 60, -1));
@@ -316,6 +325,14 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, -1, -1));
 
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 160, -1));
+
+        btnTipoUsuario.setText("Tipo Usuario");
+        btnTipoUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTipoUsuarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 104, 88));
 
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -573,6 +590,16 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         control = 1;
     }//GEN-LAST:event_btnBuscarTipoUActionPerformed
 
+    private void btnCancelarFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarFormActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarFormActionPerformed
+
+    private void btnTipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoUsuarioActionPerformed
+        frmTipoUsuario misTipoU = new frmTipoUsuario();
+        dpnEscritorio.add(misTipoU);
+        misTipoU.show();
+    }//GEN-LAST:event_btnTipoUsuarioActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -583,6 +610,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnTipoUsuario;
     private javax.swing.JTextField buscar;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JButton jButton5;

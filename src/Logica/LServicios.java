@@ -29,13 +29,15 @@ public class LServicios {
     public DefaultTableModel mostrarServicios(String buscar){
         DefaultTableModel miModelo = null;
         
-        String titulos [] = {"Id", "Nombre", "Velocidad", "Precio", "Descripción", "Tipo", "Estado"};
+        String titulos [] = {"Id", "Nombre", "Id", "Velocidad", "Precio", "Descripción", "Id", "Tipo", "Estado"};
         String dts [] = new String[7];
         
         miModelo = new DefaultTableModel(null, titulos);
-        sSQL = "select s.idServicio, s.nombreServicio, s.velocidadCon, s.precio, s.descripcion, t.nombre, \n"
+        sSQL = "select s.idServicio, s.nombreServicio, v.idVelocidadCon, v.velocidad, s.precio, s.descripcion, t.idTipoServicio, t.nombre, \n"
                 + "e.estado from tblservicio as s inner join tbltiposervicio as t on s.tiposervicioId = t.idTipoServicio \n"
-                + "inner join tblestadoservicio as e on s.estadoservicioId = e.idEstadoServicio where s.idServicio = '" + buscar + "' \n"
+                + "inner join tblestadoservicio as e on s.estadoservicioId = e.idEstadoServicio \n" 
+                + "inner join tblvelocidadcon as v on s.velocidadconId = v.idVelocidadCon \n" 
+                + "where s.idServicio = '" + buscar + "' \n"
                 + "or s.nombreServicio like '%" + buscar + "%'";
         try {
             Statement st = cn.createStatement();

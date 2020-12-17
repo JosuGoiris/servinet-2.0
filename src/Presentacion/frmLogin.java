@@ -55,8 +55,8 @@ public class frmLogin extends javax.swing.JFrame {
             if(cap.equals("Administrador")){
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Bienvenido");
-                frmPrincipal admin = new frmPrincipal();
-                admin.setVisible(true);
+                frmMenu menu = new frmMenu();
+                 menu.setVisible(true);
             }
         } catch (Exception e) {
         }

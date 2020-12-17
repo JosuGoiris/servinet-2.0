@@ -111,7 +111,7 @@ public class frmElegirDirZon extends javax.swing.JInternalFrame {
 
     private void btnDireccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireccionesActionPerformed
         frmDireccion misDir = new frmDireccion();
-        frmPrincipal.dpnEscritorio.add(misDir);
+        frmMantenimiento.dpnEscritorio.add(misDir);
         misDir.show();
         dispose();
     }//GEN-LAST:event_btnDireccionesActionPerformed

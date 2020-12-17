@@ -22,6 +22,7 @@ import Logica.LServicios;
 import Logica.LTipoUsuario;
 import Logica.LTrabajadores;
 import Logica.LUsuarios;
+import static Presentacion.frmMantenimiento.dpnEscritorio;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -113,6 +114,7 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
         btnEditar.setVisible(false);
         btnCancelarForm.setVisible(false);
         btnEliminar.setVisible(false);
+        btnPuestos.setVisible(false);
     }
     
     public void mostrarBotones(){
@@ -145,6 +147,7 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
         btnEditar.setVisible(true);
         btnCancelarForm.setVisible(true);
         btnEliminar.setVisible(true);
+        btnPuestos.setVisible(true);
     }
 
     /**
@@ -183,6 +186,7 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
         txtIdDireccion = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         btnBuscarDireccion = new javax.swing.JToggleButton();
+        btnPuestos = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
@@ -288,6 +292,14 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(btnBuscarDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 40, 30));
+
+        btnPuestos.setText("Puestos");
+        btnPuestos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPuestosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnPuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 104, 88));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -511,6 +523,12 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
         control = 1;
     }//GEN-LAST:event_btnBuscarDireccionActionPerformed
 
+    private void btnPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestosActionPerformed
+        frmPuestos misPue = new frmPuestos();
+        dpnEscritorio.add(misPue);
+        misPue.show();
+    }//GEN-LAST:event_btnPuestosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
@@ -521,6 +539,7 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnPuestos;
     private javax.swing.JTextField buscar;
     private javax.swing.JComboBox<String> cmbEstadoTrabajador;
     private javax.swing.JButton jButton5;

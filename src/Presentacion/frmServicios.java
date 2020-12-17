@@ -27,6 +27,7 @@ import javax.swing.table.DefaultTableModel;
  * @author josug
  */
 public class frmServicios extends javax.swing.JInternalFrame {
+    public static int control = 0;
     private LEstados es = new LEstados();
     /**
      * Creates new form frmUsuario
@@ -41,11 +42,11 @@ public class frmServicios extends javax.swing.JInternalFrame {
         
         txtId.setVisible(false);
         txtNombre.setVisible(false);
+        txtIdVelocidad.setVisible(false);
         txtVelocidad.setVisible(false);
         txtPrecio.setVisible(false);
         txtDescripción.setVisible(false);
         cmbEstado.setVisible(false);
-        cmbTipoServicio.setVisible(false);
         
         btnGuardar.setVisible(false);
         btnCancelar.setVisible(false);
@@ -60,8 +61,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
         lblDescripcion.setVisible(false);
         lblTipoServicio.setVisible(false);
         lblEstadoServicio.setVisible(false);
-        
-        
     }
     
     public void mostrarBuscar(String buscar){
@@ -75,32 +74,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
         }
     }
     
-    public void modificar(){
-        /*txtId.setVisible(true);
-        txtNombre.setVisible(true);
-        txtVelocidad.setVisible(true);
-        txtVelocidad.setEnabled(true);
-        txtPrecio.setVisible(true);
-        txtDescripción.setVisible(true);
-        cmbEstado.setVisible(true);
-        cmbTipoServicio.setVisible(true);
-        
-        btnGuardar.setVisible(true);
-        btnCancelar.setVisible(true);
-        
-        lblId.setVisible(true);
-        lblNombre.setVisible(true);
-        lblVelocidad.setVisible(true);
-        lblPrecio.setVisible(true);
-        lblDescripcion.setVisible(true);
-        lblVelocidad.setVisible(true);
-        lblEstadoServicio.setVisible(true);
-        
-        btnAgregar.setVisible(false);
-        btnEditar.setVisible(false);
-        btnCancelarForm.setVisible(false);
-        btnEliminar.setVisible(false);*/
-        
+    public void modificar(){   
         btnInternet.setVisible(true);
         btnTelefonía.setVisible(true);
         btnCancelar.setVisible(true);
@@ -109,16 +83,20 @@ public class frmServicios extends javax.swing.JInternalFrame {
         btnEditar.setVisible(false);
         btnCancelarForm.setVisible(false);
         btnEliminar.setVisible(false);
+        btnAgregarVelocidad.setVisible(false);
+        btnTipoServicio.setVisible(false);
     }
     
     public void mostrarBotones(){
         txtId.setVisible(false);
         txtNombre.setVisible(false);
+        txtIdVelocidad.setVisible(false);
         txtVelocidad.setVisible(false);
         txtPrecio.setVisible(false);
         txtDescripción.setVisible(false);
+        txtIdTipo.setVisible(false);
+        txtTipoServicio.setVisible(false);
         cmbEstado.setVisible(false);
-        cmbTipoServicio.setVisible(false);
         
         btnGuardar.setVisible(false);
         btnCancelar.setVisible(false);
@@ -153,7 +131,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnCancelarForm = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
         txtId = new javax.swing.JTextField();
         txtVelocidad = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
@@ -163,8 +140,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
         lblNombre = new javax.swing.JLabel();
         lblVelocidad = new javax.swing.JLabel();
         lblDescripcion = new javax.swing.JLabel();
-        cmbTipoServicio = new javax.swing.JComboBox<>();
-        btnCancelar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         lblTipoServicio = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
@@ -172,17 +147,25 @@ public class frmServicios extends javax.swing.JInternalFrame {
         btnTelefonía = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         lblPrecio = new javax.swing.JLabel();
+        txtIdTipo = new javax.swing.JTextField();
+        txtTipoServicio = new javax.swing.JTextField();
+        btnBuscarTipoServicio = new javax.swing.JToggleButton();
+        txtIdVelocidad = new javax.swing.JTextField();
+        btnBuscarVelocidad = new javax.swing.JToggleButton();
+        btnTipoServicio = new javax.swing.JButton();
+        btnAgregarVelocidad = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
         buscar = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -205,16 +188,8 @@ public class frmServicios extends javax.swing.JInternalFrame {
 
         btnCancelarForm.setText("Cancelar");
         jPanel1.add(btnCancelarForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 104, 88));
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 104, 30));
-        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 250, -1));
-        jPanel1.add(txtVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 250, -1));
+        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 50, -1));
+        jPanel1.add(txtVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 190, -1));
         jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 250, -1));
         jPanel1.add(txtDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 250, -1));
 
@@ -232,17 +207,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
 
         lblDescripcion.setText("Descripción:");
         jPanel1.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
-
-        cmbTipoServicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el Tipo de Servicio", "Internet ADSL", "Internet Fibra Óptica", "Teléfono Fijo" }));
-        jPanel1.add(cmbTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 250, 20));
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 450, 104, 30));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -276,8 +240,29 @@ public class frmServicios extends javax.swing.JInternalFrame {
 
         lblPrecio.setText("Precio:");
         jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        jPanel1.add(txtIdTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 50, -1));
+        jPanel1.add(txtTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 190, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 290, 490));
+        btnBuscarTipoServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarTipoServicioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscarTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 40, 30));
+        jPanel1.add(txtIdVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 50, -1));
+
+        btnBuscarVelocidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarVelocidadActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscarVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 180, 40, 30));
+
+        btnTipoServicio.setText("Tipo de Servicio");
+        jPanel1.add(btnTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 104, 88));
+
+        btnAgregarVelocidad.setText("Config. Velocidad");
+        jPanel1.add(btnAgregarVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 104, 88));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -306,34 +291,82 @@ public class frmServicios extends javax.swing.JInternalFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(6, 6, 6)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton5))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(304, 11, 690, 490));
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(15, 15, 15))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -356,7 +389,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
         txtVelocidad.setText(tblUsuarios.getValueAt(fila, 2).toString());
         txtPrecio.setText(tblUsuarios.getValueAt(fila, 3).toString());
         txtDescripción.setText(tblUsuarios.getValueAt(fila, 4).toString());
-        cmbTipoServicio.setSelectedItem(tblUsuarios.getValueAt(fila, 5).toString());
+        
         cmbEstado.setSelectedItem(tblUsuarios.getValueAt(fila, 6).toString());
     }//GEN-LAST:event_tblUsuariosMouseClicked
 
@@ -395,11 +428,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
             return;
         }    
         
-        if(cmbTipoServicio.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(rootPane, "Campo Tipo de Servicio obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
-            cmbTipoServicio.requestFocusInWindow();
-            return;
-        }     
         
         if(cmbEstado.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(rootPane, "Campo Estado obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
@@ -416,13 +444,12 @@ public class frmServicios extends javax.swing.JInternalFrame {
             DTipoServicio dtS = new DTipoServicio();
             DEstadoServicio des = new DEstadoServicio();
             
-            String tipo = String.valueOf(cmbTipoServicio.getSelectedItem());
             String estado = String.valueOf(cmbEstado.getSelectedItem());
             dts.setNombreServicio(txtNombre.getText());
             dts.setVelocidadCon(txtVelocidad.getText() + " MB");
             dts.setPrecio(txtPrecio.getText());
             dts.setDescripcio(txtDescripción.getText());
-            dtS.setNombre(tipo);
+            dtS.setNombre(txtTipoServicio.getText());
             des.setEstado(estado);
             msg = fun.insertarServicios(dts, dtS, des);
             mostrarBuscar("");
@@ -437,7 +464,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
             DTipoServicio dtS = new DTipoServicio();
             DEstadoServicio des = new DEstadoServicio();
             
-            String tipo = String.valueOf(cmbTipoServicio.getSelectedItem());
             String estado = String.valueOf(cmbEstado.getSelectedItem());
             dts.setIdServicio(Integer.parseInt(txtId.getText()));
             dtS.setIdTipoServicio(Integer.parseInt(txtId.getText()));
@@ -446,7 +472,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
             dts.setVelocidadCon(txtVelocidad.getText());
             dts.setPrecio(txtPrecio.getText());
             dts.setDescripcio(txtDescripción.getText());
-            dtS.setNombre(tipo);
+            dtS.setNombre(txtTipoServicio.getText());
             des.setEstado(estado);
             msg = fun.editarServicio(dts, dtS, des);
             mostrarBuscar("");
@@ -482,12 +508,14 @@ public class frmServicios extends javax.swing.JInternalFrame {
     private void btnInternetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInternetActionPerformed
         txtId.setVisible(true);
         txtNombre.setVisible(true);
+        txtIdVelocidad.setVisible(true);
         txtVelocidad.setVisible(true);
         txtVelocidad.setEnabled(true);
         txtPrecio.setVisible(true);
         txtDescripción.setVisible(true);
+        txtIdTipo.setVisible(true);
+        txtTipoServicio.setVisible(true);
         cmbEstado.setVisible(true);
-        cmbTipoServicio.setVisible(true);
         
         btnGuardar.setVisible(true);
         btnCancelar.setVisible(true);
@@ -504,6 +532,11 @@ public class frmServicios extends javax.swing.JInternalFrame {
         btnEditar.setVisible(false);
         btnCancelarForm.setVisible(false);
         btnEliminar.setVisible(false);
+        btnAgregarVelocidad.setVisible(false);
+        btnTipoServicio.setVisible(false);
+        btnBuscarTipoServicio.setVisible(true);
+        btnBuscarVelocidad.setVisible(true);
+        
         btnInternet.setVisible(false);
         btnTelefonía.setVisible(false);
     }//GEN-LAST:event_btnInternetActionPerformed
@@ -511,12 +544,14 @@ public class frmServicios extends javax.swing.JInternalFrame {
     private void btnTelefoníaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTelefoníaActionPerformed
         txtId.setVisible(true);
         txtNombre.setVisible(true);
+        txtIdVelocidad.setVisible(true);
         txtVelocidad.setVisible(true);
         txtVelocidad.setEnabled(false);
         txtPrecio.setVisible(true);
         txtDescripción.setVisible(true);
+        txtIdTipo.setVisible(true);
+        txtTipoServicio.setVisible(true);
         cmbEstado.setVisible(true);
-        cmbTipoServicio.setVisible(true);
         
         btnGuardar.setVisible(true);
         btnCancelar.setVisible(true);
@@ -533,13 +568,32 @@ public class frmServicios extends javax.swing.JInternalFrame {
         btnEditar.setVisible(false);
         btnCancelarForm.setVisible(false);
         btnEliminar.setVisible(false);
+        btnAgregarVelocidad.setVisible(false);
+        btnTipoServicio.setVisible(false);
+        btnBuscarTipoServicio.setVisible(true);
+        btnBuscarVelocidad.setVisible(true);
+        btnBuscarVelocidad.setEnabled(false);
         btnInternet.setVisible(false);
         btnTelefonía.setVisible(false);
     }//GEN-LAST:event_btnTelefoníaActionPerformed
 
+    private void btnBuscarTipoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarTipoServicioActionPerformed
+        frmVistaDireccion form = new frmVistaDireccion();
+        form.setVisible(true);
+        form.toFront();
+        control = 1;
+    }//GEN-LAST:event_btnBuscarTipoServicioActionPerformed
+
+    private void btnBuscarVelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVelocidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnBuscarVelocidadActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregarVelocidad;
+    private javax.swing.JToggleButton btnBuscarTipoServicio;
+    private javax.swing.JToggleButton btnBuscarVelocidad;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelarForm;
     private javax.swing.JButton btnEditar;
@@ -547,9 +601,9 @@ public class frmServicios extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnInternet;
     private javax.swing.JButton btnTelefonía;
+    private javax.swing.JButton btnTipoServicio;
     private javax.swing.JTextField buscar;
     private javax.swing.JComboBox<String> cmbEstado;
-    private javax.swing.JComboBox<String> cmbTipoServicio;
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -565,8 +619,11 @@ public class frmServicios extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblUsuarios;
     private javax.swing.JTextField txtDescripción;
     private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtIdTipo;
+    private javax.swing.JTextField txtIdVelocidad;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtTipoServicio;
     private javax.swing.JTextField txtVelocidad;
     // End of variables declaration//GEN-END:variables
 }
