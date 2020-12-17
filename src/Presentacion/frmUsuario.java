@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -67,6 +67,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         lblCedula.setVisible(false);
         lblTelefono.setVisible(false);
         lblDireccion.setVisible(false);
+        lblEstado.setVisible(false);
         lblTipo.setVisible(false);
     }
     
@@ -90,9 +91,9 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtApellido.setVisible(true);
         txtCedula.setVisible(true);
         txtTelefono.setVisible(true);
-        txtIdDireccion.setVisible(false);
+        txtIdDireccion.setVisible(true);
         txtIdDireccion.setEnabled(false);
-        txtDireccion.setVisible(false);
+        txtDireccion.setVisible(true);
         txtDireccion.setEnabled(false);
         txtIdTipoU.setVisible(true);
         txtIdTipoU.setEnabled(false);
@@ -143,7 +144,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         btnGuardar.setVisible(false);
         btnCancelar.setVisible(false);
         btnBuscarDireccion.setVisible(false);
-        btnBuscarTipoU.setEnabled(false);
+        btnBuscarTipoU.setVisible(false);
         
         lblId.setVisible(false);
         lblUsuario.setVisible(false);
@@ -161,6 +162,21 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         btnEliminar.setVisible(true);
     }
 
+    public void limpiarCampos(){
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtCedula.setText("");
+        txtClave.setText("");
+        txtDireccion.setText("");
+        txtId.setText("");
+        txtIdDireccion.setText("");
+        txtIdTipoU.setText("");
+        txtTelefono.setText("");
+        txtTipoU.setText("");
+        txtUsuario.setText("");
+        cmbEstado.setSelectedIndex(0);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -174,7 +190,6 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnCancelarForm = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
         txtIdTipoU = new javax.swing.JTextField();
         txtId = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
@@ -190,7 +205,6 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtCedula = new javax.swing.JTextField();
         lblCedula = new javax.swing.JLabel();
         lblDireccion = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         txtTipoU = new javax.swing.JTextField();
         lblTelefono = new javax.swing.JLabel();
@@ -207,11 +221,15 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         buscar = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
 
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -233,14 +251,6 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
         btnCancelarForm.setText("Cancelar");
         jPanel1.add(btnCancelarForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 104, 88));
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 104, 30));
         jPanel1.add(txtIdTipoU, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 60, -1));
         jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 60, -1));
         jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 250, -1));
@@ -272,14 +282,6 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
         lblDireccion.setText("Dirección");
         jPanel1.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, -1, -1));
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 540, 104, 30));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -315,6 +317,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 160, -1));
 
+        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
@@ -345,7 +348,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -369,24 +372,51 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
@@ -405,10 +435,12 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         txtNombre.setText(tblUsuarios.getValueAt(fila, 3).toString());
         txtApellido.setText(tblUsuarios.getValueAt(fila, 4).toString());
         txtCedula.setText(tblUsuarios.getValueAt(fila, 5).toString());
-        txtDireccion.setText(tblUsuarios.getValueAt(fila, 6).toString());
-        txtTelefono.setText(tblUsuarios.getValueAt(fila, 7).toString());
-        txtTipoU.setText(tblUsuarios.getValueAt(fila, 8).toString());
-        cmbEstado.setSelectedItem(tblUsuarios.getValueAt(fila, 8).toString());
+        txtIdDireccion.setText(tblUsuarios.getValueAt(fila, 6).toString());
+        txtDireccion.setText(tblUsuarios.getValueAt(fila, 7).toString());
+        txtTelefono.setText(tblUsuarios.getValueAt(fila, 8).toString());
+        txtIdTipoU.setText(tblUsuarios.getValueAt(fila, 9).toString());
+        txtTipoU.setText(tblUsuarios.getValueAt(fila, 10).toString());
+        cmbEstado.setSelectedItem(tblUsuarios.getValueAt(fila, 11).toString());
         
     }//GEN-LAST:event_tblUsuariosMouseClicked
 
@@ -524,6 +556,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         mostrarBotones();
+        limpiarCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBuscarDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarDireccionActionPerformed

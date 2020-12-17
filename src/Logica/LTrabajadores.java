@@ -57,7 +57,7 @@ public class LTrabajadores {
     
     public String insertarTrabajador(DTrabajadores dTrab, DPersona dPer){
         String msg = null;
-        sSQL = "insert into tblpersona(nombres, apellidos, cedulaIdent, telefono, direccionId) value(?,?,?,?, (select idDireccion from tbldireccion order by idDireccion desc limit 1))";
+        sSQL = "insert into tblpersona(nombres, apellidos, cedulaIdent, telefono, direccionId, estadopersonaId) value(?,?,?,?, (select idDireccion from tbldireccion order by idDireccion desc limit 1), (select idEstadoPersona from tblestadopersona order by idEstadoPersona desc limit 1))";
         sSQL1 = "insert into tbltrabajador(estado, puestotrabajoId, personaId) value(?, (select idPuestoTrabajo from tblpuestotrabajo order by idPuestoTrabajo desc limit 1) , (select idPersona from tblpersona order by idPersona desc limit 1))";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);

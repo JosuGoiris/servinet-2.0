@@ -255,7 +255,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
         lblTipoServicio.setText("Tipo de Servicio:");
         jPanel1.add(lblTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
 
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el Estado del Servicio", "Activo", "Inactivo" }));
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 250, 20));
 
         btnInternet.setText("Internet");

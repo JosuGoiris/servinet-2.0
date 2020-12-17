@@ -50,7 +50,7 @@ public class LPuestos {
     public String insertarPuestos(DPuestos dPuestos, DEstadoPuesto dEstadoPuesto){
         String msg = null;
         sSQL = "insert into tblestadopuesto(estado) value(?)";
-        sSQL1 = "insert into tblpuestotrabajo(nombrePuesto, estadopuestoId) value(?, (select idEstadoPuesto from tblestadopuesto order by idEstadoPuesto desc limit 1))";
+        sSQL1 = "insert into tblpuestotrabajo(nombrePuesto, puestoestadoId) value(?, (select idEstadoPuesto from tblestadopuesto order by idEstadoPuesto desc limit 1))";
         
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);

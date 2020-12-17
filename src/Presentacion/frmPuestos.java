@@ -190,7 +190,6 @@ public class frmPuestos extends javax.swing.JInternalFrame {
         lblNombre.setText("Nombre del Puesto:");
         jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el Estado del Puesto", "Activo", "Inactivo" }));
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 170, 20));
 
         lblEstado.setText("Estado del Puesto:");

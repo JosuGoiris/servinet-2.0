@@ -29,12 +29,12 @@ public class LUsuarios {
     public DefaultTableModel mostrarUsuarios(String buscar) {
         DefaultTableModel miModelo = null;
         
-            String titulos [] = {"Id", "Usuario", "Clave", "Nombre", "Apellido", "Cédula", "Dirección", "Telefono", "Tipo", "Estado"};
-            String dts [] = new String[10];
+            String titulos [] = {"Id", "Usuario", "Clave", "Nombre", "Apellido", "Cédula", "Id", "Dirección", "Telefono", "Id", "Tipo", "Estado"};
+            String dts [] = new String[12];
             
             miModelo = new DefaultTableModel(null, titulos);
             sSQL = "select p.idPersona, u.loginUsuario, u.passwordUsuario, p.nombres, p.apellidos, p.cedulaIdent, \n"
-                    + "d.nombreDireccion, p.telefono, t.nombre, e.estado from tblpersona as p inner join tblusuario as u on p.idPersona = u.personaId inner join tbldireccion as d on p.direccionId = d.idDireccion inner join tbltipousuario as t on u.tipoUsuarioId = t.idTipoUsuario inner join tblestadopersona as e on p.estadopersonaId = e.idEstadoPersona \n"
+                    + "d.idDireccion, d.nombreDireccion, p.telefono, t.idTipoUsuario, t.nombre, e.estado from tblpersona as p inner join tblusuario as u on p.idPersona = u.personaId inner join tbldireccion as d on p.direccionId = d.idDireccion inner join tbltipousuario as t on u.tipoUsuarioId = t.idTipoUsuario inner join tblestadopersona as e on p.estadopersonaId = e.idEstadoPersona \n"
                     + "where p.idPersona = '" + buscar + "' or p.nombres like '%" + buscar + "%'\n"
                     + "or p.apellidos like '%" + buscar + "%' or p.cedulaIdent like '%" + buscar + "%' order by p.idPersona";
             try {
@@ -47,10 +47,12 @@ public class LUsuarios {
                     dts[3] = rs.getString("nombres");
                     dts[4] = rs.getString("apellidos");
                     dts[5] = rs.getString("cedulaIdent");
-                    dts[6] = rs.getString("nombreDireccion");
-                    dts[7] = rs.getString("telefono");
-                    dts[8] = rs.getString("nombre");
-                    dts[9] = rs.getString("estado");
+                    dts[6] = rs.getString("idDireccion");
+                    dts[7] = rs.getString("nombreDireccion");
+                    dts[8] = rs.getString("telefono");
+                    dts[9] = rs.getString("idTipoUsuario");
+                    dts[10] = rs.getString("nombre");
+                    dts[11] = rs.getString("estado");
                     miModelo.addRow(dts);
                 }
                 return miModelo;

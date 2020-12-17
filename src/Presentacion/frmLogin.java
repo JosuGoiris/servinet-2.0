@@ -30,6 +30,9 @@ public class frmLogin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
+        txtUsuario.setText("Ara");
+        txtContraseña.setText("1234");
+        
         URL imageUrl = this.getClass().getResource("/Imagenes/login.png");
         ImageIcon icoservicio = new ImageIcon(imageUrl);
         Icon iconoSer = new ImageIcon(icoservicio.getImage().getScaledInstance(259, 256, Image.SCALE_DEFAULT));
@@ -103,7 +106,7 @@ public class frmLogin extends javax.swing.JFrame {
 
         jLabel1.setText("USUARIO:");
 
-        jLabel2.setText("USUARIO:");
+        jLabel2.setText("CONTRASEÑA:");
 
         btnAcceder.setText("Acceder");
         btnAcceder.addActionListener(new java.awt.event.ActionListener() {

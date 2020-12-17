@@ -191,7 +191,6 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
         lblNombre.setText("Tipo de Usuario:");
         jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el Estado del Tipo", "Activo", "Inactivo" }));
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 170, 20));
 
         lblEstado.setText("Estado del Tipo:");

@@ -199,7 +199,6 @@ public class frmDireccion extends javax.swing.JInternalFrame {
         lblDireccion.setText("Dirección:");
         jPanel1.add(lblDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
 
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija el Estado de la Dirección", "Activo", "Inactivo" }));
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 170, 20));
         jPanel1.add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 190, -1));
 
