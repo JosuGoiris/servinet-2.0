@@ -20,8 +20,8 @@ public class LConnection {
     public static Connection getConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/servinet?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, pass);
-            JOptionPane.showMessageDialog(null, "Ya se conectó", "Información", JOptionPane.INFORMATION_MESSAGE);
+            con = DriverManager.getConnection("jdbc:mysql://192.168.1.5:3306/servinet?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", user, pass);
+            //JOptionPane.showMessageDialog(null, "Ya se conectó", "Información", JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

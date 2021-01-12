@@ -233,7 +233,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -334,7 +334,7 @@ public class frmUsuario extends javax.swing.JInternalFrame {
         });
         jPanel1.add(btnTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 104, 88));
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(

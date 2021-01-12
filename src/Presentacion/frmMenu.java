@@ -22,7 +22,6 @@ public class frmMenu extends javax.swing.JFrame {
     public frmMenu() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.setExtendedState(MAXIMIZED_BOTH);
         
         URL imageUrlMantenimiento = this.getClass().getResource("/Imagenes/Mantenimiento.png");
         ImageIcon icoMante = new ImageIcon(imageUrlMantenimiento);
@@ -48,6 +47,7 @@ public class frmMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
         btnAdministrarClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +92,7 @@ public class frmMenu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N

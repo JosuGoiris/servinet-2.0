@@ -8,7 +8,6 @@ package Logica;
 import Datos.DEstadoServicio;
 import Datos.DServicios;
 import Datos.DTipoServicio;
-import com.mysql.cj.xdevapi.PreparableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
