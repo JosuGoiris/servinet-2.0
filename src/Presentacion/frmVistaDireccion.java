@@ -155,9 +155,9 @@ public class frmVistaDireccion extends javax.swing.JFrame {
             if(frmTrabajadores.control == 1){
                 frmTrabajadores.txtIdDireccion.setText(cod);
                 frmTrabajadores.txtDireccion.setText(nombre);
-            }else if(frmUsuario.control == 2){
-                frmUsuario.txtIdDireccion.setText(cod);
-                frmUsuario.txtDireccion.setText(nombre);
+            }else if(frmValoresUsuario.control == 2){
+                frmValoresUsuario.txtIdDireccion.setText(cod);
+                frmValoresUsuario.txtDireccion.setText(nombre);
             }
             this.dispose();
         }

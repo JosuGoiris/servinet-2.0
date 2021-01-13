@@ -65,7 +65,7 @@ public class LUsuarios {
     public String insertarUsuarios(DUsuarios misDUsuarios, DPersona misDPersona, DTipoUsuario misDTipoUsuario) {
         String msg = null;
         sSQL = "insert into tblpersona(nombres, apellidos, cedulaIdent, telefono, direccionId, estadopersonaId) value(?,?,?,?, \n"
-                + "(select idDireccion from tbldireccion order by idDireccion desc limit 1) \n"
+                + "(select idDireccion from tbldireccion order by idDireccion desc limit 1), \n"
                 + "(select idEstadoPersona from tblestadopersona order by idEstadoPersona desc limit 1))";
         sSQL1 = "insert into tbltipousuario(nombre, estadotipoId) value(?, (select idEstadoTipoU from tblestadotipousuario order by idEstadoTipoU desc limit 1))";
         sSQL2 = "insert into tblusuario(loginUsuario, passwordUsuario, personaId, tipoUsuarioId) "

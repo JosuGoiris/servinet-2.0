@@ -154,9 +154,9 @@ public class frmVistaTipoU extends javax.swing.JFrame {
             String cod, nombre;
             cod = tblTipoU.getValueAt(fila, 0).toString();
             nombre = tblTipoU.getValueAt(fila, 1).toString();
-            if(frmUsuario.control == 1){
-                frmUsuario.txtIdTipoU.setText(cod);
-                frmUsuario.txtTipoU.setText(nombre);
+            if(frmValoresUsuario.control == 1){
+                frmValoresUsuario.txtIdTipo.setText(cod);
+                frmValoresUsuario.txtTipoUsuario.setText(nombre);
             }
             this.dispose();
         }
