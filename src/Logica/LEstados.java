@@ -34,7 +34,7 @@ public class LEstados {
     public DefaultComboBoxModel llenarComboPersona(){
         DefaultComboBoxModel listaModelo = new DefaultComboBoxModel();
         listaModelo.addElement("Seleccione un Estado");
-        ResultSet rs = this.consulta("select * from tblestadopersona order by estado");
+        ResultSet rs = this.consulta("select * from tblestadopersona order by idEstadoPersona");
         try {
             while(rs.next()){
                 listaModelo.addElement(rs.getString("estado"));

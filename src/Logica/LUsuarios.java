@@ -65,37 +65,31 @@ public class LUsuarios {
     public String insertarUsuarios(DUsuarios misDUsuarios, DPersona misDPersona, DTipoUsuario misDTipoUsuario) {
         String msg = null;
         sSQL = "insert into tblpersona(nombres, apellidos, cedulaIdent, telefono, direccionId, estadopersonaId) value(?,?,?,?, \n"
-                + "(select idDireccion from tbldireccion order by idDireccion desc limit 1), \n"
-                + "(select idEstadoPersona from tblestadopersona order by idEstadoPersona desc limit 1))";
-        sSQL1 = "insert into tbltipousuario(nombre, estadotipoId) value(?, (select idEstadoTipoU from tblestadotipousuario order by idEstadoTipoU desc limit 1))";
+                + "(select idDireccion from tbldireccion order by idDireccion desc limit 1), ?)";
+        //sSQL1 = "insert into tbltipousuario(nombre, estadotipoId) value(?, (select idEstadoTipoU from tblestadotipousuario order by idEstadoTipoU desc limit 1))";
         sSQL2 = "insert into tblusuario(loginUsuario, passwordUsuario, personaId, tipoUsuarioId) "
                 + "value(?,?, (select idPersona from tblPersona order by idPersona desc limit 1), "
                 + "(select idTipoUsuario from tbltipousuario order by idTipoUsuario desc limit 1))";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            PreparedStatement pst1 = cn.prepareStatement(sSQL1);
+            //PreparedStatement pst1 = cn.prepareStatement(sSQL1);
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);
             //CallableStatement cst = cn.prepareCall("{ call sp_insertar_usuariopersona(?,?,?,?,?,?,?) }");
             pst.setString(1, misDPersona.getNombre());
             pst.setString(2, misDPersona.getApellido());
             pst.setString(3, misDPersona.getCedulaIdent());
             pst.setString(4, misDPersona.getTelefono());
+            pst.setInt(5, misDPersona.getEstadoPersonaId());
             
-            pst1.setString(1, misDTipoUsuario.getNombre());
+            //pst1.setString(1, misDTipoUsuario.getNombre());
             pst2.setString(1, misDUsuarios.getLoginUsuario());
             pst2.setString(2, misDUsuarios.getPasswordUsuario());
             
             int n = pst.executeUpdate();
             if(n != 0){
-                int n2 = pst1.executeUpdate();
-                if (n2 != 0){
-                    int n3 = pst2.executeUpdate();
-                    msg = "si";
-                    return msg;
-                }else {
-                    msg = "no";
-                    return msg;
-                }
+                int n2 = pst2.executeUpdate();
+                msg = "si";
+                return msg;
             }else {
                 msg = "no";
                 return msg;
