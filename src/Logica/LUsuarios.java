@@ -60,6 +60,7 @@ public class LUsuarios {
                 JOptionPane.showMessageDialog(null, e);
             return null;
         }
+        
     }
     
     public String insertarUsuarios(DUsuarios misDUsuarios, DPersona misDPersona, DTipoUsuario misDTipoUsuario) {

@@ -26,6 +26,23 @@ import javax.swing.table.DefaultTableModel;
 public class frmUsuario extends javax.swing.JInternalFrame {
     public static int control = 0;
     private LEstados es = new LEstados();
+    frmValoresUsuario formulario = new frmValoresUsuario();
+    
+    /** Valores para editar **/
+    public static int id;
+    public static String usuario = "";
+    public static String contraseña = "";
+    public static String nombres = "";
+    public static String apellidos = "";
+    public static String cedula = "";
+    public static String telefono = "";
+    public static String direccionId = "";
+    public static String direccion = "";
+    public static String tipoId = "";
+    public static String tipo = "";
+    public static String estado = "";
+    public static String estadoId = "";
+    
     /**
      * Creates new form frmUsuario
      */
@@ -48,7 +65,18 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     }
 
     public void limpiarCampos(){
-        
+        formulario.txtId.setText(null);
+        formulario.txtUsuario.setText("");
+        formulario.txtContraseña.setText("");
+        formulario.txtNombres.setText("");
+        formulario.txtApellidos.setText("");
+        formulario.txtCedula.setText("");
+        formulario.txtTelefono.setText("");
+        formulario.txtIdDireccion.setText("");
+        formulario.txtDireccion.setText("");
+        formulario.txtIdTipo.setText("");
+        formulario.txtTipoUsuario.setText("");
+        formulario.cmbEstado.setSelectedIndex(0);
     }
     
     /**
@@ -232,17 +260,37 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        
+        limpiarCampos();
         frmValoresUsuario formulario = new frmValoresUsuario();
         formulario.setVisible(true);
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
-        int fila = tblUsuarios.rowAtPoint(evt.getPoint());  
+        //** Carga de los txt a las variables **//
+        int fila = tblUsuarios.rowAtPoint(evt.getPoint());
+        id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
+        usuario = tblUsuarios.getValueAt(fila, 1).toString();
+        contraseña = tblUsuarios.getValueAt(fila, 2).toString();
+        nombres = tblUsuarios.getValueAt(fila, 3).toString();
+        apellidos = tblUsuarios.getValueAt(fila, 4).toString();
+        cedula = tblUsuarios.getValueAt(fila, 5).toString();
+        direccionId = tblUsuarios.getValueAt(fila, 6).toString();
+        direccion = tblUsuarios.getValueAt(fila, 7).toString();
+        telefono = tblUsuarios.getValueAt(fila, 8).toString();
+        tipoId = tblUsuarios.getValueAt(fila, 9).toString();
+        tipo = tblUsuarios.getValueAt(fila, 10).toString();
     }//GEN-LAST:event_tblUsuariosMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if(tblUsuarios.getSelectedRows().length > 0){
-            accion = "modificar";
+            formulario.accion = "cargar";
+            
+            frmValoresUsuario formulario = new frmValoresUsuario();
+            formulario.setVisible(true);
+            formulario.toFront();
+            
         }else{
             JOptionPane.showMessageDialog(null, "Se debe de Seleccionar un usuario");
         }

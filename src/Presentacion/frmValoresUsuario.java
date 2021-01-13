@@ -24,6 +24,8 @@ public class frmValoresUsuario extends javax.swing.JFrame {
     private LEstados es = new LEstados();
     frmUsuario formUsuario = new frmUsuario();
     String accion = null;
+    
+        
     /**
      * Creates new form frmValoresUsuario
      */
@@ -32,6 +34,43 @@ public class frmValoresUsuario extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         
         cmbEstado.setModel(es.llenarComboPersona());
+        
+        //** Carga de los valores **/
+        if(accion == "cargar"){
+            cargarValores();
+        }
+        limpiarCampos();
+    }
+    
+    public void cargarValores() {
+        frmUsuario formulario = new frmUsuario();
+        txtId.setText(String.valueOf(formulario.id));
+        txtUsuario.setText(formulario.usuario);
+        txtContraseña.setText(formulario.contraseña);
+        txtNombres.setText(formulario.nombres);
+        txtApellidos.setText(formulario.apellidos);
+        txtCedula.setText(formulario.cedula);
+        txtTelefono.setText(formulario.telefono);
+        txtIdDireccion.setText(formulario.direccionId);
+        txtDireccion.setText(formulario.direccion);
+        txtIdTipo.setText(formulario.tipoId);
+        txtTipoUsuario.setText(formulario.tipo);
+        cmbEstado.setSelectedIndex(0);
+    }
+    
+    public void limpiarCampos(){
+        txtId.setText("");
+        txtUsuario.setText("");
+        txtContraseña.setText("");
+        txtNombres.setText("");
+        txtApellidos.setText("");
+        txtCedula.setText("");
+        txtTelefono.setText("");
+        txtIdDireccion.setText("");
+        txtDireccion.setText("");
+        txtIdTipo.setText("");
+        txtTipoUsuario.setText("");
+        cmbEstado.setSelectedIndex(0);
     }
     
     /** Acá están las variables **/
@@ -373,6 +412,7 @@ public class frmValoresUsuario extends javax.swing.JFrame {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
+        limpiarCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void cmbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbEstadoActionPerformed
@@ -431,7 +471,7 @@ public class frmValoresUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarTipoUsuario;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JComboBox<String> cmbEstado;
+    public static javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -444,17 +484,17 @@ public class frmValoresUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txtApellidos;
-    private javax.swing.JTextField txtCedula;
-    private javax.swing.JPasswordField txtContraseña;
+    public static javax.swing.JTextField txtApellidos;
+    public static javax.swing.JTextField txtCedula;
+    public static javax.swing.JPasswordField txtContraseña;
     public static javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtId;
+    public static javax.swing.JTextField txtId;
     public static javax.swing.JTextField txtIdDireccion;
-    private javax.swing.JTextField txtIdEstado;
+    public static javax.swing.JTextField txtIdEstado;
     public static javax.swing.JTextField txtIdTipo;
-    private javax.swing.JTextField txtNombres;
-    private javax.swing.JTextField txtTelefono;
+    public static javax.swing.JTextField txtNombres;
+    public static javax.swing.JTextField txtTelefono;
     public static javax.swing.JTextField txtTipoUsuario;
-    private javax.swing.JTextField txtUsuario;
+    public static javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
