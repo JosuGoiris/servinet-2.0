@@ -74,11 +74,6 @@ public class frmValoresUsuario extends javax.swing.JFrame {
     }
     
     /** Acá están las variables **/
-    
-    public static int Id;
-    public static String Usuario = "";
-    public static String Contraseña = "";
-    public static String Nombres = "";
      
 
     /**
