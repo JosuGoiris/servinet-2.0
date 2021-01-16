@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author josug
  */
 public class LServicios {
-    Connection cn = LConnection.getConnection();
+    Connection cn = ConexionSingleton.getConnection();
     private String sSQL = null;
     private String sSQL1 = null;
     private String sSQL2 = null;
@@ -29,7 +29,7 @@ public class LServicios {
         DefaultTableModel miModelo = null;
         
         String titulos [] = {"Id", "Nombre", "Id", "Velocidad", "Precio", "Descripción", "Id", "Tipo", "Estado"};
-        String dts [] = new String[7];
+        String dts [] = new String[9];
         
         miModelo = new DefaultTableModel(null, titulos);
         sSQL = "select s.idServicio, s.nombreServicio, v.idVelocidadCon, v.velocidad, s.precio, s.descripcion, t.idTipoServicio, t.nombre, \n"
@@ -44,11 +44,13 @@ public class LServicios {
             while(rs.next()){
                 dts[0] = rs.getString("idServicio");
                 dts[1] = rs.getString("nombreServicio");
-                dts[2] = rs.getString("velocidadCon");
-                dts[3] = rs.getString("precio");
-                dts[4] = rs.getString("descripcion");
-                dts[5] = rs.getString("nombre");
-                dts[6] = rs.getString("estado");
+                dts[2] = rs.getString("idVelocidadCon");
+                dts[3] = rs.getString("velocidadCon");
+                dts[4] = rs.getString("precio");
+                dts[5] = rs.getString("descripcion");
+                dts[6] = rs.getString("idTipoServicio");
+                dts[7] = rs.getString("nombre");
+                dts[8] = rs.getString("estado");
                 miModelo.addRow(dts);
             } 
             return miModelo;
@@ -58,39 +60,29 @@ public class LServicios {
         }
     }
     
-    public String insertarServicios(DServicios misDServicios, DTipoServicio misDTipoServicio, DEstadoServicio misDEstadoServicio){
+    public String insertarServicios(DServicios misDServicios){
         String msg = null;
-        sSQL = "insert into tbltiposervicio(nombre) value(?)";
-        sSQL1 = "insert into tblestadoservicio(estado) value(?)";
-        sSQL2 = "insert into tblservicio(nombreServicio, velocidadCon, precio, descripcion, estadoservicioId, tiposervicioId) value(?,?,?,?, (select idEstadoServicio from tblestadoservicio order by idEstadoServicio desc limit 1), (select idTipoServicio from tbltiposervicio order by idTipoServicio desc limit 1))";
+        sSQL = "insert into tblservicio(nombreServicio, velocidadCon, precio, descripcion, estadoservicioId, tiposervicioId) \n"
+                + "value(?,?,?,?,?, \n"
+                + "(select idTipoServicio from tbltiposervicio order by idTipoServicio desc limit 1))";
         
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            PreparedStatement pst1 = cn.prepareStatement(sSQL1);
-            PreparedStatement pst2 = cn.prepareStatement(sSQL2);
-            
-            pst.setString(1, misDTipoServicio.getNombre());
-            pst1.setString(1, misDEstadoServicio.getEstado());
-            pst2.setString(1, misDServicios.getNombreServicio());
-            pst2.setString(2, misDServicios.getVelocidadCon());
-            pst2.setString(3, misDServicios.getPrecio());
-            pst2.setString(4, misDServicios.getDescripcio());
+           
+            pst.setString(1, misDServicios.getNombreServicio());
+            pst.setString(2, misDServicios.getVelocidadCon());
+            pst.setString(3, misDServicios.getPrecio());
+            pst.setString(4, misDServicios.getDescripcio());
+            pst.setInt(5, misDServicios.getEstadoservicioId());
             
             int n = pst.executeUpdate();
             if(n != 0){
-                int n2 = pst1.executeUpdate();
-                if (n2 != 0){
-                    int n3 = pst2.executeUpdate();
                     msg = "si";
                     return msg;
                 }else {
                     msg = "no";
                     return msg;
                 }
-            }else {
-                msg = "no";
-                return msg;
-            }
         } catch (Exception e) {
             e.printStackTrace();
             msg = "no";

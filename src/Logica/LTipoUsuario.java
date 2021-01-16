@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author josug
  */
 public class LTipoUsuario {
-    Connection cn = LConnection.getConnection();
+    Connection cn = ConexionSingleton.getConnection();
     private String sSQL = null;
     private String sSQL1 = null;
     

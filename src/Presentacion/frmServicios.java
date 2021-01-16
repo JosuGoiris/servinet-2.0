@@ -29,38 +29,26 @@ import javax.swing.table.DefaultTableModel;
 public class frmServicios extends javax.swing.JInternalFrame {
     public static int control = 0;
     private LEstados es = new LEstados();
+    public static String accion = "";
+    /** Valores para editar **/
+    public static int id;
+    public static String nombres = "";
+    public static String velocidadId = "";
+    public static String velocidad = "";
+    public static String precio = "";
+    public static String descripcion = "";
+    public static String tipoServicioId;
+    public static String tipoServicio = "";
+    public static String estadoId = "";
+    public static String estado = "";
     /**
      * Creates new form frmUsuario
      */
-    String accion = null;
     
     public frmServicios() {
         initComponents();
         mostrarBuscar("");
         
-        cmbEstado.setModel(es.llenarComboServicio());
-        
-        txtId.setVisible(false);
-        txtNombre.setVisible(false);
-        txtIdVelocidad.setVisible(false);
-        txtVelocidad.setVisible(false);
-        txtPrecio.setVisible(false);
-        txtDescripción.setVisible(false);
-        cmbEstado.setVisible(false);
-        
-        btnGuardar.setVisible(false);
-        btnCancelar.setVisible(false);
-        
-        btnInternet.setVisible(false);
-        btnTelefonía.setVisible(false);
-        
-        lblId.setVisible(false);
-        lblNombre.setVisible(false);
-        lblPrecio.setVisible(false);
-        lblVelocidad.setVisible(false);
-        lblDescripcion.setVisible(false);
-        lblTipoServicio.setVisible(false);
-        lblEstadoServicio.setVisible(false);
     }
     
     public void mostrarBuscar(String buscar){
@@ -72,50 +60,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-    }
-    
-    public void modificar(){   
-        btnInternet.setVisible(true);
-        btnTelefonía.setVisible(true);
-        btnCancelar.setVisible(true);
-        
-        btnAgregar.setVisible(false);
-        btnEditar.setVisible(false);
-        btnCancelarForm.setVisible(false);
-        btnEliminar.setVisible(false);
-        btnAgregarVelocidad.setVisible(false);
-        btnTipoServicio.setVisible(false);
-    }
-    
-    public void mostrarBotones(){
-        txtId.setVisible(false);
-        txtNombre.setVisible(false);
-        txtIdVelocidad.setVisible(false);
-        txtVelocidad.setVisible(false);
-        txtPrecio.setVisible(false);
-        txtDescripción.setVisible(false);
-        txtIdTipo.setVisible(false);
-        txtTipoServicio.setVisible(false);
-        cmbEstado.setVisible(false);
-        
-        btnGuardar.setVisible(false);
-        btnCancelar.setVisible(false);
-        
-        lblId.setVisible(false);
-        lblNombre.setVisible(false);
-        lblVelocidad.setVisible(false);
-        lblPrecio.setVisible(false);
-        lblDescripcion.setVisible(false);
-        lblTipoServicio.setVisible(false);
-        lblEstadoServicio.setVisible(false);
-        
-        btnAgregar.setVisible(true);
-        btnEditar.setVisible(true);
-        btnCancelarForm.setVisible(true);
-        btnEliminar.setVisible(true);
-        btnInternet.setVisible(false);
-        btnTelefonía.setVisible(false);
-                
     }
 
     /**
@@ -131,26 +75,9 @@ public class frmServicios extends javax.swing.JInternalFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnCancelarForm = new javax.swing.JButton();
-        txtId = new javax.swing.JTextField();
-        txtVelocidad = new javax.swing.JTextField();
-        txtPrecio = new javax.swing.JTextField();
-        txtDescripción = new javax.swing.JTextField();
-        lblEstadoServicio = new javax.swing.JLabel();
-        lblId = new javax.swing.JLabel();
-        lblNombre = new javax.swing.JLabel();
-        lblVelocidad = new javax.swing.JLabel();
-        lblDescripcion = new javax.swing.JLabel();
         btnEliminar = new javax.swing.JButton();
-        lblTipoServicio = new javax.swing.JLabel();
-        cmbEstado = new javax.swing.JComboBox<>();
         btnInternet = new javax.swing.JButton();
         btnTelefonía = new javax.swing.JButton();
-        txtNombre = new javax.swing.JTextField();
-        lblPrecio = new javax.swing.JLabel();
-        txtIdTipo = new javax.swing.JTextField();
-        txtTipoServicio = new javax.swing.JTextField();
-        btnBuscarTipoServicio = new javax.swing.JToggleButton();
-        txtIdVelocidad = new javax.swing.JTextField();
         btnBuscarVelocidad = new javax.swing.JToggleButton();
         btnTipoServicio = new javax.swing.JButton();
         btnAgregarVelocidad = new javax.swing.JButton();
@@ -161,7 +88,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
         btnGuardar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -176,7 +102,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 104, 88));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 104, 88));
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -188,25 +114,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
 
         btnCancelarForm.setText("Cancelar");
         jPanel1.add(btnCancelarForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 104, 88));
-        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 50, -1));
-        jPanel1.add(txtVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, 190, -1));
-        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 250, -1));
-        jPanel1.add(txtDescripción, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 250, -1));
-
-        lblEstadoServicio.setText("Estado del Servicio:");
-        jPanel1.add(lblEstadoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
-
-        lblId.setText("ID:");
-        jPanel1.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
-
-        lblNombre.setText("Nombre:");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
-
-        lblVelocidad.setText("Velocidad de Conexión:");
-        jPanel1.add(lblVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
-
-        lblDescripcion.setText("Descripción:");
-        jPanel1.add(lblDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -214,12 +121,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 104, 88));
-
-        lblTipoServicio.setText("Tipo de Servicio:");
-        jPanel1.add(lblTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, -1, -1));
-
-        jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 250, 20));
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 160, 104, 88));
 
         btnInternet.setText("Internet");
         btnInternet.addActionListener(new java.awt.event.ActionListener() {
@@ -236,20 +138,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
             }
         });
         jPanel1.add(btnTelefonía, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 104, 88));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 250, -1));
-
-        lblPrecio.setText("Precio:");
-        jPanel1.add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
-        jPanel1.add(txtIdTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 50, -1));
-        jPanel1.add(txtTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 190, -1));
-
-        btnBuscarTipoServicio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarTipoServicioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnBuscarTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 340, 40, 30));
-        jPanel1.add(txtIdVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 50, -1));
 
         btnBuscarVelocidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -262,7 +150,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
         jPanel1.add(btnTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 104, 88));
 
         btnAgregarVelocidad.setText("Config. Velocidad");
-        jPanel1.add(btnAgregarVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 104, 88));
+        jPanel1.add(btnAgregarVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 104, 88));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -326,13 +214,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -346,9 +227,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)))
+                        .addGap(22, 239, Short.MAX_VALUE)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -359,9 +238,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
                         .addGap(11, 11, 11)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -372,21 +249,16 @@ public class frmServicios extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        btnInternet.setVisible(true);
-        btnTelefonía.setVisible(true);
-        btnCancelar.setVisible(true);
-        
-        btnAgregar.setVisible(false);
-        btnEditar.setVisible(false);
-        btnCancelarForm.setVisible(false);
-        btnEliminar.setVisible(false);
+        frmElegirServicio formulario = new frmElegirServicio();
+        formulario.setVisible(true);
+        formulario.toFront();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
         int fila = tblUsuarios.rowAtPoint(evt.getPoint());
-        txtId.setText(tblUsuarios.getValueAt(fila, 0).toString());
-        txtNombre.setText(tblUsuarios.getValueAt(fila, 1).toString());
-        txtVelocidad.setText(tblUsuarios.getValueAt(fila, 2).toString());
+        id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
+        nombres = (tblUsuarios.getValueAt(fila, 1).toString());
+        velocidadId = tblUsuarios.getValueAt(fila, 2).toString());
         txtPrecio.setText(tblUsuarios.getValueAt(fila, 3).toString());
         txtDescripción.setText(tblUsuarios.getValueAt(fila, 4).toString());
         
@@ -401,85 +273,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Se debe de Seleccionar un usuario");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String actualizar = null;
-        if(txtVelocidad.getText().equals("")){
-            JOptionPane.showMessageDialog(rootPane, "Campo Velocidad obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
-            txtVelocidad.requestFocusInWindow();
-            return;
-        }
-        
-        if(txtNombre.getText().equals("")){
-            JOptionPane.showMessageDialog(rootPane, "Campo Nombre obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
-            txtNombre.requestFocusInWindow();
-            return;
-        }
-        
-        if(txtDescripción.getText().equals("")){
-            JOptionPane.showMessageDialog(rootPane, "Campo Descripción obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
-            txtDescripción.requestFocusInWindow();
-            return;
-        }
-        
-        if(txtPrecio.getText().equals("")){
-            JOptionPane.showMessageDialog(rootPane, "Campo Contraseña obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
-            txtPrecio.requestFocusInWindow();
-            return;
-        }    
-        
-        
-        if(cmbEstado.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(rootPane, "Campo Estado obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
-            cmbEstado.requestFocusInWindow();
-            return;
-        }
-        
-        String msg = null;
-        String msg1 = null;
-        String msg2 = null;
-        if(txtId.getText().equals("")){
-            DServicios dts = new DServicios();
-            LServicios fun = new LServicios();
-            DTipoServicio dtS = new DTipoServicio();
-            DEstadoServicio des = new DEstadoServicio();
-            
-            String estado = String.valueOf(cmbEstado.getSelectedItem());
-            dts.setNombreServicio(txtNombre.getText());
-            dts.setVelocidadCon(txtVelocidad.getText() + " MB");
-            dts.setPrecio(txtPrecio.getText());
-            dts.setDescripcio(txtDescripción.getText());
-            dtS.setNombre(txtTipoServicio.getText());
-            des.setEstado(estado);
-            msg = fun.insertarServicios(dts, dtS, des);
-            mostrarBuscar("");
-            if(msg == "si"){
-                JOptionPane.showMessageDialog(rootPane, "Se insertó de forma correcta", "Información", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Ocurrió un problema al insertar", "Información", JOptionPane.ERROR);
-            }
-        }else if(accion.equals("modificar")){
-            DServicios dts = new DServicios();
-            LServicios fun = new LServicios();
-            DTipoServicio dtS = new DTipoServicio();
-            DEstadoServicio des = new DEstadoServicio();
-            
-            String estado = String.valueOf(cmbEstado.getSelectedItem());
-            dts.setIdServicio(Integer.parseInt(txtId.getText()));
-            dtS.setIdTipoServicio(Integer.parseInt(txtId.getText()));
-            des.setIdestadoServicio(Integer.parseInt(txtId.getText()));
-            dts.setNombreServicio(txtNombre.getText());
-            dts.setVelocidadCon(txtVelocidad.getText());
-            dts.setPrecio(txtPrecio.getText());
-            dts.setDescripcio(txtDescripción.getText());
-            dtS.setNombre(txtTipoServicio.getText());
-            des.setEstado(estado);
-            msg = fun.editarServicio(dts, dtS, des);
-            mostrarBuscar("");
-            modificar();
-        }
-        mostrarBotones();
-    }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         if(!txtId.getText().equals("")){
@@ -501,10 +294,6 @@ public class frmServicios extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        mostrarBotones();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     private void btnInternetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInternetActionPerformed
         txtId.setVisible(true);
         txtNombre.setVisible(true);
@@ -516,10 +305,10 @@ public class frmServicios extends javax.swing.JInternalFrame {
         txtIdTipo.setVisible(true);
         txtTipoServicio.setVisible(true);
         cmbEstado.setVisible(true);
-        
+
         btnGuardar.setVisible(true);
         btnCancelar.setVisible(true);
-        
+
         lblId.setVisible(true);
         lblNombre.setVisible(true);
         lblVelocidad.setVisible(true);
@@ -527,7 +316,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
         lblDescripcion.setVisible(true);
         lblTipoServicio.setVisible(true);
         lblEstadoServicio.setVisible(true);
-        
+
         btnAgregar.setVisible(false);
         btnEditar.setVisible(false);
         btnCancelarForm.setVisible(false);
@@ -536,7 +325,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
         btnTipoServicio.setVisible(false);
         btnBuscarTipoServicio.setVisible(true);
         btnBuscarVelocidad.setVisible(true);
-        
+
         btnInternet.setVisible(false);
         btnTelefonía.setVisible(false);
     }//GEN-LAST:event_btnInternetActionPerformed
@@ -552,10 +341,10 @@ public class frmServicios extends javax.swing.JInternalFrame {
         txtIdTipo.setVisible(true);
         txtTipoServicio.setVisible(true);
         cmbEstado.setVisible(true);
-        
+
         btnGuardar.setVisible(true);
         btnCancelar.setVisible(true);
-        
+
         lblId.setVisible(true);
         lblNombre.setVisible(true);
         lblVelocidad.setVisible(true);
@@ -563,7 +352,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
         lblDescripcion.setVisible(true);
         lblTipoServicio.setVisible(true);
         lblEstadoServicio.setVisible(true);
-        
+
         btnAgregar.setVisible(false);
         btnEditar.setVisible(false);
         btnCancelarForm.setVisible(false);
@@ -577,24 +366,93 @@ public class frmServicios extends javax.swing.JInternalFrame {
         btnTelefonía.setVisible(false);
     }//GEN-LAST:event_btnTelefoníaActionPerformed
 
-    private void btnBuscarTipoServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarTipoServicioActionPerformed
-        frmVistaDireccion form = new frmVistaDireccion();
-        form.setVisible(true);
-        form.toFront();
-        control = 1;
-    }//GEN-LAST:event_btnBuscarTipoServicioActionPerformed
-
     private void btnBuscarVelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarVelocidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBuscarVelocidadActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String actualizar = null;
+        if(txtVelocidad.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Campo Velocidad obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtVelocidad.requestFocusInWindow();
+            return;
+        }
+
+        if(txtNombre.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Campo Nombre obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtNombre.requestFocusInWindow();
+            return;
+        }
+
+        if(txtDescripción.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Campo Descripción obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtDescripción.requestFocusInWindow();
+            return;
+        }
+
+        if(txtPrecio.getText().equals("")){
+            JOptionPane.showMessageDialog(rootPane, "Campo Contraseña obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
+            txtPrecio.requestFocusInWindow();
+            return;
+        }
+
+        if(cmbEstado.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(rootPane, "Campo Estado obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
+            cmbEstado.requestFocusInWindow();
+            return;
+        }
+
+        String msg = null;
+        String msg1 = null;
+        String msg2 = null;
+        if(txtId.getText().equals("")){
+            DServicios dts = new DServicios();
+            LServicios fun = new LServicios();
+            DTipoServicio dtS = new DTipoServicio();
+            DEstadoServicio des = new DEstadoServicio();
+
+            String estado = String.valueOf(cmbEstado.getSelectedItem());
+            dts.setNombreServicio(txtNombre.getText());
+            dts.setVelocidadCon(txtVelocidad.getText() + " MB");
+            dts.setPrecio(txtPrecio.getText());
+            dts.setDescripcio(txtDescripción.getText());
+            dtS.setNombre(txtTipoServicio.getText());
+            des.setEstado(estado);
+            msg = fun.insertarServicios(dts, dtS, des);
+            mostrarBuscar("");
+            if(msg == "si"){
+                JOptionPane.showMessageDialog(rootPane, "Se insertó de forma correcta", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(rootPane, "Ocurrió un problema al insertar", "Información", JOptionPane.ERROR);
+            }
+        }else if(accion.equals("modificar")){
+            DServicios dts = new DServicios();
+            LServicios fun = new LServicios();
+            DTipoServicio dtS = new DTipoServicio();
+            DEstadoServicio des = new DEstadoServicio();
+
+            String estado = String.valueOf(cmbEstado.getSelectedItem());
+            dts.setIdServicio(Integer.parseInt(txtId.getText()));
+            dtS.setIdTipoServicio(Integer.parseInt(txtId.getText()));
+            des.setIdestadoServicio(Integer.parseInt(txtId.getText()));
+            dts.setNombreServicio(txtNombre.getText());
+            dts.setVelocidadCon(txtVelocidad.getText());
+            dts.setPrecio(txtPrecio.getText());
+            dts.setDescripcio(txtDescripción.getText());
+            dtS.setNombre(txtTipoServicio.getText());
+            des.setEstado(estado);
+            msg = fun.editarServicio(dts, dtS, des);
+            mostrarBuscar("");
+            modificar();
+        }
+        mostrarBotones();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarVelocidad;
-    private javax.swing.JToggleButton btnBuscarTipoServicio;
     private javax.swing.JToggleButton btnBuscarVelocidad;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelarForm;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
@@ -603,27 +461,11 @@ public class frmServicios extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnTelefonía;
     private javax.swing.JButton btnTipoServicio;
     private javax.swing.JTextField buscar;
-    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblDescripcion;
-    private javax.swing.JLabel lblEstadoServicio;
-    private javax.swing.JLabel lblId;
-    private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblPrecio;
-    private javax.swing.JLabel lblTipoServicio;
-    private javax.swing.JLabel lblVelocidad;
     private javax.swing.JTable tblUsuarios;
-    private javax.swing.JTextField txtDescripción;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtIdTipo;
-    private javax.swing.JTextField txtIdVelocidad;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtPrecio;
-    private javax.swing.JTextField txtTipoServicio;
-    private javax.swing.JTextField txtVelocidad;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  * @author josug
  */
 public class LUsuarios {
-    Connection cn = LConnection.getConnection();
+    Connection cn = ConexionSingleton.getConnection();
     private String sSQL  = null;
     private String sSQL1 = null;
     private String sSQL2 = null;
@@ -34,7 +34,10 @@ public class LUsuarios {
             
             miModelo = new DefaultTableModel(null, titulos);
             sSQL = "select p.idPersona, u.loginUsuario, u.passwordUsuario, p.nombres, p.apellidos, p.cedulaIdent, \n"
-                    + "d.idDireccion, d.nombreDireccion, p.telefono, t.idTipoUsuario, t.nombre, e.estado from tblpersona as p inner join tblusuario as u on p.idPersona = u.personaId inner join tbldireccion as d on p.direccionId = d.idDireccion inner join tbltipousuario as t on u.tipoUsuarioId = t.idTipoUsuario inner join tblestadopersona as e on p.estadopersonaId = e.idEstadoPersona \n"
+                    + "d.idDireccion, d.nombreDireccion, p.telefono, t.idTipoUsuario, t.nombre, e.estado from tblpersona \n"
+                    + "as p inner join tblusuario as u on p.idPersona = u.personaId inner join tbldireccion as d on \n"
+                    + "p.direccionId = d.idDireccion inner join tbltipousuario as t on u.tipoUsuarioId = t.idTipoUsuario \n"
+                    + "inner join tblestadopersona as e on p.estadopersonaId = e.idEstadoPersona \n"
                     + "where p.idPersona = '" + buscar + "' or p.nombres like '%" + buscar + "%'\n"
                     + "or p.apellidos like '%" + buscar + "%' or p.cedulaIdent like '%" + buscar + "%' order by p.idPersona";
             try {

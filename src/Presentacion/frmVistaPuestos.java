@@ -153,9 +153,9 @@ public class frmVistaPuestos extends javax.swing.JFrame {
             String cod, nombre;
             cod = tblPuestos.getValueAt(fila, 0).toString();
             nombre = tblPuestos.getValueAt(fila, 1).toString();
-            if(frmTrabajadores.control == 1){
-                frmTrabajadores.txtIdPuesto.setText(cod);
-                frmTrabajadores.txtPuesto.setText(nombre);
+            if(frmValoresTrabajadores.control == 1){
+                frmValoresTrabajadores.txtIdPuesto.setText(cod);
+                frmValoresTrabajadores.txtPuesto.setText(nombre);
             }
             this.dispose();
         }

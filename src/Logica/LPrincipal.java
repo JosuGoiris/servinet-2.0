@@ -13,6 +13,6 @@ import java.sql.Connection;
  */
 public class LPrincipal {
     public static void main(String [] args) {
-        Connection cn = LConnection.getConnection();
+        Connection cn = ConexionSingleton.getConnection();
     }
 }

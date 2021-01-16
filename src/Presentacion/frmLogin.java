@@ -5,7 +5,7 @@
  */
 package Presentacion;
 
-import Logica.LConnection;
+import Logica.ConexionSingleton;
 import java.awt.Image;
 import java.net.URL;
 import java.sql.Connection;
@@ -24,7 +24,7 @@ public class frmLogin extends javax.swing.JFrame {
     /**
      * Creates new form frmLogin
      */
-    Connection cn = LConnection.getConnection();
+    Connection cn = ConexionSingleton.getConnection();
     
     public frmLogin() {
         initComponents();

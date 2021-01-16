@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author josug
  */
 public class LPuestos {
-    Connection cn = LConnection.getConnection();
+    Connection cn = ConexionSingleton.getConnection();
     private String sSQL = null;
     private String sSQL1 = null;
     
@@ -30,7 +30,9 @@ public class LPuestos {
         String dts [] = new String[3];
         
         miModelo = new DefaultTableModel(null, titulos);
-        sSQL = "select pt.idPuestoTrabajo, pt.nombrePuesto, e.estado from tblpuestotrabajo as pt inner join tblestadopuesto as e on pt.puestoestadoId = e.idEstadoPuesto where pt.idPuestoTrabajo = '" + buscar + "' or pt.nombrePuesto like '%" + buscar + "%'";
+        sSQL = "select pt.idPuestoTrabajo, pt.nombrePuesto, e.estado from tblpuestotrabajo \n"
+                + "as pt inner join tblestadopuesto as e on pt.puestoestadoId = e.idEstadoPuesto \n"
+                + "where pt.idPuestoTrabajo = '" + buscar + "' or pt.nombrePuesto like '%" + buscar + "%'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -47,22 +49,18 @@ public class LPuestos {
         }
     }
     
-    public String insertarPuestos(DPuestos dPuestos, DEstadoPuesto dEstadoPuesto){
+    public String insertarPuestos(DPuestos dPuestos){
         String msg = null;
-        sSQL = "insert into tblestadopuesto(estado) value(?)";
-        sSQL1 = "insert into tblpuestotrabajo(nombrePuesto, puestoestadoId) value(?, (select idEstadoPuesto from tblestadopuesto order by idEstadoPuesto desc limit 1))";
+        sSQL = "insert into tblpuestotrabajo(nombrePuesto, puestoestadoId) value(?, ?)";
         
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            PreparedStatement pst1 = cn.prepareStatement(sSQL1);
             
-            pst.setString(1, dEstadoPuesto.getEstado());
-            
-            pst1.setString(1, dPuestos.getNombrePuesto());
+            pst.setString(1, dPuestos.getNombrePuesto());
+            pst.setInt(2, dPuestos.getEstadopuestoId());
             
             int n = pst.executeUpdate();
             if(n != 0){
-                int n2 = pst1.executeUpdate();
                 msg = "si";
                 return msg;
             }else{

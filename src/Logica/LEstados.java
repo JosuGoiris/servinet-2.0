@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author josug
  */
 public class LEstados {
-    Connection cn = LConnection.getConnection();
+    Connection cn = ConexionSingleton.getConnection();
     public String sSQL = null;
     
     public ResultSet consulta(String sql){

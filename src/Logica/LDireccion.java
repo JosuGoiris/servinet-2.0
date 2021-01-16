@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  * @author josug
  */
 public class LDireccion {
-    Connection cn = LConnection.getConnection();
+    Connection cn = ConexionSingleton.getConnection();
     private String sSQL = null;
     private String sSQL1 = null;
     private String sSQL2 = null;

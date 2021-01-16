@@ -9,7 +9,6 @@ import Datos.DPersona;
 import Datos.DTipoUsuario;
 import Datos.DUsuarios;
 import Datos.guardarDatos;
-import Logica.LConnection;
 import Logica.LEstados;
 import Logica.LUsuarios;
 import static Presentacion.frmMantenimiento.dpnEscritorio;
@@ -26,8 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class frmUsuario extends javax.swing.JInternalFrame {
     public static int control = 0;
     private LEstados es = new LEstados();
-    frmValoresUsuario formulario = new frmValoresUsuario();
-    
+    public static String accion = "";
     /** Valores para editar **/
     public static int id;
     public static String usuario = "";
@@ -46,11 +44,11 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmUsuario
      */
-    String accion = null;
     
     public frmUsuario() {
         initComponents();
-        mostrarBuscar("");      
+        mostrarBuscar("");    
+        
     }
     
     public void mostrarBuscar(String buscar){
@@ -63,21 +61,8 @@ public class frmUsuario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+   
 
-    public void limpiarCampos(){
-        formulario.txtId.setText(null);
-        formulario.txtUsuario.setText("");
-        formulario.txtContraseña.setText("");
-        formulario.txtNombres.setText("");
-        formulario.txtApellidos.setText("");
-        formulario.txtCedula.setText("");
-        formulario.txtTelefono.setText("");
-        formulario.txtIdDireccion.setText("");
-        formulario.txtDireccion.setText("");
-        formulario.txtIdTipo.setText("");
-        formulario.txtTipoUsuario.setText("");
-        formulario.cmbEstado.setSelectedIndex(0);
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -260,11 +245,9 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
-        limpiarCampos();
         frmValoresUsuario formulario = new frmValoresUsuario();
         formulario.setVisible(true);
-        
+        formulario.toFront();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
@@ -284,10 +267,11 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblUsuariosMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
         if(tblUsuarios.getSelectedRows().length > 0){
-            formulario.accion = "cargar";
-            
             frmValoresUsuario formulario = new frmValoresUsuario();
+            accion = "cargar";
+            formulario.cargarValores();
             formulario.setVisible(true);
             formulario.toFront();
             
@@ -297,7 +281,8 @@ public class frmUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        /*if(!txtId.getText().equals("")){
+        frmValoresUsuario formulario = new frmValoresUsuario();
+        if(!formulario.txtId.getText().equals("")){
             int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Desea eliminar el Usuario?", "Confirmación", 2);
             if(confirmacion == 0){
                 LUsuarios func = new LUsuarios();
@@ -305,13 +290,13 @@ public class frmUsuario extends javax.swing.JInternalFrame {
                 DPersona dtp = new DPersona();
                 DTipoUsuario dtt = new DTipoUsuario();
                 
-                dts.setIdUsuario(Integer.parseInt(txtId.getText()));
-                dtp.setIdPersona(Integer.parseInt(txtId.getText()));
+                dts.setIdUsuario(Integer.parseInt(formulario.txtId.getText()));
+                dtp.setIdPersona(Integer.parseInt(formulario.txtId.getText()));
                 
                 func.eliminarUsuarios(dts, dtp, dtt);
                 mostrarBuscar("");
             }
-        }*/
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarFormActionPerformed
