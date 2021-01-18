@@ -258,7 +258,7 @@ public class frmServicios extends javax.swing.JInternalFrame {
         int fila = tblUsuarios.rowAtPoint(evt.getPoint());
         id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
         nombres = (tblUsuarios.getValueAt(fila, 1).toString());
-        velocidadId = tblUsuarios.getValueAt(fila, 2).toString());
+        velocidadId = tblUsuarios.getValueAt(fila, 2).toString();
         txtPrecio.setText(tblUsuarios.getValueAt(fila, 3).toString());
         txtDescripción.setText(tblUsuarios.getValueAt(fila, 4).toString());
         
