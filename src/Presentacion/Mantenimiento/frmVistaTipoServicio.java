@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package Presentacion.Mantenimiento;
 
 import Logica.LDireccion;
-import Logica.LServicios;
+import Logica.LPuestos;
+import Logica.LTipoServicio;
+import Logica.LTipoUsuario;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,12 +16,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author josug
  */
-public class frmVistaServicio extends javax.swing.JFrame {
+public class frmVistaTipoServicio extends javax.swing.JFrame {
 
     /**
      * Creates new form frmVistaDireccion
      */
-    public frmVistaServicio() {
+    public frmVistaTipoServicio() {
         initComponents();
         mostrar("");
     }
@@ -27,9 +29,9 @@ public class frmVistaServicio extends javax.swing.JFrame {
     public void mostrar(String buscar){
         try {
             DefaultTableModel miModelo;
-            LServicios fun = new LServicios();
-            miModelo = fun.mostrarServicios(buscar);
-            tblServicios.setModel(miModelo);
+            LTipoServicio fun = new LTipoServicio();
+            miModelo = fun.mostrarTipoServicio(buscar);
+            tblTipoU.setModel(miModelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -49,11 +51,11 @@ public class frmVistaServicio extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblServicios = new javax.swing.JTable();
+        tblTipoU = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de los Servicios"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de las Direcciones"));
 
         jLabel1.setText("Buscar:");
 
@@ -88,7 +90,7 @@ public class frmVistaServicio extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tblServicios.setModel(new javax.swing.table.DefaultTableModel(
+        tblTipoU.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -99,12 +101,12 @@ public class frmVistaServicio extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblServicios.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblTipoU.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblServiciosMousePressed(evt);
+                tblTipoUMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblServicios);
+        jScrollPane1.setViewportView(tblTipoU);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -147,19 +149,19 @@ public class frmVistaServicio extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblServiciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblServiciosMousePressed
+    private void tblTipoUMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoUMousePressed
         if(evt.getClickCount() == 2){
-            int fila = tblServicios.getSelectedRow();
+            int fila = tblTipoU.getSelectedRow();
             String cod, nombre;
-            cod = tblServicios.getValueAt(fila, 0).toString();
-            nombre = tblServicios.getValueAt(fila, 1).toString();
+            cod = tblTipoU.getValueAt(fila, 0).toString();
+            nombre = tblTipoU.getValueAt(fila, 1).toString();
             if(frmValoresServicio.control == 1){
                 frmValoresServicio.txtIdTipoServicio.setText(cod);
                 frmValoresServicio.txtTipoServicio.setText(nombre);
             }
             this.dispose();
         }
-    }//GEN-LAST:event_tblServiciosMousePressed
+    }//GEN-LAST:event_tblTipoUMousePressed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         mostrar(txtBuscar.getText());
@@ -182,21 +184,27 @@ public class frmVistaServicio extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVistaServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaTipoServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVistaServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaTipoServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVistaServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaTipoServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVistaServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaTipoServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVistaServicio().setVisible(true);
+                new frmVistaTipoServicio().setVisible(true);
             }
         });
     }
@@ -206,7 +214,7 @@ public class frmVistaServicio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblServicios;
+    private javax.swing.JTable tblTipoU;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

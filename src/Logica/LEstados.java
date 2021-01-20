@@ -90,4 +90,19 @@ public class LEstados {
         }
         return listaModelo;
     }
+    
+    public DefaultComboBoxModel llenarComboEstadoVelocidad(){
+        DefaultComboBoxModel listaModelo = new DefaultComboBoxModel();
+        listaModelo.addElement("Seleccione un Estado");
+        ResultSet rs = this.consulta("select * from tblestadovelocidad order by estado");
+        try {
+            while(rs.next()){
+                listaModelo.addElement(rs.getString("estado"));
+            }
+            rs.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return listaModelo;
+    }
 }

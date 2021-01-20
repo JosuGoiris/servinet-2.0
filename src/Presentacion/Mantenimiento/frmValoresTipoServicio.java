@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package Presentacion.Mantenimiento;
 
 import Datos.DEstadoPuesto;
 import Datos.DPersona;
@@ -14,6 +14,8 @@ import Datos.DTrabajadores;
 import Datos.DUsuarios;
 import Logica.LEstados;
 import Logica.LPuestos;
+import Logica.LTipoServicio;
+import Logica.LTipoUsuario;
 import Logica.LTrabajadores;
 import Logica.LUsuarios;
 import java.awt.event.ActionEvent;
@@ -24,7 +26,7 @@ import javax.swing.JOptionPane;
  *
  * @author josug
  */
-public class frmValoresPuestos extends javax.swing.JFrame {
+public class frmValoresTipoServicio extends javax.swing.JFrame {
     public static int control = 0;
     private LEstados es = new LEstados();
 
@@ -34,7 +36,7 @@ public class frmValoresPuestos extends javax.swing.JFrame {
     /**
      * Creates new form frmValoresUsuario
      */
-    public frmValoresPuestos() {
+    public frmValoresTipoServicio() {
         initComponents();
         this.setLocationRelativeTo(null);
         
@@ -44,15 +46,15 @@ public class frmValoresPuestos extends javax.swing.JFrame {
     }
     
     public void cargarValores() {
-        frmTrabajadores formTrabajador = new frmTrabajadores();
-        txtId.setText(String.valueOf(formTrabajador.id));
-        txtNombredelPuesto.setText(formTrabajador.nombres);
+        frmTipoServicio form = new frmTipoServicio();
+        txtId.setText(String.valueOf(form.id));
+        txtNombredelTipo.setText(form.tipoServicio);
         cmbEstado.setSelectedIndex(0);
     }
     
     public void limpiarCampos(){
         txtId.setText("");
-        txtNombredelPuesto.setText("");
+        txtNombredelTipo.setText("");
         cmbEstado.setSelectedIndex(0);
     }
     
@@ -73,7 +75,7 @@ public class frmValoresPuestos extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtNombredelPuesto = new javax.swing.JTextField();
+        txtNombredelTipo = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
         btnGuardar = new javax.swing.JButton();
@@ -92,7 +94,7 @@ public class frmValoresPuestos extends javax.swing.JFrame {
         jLabel3.setText("ID:");
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Nombre del Puesto:");
+        jLabel5.setText("Tipo de Servicio:");
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Estado:");
@@ -130,7 +132,7 @@ public class frmValoresPuestos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNombredelPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombredelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel3)
                     .addComponent(jLabel10)
@@ -154,7 +156,7 @@ public class frmValoresPuestos extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtNombredelPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNombredelTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -212,13 +214,13 @@ public class frmValoresPuestos extends javax.swing.JFrame {
         String msg2 = null;
 
         if(txtId.getText().equals("")) {
-            DPuestos dt = new DPuestos();
-            LPuestos fun = new LPuestos();
-
+            DTipoServicio dts = new DTipoServicio();
+            LTipoServicio fun = new LTipoServicio();
+            
             String estado = String.valueOf(cmbEstado.getSelectedItem());
-            dt.setNombrePuesto(txtNombredelPuesto.getText());
-            dt.setEstadopuestoId(Integer.parseInt(txtIdEstado.getText()));
-            msg = fun.insertarPuestos(dt);
+            dts.setNombre(txtNombredelTipo.getText());
+            dts.setEstadotiposerId(Integer.parseInt(txtIdEstado.getText()));
+            msg = fun.insertarTipos(dts);
             if(msg == "si") {
                 JOptionPane.showMessageDialog(rootPane, "Se Insertó de forma correcta", "Información", JOptionPane.INFORMATION_MESSAGE);
             }else{
@@ -245,8 +247,8 @@ public class frmValoresPuestos extends javax.swing.JFrame {
             dtu.setNombre(tipo);
             msg = fun.editarUsuarios(dts, dtp, dtu);
             formUsuario.mostrarBuscar("");*/
-            frmTrabajadores formTrabajadores = new frmTrabajadores();
-            formTrabajadores.mostrarBuscar("");
+            frmTipoServicio form = new frmTipoServicio();
+            form.mostrarBuscar("");
             this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -283,14 +285,26 @@ public class frmValoresPuestos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmValoresPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmValoresTipoServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmValoresPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmValoresTipoServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmValoresPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmValoresTipoServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmValoresPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmValoresTipoServicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -299,7 +313,7 @@ public class frmValoresPuestos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmValoresPuestos().setVisible(true);
+                new frmValoresTipoServicio().setVisible(true);
             }
         });
     }
@@ -307,14 +321,14 @@ public class frmValoresPuestos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JComboBox<String> cmbEstado;
+    public static javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtIdEstado;
-    private javax.swing.JTextField txtNombredelPuesto;
+    public static javax.swing.JTextField txtIdEstado;
+    public static javax.swing.JTextField txtNombredelTipo;
     // End of variables declaration//GEN-END:variables
 }

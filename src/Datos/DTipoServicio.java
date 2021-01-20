@@ -12,13 +12,23 @@ package Datos;
 public class DTipoServicio {
     int idTipoServicio;
     String nombre;
+    int estadotiposerId;
 
     public DTipoServicio() {
     }
 
-    public DTipoServicio(int idTipoServicio, String nombre) {
+    public DTipoServicio(int idTipoServicio, String nombre, int estadotiposerId) {
         this.idTipoServicio = idTipoServicio;
         this.nombre = nombre;
+        this.estadotiposerId = estadotiposerId;
+    }
+
+    public int getEstadotiposerId() {
+        return estadotiposerId;
+    }
+
+    public void setEstadotiposerId(int estadotiposerId) {
+        this.estadotiposerId = estadotiposerId;
     }
 
     public int getIdTipoServicio() {

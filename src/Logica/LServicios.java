@@ -45,7 +45,7 @@ public class LServicios {
                 dts[0] = rs.getString("idServicio");
                 dts[1] = rs.getString("nombreServicio");
                 dts[2] = rs.getString("idVelocidadCon");
-                dts[3] = rs.getString("velocidadCon");
+                dts[3] = rs.getString("velocidad");
                 dts[4] = rs.getString("precio");
                 dts[5] = rs.getString("descripcion");
                 dts[6] = rs.getString("idTipoServicio");
@@ -62,18 +62,18 @@ public class LServicios {
     
     public String insertarServicios(DServicios misDServicios){
         String msg = null;
-        sSQL = "insert into tblservicio(nombreServicio, velocidadCon, precio, descripcion, estadoservicioId, tiposervicioId) \n"
-                + "value(?,?,?,?,?, \n"
-                + "(select idTipoServicio from tbltiposervicio order by idTipoServicio desc limit 1))";
+        sSQL = "insert into tblservicio(nombreServicio, velocidadconId, precio, descripcion, estadoservicioId, tiposervicioId) \n"
+                + "value(?,?,?,?,?,?)";
         
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
            
             pst.setString(1, misDServicios.getNombreServicio());
-            pst.setString(2, misDServicios.getVelocidadCon());
+            pst.setInt(2, misDServicios.getVelocidadconId());
             pst.setString(3, misDServicios.getPrecio());
             pst.setString(4, misDServicios.getDescripcio());
             pst.setInt(5, misDServicios.getEstadoservicioId());
+            pst.setInt(6, misDServicios.getTiposervicioId());
             
             int n = pst.executeUpdate();
             if(n != 0){
@@ -108,7 +108,7 @@ public class LServicios {
             pst1.setInt(2, misDEstadoServicio.getIdestadoServicio());
             
             pst2.setString(1, misDServicios.getNombreServicio());
-            pst2.setString(2, misDServicios.getVelocidadCon());
+            pst2.setInt(2, misDServicios.getVelocidadconId());
             pst2.setString(3, misDServicios.getPrecio());
             pst2.setString(4, misDServicios.getDescripcio());
             pst2.setInt(5, misDServicios.getIdServicio());

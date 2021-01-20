@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package Presentacion.Mantenimiento;
 
 import Datos.DDireccion;
 import Datos.DEstadoDireccion;
@@ -34,28 +34,23 @@ import javax.swing.table.DefaultTableModel;
  * @author josug
  */
 public class frmTipoUsuario extends javax.swing.JInternalFrame {
+    public static int control = 0;
     private LEstados es = new LEstados();
+    public static String accion = "";
+    /** Valores para editar **/
+    public static int id;
+    public static String tipoUsuario = "";
+    public static String estado = "";
+    public static String estadoId = "";
+    
+    
     /**
      * Creates new form frmUsuario
      */
-    String accion = null;
     
     public frmTipoUsuario() {
         initComponents();
         mostrarBuscar("");
-        
-        cmbEstado.setModel(es.llenarComboTipoUsuario());
-        
-        txtId.setVisible(false);
-        txtTipoUsuario.setVisible(false);
-        cmbEstado.setVisible(false);
-        
-        btnGuardar.setVisible(false);
-        btnCancelar.setVisible(false);
-        
-        lblId.setVisible(false);
-        lblNombre.setVisible(false);
-        lblEstado.setVisible(false);
     }
     
     public void mostrarBuscar(String buscar){
@@ -67,42 +62,6 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-    }
-    
-    public void modificar(){
-        txtId.setVisible(true);
-        txtTipoUsuario.setVisible(true);
-        cmbEstado.setVisible(true);
-        
-        btnGuardar.setVisible(true);
-        btnCancelar.setVisible(true);
-        
-        lblId.setVisible(true);
-        lblNombre.setVisible(true);
-        lblEstado.setVisible(true);
-        
-        btnAgregar.setVisible(false);
-        btnEditar.setVisible(false);
-        btnCancelarForm.setVisible(false);
-        btnEliminar.setVisible(false);    
-    }
-    
-    public void mostrarBotones(){
-        txtId.setVisible(false);
-        cmbEstado.setVisible(false);
-        txtTipoUsuario.setVisible(false);
-        
-        btnGuardar.setVisible(false);
-        btnCancelar.setVisible(false);
-        
-        lblId.setVisible(false);
-        lblNombre.setVisible(false);
-        lblEstado.setVisible(false);
-        
-        btnAgregar.setVisible(true);
-        btnEditar.setVisible(true);
-        btnCancelarForm.setVisible(true);
-        btnEliminar.setVisible(true);
     }
 
     /**
@@ -118,15 +77,7 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
         btnAgregar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnCancelarForm = new javax.swing.JButton();
-        btnGuardar = new javax.swing.JButton();
-        txtId = new javax.swing.JTextField();
-        lblId = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        lblNombre = new javax.swing.JLabel();
-        cmbEstado = new javax.swing.JComboBox<>();
-        lblEstado = new javax.swing.JLabel();
-        txtTipoUsuario = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTipoUsuario = new javax.swing.JTable();
@@ -139,7 +90,6 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
         setMaximizable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +97,6 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 104, 88));
 
         btnEditar.setText("Editar");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -155,30 +104,8 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 104, 88));
 
         btnCancelarForm.setText("Cancelar");
-        jPanel1.add(btnCancelarForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 104, 88));
-
-        btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 104, 30));
-        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 50, -1));
-
-        lblId.setText("ID:");
-        jPanel1.add(lblId, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
-
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 104, 30));
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -186,16 +113,37 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
                 btnEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 104, 88));
 
-        lblNombre.setText("Tipo de Usuario:");
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
-
-        jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 170, 20));
-
-        lblEstado.setText("Estado del Tipo:");
-        jPanel1.add(lblEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
-        jPanel1.add(txtTipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 190, -1));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnCancelarForm, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelarForm, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -257,7 +205,7 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -266,104 +214,41 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        btnAgregar.setVisible(false);
-        btnEditar.setVisible(false);
-        btnCancelarForm.setVisible(false);
-        btnEliminar.setVisible(false);
-        
-        txtId.setVisible(true);
-        txtTipoUsuario.setVisible(true);
-        cmbEstado.setVisible(true);
-        
-        btnGuardar.setVisible(true);
-        btnCancelar.setVisible(true);
-        
-        lblId.setVisible(true);
-        lblNombre.setVisible(true);
-        lblEstado.setVisible(true);
+        frmValoresTipoUsuario formulario = new frmValoresTipoUsuario();
+        formulario.setVisible(true);
+        formulario.toFront();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void tblTipoUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTipoUsuarioMouseClicked
         int fila = tblTipoUsuario.rowAtPoint(evt.getPoint());
-        txtId.setText(tblTipoUsuario.getValueAt(fila, 0).toString());
-        /*txtNombre.setText(tblUsuarios.getValueAt(fila, 1).toString());
-        txtApellido.setText(tblUsuarios.getValueAt(fila, 2).toString());
-        txtCedula.setText(tblUsuarios.getValueAt(fila, 3).toString());
-        txtTelefono.setText(tblUsuarios.getValueAt(fila, 4).toString());
-        cmbTipoServicio.setSelectedItem(tblUsuarios.getValueAt(fila, 5).toString());*/
-        cmbEstado.setSelectedItem(tblTipoUsuario.getValueAt(fila, 6).toString());
+        id = Integer.parseInt(tblTipoUsuario.getValueAt(fila, 0).toString());
+        tipoUsuario = tblTipoUsuario.getValueAt(fila, 1).toString();
     }//GEN-LAST:event_tblTipoUsuarioMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if(tblTipoUsuario.getSelectedRows().length > 0){
-            accion = "modificar";
-            modificar();
+            frmValoresTipoUsuario formulario = new frmValoresTipoUsuario();
+            accion = "cargar";
+            formulario.cargarValores();
+            formulario.setVisible(true);
+            formulario.toFront();
         }else{
             JOptionPane.showMessageDialog(null, "Se debe de Seleccionar un usuario");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        String actualizar = null;
-        if(txtTipoUsuario.getText().equals("")){
-            JOptionPane.showMessageDialog(rootPane, "Campo Dirección obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
-            txtTipoUsuario.requestFocusInWindow();
-            return;
-        }
-        
-        if(cmbEstado.getSelectedIndex() == 0){
-            JOptionPane.showMessageDialog(rootPane, "Campo Estado obligatorio", "Validación", JOptionPane.WARNING_MESSAGE);
-            cmbEstado.requestFocusInWindow();
-            return;
-        }
-        
-        String msg = null;
-        String msg1 = null;
-        String msg2 = null;
-        if(txtId.getText().equals("")){
-            DTipoUsuario dts = new DTipoUsuario();
-            LTipoUsuario fun = new LTipoUsuario();
-            DEstadoTipoU det = new DEstadoTipoU();
-            
-            String estado = String.valueOf(cmbEstado.getSelectedItem());
-            dts.setNombre(txtTipoUsuario.getText());
-            det.setEstado(estado);
-            msg = fun.insertarTipos(dts, det);
-            mostrarBuscar("");
-            if(msg == "si"){
-                JOptionPane.showMessageDialog(rootPane, "Se insertó de forma correcta", "Información", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                JOptionPane.showMessageDialog(rootPane, "Ocurrió un problema al insertar", "Información", JOptionPane.ERROR);
-            }
-        }else if(accion.equals("modificar")){
-            DDireccion dts = new DDireccion();
-            LDireccion fun = new LDireccion();
-            DEstadoDireccion ded = new DEstadoDireccion();
-            
-            String estado = String.valueOf(cmbEstado.getSelectedItem());
-            dts.setIdDireccion(Integer.parseInt(txtId.getText()));
-            ded.setIdEstadoDireccion(Integer.parseInt(txtId.getText()));
-            /*dts.set(txtPuesto.getText());*/
-            ded.setEstado(estado);
-           /* msg = fun.; */
-            mostrarBuscar("");
-            modificar();
-        }
-        mostrarBotones();
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if(!txtId.getText().equals("")){
+        /*if(!txtId.getText().equals("")){
             int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Desea eliminar el Usuario?", "Confirmación", 2);
             if(confirmacion == 0){
                 DServicios dts = new DServicios();
@@ -379,33 +264,21 @@ public class frmTipoUsuario extends javax.swing.JInternalFrame {
                 fun.eliminarServicios(dts, dtS, des);
                 mostrarBuscar("");
             }
-        }
+        }*/
     }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        mostrarBotones();
-    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnCancelarForm;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnGuardar;
     private javax.swing.JTextField buscar;
-    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblEstado;
-    private javax.swing.JLabel lblId;
-    private javax.swing.JLabel lblNombre;
     private javax.swing.JTable tblTipoUsuario;
-    private javax.swing.JTextField txtId;
-    private javax.swing.JTextField txtTipoUsuario;
     // End of variables declaration//GEN-END:variables
 }

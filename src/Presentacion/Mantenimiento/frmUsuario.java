@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package Presentacion.Mantenimiento;
 
 import Datos.DPersona;
 import Datos.DTipoUsuario;
@@ -11,7 +11,7 @@ import Datos.DUsuarios;
 import Datos.guardarDatos;
 import Logica.LEstados;
 import Logica.LUsuarios;
-import static Presentacion.frmMantenimiento.dpnEscritorio;
+import static Presentacion.Mantenimiento.frmMantenimiento.dpnEscritorio;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;

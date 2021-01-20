@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package Presentacion.Mantenimiento;
 
 import Logica.LDireccion;
+import Logica.LPuestos;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -13,12 +14,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author josug
  */
-public class frmVistaDireccion extends javax.swing.JFrame {
+public class frmVistaPuestos extends javax.swing.JFrame {
 
     /**
      * Creates new form frmVistaDireccion
      */
-    public frmVistaDireccion() {
+    public frmVistaPuestos() {
         initComponents();
         mostrar("");
     }
@@ -26,9 +27,9 @@ public class frmVistaDireccion extends javax.swing.JFrame {
     public void mostrar(String buscar){
         try {
             DefaultTableModel miModelo;
-            LDireccion fun = new LDireccion();
-            miModelo = fun.mostrarDireccion(buscar);
-            tblDirecciones.setModel(miModelo);
+            LPuestos fun = new LPuestos();
+            miModelo = fun.mostrarPuestos(buscar);
+            tblPuestos.setModel(miModelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -48,7 +49,7 @@ public class frmVistaDireccion extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblDirecciones = new javax.swing.JTable();
+        tblPuestos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,7 +88,7 @@ public class frmVistaDireccion extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tblDirecciones.setModel(new javax.swing.table.DefaultTableModel(
+        tblPuestos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -98,12 +99,12 @@ public class frmVistaDireccion extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblDirecciones.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPuestos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblDireccionesMousePressed(evt);
+                tblPuestosMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblDirecciones);
+        jScrollPane1.setViewportView(tblPuestos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -146,22 +147,19 @@ public class frmVistaDireccion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblDireccionesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDireccionesMousePressed
+    private void tblPuestosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPuestosMousePressed
         if(evt.getClickCount() == 2){
-            int fila = tblDirecciones.getSelectedRow();
+            int fila = tblPuestos.getSelectedRow();
             String cod, nombre;
-            cod = tblDirecciones.getValueAt(fila, 0).toString();
-            nombre = tblDirecciones.getValueAt(fila, 1).toString();
+            cod = tblPuestos.getValueAt(fila, 0).toString();
+            nombre = tblPuestos.getValueAt(fila, 1).toString();
             if(frmValoresTrabajadores.control == 1){
-                frmValoresTrabajadores.txtIdDireccion.setText(cod);
-                frmValoresTrabajadores.txtDireccion.setText(nombre);
-            }else if(frmValoresUsuario.control == 2){
-                frmValoresUsuario.txtIdDireccion.setText(cod);
-                frmValoresUsuario.txtDireccion.setText(nombre);
+                frmValoresTrabajadores.txtIdPuesto.setText(cod);
+                frmValoresTrabajadores.txtPuesto.setText(nombre);
             }
             this.dispose();
         }
-    }//GEN-LAST:event_tblDireccionesMousePressed
+    }//GEN-LAST:event_tblPuestosMousePressed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         mostrar(txtBuscar.getText());
@@ -184,20 +182,21 @@ public class frmVistaDireccion extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVistaDireccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVistaDireccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVistaDireccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVistaDireccion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVistaDireccion().setVisible(true);
+                new frmVistaPuestos().setVisible(true);
             }
         });
     }
@@ -207,7 +206,7 @@ public class frmVistaDireccion extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblDirecciones;
+    private javax.swing.JTable tblPuestos;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

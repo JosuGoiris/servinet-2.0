@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package Presentacion.Mantenimiento;
 
 import Datos.DDireccion;
 import Datos.DEstadoDireccion;
+import Datos.DEstadoPuesto;
 import Datos.DEstadoServicio;
 import Datos.DPersona;
 import Datos.DPuestos;
 import Datos.DServicios;
 import Datos.DTipoServicio;
 import Datos.DTipoUsuario;
-import Datos.DTrabajadores;
 import Datos.DUsuarios;
 import Datos.guardarDatos;
 import Logica.LDireccion;
 import Logica.LEstados;
+import Logica.LPuestos;
 import Logica.LServicios;
 import Logica.LTipoUsuario;
-import Logica.LTrabajadores;
 import Logica.LUsuarios;
-import static Presentacion.frmMantenimiento.dpnEscritorio;
+import Logica.LVelocidadInternet;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -33,42 +33,37 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author josug
  */
-public class frmTrabajadores extends javax.swing.JInternalFrame {
+public class frmVelocidadInternet extends javax.swing.JFrame {
     public static int control = 0;
     private LEstados es = new LEstados();
     public static String accion = "";
     /** Valores para editar **/
     public static int id;
-    public static String nombres;
-    public static String apellidos;
-    public static String cedula = "";
-    public static String telefono = "";
-    public static String direccionId = "";
-    public static String direccion = "";
-    public static String puestoId = "";
-    public static String puesto = "";
+    public static String velocidad = "";
     public static String estado = "";
     public static String estadoId = "";
+    
     /**
      * Creates new form frmUsuario
      */
     
-    public frmTrabajadores() {
+    public frmVelocidadInternet() {
         initComponents();
         mostrarBuscar("");
+            
     }
     
     public void mostrarBuscar(String buscar){
         try {
             DefaultTableModel miModelo;
-            LTrabajadores log = new LTrabajadores();
-            miModelo = log.mostrarTrabajadores(buscar);
+            LVelocidadInternet log = new LVelocidadInternet();
+            miModelo = log.mostrarVelocidad(buscar);
             tblUsuarios.setModel(miModelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,17 +78,12 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
         btnEditar = new javax.swing.JButton();
         btnCancelarForm = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnPuestos = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
         buscar = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jScrollBar1 = new javax.swing.JScrollBar();
-
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
@@ -112,11 +102,6 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
         });
 
         btnCancelarForm.setText("Cancelar");
-        btnCancelarForm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarFormActionPerformed(evt);
-            }
-        });
 
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -125,47 +110,34 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
             }
         });
 
-        btnPuestos.setText("Puestos");
-        btnPuestos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPuestosActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(16, 16, 16)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22)
-                                .addComponent(btnCancelarForm, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelarForm, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarForm, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(btnPuestos, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -199,14 +171,14 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 185, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -219,7 +191,7 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -231,24 +203,24 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        frmValoresTrabajadores formulario = new frmValoresTrabajadores();
+        frmValoresVelocidad formulario = new frmValoresVelocidad();
         formulario.setVisible(true);
         formulario.toFront();
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -256,31 +228,24 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
         int fila = tblUsuarios.rowAtPoint(evt.getPoint());
         id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
-        nombres = tblUsuarios.getValueAt(fila, 1).toString();
-        apellidos = tblUsuarios.getValueAt(fila, 2).toString();
-        direccionId = tblUsuarios.getValueAt(fila, 3).toString();
-        direccion = tblUsuarios.getValueAt(fila, 4).toString();
-        puestoId = tblUsuarios.getValueAt(fila, 5).toString();
-        puesto = tblUsuarios.getValueAt(fila, 6).toString();
-        cedula = tblUsuarios.getValueAt(fila, 7).toString();
-        telefono = tblUsuarios.getValueAt(fila, 8).toString();
-        
+        velocidad = tblUsuarios.getValueAt(fila, 1).toString();
     }//GEN-LAST:event_tblUsuariosMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if(tblUsuarios.getSelectedRows().length > 0){
-            frmValoresTrabajadores formulario = new frmValoresTrabajadores();
+            frmValoresVelocidad formulario = new frmValoresVelocidad();
             accion = "cargar";
             formulario.cargarValores();
             formulario.setVisible(true);
             formulario.toFront();
         }else{
-            JOptionPane.showMessageDialog(null, "Se debe de Seleccionar un usuario");
+            JOptionPane.showMessageDialog(null, "Se debe de Seleccionar una Velocidad");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        /*if(!txtId.getText().equals("")){
+        frmValoresPuestos formulario = new frmValoresPuestos();
+        if(!formulario.txtId.getText().equals("")){
             int confirmacion = JOptionPane.showConfirmDialog(rootPane, "¿Desea eliminar el Usuario?", "Confirmación", 2);
             if(confirmacion == 0){
                 DServicios dts = new DServicios();
@@ -289,25 +254,15 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
                 DEstadoServicio des = new DEstadoServicio();
                 
                 
-                dts.setIdServicio(Integer.parseInt(txtId.getText()));
-                dtS.setIdTipoServicio(Integer.parseInt(txtId.getText()));
-                des.setIdestadoServicio(Integer.parseInt(txtId.getText()));
+                dts.setIdServicio(Integer.parseInt(formulario.txtId.getText()));
+                dtS.setIdTipoServicio(Integer.parseInt(formulario.txtId.getText()));
+                des.setIdestadoServicio(Integer.parseInt(formulario.txtId.getText()));
                 
                 fun.eliminarServicios(dts, dtS, des);
                 mostrarBuscar("");
             }
-        }*/
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnPuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestosActionPerformed
-        frmPuestos misPue = new frmPuestos();
-        dpnEscritorio.add(misPue);
-        misPue.show();
-    }//GEN-LAST:event_btnPuestosActionPerformed
-
-    private void btnCancelarFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarFormActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarFormActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -315,7 +270,6 @@ public class frmTrabajadores extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelarForm;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JButton btnPuestos;
     private javax.swing.JTextField buscar;
     private javax.swing.JButton jButton5;
     private javax.swing.JPanel jPanel1;

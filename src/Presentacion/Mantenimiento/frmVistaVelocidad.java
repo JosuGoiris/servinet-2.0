@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion;
+package Presentacion.Mantenimiento;
 
 import Logica.LDireccion;
 import Logica.LPuestos;
+import Logica.LVelocidadInternet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,12 +15,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author josug
  */
-public class frmVistaPuestos extends javax.swing.JFrame {
+public class frmVistaVelocidad extends javax.swing.JFrame {
 
     /**
      * Creates new form frmVistaDireccion
      */
-    public frmVistaPuestos() {
+    public frmVistaVelocidad() {
         initComponents();
         mostrar("");
     }
@@ -27,9 +28,9 @@ public class frmVistaPuestos extends javax.swing.JFrame {
     public void mostrar(String buscar){
         try {
             DefaultTableModel miModelo;
-            LPuestos fun = new LPuestos();
-            miModelo = fun.mostrarPuestos(buscar);
-            tblPuestos.setModel(miModelo);
+            LVelocidadInternet fun = new LVelocidadInternet();
+            miModelo = fun.mostrarVelocidad(buscar);
+            tblVelocidad.setModel(miModelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -49,7 +50,7 @@ public class frmVistaPuestos extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblPuestos = new javax.swing.JTable();
+        tblVelocidad = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,7 +89,7 @@ public class frmVistaPuestos extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        tblPuestos.setModel(new javax.swing.table.DefaultTableModel(
+        tblVelocidad.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -99,12 +100,12 @@ public class frmVistaPuestos extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblPuestos.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblVelocidad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                tblPuestosMousePressed(evt);
+                tblVelocidadMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tblPuestos);
+        jScrollPane1.setViewportView(tblVelocidad);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -147,19 +148,19 @@ public class frmVistaPuestos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblPuestosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPuestosMousePressed
+    private void tblVelocidadMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVelocidadMousePressed
         if(evt.getClickCount() == 2){
-            int fila = tblPuestos.getSelectedRow();
-            String cod, nombre;
-            cod = tblPuestos.getValueAt(fila, 0).toString();
-            nombre = tblPuestos.getValueAt(fila, 1).toString();
-            if(frmValoresTrabajadores.control == 1){
-                frmValoresTrabajadores.txtIdPuesto.setText(cod);
-                frmValoresTrabajadores.txtPuesto.setText(nombre);
+            int fila = tblVelocidad.getSelectedRow();
+            String cod, velocidad;
+            cod = tblVelocidad.getValueAt(fila, 0).toString();
+            velocidad = tblVelocidad.getValueAt(fila, 1).toString();
+            if(frmValoresServicio.control == 1){
+                frmValoresServicio.txtIdVelocidad.setText(cod);
+                frmValoresServicio.txtVelocidad.setText(velocidad);
             }
             this.dispose();
         }
-    }//GEN-LAST:event_tblPuestosMousePressed
+    }//GEN-LAST:event_tblVelocidadMousePressed
 
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         mostrar(txtBuscar.getText());
@@ -182,21 +183,23 @@ public class frmVistaPuestos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVistaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaVelocidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVistaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaVelocidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVistaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaVelocidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVistaPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaVelocidad.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVistaPuestos().setVisible(true);
+                new frmVistaVelocidad().setVisible(true);
             }
         });
     }
@@ -206,7 +209,7 @@ public class frmVistaPuestos extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblPuestos;
+    private javax.swing.JTable tblVelocidad;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

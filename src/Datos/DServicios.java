@@ -12,7 +12,7 @@ package Datos;
 public class DServicios {
     int idServicio;
     String nombreServicio;
-    String velocidadCon;
+    int velocidadconId;
     String precio;
     String descripcio;
     int estadoservicioId;
@@ -21,23 +21,23 @@ public class DServicios {
     public DServicios() {
     }
 
-    public DServicios(int idServicio, String nombreServicio, String velocidadCon , String precio, String descripcio, int estadoservicioId, int tiposervicioId) {
+    public DServicios(int idServicio, String nombreServicio, int velocidadconId , String precio, String descripcio, int estadoservicioId, int tiposervicioId) {
         this.idServicio = idServicio;
         this.nombreServicio = nombreServicio;
-        this.velocidadCon = velocidadCon;
+        this.velocidadconId = velocidadconId;
         this.precio = precio;
         this.descripcio = descripcio;
         this.estadoservicioId = estadoservicioId;
         this.tiposervicioId = tiposervicioId;
     }
 
-    public String getVelocidadCon() {
-        return velocidadCon;
+    public int getVelocidadconId() {
+        return velocidadconId;
     }
 
-    public void setVelocidadCon(String velocidadCon) {
-        this.velocidadCon = velocidadCon;
-    } 
+    public void setVelocidadconId(int velocidadconId) {
+        this.velocidadconId = velocidadconId;
+    }
     
     public int getIdServicio() {
         return idServicio;

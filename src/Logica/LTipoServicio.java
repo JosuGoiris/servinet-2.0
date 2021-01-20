@@ -5,7 +5,7 @@
  */
 package Logica;
 
-import Datos.DTipoUsuario;
+import Datos.DTipoServicio;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,26 +17,26 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author josug
  */
-public class LTipoUsuario {
+public class LTipoServicio {
     Connection cn = ConexionSingleton.getConnection();
     private String sSQL = null;
-    private String sSQL1 = null;
     
-    public DefaultTableModel mostrarTipos(String buscar){
+    public DefaultTableModel mostrarTipoServicio(String buscar) {
         DefaultTableModel miModelo = null;
         
-        String titulos [] = {"Id","Nombre del Tipo", "Estado"};
-        String dts [] = new String[3];
+        String titulos [] = {"Id", "Nombre del Servicio", "Estado"};
+        String dts [];
+        dts = new String[3];
         
         miModelo = new DefaultTableModel(null, titulos);
-        sSQL = "select tu.idTipoUsuario, tu.nombre, etu.estado from tbltipousuario \n"
-                + "as tu inner join tblestadotipousuario as etu on tu.estadotipoId = etu.idEstadoTipoU \n"
-                + "where tu.idTipoUsuario = '" + buscar + "' or tu.nombre like '%" + buscar + "'";
+        sSQL = "select ts.idTipoServicio, ts.nombre, e.estado from tbltiposervicio \n"
+                + "as ts inner join tblestadotiposervicio as e on ts.estadotiposerId = e.idEstadoTipoSer \n"
+                + "where ts.idTipoServicio = '" + buscar + "' or ts.nombre like '%" + buscar + "%'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
             while(rs.next()){
-                dts[0] = rs.getString("idTipoUsuario");
+                dts[0] = rs.getString("idTipoServicio");
                 dts[1] = rs.getString("nombre");
                 dts[2] = rs.getString("estado");
                 miModelo.addRow(dts);
@@ -48,14 +48,14 @@ public class LTipoUsuario {
         }
     }
     
-    public String insertarTipos(DTipoUsuario dTipo){
+    public String insertarTipos(DTipoServicio dTipo){
         String msg = null;
-        sSQL = "insert into tbltipousuario(nombre, estadotipoId) value(?, ?)";
+        sSQL = "insert into tbltiposervicio(nombre, estadotiposerId) value(?,?)";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             
             pst.setString(1, dTipo.getNombre());
-            pst.setInt(2, dTipo.getEstadotipoId());
+            pst.setInt(2, dTipo.getEstadotiposerId());
             
             int n = pst.executeUpdate();
             if(n != 0){
@@ -65,6 +65,7 @@ public class LTipoUsuario {
                 msg = "no";
                 return msg;
             }
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
             return msg;
