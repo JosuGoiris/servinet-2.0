@@ -11,13 +11,14 @@ import java.beans.PropertyVetoException;
  *
  * @author josug
  */
-public class frmElegirDirZon extends javax.swing.JInternalFrame {
+public class frmElegirDirZon extends javax.swing.JFrame {
 
     /**
      * Creates new form frmElegirDirZon
      */
     public frmElegirDirZon() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -106,7 +107,10 @@ public class frmElegirDirZon extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZonasActionPerformed
-        
+        frmZonas zona = new frmZonas();
+        frmMantenimiento.dpnEscritorio.add(zona);
+        zona.show();
+        dispose();
     }//GEN-LAST:event_btnZonasActionPerformed
 
     private void btnDireccionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireccionesActionPerformed

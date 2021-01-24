@@ -19,6 +19,7 @@ import Logica.LEstados;
 import Logica.LServicios;
 import Logica.LTipoUsuario;
 import Logica.LUsuarios;
+import Logica.LZonas;
 import java.awt.Image;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -29,23 +30,21 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author josug
  */
-public class frmDireccion extends javax.swing.JInternalFrame {
+public class frmZonas extends javax.swing.JInternalFrame {
     public static int control = 0;
     private LEstados es = new LEstados();
     public static String accion = "";
     /** **/
     public static int id;
-    public static String direccion = "";
-    public static String descripcion = "";
-    public static String zonaId = "";
     public static String zona = "";
+    public static String descripcion = "";
     public static String estadoId = "";
     public static String estado = "";
     /**
      * Creates new form frmUsuario
      */
     
-    public frmDireccion() {
+    public frmZonas() {
         initComponents();
         mostrarBuscar("");
     }
@@ -53,8 +52,8 @@ public class frmDireccion extends javax.swing.JInternalFrame {
     public void mostrarBuscar(String buscar){
         try {
             DefaultTableModel miModelo;
-            LDireccion log = new LDireccion();
-            miModelo = log.mostrarDireccion(buscar);
+            LZonas log = new LZonas();
+            miModelo = log.mostrarZonas(buscar);
             tblUsuarios.setModel(miModelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -218,7 +217,7 @@ public class frmDireccion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        frmValoresDireccion form = new frmValoresDireccion();
+        frmValoresZonas form = new frmValoresZonas();
         form.setVisible(true);
         form.toFront();
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -226,15 +225,13 @@ public class frmDireccion extends javax.swing.JInternalFrame {
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
         int fila = tblUsuarios.rowAtPoint(evt.getPoint());
         id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
-        direccion = tblUsuarios.getValueAt(fila, 1).toString();
+        zona = tblUsuarios.getValueAt(fila, 1).toString();
         descripcion = tblUsuarios.getValueAt(fila, 2).toString();
-        zonaId = tblUsuarios.getValueAt(fila, 3).toString();
-        zona = tblUsuarios.getValueAt(fila, 4).toString();   
     }//GEN-LAST:event_tblUsuariosMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         if(tblUsuarios.getSelectedRows().length > 0){
-            frmValoresDireccion form = new frmValoresDireccion();
+            frmValoresZonas form = new frmValoresZonas();
             accion = "cargar";
             form.cargarValores();
             form.setVisible(true);

@@ -13,18 +13,28 @@ public class DDireccion {
     int idDireccion;
     String nombreDireccion;
     String descripcion;
+    int zonaId;
     int estadodireccionId;
 
     public DDireccion() {
     }
 
-    public DDireccion(int idDireccion, String nombreDireccion, String descripcion, int estadodireccionId) {
+    public DDireccion(int idDireccion, String nombreDireccion, String descripcion, int zonaId,int estadodireccionId) {
         this.idDireccion = idDireccion;
         this.nombreDireccion = nombreDireccion;
         this.descripcion = descripcion;
+        this.zonaId = zonaId;
         this.estadodireccionId = estadodireccionId;
     }
 
+    public int getZonaId() {
+        return zonaId;
+    }
+
+    public void setZonaId(int zonaId) {
+        this.zonaId = zonaId;
+    }
+    
     public int getIdDireccion() {
         return idDireccion;
     }

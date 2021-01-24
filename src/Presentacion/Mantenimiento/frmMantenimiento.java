@@ -267,8 +267,8 @@ public class frmMantenimiento extends javax.swing.JFrame {
 
     private void btnZonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZonasActionPerformed
         frmElegirDirZon misDirZon = new frmElegirDirZon();
-        dpnEscritorio.add(misDirZon);
-        misDirZon.show();
+        misDirZon.setVisible(true);
+        misDirZon.toFront();
     }//GEN-LAST:event_btnZonasActionPerformed
 
     private void btnTrabajadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrabajadoresActionPerformed
