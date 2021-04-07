@@ -51,6 +51,49 @@ public class LDireccion {
         }
     }
     
+    public DefaultTableModel mostrarDireccionconBarrio(int buscar){
+        DefaultTableModel miModelo = null;
+        
+        String titulos [] = {"Id", "Dirección", "Barrio", "Descripción"};
+        String dts [] = new String[4];
+        
+        miModelo = new DefaultTableModel(null, titulos);
+        sSQL = "select d.idDireccion, d.nombreDireccion, z.idZona, z.nombreZona, d.descripcion, d.estado \n"
+             + "from tbldireccion as d inner join tblzona as z on d.idZona = z.idZona \n"
+             + "where d.idDireccion = '" + buscar + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                dts[0] = rs.getString("idDireccion");
+                dts[1] = rs.getString("nombreDireccion");
+                dts[2] = rs.getString("nombreZona");
+                dts[3] = rs.getString("descripcion");
+                miModelo.addRow(dts);
+            }
+            return miModelo;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
+    
+    public int traerIdDireccion(int ids) {
+        int id = 0;
+        sSQL = "select idDireccion from tbldireccion where idZona = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while (rs.next()) {
+                id = rs.getInt("idDireccion");
+            }
+            return id;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
+    }
+    
     public DefaultTableModel mostrarDireccionInactiva(String buscar){
         DefaultTableModel miModelo = null;
         

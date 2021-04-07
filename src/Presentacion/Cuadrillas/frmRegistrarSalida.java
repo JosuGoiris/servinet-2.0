@@ -51,6 +51,20 @@ public class frmRegistrarSalida extends javax.swing.JFrame {
         hora = String.valueOf(horaActual.format(fecha_actual.getTime()));
         txtHoraSalida.setText(String.valueOf(hora));
         cargarValores();
+        txtIdTrabajador.setEnabled(false);
+        txtNombres.setEnabled(false);
+        txtApellidos.setEnabled(false);
+        txtCedula.setEnabled(false);
+        txtCuadrilla.setEnabled(false);
+        txtHora.setEnabled(false);
+        txtHoraSalida.setEnabled(false);
+        txtIdDetalleCuadrilla.setVisible(false);
+        txtIdPuesto.setEnabled(false);
+        txtIdTrabajador.setEnabled(false);
+        txtObservacion.requestFocus();
+        txtPuesto.setEnabled(false);
+        txtIdCuadrilla.setEnabled(false);
+        jdFechaSolicitud.setEnabled(false);
     }
 
     void cargarValores(){
@@ -126,7 +140,7 @@ public class frmRegistrarSalida extends javax.swing.JFrame {
         jLabel14.setText("INSERTE LA CUADRILLA PARA EL TRABAJO");
         bar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 40));
+        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 40));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -136,13 +150,13 @@ public class frmRegistrarSalida extends javax.swing.JFrame {
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nombres:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-        jPanel2.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 138, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jPanel2.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 200, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Apellidos:");
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-        jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 138, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 200, -1));
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Id:");
@@ -168,41 +182,41 @@ public class frmRegistrarSalida extends javax.swing.JFrame {
         jLabel11.setText("Nro de Cedula");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 170, 260));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 220, 260));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 80, -1));
+        jPanel3.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 110, -1));
         jPanel3.add(txtIdCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 53, -1));
         jPanel3.add(txtIdPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 53, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Puesto de Trabajo");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        jPanel3.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 140, -1));
+        jPanel3.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 230, -1));
 
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Fecha de Entrada");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jdFechaSolicitud.setDateFormatString("yyyy/MM/dd");
-        jPanel3.add(jdFechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 130, -1));
+        jPanel3.add(jdFechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 150, -1));
 
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Hora de Entrada");
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
-        jPanel3.add(txtCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 140, -1));
-        jPanel3.add(txtHoraSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 80, -1));
+        jPanel3.add(txtCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 230, -1));
+        jPanel3.add(txtHoraSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 110, -1));
 
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Hora de Salida");
-        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, -1, -1));
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, -1, -1));
 
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Cuadrilla de Trabajo:");
         jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 260, 260));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 40, 320, 260));
 
         btnGuardar.setBackground(new java.awt.Color(102, 0, 0));
         btnGuardar.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -217,7 +231,7 @@ public class frmRegistrarSalida extends javax.swing.JFrame {
         jLabel2.setPreferredSize(new java.awt.Dimension(25, 25));
         btnGuardar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 28));
 
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 420, 50, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 440, 50, 50));
 
         btnGuardar1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -232,7 +246,7 @@ public class frmRegistrarSalida extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 430, -1, 50));
+        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, -1, 50));
 
         btnSalir.setBackground(new java.awt.Color(102, 0, 0));
         btnSalir.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -247,7 +261,7 @@ public class frmRegistrarSalida extends javax.swing.JFrame {
         jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
         btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 420, 50, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 440, 50, 50));
 
         btnGuardar3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -262,7 +276,7 @@ public class frmRegistrarSalida extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 430, 50, 50));
+        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 450, 50, 50));
         jPanel1.add(txtIdDetalleCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 53, -1));
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
@@ -278,17 +292,15 @@ public class frmRegistrarSalida extends javax.swing.JFrame {
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 420, 70));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 440, 110));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 440, 110));
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 500, 490));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 630, 510));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

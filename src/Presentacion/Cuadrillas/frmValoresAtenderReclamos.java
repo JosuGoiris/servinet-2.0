@@ -22,6 +22,7 @@ import Presentacion.Mantenimiento.frmVistaCuadrillaNuevo;
 import Presentacion.Mantenimiento.frmVistaDireccionNuevo;
 import Presentacion.Mantenimiento.frmVistaServicioNuevo;
 import Presentacion.Mantenimiento.frmVistaZonaNuevo;
+import java.awt.Color;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -32,14 +33,15 @@ import javax.swing.JOptionPane;
  * @author josug
  */
 public class frmValoresAtenderReclamos extends javax.swing.JFrame {
+
     public static int control = 0;
     private LEstados es = new LEstados();
     Calendar fecha_actual = new GregorianCalendar();
-    
+
     String accion = null;
-    
+
     LClientes lc = new LClientes();
-    
+
     /**
      * Creates new form frmValoresSolicitudNuevo
      */
@@ -48,9 +50,19 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         limpiar();
         cargarValores();
+        txtNombres.setEditable(false);
+        txtApellidos.setEditable(false);
+        txtCedula.setEditable(false);
+        txtDetalle.requestFocus();
+        txtIdCliente.setEditable(false);
+        txtIdCuadrilla.setEditable(false);
+        txtIdServicio.setEditable(false);
+        txtServicio.setEditable(false);
+        txtCuadrilla.setEditable(false);
+        jdFechaSolicitud.setEnabled(false);
     }
-    
-    void limpiar(){
+
+    void limpiar() {
         txtIdCliente.setText("");
         txtNombres.setText("");
         txtApellidos.setText("");
@@ -58,11 +70,11 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         txtIdServicio.setText("");
         txtCuadrilla.setText("");
         txtServicio.setText("");
-        jdFechaSolicitud.setDate(new Date(0,0,0));
-        
+        jdFechaSolicitud.setDate(new Date(0, 0, 0));
+
     }
-    
-    public void cargarValores(){
+
+    public void cargarValores() {
         frmRevisarReclamos form = new frmRevisarReclamos();
         txtIdServicio.setText(String.valueOf(form.idServicio));
         txtIdCliente.setText(String.valueOf(form.idCliente));
@@ -74,7 +86,7 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         txtCuadrilla.setText(form.cuadrilla);
         jdFechaSolicitud.setDate(form.fechaReclamo);
         txtDetalle.setText(form.detalle);
-        
+
     }
 
     /**
@@ -151,35 +163,41 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nombres:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
-        jPanel2.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 85, 138, -1));
+        jPanel2.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 85, 200, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Apellidos:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 123, -1, -1));
-        jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 143, 138, -1));
+        jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 143, 200, -1));
         jPanel2.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 53, -1));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("ID Cliente:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
-        jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 138, -1));
+        jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 110, -1));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Cedula:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 170, 250));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 230, 250));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(txtCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 192, -1));
+        jPanel3.add(txtCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 230, -1));
         jPanel3.add(txtIdCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 53, -1));
         jPanel3.add(txtIdServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 53, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Tipo de Solicitud:");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        jPanel3.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 192, -1));
+
+        txtServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtServicioActionPerformed(evt);
+            }
+        });
+        jPanel3.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 230, -1));
 
         jdFechaSolicitud.setDateFormatString("yyyy/MM/dd");
         jPanel3.add(jdFechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 150, -1));
@@ -200,7 +218,7 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
         btnBuscarCuadrilla.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 20, 20));
 
-        jPanel3.add(btnBuscarCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 40, 40));
+        jPanel3.add(btnBuscarCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 40, 40));
 
         btnGuardar2.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar2.setEnabled(false);
@@ -216,13 +234,13 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel3.add(btnGuardar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 80, -1, -1));
+        jPanel3.add(btnGuardar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
 
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Fecha de Solicitud:");
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 350, 250));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 400, 250));
 
         btnGuardar.setBackground(new java.awt.Color(102, 0, 0));
         btnGuardar.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -237,7 +255,7 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(25, 25));
         btnGuardar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 400, 50, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 440, 50, 50));
 
         btnGuardar1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -252,7 +270,7 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 410, -1, 50));
+        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 450, -1, 50));
 
         btnSalir.setBackground(new java.awt.Color(102, 0, 0));
         btnSalir.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -267,7 +285,7 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
         btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, 50, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 440, 50, 50));
 
         btnGuardar3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -282,23 +300,23 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, 50, 50));
+        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 450, 50, 50));
 
         jSeparator30.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 20, 420));
-        jPanel1.add(jSeparator28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, 20));
+        jPanel1.add(jSeparator30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 20, 460));
+        jPanel1.add(jSeparator28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 270, 20));
 
         jSeparator27.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator27, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 20, 30));
-        jPanel1.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 340, 10));
+        jPanel1.add(jSeparator27, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, 20, 30));
+        jPanel1.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 50, 410, 20));
 
         jSeparator29.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator29, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 60, 20, 310));
-        jPanel1.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 120, 10));
+        jPanel1.add(jSeparator29, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 60, 20, 350));
+        jPanel1.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 420, 140, 10));
 
         jSeparator25.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, 20, 50));
-        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 450, 430, 10));
+        jPanel1.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 440, 20, 50));
+        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 550, 20));
 
         jPanel5.setBackground(new java.awt.Color(51, 51, 51));
         jPanel5.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -311,11 +329,11 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         txtDetalle.setRows(5);
         jScrollPane1.setViewportView(txtDetalle);
 
-        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 390, 60));
+        jPanel5.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 500, 90));
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 410, 100));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, 520, 140));
 
-        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 610, 470));
+        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 750, 510));
 
         bar.setBackground(new java.awt.Color(204, 204, 204));
         bar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -334,9 +352,9 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         jLabel15.setText("SERVINET");
         bar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 10, -1, -1));
 
-        jPanel4.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 40));
+        jPanel4.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 40));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 610, 510));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 750, 550));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -346,30 +364,44 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMousePressed
 
     private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
-        DTrabajosReclamos dtr = new DTrabajosReclamos();
-        DTrabajos dt = new DTrabajos();
-        DReclamos dr = new DReclamos();
-        LClientes fun = new LClientes();
-        
-        dtr.setCuadrillasId(Integer.parseInt(txtIdCuadrilla.getText()));
-        int idCliente = Integer.parseInt(txtIdCliente.getText());
-        int idReclamos = lc.traerIdReclamos(idCliente);
-        dr.setIdReclamos(idReclamos);
-        int idTrabajosReclamos = lc.traerIdTrabajosReclamos(idReclamos);
-        dtr.setIdTrabajosReclamos(idTrabajosReclamos);
-        dt.setIdTrabajos(idTrabajosReclamos);
-        fun.enviarReclamos(dtr, dt, dr);
-        
-        this.dispose();
+        if ("".equals(txtCuadrilla.getText()) || "".equals(txtIdCuadrilla.getText())) {
+            txtCuadrilla.setBackground(Color.red);
+            txtIdCuadrilla.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Se necesita registrar la cuadrilla");
+        } else {
+            JOptionPane.showMessageDialog(null, "Se han registrado los datos");
+
+            DTrabajosReclamos dtr = new DTrabajosReclamos();
+            DTrabajos dt = new DTrabajos();
+            DReclamos dr = new DReclamos();
+            LClientes fun = new LClientes();
+
+            dtr.setCuadrillasId(Integer.parseInt(txtIdCuadrilla.getText()));
+            int idCliente = Integer.parseInt(txtIdCliente.getText());
+            int idReclamos = lc.traerIdReclamos(idCliente);
+            dr.setIdReclamos(idReclamos);
+            int idTrabajosReclamos = lc.traerIdTrabajosReclamos(idReclamos);
+            dtr.setIdTrabajosReclamos(idTrabajosReclamos);
+            dt.setIdTrabajos(idTrabajosReclamos);
+            fun.enviarReclamos(dtr, dt, dr);
+
+            this.dispose();
+        }
     }//GEN-LAST:event_btnGuardarMousePressed
 
     private void btnBuscarCuadrillaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarCuadrillaMousePressed
+        txtCuadrilla.setBackground(Color.WHITE);
+        txtIdCuadrilla.setBackground(Color.WHITE);
         control = 3;
         frmVistaCuadrillaNuevo form = new frmVistaCuadrillaNuevo();
         form.setVisible(true);
         form.toFront();
     }//GEN-LAST:event_btnBuscarCuadrillaMousePressed
-        
+
+    private void txtServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtServicioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtServicioActionPerformed
+
     /**
      * @param args the command line arguments
      */

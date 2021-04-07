@@ -109,6 +109,11 @@ public final class frmValoresZonasNuevo extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtNombreBarrio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtNombreBarrioFocusLost(evt);
+            }
+        });
         txtNombreBarrio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNombreBarrioKeyTyped(evt);
@@ -260,6 +265,10 @@ public final class frmValoresZonasNuevo extends javax.swing.JFrame {
         String descripcion = txtDescripcion.getText().toUpperCase();
         txtDescripcion.setText(descripcion);
     }//GEN-LAST:event_txtDescripcionKeyReleased
+
+    private void txtNombreBarrioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreBarrioFocusLost
+        buscarRepetido();
+    }//GEN-LAST:event_txtNombreBarrioFocusLost
 
     void buscarRepetido(){
         LZonas lz = new LZonas();

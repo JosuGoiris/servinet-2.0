@@ -19,6 +19,7 @@ import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -26,12 +27,13 @@ import javax.swing.JPanel;
  * @author josug
  */
 public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
+
     public static int control = 0;
     private LEstados es = new LEstados();
     Calendar fecha_actual = new GregorianCalendar();
     SimpleDateFormat sdf2 = new SimpleDateFormat("dd");
     Calendar cal = Calendar.getInstance();
-    
+
     public static String accion = null;
     public static String ruc = "";
     public static String nombres = "";
@@ -49,6 +51,8 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
     int ultimoDia;
     int faltantes;
     int meses = 12;
+    public static int idBarrio = 0;
+    public static String barrio = "";
     
     /**
      * Creates new form frmValoresSolicitudNuevo
@@ -56,11 +60,16 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
     public frmValoresSolicitudNuevo() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
         jdFechaSolicitud.setCalendar(fecha_actual);
+        txtId.setEditable(false);
+        txtIdBarrio.setEditable(false);
+        txtIdDireccion.setEditable(false);
+        txtIdTipo.setEditable(false);
+        txtBarrio.setEditable(false);
+        txtDireccion.setEditable(false);
+        txtTipoSolicitud.setEditable(false);
     }
-    
-    
+
     void setColor(JPanel panel) {
         panel.setBackground(new Color(51, 0, 0));
     }
@@ -133,7 +142,6 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jSeparator28 = new javax.swing.JSeparator();
         jSeparator29 = new javax.swing.JSeparator();
         jSeparator30 = new javax.swing.JSeparator();
-        jSeparator31 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -155,7 +163,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel15.setText("SERVINET");
         bar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
 
-        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 40));
+        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 40));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -171,53 +179,65 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nombres:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
-        jPanel2.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 85, 138, -1));
+
+        txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNombresKeyReleased(evt);
+            }
+        });
+        jPanel2.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 85, 200, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Apellidos:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 123, -1, -1));
-        jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 143, 138, -1));
+        jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 143, 200, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Cédula de Identidad:");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 181, -1, -1));
-        jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 201, 138, -1));
+        jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 201, 120, -1));
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Teléfono:");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 239, -1, -1));
-        jPanel2.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 259, 138, -1));
+
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 259, 120, -1));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("RUC:");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 297, -1, -1));
-        jPanel2.add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 317, 138, -1));
+        jPanel2.add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 317, 120, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 170, 360));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 230, 360));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(txtBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 170, -1));
+        jPanel3.add(txtBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 230, -1));
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Barrio:");
         jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
         jPanel3.add(txtIdBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 53, -1));
-        jPanel3.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 170, -1));
+        jPanel3.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 230, -1));
         jPanel3.add(txtIdDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 53, -1));
         jPanel3.add(txtIdTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 148, 53, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Tipo de Solicitud:");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 128, -1, -1));
-        jPanel3.add(txtTipoSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 170, -1));
+        jPanel3.add(txtTipoSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 230, -1));
 
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Fecha de Solicitud:");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 186, -1, -1));
 
         jdFechaSolicitud.setDateFormatString("yyyy/MM/dd ");
-        jPanel3.add(jdFechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 206, 160, -1));
+        jPanel3.add(jdFechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 206, 150, -1));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Dirección:");
@@ -241,7 +261,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
         btnBuscarBarrio.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel3.add(btnBuscarBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, 40, 40));
+        jPanel3.add(btnBuscarBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 40, 40));
 
         btnBuscarDireccion.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscarDireccion.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -261,7 +281,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
         btnBuscarDireccion.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel3.add(btnBuscarDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 40, 40));
+        jPanel3.add(btnBuscarDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 40, 40));
 
         btnBuscarSolicitud.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscarSolicitud.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -281,7 +301,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
         btnBuscarSolicitud.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel3.add(btnBuscarSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, -1, 40));
+        jPanel3.add(btnBuscarSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, 40));
 
         btnGuardar2.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar2.setEnabled(false);
@@ -297,7 +317,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel3.add(btnGuardar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 30, 40, 40));
+        jPanel3.add(btnGuardar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 40, 40));
 
         btnGuardar4.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar4.setEnabled(false);
@@ -313,7 +333,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel3.add(btnGuardar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, -1));
+        jPanel3.add(btnGuardar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
 
         btnGuardar5.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar5.setEnabled(false);
@@ -329,9 +349,9 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel3.add(btnGuardar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, -1));
+        jPanel3.add(btnGuardar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 340, 250));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 400, 250));
 
         btnGuardar.setBackground(new java.awt.Color(102, 0, 0));
         btnGuardar.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -352,7 +372,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(25, 25));
         btnGuardar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 390, 50, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 390, 50, 50));
 
         btnGuardar1.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar1.setEnabled(false);
@@ -368,7 +388,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 400, -1, 50));
+        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 400, -1, 50));
 
         btnSalir.setBackground(new java.awt.Color(102, 0, 0));
         btnSalir.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -389,7 +409,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
         btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 390, 50, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 390, 50, 50));
 
         btnGuardar3.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar3.setEnabled(false);
@@ -405,36 +425,31 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 400, 50, 50));
-        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 430, 10));
-        jPanel1.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 340, 10));
-        jPanel1.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, 120, 10));
+        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 400, 50, 50));
+        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 580, 10));
+        jPanel1.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 400, 10));
+        jPanel1.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 120, 10));
 
         jSeparator25.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, 20, 30));
+        jPanel1.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 20, 30));
 
         jSeparator27.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator27, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 20, 30));
-        jPanel1.add(jSeparator28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, 20));
+        jPanel1.add(jSeparator27, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 20, 30));
+        jPanel1.add(jSeparator28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 270, 20));
 
         jSeparator29.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator29, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 20, 300));
+        jPanel1.add(jSeparator29, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 70, 20, 300));
 
         jSeparator30.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 20, 400));
 
-        jSeparator31.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator31, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, 20, 30));
-
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 610, 460));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 760, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,15 +458,41 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-        
+
     private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
         this.dispose();
     }//GEN-LAST:event_btnSalirMousePressed
 
     private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
-        String msg = null;
-        
-        if(txtId.getText().equals("")){
+        if ("".equals(txtNombres.getText())) {
+            txtNombres.requestFocus();
+            txtNombres.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese el nombre");
+        } else if ("".equals(txtApellidos.getText())) {
+            txtApellidos.requestFocus();
+            txtApellidos.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese el apellido");
+        } else if ("".equals(txtCedula.getText())) {
+            txtCedula.requestFocus();
+            txtCedula.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese el nro de cedula");
+        } else if ("".equals(txtTelefono.getText())) {
+            txtTelefono.requestFocus();
+            txtTelefono.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese el nro de telefono");
+        } else if ("".equals(txtIdBarrio.getText()) || "".equals(txtBarrio.getText())) {
+            txtIdBarrio.setBackground(Color.red);
+            txtBarrio.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese el barrio");
+        } else if ("".equals(txtIdDireccion.getText()) || "".equals(txtDireccion.getText())) {
+            txtIdDireccion.setBackground(Color.red);
+            txtDireccion.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese la direccion");
+        } else if ("".equals(txtIdTipo.getText()) || "".equals(txtTipoSolicitud.getText())) {
+            txtIdTipo.setBackground(Color.red);
+            txtTipoSolicitud.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese el tipo de solicitud");
+        } else if (txtId.getText().equals("")) {
             nombres = txtNombres.getText();
             apellidos = txtApellidos.getText();
             cedula = txtCedula.getText();
@@ -460,25 +501,25 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             direccionId = Integer.parseInt(txtIdDireccion.getText());
             tiposervicioId = Integer.parseInt(txtIdTipo.getText());
             ruc = txtRUC.getText();
-            
+
             DClientes dc = new DClientes();
             DPersona dp = new DPersona();
             DSolicitud ds = new DSolicitud();
             LSolicitud fun1 = new LSolicitud();
             DServiciodelCliente dsc = new DServiciodelCliente();
-        
+
             int a, m, d;
             a = fecha_actual.get(Calendar.YEAR) - 1900;
             m = fecha_actual.get(Calendar.MONTH);
             d = fecha_actual.get(Calendar.DAY_OF_MONTH);
             ds.setFechaSolicitud(new Date(a, m, d));
-            
+
             //Se Inserta la fecha actual para la fecha de la solicitud
             int año = jdFechaSolicitud.getCalendar().get(Calendar.YEAR);
             int mes = jdFechaSolicitud.getCalendar().get(Calendar.MONTH);
             int dia = jdFechaSolicitud.getCalendar().get(Calendar.DAY_OF_MONTH);
             ds.setFechaSolicitud(new Date((año - 1900), mes, dia));
-            
+
             //Se inserta la fecha final del mes siguiente para la fecha de pago
             Calendar mesActual = new GregorianCalendar();
             mesActual.set(Calendar.MONTH, Calendar.MONTH);
@@ -486,23 +527,23 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             mesActual.set(Calendar.DATE, mesActual.getActualMaximum(Calendar.DATE));
             diasActuales = Integer.parseInt(sdf2.format(mesActual.getTime()));
             diasdeverdad = diasActuales - 7;
-            
+
             //PROBANDO
             Calendar mesPrimero = new GregorianCalendar();
             mesPrimero.set(Calendar.DAY_OF_MONTH, mesPrimero.getActualMaximum(Calendar.DAY_OF_MONTH));
-            
-            if(diasdeverdad > dia){
+
+            if (diasdeverdad > dia) {
                 mesSiguiente = mes;
                 ultimoDia = Integer.parseInt(sdf2.format(mesPrimero.getTime()));
                 dsc.setFechaPago(new Date(año - 1900, mesSiguiente, ultimoDia));
-            }else{
+            } else {
                 mesSiguiente = mes + 1;
                 ultimoDia = Integer.parseInt(sdf2.format(mesActual.getTime()));
                 dsc.setFechaPago(new Date(año - 1900, mesSiguiente, ultimoDia));
             }
             dsc.setFechaInicio(new Date((año - 1900), mes, dia));
             dsc.setDetalleservicioId(Integer.parseInt(txtIdTipo.getText()));
-            
+
             dp.setNombre(nombres);
             dp.setApellido(apellidos);
             dp.setCedulaIdent(cedula);
@@ -511,8 +552,11 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             dc.setRuc(txtRUC.getText());
             ds.setServicioId(tiposervicioId);
             fun1.insertarSolicitud(ds, dp, dc, dsc);
+            this.dispose();
         }
-        this.dispose();
+        
+
+
     }//GEN-LAST:event_btnGuardarMousePressed
 
     private void btnBuscarBarrioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarBarrioMousePressed
@@ -523,6 +567,10 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarBarrioMousePressed
 
     private void btnBuscarDireccionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarDireccionMousePressed
+        idBarrio = Integer.parseInt(txtIdBarrio.getText());
+        barrio = txtBarrio.getText();
+        System.out.println(idBarrio);
+        System.out.println(barrio);
         frmVistaDireccionNuevo form = new frmVistaDireccionNuevo();
         form.setVisible(true);
         form.toFront();
@@ -576,7 +624,19 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         resetColor(btnSalir);
     }//GEN-LAST:event_btnSalirMouseExited
 
-    
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtNombresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyReleased
+        txtNombres.setBackground(Color.WHITE);
+    }//GEN-LAST:event_txtNombresKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -654,7 +714,6 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator28;
     private javax.swing.JSeparator jSeparator29;
     private javax.swing.JSeparator jSeparator30;
-    private javax.swing.JSeparator jSeparator31;
     private javax.swing.JSeparator jSeparator5;
     private com.toedter.calendar.JDateChooser jdFechaSolicitud;
     public static javax.swing.JTextField txtApellidos;

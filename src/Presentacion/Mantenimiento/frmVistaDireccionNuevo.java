@@ -20,19 +20,25 @@ public final class frmVistaDireccionNuevo extends javax.swing.JFrame {
 
     /**
      * Creates new form frmVistaZonaNuevo
+     * 
      */
+    
+    LDireccion ld = new LDireccion();
+    
     public frmVistaDireccionNuevo() {
         initComponents();
         this.setLocationRelativeTo(null);
-        mostrar("");
+        mostrar(0);
         ordenarTamaños();
+        txtBuscar.setText(frmValoresSolicitudNuevo.barrio);
     }
     
-    public void mostrar(String buscar){
+    public void mostrar(int id){
+        id = ld.traerIdDireccion(frmValoresSolicitudNuevo.idBarrio);
         try {
             DefaultTableModel miModelo;
             LDireccion fun = new LDireccion();
-            miModelo = fun.mostrarDireccion(buscar);
+            miModelo = fun.mostrarDireccionconBarrio(id);
             tblDirecciones.setModel(miModelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -67,12 +73,12 @@ public final class frmVistaDireccionNuevo extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDirecciones = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -99,8 +105,8 @@ public final class frmVistaDireccionNuevo extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Buscar:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel2.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 220, -1));
 
         bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 500, 60));
 
@@ -220,7 +226,7 @@ public final class frmVistaDireccionNuevo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblDirecciones;
+    public static javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

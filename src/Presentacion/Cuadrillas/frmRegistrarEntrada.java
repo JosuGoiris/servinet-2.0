@@ -16,6 +16,7 @@ import Datos.DTrabajosSolicitud;
 import Logica.ConexionSingleton;
 import Logica.LEstados;
 import Logica.LHorarioTrabajo;
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.Date;
@@ -23,6 +24,7 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,7 +39,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
     String hora;
 
     Connection cn = ConexionSingleton.getConnection();
-    
+
     LHorarioTrabajo lht = new LHorarioTrabajo();
 
     /**
@@ -49,6 +51,17 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jdFechaSolicitud.setCalendar(fecha_actual);
         hora = String.valueOf(horaActual.format(fecha_actual.getTime()));
         txtHora.setText(String.valueOf(hora));
+        txtCedula.requestFocus();
+        txtNombres.setEnabled(false);
+        txtApellidos.setEnabled(false);
+        txtIdCuadrilla.setEnabled(false);
+        txtIdDetalleCuadrilla.setVisible(false);
+        txtIdPuesto.setEnabled(false);
+        txtIdTrabajador.setEnabled(false);
+        txtCuadrilla.setEnabled(false);
+        txtHora.setEnabled(false);
+        txtPuesto.setEnabled(false);
+        jdFechaSolicitud.setEnabled(false);
     }
 
     void buscarTrabajador(String cedula) {
@@ -61,7 +74,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         int idPuesto = lht.traerIdPuesto(cedula);
         int idCuadrilla = lht.traerIdCuadrilla(cedula);
         String Cuadrilla = lht.traerCuadrilla(cedula);
-        
+
         System.out.println(id);
         System.out.println(idDetalle);
         System.out.println(nombre);
@@ -71,7 +84,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         System.out.println(puesto);
         System.out.println(idCuadrilla);
         System.out.println(Cuadrilla);
-        
+
         txtIdTrabajador.setText(String.valueOf(id));
         txtNombres.setText(nombre);
         txtApellidos.setText(apellido);
@@ -138,7 +151,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jLabel14.setText("INSERTE LA CUADRILLA PARA EL TRABAJO");
         bar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 40));
+        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 40));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -149,37 +162,39 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nombres:");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
-        jPanel2.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 138, -1));
+
+        txtNombres.setVerifyInputWhenFocusTarget(false);
+        jPanel2.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 200, -1));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Apellidos:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-        jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 138, -1));
+        jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 140, 200, -1));
 
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Id:");
         jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
         jPanel2.add(txtIdTrabajador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 53, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 170, 180));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 220, 180));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 80, -1));
+        jPanel3.add(txtHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 110, -1));
         jPanel3.add(txtIdCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 53, -1));
         jPanel3.add(txtIdPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 53, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Puesto de Trabajo");
         jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        jPanel3.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 140, -1));
+        jPanel3.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 230, -1));
 
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Fecha de Entrada");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         jdFechaSolicitud.setDateFormatString("yyyy/MM/dd");
-        jPanel3.add(jdFechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 130, -1));
+        jPanel3.add(jdFechaSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 150, -1));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Cuadrilla de Trabajo:");
@@ -188,9 +203,9 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Hora de Entrada");
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
-        jPanel3.add(txtCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 140, -1));
+        jPanel3.add(txtCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 230, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 240, 250));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 330, 250));
 
         btnGuardar.setBackground(new java.awt.Color(102, 0, 0));
         btnGuardar.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -205,7 +220,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jLabel2.setPreferredSize(new java.awt.Dimension(25, 25));
         btnGuardar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 28));
 
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 50, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 50, 50));
 
         btnGuardar1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -220,7 +235,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 330, -1, 50));
+        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, 50));
 
         btnSalir.setBackground(new java.awt.Color(102, 0, 0));
         btnSalir.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -235,7 +250,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
         btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, 50, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 50, 50));
 
         btnGuardar3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -250,17 +265,25 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 50, 50));
+        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 50, 50));
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtCedula.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtCedulaFocusLost(evt);
+            }
+        });
         txtCedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCedulaActionPerformed(evt);
             }
         });
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedulaKeyTyped(evt);
+            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtCedulaKeyPressed(evt);
             }
@@ -274,18 +297,16 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jLabel11.setText("Ingrese el Nro de Cedula:");
         jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 200, 60));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 200, 70));
         jPanel1.add(txtIdDetalleCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 53, -1));
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 500, 390));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 680, 390));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,8 +337,13 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
 
     private void txtCedulaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            String cedula = txtCedula.getText();
-            buscarTrabajador(cedula);
+            if ("".equals(txtCedula.getText())) {
+                txtCedula.setBackground(Color.red);
+                JOptionPane.showMessageDialog(null, "La cédula es necesaria para buscar al trabajador");
+            } else {
+                String cedula = txtCedula.getText();
+                buscarTrabajador(cedula);
+            }
         }
     }//GEN-LAST:event_txtCedulaKeyPressed
 
@@ -326,8 +352,16 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCedulaActionPerformed
 
     private void txtCedulaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyReleased
-        // TODO add your handling code here:
+        txtCedula.setBackground(Color.WHITE);
     }//GEN-LAST:event_txtCedulaKeyReleased
+
+    private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaFocusLost
+
+    private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
+       
+    }//GEN-LAST:event_txtCedulaKeyTyped
 
     /**
      * @param args the command line arguments
