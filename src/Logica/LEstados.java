@@ -31,73 +31,13 @@ public class LEstados {
         return rs;
     }
     
-    public DefaultComboBoxModel llenarComboPersona(){
+    public DefaultComboBoxModel llenarComboFormadePago(){
         DefaultComboBoxModel listaModelo = new DefaultComboBoxModel();
-        listaModelo.addElement("Seleccione un Estado");
-        ResultSet rs = this.consulta("select * from tblestadopersona order by idEstadoPersona");
+        listaModelo.addElement("Seleccione una forma de pago");
+        ResultSet rs = this.consulta("select * from tblformadepago order by idFormaPago");
         try {
             while(rs.next()){
-                listaModelo.addElement(rs.getString("estado"));
-            }
-            rs.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return listaModelo;
-    }
-    
-    public DefaultComboBoxModel llenarComboPuestos(){
-        DefaultComboBoxModel listaModelo = new DefaultComboBoxModel();
-        listaModelo.addElement("Seleccione un Estado");
-        ResultSet rs = this.consulta("select * from tblestadopuesto order by estado");
-        try {
-            while(rs.next()){
-                listaModelo.addElement(rs.getString("estado"));
-            }
-            rs.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return listaModelo;
-    }
-    
-    public DefaultComboBoxModel llenarComboServicio(){
-        DefaultComboBoxModel listaModelo = new DefaultComboBoxModel();
-        listaModelo.addElement("Seleccione un Estado");
-        ResultSet rs = this.consulta("select * from tblestadoservicio order by estado");
-        try {
-            while(rs.next()){
-                listaModelo.addElement(rs.getString("estado"));
-            }
-            rs.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return listaModelo;
-    }
-    
-    public DefaultComboBoxModel llenarComboTipoUsuario(){
-        DefaultComboBoxModel listaModelo = new DefaultComboBoxModel();
-        listaModelo.addElement("Seleccione un Estado");
-        ResultSet rs = this.consulta("select * from tblestadotipousuario order by estado");
-        try {
-            while(rs.next()){
-                listaModelo.addElement(rs.getString("estado"));
-            }
-            rs.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-        }
-        return listaModelo;
-    }
-    
-    public DefaultComboBoxModel llenarComboEstadoVelocidad(){
-        DefaultComboBoxModel listaModelo = new DefaultComboBoxModel();
-        listaModelo.addElement("Seleccione un Estado");
-        ResultSet rs = this.consulta("select * from tblestadovelocidad order by estado");
-        try {
-            while(rs.next()){
-                listaModelo.addElement(rs.getString("estado"));
+                listaModelo.addElement(rs.getString("nombreForma"));
             }
             rs.close();
         } catch (Exception e) {

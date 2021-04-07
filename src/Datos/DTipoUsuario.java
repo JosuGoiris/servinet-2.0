@@ -12,23 +12,17 @@ package Datos;
 public class DTipoUsuario {
     int IdTipoUsuario;
     String nombre;
-    int estadotipoId;
+    String estado;
+    String Descripcion;
 
     public DTipoUsuario() {
     }
 
-    public DTipoUsuario(int IdTipoUsuario, String nombre, int estadotipoId) {
+    public DTipoUsuario(int IdTipoUsuario, String nombre, String estado, String Descripcion) {
         this.IdTipoUsuario = IdTipoUsuario;
         this.nombre = nombre;
-        this.estadotipoId = estadotipoId;
-    }
-
-    public int getEstadotipoId() {
-        return estadotipoId;
-    }
-
-    public void setEstadotipoId(int estadotipoId) {
-        this.estadotipoId = estadotipoId;
+        this.estado = estado;
+        this.Descripcion = Descripcion;
     }
 
     public int getIdTipoUsuario() {
@@ -46,6 +40,22 @@ public class DTipoUsuario {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
+
     
 }

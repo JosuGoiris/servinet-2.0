@@ -12,25 +12,19 @@ package Datos;
 public class DPuestos {
     int idPuestoTrabajo;
     String nombrePuesto;
-    int estadopuestoId;
-
+    String estado;
+    String Descripcion;
+    
     public DPuestos() {
     }
 
-    public DPuestos(int idPuestoTrabajo, String nombrePuesto, int estadopuestoId) {
+    public DPuestos(int idPuestoTrabajo, String nombrePuesto, String estado, String Descripcion) {
         this.idPuestoTrabajo = idPuestoTrabajo;
         this.nombrePuesto = nombrePuesto;
-        this.estadopuestoId = estadopuestoId;
+        this.estado = estado;
+        this.Descripcion = Descripcion;
     }
 
-    public int getEstadopuestoId() {
-        return estadopuestoId;
-    }
-
-    public void setEstadopuestoId(int estadopuestoId) {
-        this.estadopuestoId = estadopuestoId;
-    }
-    
     public int getIdPuestoTrabajo() {
         return idPuestoTrabajo;
     }
@@ -46,6 +40,22 @@ public class DPuestos {
     public void setNombrePuesto(String nombrePuesto) {
         this.nombrePuesto = nombrePuesto;
     }
-    
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getDescripcion() {
+        return Descripcion;
+    }
+
+    public void setDescripcion(String Descripcion) {
+        this.Descripcion = Descripcion;
+    }
+
     
 }

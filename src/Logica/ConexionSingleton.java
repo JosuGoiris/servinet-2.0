@@ -22,7 +22,7 @@ public class ConexionSingleton {
             if(con == null){
                 Runtime.getRuntime().addShutdownHook(new getClose());
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://192.168.1.3:3306/servinet", "root", "aramiteamo16");
+                con = DriverManager.getConnection("jdbc:mysql://localhost/servinet", "root", "aramiteamo16");
                 System.out.println("Entro al if");
             }
             return con;

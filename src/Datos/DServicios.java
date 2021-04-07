@@ -5,6 +5,7 @@
  */
 package Datos;
 
+
 /**
  *
  * @author josug
@@ -12,33 +13,19 @@ package Datos;
 public class DServicios {
     int idServicio;
     String nombreServicio;
-    int velocidadconId;
-    String precio;
-    String descripcio;
-    int estadoservicioId;
-    int tiposervicioId;
+    String estado;
+    int detalleservicioId;
 
     public DServicios() {
     }
 
-    public DServicios(int idServicio, String nombreServicio, int velocidadconId , String precio, String descripcio, int estadoservicioId, int tiposervicioId) {
+    public DServicios(int idServicio, String nombreServicio, String estado, int detalleservicioId) {
         this.idServicio = idServicio;
         this.nombreServicio = nombreServicio;
-        this.velocidadconId = velocidadconId;
-        this.precio = precio;
-        this.descripcio = descripcio;
-        this.estadoservicioId = estadoservicioId;
-        this.tiposervicioId = tiposervicioId;
+        this.estado = estado;
+        this.detalleservicioId = detalleservicioId;
     }
 
-    public int getVelocidadconId() {
-        return velocidadconId;
-    }
-
-    public void setVelocidadconId(int velocidadconId) {
-        this.velocidadconId = velocidadconId;
-    }
-    
     public int getIdServicio() {
         return idServicio;
     }
@@ -55,37 +42,21 @@ public class DServicios {
         this.nombreServicio = nombreServicio;
     }
 
-    public String getPrecio() {
-        return precio;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setPrecio(String precio) {
-        this.precio = precio;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
-    public String getDescripcio() {
-        return descripcio;
+    public int getDetalleservicioId() {
+        return detalleservicioId;
     }
 
-    public void setDescripcio(String descripcio) {
-        this.descripcio = descripcio;
+    public void setDetalleservicioId(int detalleservicioId) {
+        this.detalleservicioId = detalleservicioId;
     }
 
-    public int getEstadoservicioId() {
-        return estadoservicioId;
-    }
-
-    public void setEstadoservicioId(int estadoservicioId) {
-        this.estadoservicioId = estadoservicioId;
-    }
-
-    public int getTiposervicioId() {
-        return tiposervicioId;
-    }
-
-    public void setTiposervicioId(int tiposervicioId) {
-        this.tiposervicioId = tiposervicioId;
-    }
-    
     
 }

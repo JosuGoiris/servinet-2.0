@@ -6,14 +6,20 @@
 package Presentacion.Mantenimiento;
 
 import Logica.ConexionSingleton;
+import Presentacion.Clientes.frmCargando;
+import Presentacion.Clientes.frmPrincipalMenu;
+import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -30,33 +36,43 @@ public class frmLogin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        txtUsuario.setText("Josu");
-        txtContraseña.setText("1234");
+        txtUsuario.setText("Hector");
+        txtContraseña.setText("12345");
         
-        URL imageUrl = this.getClass().getResource("/Imagenes/login.png");
-        ImageIcon icoservicio = new ImageIcon(imageUrl);
-        Icon iconoSer = new ImageIcon(icoservicio.getImage().getScaledInstance(259, 256, Image.SCALE_DEFAULT));
-        lblIcono.setIcon(iconoSer);
-        
+        frmCargando form = new frmCargando();
+        form.dispose();
     }
     
     void acceder(String usuario, String contraseña){
         String cap = "";
-        String SQL = "select u.loginUsuario, u.passwordUsuario, t.nombre from tblusuario \n"
+        String nombre = "";
+        int id = 0;
+        String SQL = "select u.idUsuario, u.loginUsuario, u.passwordUsuario, t.tipoUsuario, concat(p.nombres,' ',p.apellidos) as usuario from tblusuario \n"
                 + "as u inner join tbltipousuario as t on u.tipousuarioId = t.idTipoUsuario \n"
+                + "inner join tblpersona as p on u.personaId = p.idPersona \n"
                 + "where u.loginUsuario='"+ usuario + "' && u.passwordUsuario='" + contraseña + "'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(SQL);
             
             while(rs.next()){
-                cap = rs.getString("t.nombre");
+                cap = rs.getString("t.tipoUsuario");
+                nombre = rs.getString("usuario");
+                id = rs.getInt("u.idUsuario");
             }
             if(cap.equals("Administrador")){
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Bienvenido");
-                frmMenu menu = new frmMenu();
-                 menu.setVisible(true);
+                frmMenuMantenimiento menu = new frmMenuMantenimiento();
+                menu.setVisible(true);
+            }
+            if(cap.equals("Encargado de Clientes")){
+                this.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Bienvenido");
+                frmPrincipalMenu form = new frmPrincipalMenu();
+                form.setVisible(true);
+                form.toFront();
+                form.lblNombreUsuario.setText(nombre);
             }
         } catch (Exception e) {
         }
@@ -71,122 +87,337 @@ public class frmLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        lblIcono = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         txtContraseña = new javax.swing.JPasswordField();
-        btnAcceder = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnEditarSolicitud1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        btnNuevaSolicitud5 = new javax.swing.JPanel();
+        btnAcceder = new javax.swing.JPanel();
+        lblAcceder = new javax.swing.JLabel();
+        btnAccederFondo = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIcono, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblIcono, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
+        jLabel1.setFont(new java.awt.Font("Bauhaus 93", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("USUARIO:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 80, 180, 30));
 
+        jLabel2.setFont(new java.awt.Font("Bauhaus 93", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("CONTRASEÑA:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
+        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 180, 30));
 
-        btnAcceder.setText("Acceder");
-        btnAcceder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAccederActionPerformed(evt);
+        btnEditarSolicitud1.setBackground(new java.awt.Color(102, 0, 0));
+        btnEditarSolicitud1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarSolicitud1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnEditarSolicitud1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnEditarSolicitud1FocusGained(evt);
+            }
+        });
+        btnEditarSolicitud1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditarSolicitud1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditarSolicitud1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnEditarSolicitud1MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnEditarSolicitud1MouseReleased(evt);
+            }
+        });
+        btnEditarSolicitud1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_cancel_40px_1.png"))); // NOI18N
+        btnEditarSolicitud1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 40));
+
+        jPanel1.add(btnEditarSolicitud1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 60, 60));
+
+        btnNuevaSolicitud5.setBackground(new java.awt.Color(51, 0, 0));
+        btnNuevaSolicitud5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevaSolicitud5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnNuevaSolicitud5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnNuevaSolicitud5FocusGained(evt);
+            }
+        });
+        btnNuevaSolicitud5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNuevaSolicitud5MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNuevaSolicitud5MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnNuevaSolicitud5MousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnNuevaSolicitud5MouseReleased(evt);
             }
         });
 
-        btnCancelar.setText("Cancelar");
+        javax.swing.GroupLayout btnNuevaSolicitud5Layout = new javax.swing.GroupLayout(btnNuevaSolicitud5);
+        btnNuevaSolicitud5.setLayout(btnNuevaSolicitud5Layout);
+        btnNuevaSolicitud5Layout.setHorizontalGroup(
+            btnNuevaSolicitud5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
+        btnNuevaSolicitud5Layout.setVerticalGroup(
+            btnNuevaSolicitud5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
+        );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtContraseña)
-                    .addComponent(txtUsuario)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+        jPanel1.add(btnNuevaSolicitud5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 60, 60));
+
+        btnAcceder.setBackground(new java.awt.Color(102, 0, 0));
+        btnAcceder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAcceder.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAcceder.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnAccederFocusGained(evt);
+            }
+        });
+        btnAcceder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAccederMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAccederMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAccederMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnAccederMouseReleased(evt);
+            }
+        });
+        btnAcceder.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblAcceder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_enter_40px.png"))); // NOI18N
+        lblAcceder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblAccederMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblAccederMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblAccederMousePressed(evt);
+            }
+        });
+        btnAcceder.add(lblAcceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+
+        jPanel1.add(btnAcceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 60, 60));
+
+        btnAccederFondo.setBackground(new java.awt.Color(51, 0, 0));
+        btnAccederFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAccederFondo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnAccederFondo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnAccederFondoFocusGained(evt);
+            }
+        });
+        btnAccederFondo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAccederFondoMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAccederFondoMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnAccederFondoMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                btnAccederFondoMouseReleased(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnAccederFondoLayout = new javax.swing.GroupLayout(btnAccederFondo);
+        btnAccederFondo.setLayout(btnAccederFondoLayout);
+        btnAccederFondoLayout.setHorizontalGroup(
+            btnAccederFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAcceder, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        btnAccederFondoLayout.setVerticalGroup(
+            btnAccederFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 60, Short.MAX_VALUE)
         );
+
+        jPanel1.add(btnAccederFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 230, 60, 60));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/loginsinfondo_1.png"))); // NOI18N
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, -10, 300, 270));
+
+        jLabel7.setFont(new java.awt.Font("Bauhaus 93", 1, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel7.setText("JOTZPOT ");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Bauhaus 93", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setText("INTERNET");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Bauhaus 93", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel8.setText("SERVINET");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, 20));
+
+        jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 310));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccederActionPerformed
+    private void btnNuevaSolicitud5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud5FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaSolicitud5FocusGained
+
+    private void btnNuevaSolicitud5MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud5MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaSolicitud5MouseEntered
+
+    private void btnNuevaSolicitud5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud5MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaSolicitud5MouseExited
+
+    private void btnNuevaSolicitud5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud5MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaSolicitud5MousePressed
+
+    private void btnNuevaSolicitud5MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud5MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNuevaSolicitud5MouseReleased
+
+    private void btnEditarSolicitud1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarSolicitud1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarSolicitud1FocusGained
+
+    private void btnEditarSolicitud1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarSolicitud1MouseEntered
+
+    private void btnEditarSolicitud1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarSolicitud1MouseExited
+
+    private void btnEditarSolicitud1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud1MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarSolicitud1MousePressed
+
+    private void btnEditarSolicitud1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud1MouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarSolicitud1MouseReleased
+
+    private void btnAccederFondoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnAccederFondoFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAccederFondoFocusGained
+
+    private void btnAccederFondoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederFondoMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAccederFondoMouseEntered
+
+    private void btnAccederFondoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederFondoMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAccederFondoMouseExited
+
+    private void btnAccederFondoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederFondoMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAccederFondoMousePressed
+
+    private void btnAccederFondoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederFondoMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAccederFondoMouseReleased
+
+    private void btnAccederFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnAccederFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAccederFocusGained
+
+    private void btnAccederMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederMouseEntered
+        setColor(btnAcceder);
+        setColorFondo(btnAccederFondo);
+    }//GEN-LAST:event_btnAccederMouseEntered
+
+    private void btnAccederMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederMouseExited
+        resetColor(btnAcceder);
+        resetColorFondo(btnAccederFondo);
+    }//GEN-LAST:event_btnAccederMouseExited
+
+    private void btnAccederMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederMousePressed
+        setColor(btnAcceder);
         String usuario = txtUsuario.getText();
         String contraseña = txtContraseña.getText();
         acceder(usuario, contraseña);
-    }//GEN-LAST:event_btnAccederActionPerformed
+    }//GEN-LAST:event_btnAccederMousePressed
 
+    private void btnAccederMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAccederMouseReleased
+
+    private void lblAccederMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAccederMousePressed
+        
+        String usuario = txtUsuario.getText();
+        String contraseña = txtContraseña.getText();
+        acceder(usuario, contraseña);
+    }//GEN-LAST:event_lblAccederMousePressed
+
+    private void lblAccederMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAccederMouseEntered
+        setColor(btnAcceder);
+        setColorFondo(btnAccederFondo);
+    }//GEN-LAST:event_lblAccederMouseEntered
+
+    private void lblAccederMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAccederMouseExited
+        resetColor(btnAcceder);
+        resetColorFondo(btnAccederFondo);
+    }//GEN-LAST:event_lblAccederMouseExited
+
+    void setColor(JPanel panel){
+        panel.setBackground(new Color(51,0,0));
+    }
+    
+    void setColorFondo(JPanel panel){
+        panel.setBackground(new Color(0,0,0));
+    }
+    
+    void resetColorFondo(JPanel panel){
+        panel.setBackground(new Color(51,0,0));
+    }
+    
+    void resetColor(JPanel panel){
+        panel.setBackground(new Color(102,0,0));
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -223,13 +454,20 @@ public class frmLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAcceder;
-    private javax.swing.JButton btnCancelar;
+    private javax.swing.JPanel btnAcceder;
+    private javax.swing.JPanel btnAccederFondo;
+    private javax.swing.JPanel btnEditarSolicitud1;
+    private javax.swing.JPanel btnNuevaSolicitud5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lblIcono;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblAcceder;
     private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables

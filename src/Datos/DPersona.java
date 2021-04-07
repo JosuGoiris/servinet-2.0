@@ -12,34 +12,25 @@ package Datos;
 public class DPersona {
     int IdPersona;
     int DireccionId;
-    int EstadoPersonaId;
     String Nombre;
     String Apellido;
     String CedulaIdent;
     String Telefono;
-    
+    String estado;
 
     public DPersona() {
     }
 
-    public DPersona(int IdPersona, int DireccionId, int EstadoPersonaId, String Nombre, String Apellido, String CedulaIdent, String Telefono) {
+    public DPersona(int IdPersona, int DireccionId, String Nombre, String Apellido, String CedulaIdent, String Telefono, String estado) {
         this.IdPersona = IdPersona;
         this.DireccionId = DireccionId;
-        this.EstadoPersonaId = EstadoPersonaId;
         this.Nombre = Nombre;
         this.Apellido = Apellido;
         this.CedulaIdent = CedulaIdent;
         this.Telefono = Telefono;
+        this.estado = estado;
     }
 
-    public int getEstadoPersonaId() {
-        return EstadoPersonaId;
-    }
-
-    public void setEstadoPersonaId(int EstadoPersonaId) {
-        this.EstadoPersonaId = EstadoPersonaId;
-    }
-    
     public int getIdPersona() {
         return IdPersona;
     }
@@ -87,6 +78,14 @@ public class DPersona {
     public void setTelefono(String Telefono) {
         this.Telefono = Telefono;
     }
-    
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
     
 }

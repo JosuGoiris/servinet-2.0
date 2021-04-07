@@ -25,20 +25,44 @@ public class LTipoUsuario {
     public DefaultTableModel mostrarTipos(String buscar){
         DefaultTableModel miModelo = null;
         
-        String titulos [] = {"Id","Nombre del Tipo", "Estado"};
+        String titulos [] = {"Id","Tipo de Usuario", "Descripción"};
         String dts [] = new String[3];
         
         miModelo = new DefaultTableModel(null, titulos);
-        sSQL = "select tu.idTipoUsuario, tu.nombre, etu.estado from tbltipousuario \n"
-                + "as tu inner join tblestadotipousuario as etu on tu.estadotipoId = etu.idEstadoTipoU \n"
-                + "where tu.idTipoUsuario = '" + buscar + "' or tu.nombre like '%" + buscar + "'";
+        sSQL = "select idTipoUsuario, tipoUsuario, Descripcion, estado from tbltipousuario \n"
+                + "where idTipoUsuario = '" + buscar + "' or tipoUsuario like '%" + buscar + "' && estado = 'Activo' ";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
             while(rs.next()){
                 dts[0] = rs.getString("idTipoUsuario");
-                dts[1] = rs.getString("nombre");
-                dts[2] = rs.getString("estado");
+                dts[1] = rs.getString("tipoUsuario");
+                dts[2] = rs.getString("Descripcion");
+                miModelo.addRow(dts);
+            }
+            return miModelo;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
+    
+    public DefaultTableModel mostrarTiposInactivos(String buscar){
+        DefaultTableModel miModelo = null;
+        
+        String titulos [] = {"Id","Tipo de Usuario", "Descripción"};
+        String dts [] = new String[3];
+        
+        miModelo = new DefaultTableModel(null, titulos);
+        sSQL = "select idTipoUsuario, tipoUsuario, Descripcion, estado from tbltipousuario \n"
+                + "where idTipoUsuario = '" + buscar + "' or tipoUsuario like '%" + buscar + "' && estado = 'Inactivo' ";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                dts[0] = rs.getString("idTipoUsuario");
+                dts[1] = rs.getString("tipoUsuario");
+                dts[2] = rs.getString("Descripcion");
                 miModelo.addRow(dts);
             }
             return miModelo;
@@ -49,25 +73,96 @@ public class LTipoUsuario {
     }
     
     public String insertarTipos(DTipoUsuario dTipo){
-        String msg = null;
-        sSQL = "insert into tbltipousuario(nombre, estadotipoId) value(?, ?)";
+        sSQL = "insert into tbltipousuario(tipoUsuario, Descripcion, estado) value(?,?,?)";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             
             pst.setString(1, dTipo.getNombre());
-            pst.setInt(2, dTipo.getEstadotipoId());
+            pst.setString(2, dTipo.getDescripcion());
+            pst.setString(3, "Activo");
             
-            int n = pst.executeUpdate();
-            if(n != 0){
-                msg = "si";
-                return msg;
-            }else{
-                msg = "no";
-                return msg;
-            }
+            pst.executeUpdate();
+            
+            System.out.println("Datos Insertados");
+            
+        } catch (Exception e) {
+            System.out.println("Datos no Insertados");
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public String editarTipos(DTipoUsuario dTipo){
+        sSQL = "update tbltipousuario set tipoUsuario = ?, Descripcion = ? \n"
+                + "where idTipoUsuario = ?";
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+            
+            pst.setString(1, dTipo.getNombre());
+            pst.setString(2, dTipo.getDescripcion());
+            pst.setInt(3, dTipo.getIdTipoUsuario());
+            
+            pst.executeUpdate();
+            
+            System.out.println("Datos Actualizados");
+            
+        } catch (Exception e) {
+            System.out.println("Datos no Actualizados");
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public String eliminarTipos(DTipoUsuario dTipo){
+        sSQL = "update tbltipousuario set estado = ? \n"
+                + "where idTipoUsuario = ?";
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+            
+            pst.setString(1, "Inactivo");;
+            pst.setInt(2, dTipo.getIdTipoUsuario());
+            
+            pst.executeUpdate();
+            
+            System.out.println("Datos Eliminados");
+            
+        } catch (Exception e) {
+            System.out.println("Datos no Eliminados");
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public String activarTipos(DTipoUsuario dTipo){
+        sSQL = "update tbltipousuario set estado = ? \n"
+                + "where idTipoUsuario = ?";
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+            
+            pst.setString(1, "Activo");;
+            pst.setInt(2, dTipo.getIdTipoUsuario());
+            
+            pst.executeUpdate();
+            
+            System.out.println("Datos Activados");
+            
+        } catch (Exception e) {
+            System.out.println("Datos no Activados");
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public ResultSet buscarRepetido(String buscar){
+        sSQL = "select tipoUsuario from tbltipousuario where tipoUsuario = '" + buscar + "' && estado = 'Activo' order by idTipoUsuario";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            
+            return rs;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-            return msg;
+            return null;
         }
     }
 }
