@@ -48,7 +48,7 @@ public class frmValoresReclamos extends javax.swing.JFrame {
     }
     
     public void cargarValores(){
-        frmAtenciónalCliente form = new frmAtenciónalCliente();
+        frmAtencionalCliente form = new frmAtencionalCliente();
         txtIdCliente.setText(String.valueOf(form.id));
         txtNombres.setText(form.nombre);
         txtApellidos.setText(form.apellido);

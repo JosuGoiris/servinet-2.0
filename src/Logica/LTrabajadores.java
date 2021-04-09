@@ -98,7 +98,7 @@ public class LTrabajadores {
     
     public String insertarTrabajador(DTrabajadores dTrab, DPersona dPer){
         sSQL = "insert into tblpersona(nombres, apellidos, cedulaIdent, telefono, direccionId, estado) value(?,?,?,?,?,?)";
-        sSQL1 = "insert into tbltrabajador(idTrabajdor, puestotrabajoId, personaId) value((select idPersona from tblpersona order by idPersona desc limit 1),?, (select idPersona from tblpersona order by idPersona desc limit 1))";
+        sSQL1 = "insert into tbltrabajador(idTrabajador, puestotrabajoId, personaId) value((select idPersona from tblpersona order by idPersona desc limit 1),?, (select idPersona from tblpersona order by idPersona desc limit 1))";
         try {
             cn.setAutoCommit(false);
             

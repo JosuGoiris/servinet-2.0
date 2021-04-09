@@ -6,8 +6,10 @@
 package Presentacion.Mantenimiento;
 
 import Logica.ConexionSingleton;
+import Presentacion.AtencionalCliente.frmAtencionalCliente;
 import Presentacion.Clientes.frmCargando;
 import Presentacion.Clientes.frmPrincipalMenu;
+import Presentacion.Cuadrillas.frmMenuCuadrillas;
 import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
@@ -36,9 +38,6 @@ public class frmLogin extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         
-        txtUsuario.setText("Hector");
-        txtContraseña.setText("12345");
-        
         frmCargando form = new frmCargando();
         form.dispose();
     }
@@ -60,19 +59,33 @@ public class frmLogin extends javax.swing.JFrame {
                 nombre = rs.getString("usuario");
                 id = rs.getInt("u.idUsuario");
             }
-            if(cap.equals("Administrador")){
+            if(cap.equals("ADMINISTRADOR")){
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Bienvenido");
                 frmMenuMantenimiento menu = new frmMenuMantenimiento();
                 menu.setVisible(true);
             }
-            if(cap.equals("Encargado de Clientes")){
+            if(cap.equals("ENCARGADO DE CLIENTES")){
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Bienvenido");
                 frmPrincipalMenu form = new frmPrincipalMenu();
                 form.setVisible(true);
                 form.toFront();
                 form.lblNombreUsuario.setText(nombre);
+            }
+            if(cap.equals("ENCARGADO DE CUADRILLAS")){
+                this.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Bienvenido");
+                frmMenuCuadrillas form = new frmMenuCuadrillas();
+                form.setVisible(true);
+                form.toFront();
+            }
+            if(cap.equals("ENCARGADO DE ATENCION AL CLIENTE")){
+                this.setVisible(false);
+                JOptionPane.showMessageDialog(null, "Bienvenido");
+                frmAtencionalCliente form = new frmAtencionalCliente();
+                form.setVisible(true);
+                form.toFront();
             }
         } catch (Exception e) {
         }

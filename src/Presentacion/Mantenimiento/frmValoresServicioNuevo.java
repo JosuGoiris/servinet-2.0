@@ -37,8 +37,8 @@ public class frmValoresServicioNuevo extends javax.swing.JFrame {
         cargarValores();
         txtNombreServicio.requestFocus();
         txtId.setEnabled(false);
-        txtIdBarrio.setEnabled(false);
-        txtBarrio.setEnabled(false);
+        txtIdBarrio.setEditable(false);
+        txtBarrio.setEditable(false);
     }
     
     public void cargarValores(){

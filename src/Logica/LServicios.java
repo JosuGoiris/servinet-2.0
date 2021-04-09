@@ -125,9 +125,9 @@ public class LServicios {
     }
 
     public String insertarServicios(DServicios dServicios, DDetalleServicio dDetalleServicio) {
-        sSQL = "insert into tblservicio(nombreServicio, estado) values(?,?)";
-        sSQL1 = "insert into tbldetalleservicio(conexion, precio, descripcion, zonaId, servicioId) \n"
-                + "values(?,?,?,?, (select idServicio from tblservicio order by idServicio desc limit 1))";
+        sSQL = "insert into tblservicio(nombreServicio) values(?)";
+        sSQL1 = "insert into tbldetalleservicio(conexion, precio, descripcion, zonaId, servicioId, estado) \n"
+                + "values(?,?,?,?, (select idServicio from tblservicio order by idServicio desc limit 1),?)";
         try {
             cn.setAutoCommit(false);
 
@@ -135,7 +135,6 @@ public class LServicios {
             PreparedStatement pst1 = cn.prepareStatement(sSQL1);
 
             pst.setString(1, dServicios.getNombreServicio());
-            pst.setString(2, "Activo");
 
             pst.executeUpdate();
 
@@ -143,7 +142,8 @@ public class LServicios {
             pst1.setDouble(2, dDetalleServicio.getPrecio());
             pst1.setString(3, dDetalleServicio.getDescripcion());
             pst1.setInt(4, dDetalleServicio.getZonaId());
-
+            pst1.setString(5, "ACTIVO");
+            
             pst1.executeUpdate();
 
             cn.commit();

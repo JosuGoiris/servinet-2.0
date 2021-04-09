@@ -10,32 +10,53 @@ import Logica.LZonas;
 import Presentacion.Clientes.frmValoresSolicitudNuevo;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
  * @author josug
  */
-public class frmVistaZonaNuevo extends javax.swing.JFrame {
+public final class frmVistaDireccionTrabajador extends javax.swing.JFrame {
 
     /**
      * Creates new form frmVistaZonaNuevo
+     * 
      */
-    public frmVistaZonaNuevo() {
+    
+    LDireccion ld = new LDireccion();
+    
+    public frmVistaDireccionTrabajador() {
         initComponents();
         this.setLocationRelativeTo(null);
-        mostrar("");
+        mostrar(0);
+        ordenarTamaños();
+        txtBuscar.setText(frmValoresTrabajadoresNuevo.barrio);
     }
     
-    public void mostrar(String buscar){
+    public void mostrar(int id){
+        id = ld.traerIdDireccion(frmValoresTrabajadoresNuevo.idBarrio);
         try {
             DefaultTableModel miModelo;
-            LZonas fun = new LZonas();
-            miModelo = fun.mostrarZonas(buscar);
+            LDireccion fun = new LDireccion();
+            miModelo = fun.mostrarDireccionconBarrio(id);
             tblDirecciones.setModel(miModelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
     }
+    
+    public void ordenarTamaños() {
+        TableColumnModel Modelo = tblDirecciones.getColumnModel();
+        Modelo.getColumn(0).setPreferredWidth(5);
+        Modelo.getColumn(0).setResizable(false);
+        Modelo.getColumn(1).setPreferredWidth(100);
+        Modelo.getColumn(1).setResizable(false);
+        Modelo.getColumn(2).setPreferredWidth(70);
+        Modelo.getColumn(2).setResizable(false);
+        Modelo.getColumn(3).setPreferredWidth(120);
+        Modelo.getColumn(3).setResizable(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,7 +73,7 @@ public class frmVistaZonaNuevo extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDirecciones = new javax.swing.JTable();
@@ -63,20 +84,20 @@ public class frmVistaZonaNuevo extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 160, 30));
+        jPanel1.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 30, 160, 30));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("SERVINET");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 60, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 60, -1));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel14.setText("Seleccione un Barrio");
+        jLabel14.setText("Seleccione una Dirección");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 400, 40));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 40));
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -84,10 +105,10 @@ public class frmVistaZonaNuevo extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Buscar:");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 10, -1, -1));
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, 180, -1));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jPanel2.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 220, -1));
 
-        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 400, 60));
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 500, 60));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -118,9 +139,9 @@ public class frmVistaZonaNuevo extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblDirecciones);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 380, 240));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 480, 240));
 
-        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 400, 260));
+        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 500, 260));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,24 +163,9 @@ public class frmVistaZonaNuevo extends javax.swing.JFrame {
             String cod, nombre;
             cod = tblDirecciones.getValueAt(fila, 0).toString();
             nombre = tblDirecciones.getValueAt(fila, 1).toString();
-            if(frmValoresDireccionNuevo.control == 1){
-                frmValoresDireccionNuevo.txtIdBarrio.setText(cod);
-                frmValoresDireccionNuevo.txtNombreBarrio.setText(nombre);
-            }else if(frmValoresSolicitudNuevo.control == 2){
-                frmValoresSolicitudNuevo.txtIdBarrio.setText(cod);
-                frmValoresSolicitudNuevo.txtBarrio.setText(nombre);
-            }else if(frmValoresServicioNuevo.control == 3){
-                frmValoresServicioNuevo.txtIdBarrio.setText(cod);
-                frmValoresServicioNuevo.txtBarrio.setText(nombre);
-            }else if(frmValoresTrabajadoresNuevo.control == 4){
-                frmValoresTrabajadoresNuevo.txtIdBarrio.setText(cod);
-                frmValoresTrabajadoresNuevo.txtBarrio.setText(nombre);
-            }else if(frmValoresTrabajadoresNuevo.control == 4){
-                frmValoresTrabajadoresNuevo.txtIdBarrio.setText(cod);
-                frmValoresTrabajadoresNuevo.txtBarrio.setText(nombre);
-            }else if(frmValoresUsuarioNuevo.control == 5){
-                frmValoresUsuarioNuevo.txtIdBarrio.setText(cod);
-                frmValoresUsuarioNuevo.txtBarrio.setText(nombre);
+            if(frmValoresTrabajadoresNuevo.control == 1){
+                frmValoresTrabajadoresNuevo.txtIdDireccion.setText(cod);
+                frmValoresTrabajadoresNuevo.txtDireccion.setText(nombre);
             }
             this.dispose();
         }
@@ -182,13 +188,13 @@ public class frmVistaZonaNuevo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmVistaZonaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaDireccionTrabajador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmVistaZonaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaDireccionTrabajador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmVistaZonaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaDireccionTrabajador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmVistaZonaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmVistaDireccionTrabajador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -198,7 +204,7 @@ public class frmVistaZonaNuevo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmVistaZonaNuevo().setVisible(true);
+                new frmVistaDireccionTrabajador().setVisible(true);
             }
         });
     }
@@ -213,7 +219,7 @@ public class frmVistaZonaNuevo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblDirecciones;
+    public static javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

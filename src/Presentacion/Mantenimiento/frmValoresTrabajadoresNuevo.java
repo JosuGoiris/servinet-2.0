@@ -9,10 +9,12 @@ import Datos.DPersona;
 import Datos.DTrabajadores;
 import Logica.LEstados;
 import Logica.LTrabajadores;
+import java.awt.Color;
 import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -31,6 +33,9 @@ public class frmValoresTrabajadoresNuevo extends javax.swing.JFrame {
     public static int zonaId = 0;
     public static String descripcion = "";
     public static String estado = "";
+    
+    public static int idBarrio = 0;
+    public static String barrio = "";
     
     /**
      * Creates new form frmValoresSolicitudNuevo
@@ -93,18 +98,24 @@ public class frmValoresTrabajadoresNuevo extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         btnGuardar3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        txtDireccion = new javax.swing.JTextField();
         btnBuscarDireccion = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
-        btnGuardar4 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        btnGuardar6 = new javax.swing.JPanel();
+        txtIdDireccion = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtBarrio = new javax.swing.JTextField();
+        txtIdBarrio = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        btnBuscarBarrio = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        btnGuardar2 = new javax.swing.JPanel();
+        txtIdPuesto = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        txtPuesto = new javax.swing.JTextField();
         btnBuscarPuesto = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         btnGuardar5 = new javax.swing.JPanel();
-        txtDireccion = new javax.swing.JTextField();
-        txtPuesto = new javax.swing.JTextField();
-        txtIdPuesto = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
-        txtIdDireccion = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -126,7 +137,7 @@ public class frmValoresTrabajadoresNuevo extends javax.swing.JFrame {
         jLabel15.setText("SERVINET");
         bar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
 
-        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 40));
+        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 690, 40));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -247,35 +258,96 @@ public class frmValoresTrabajadoresNuevo extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 230, -1));
 
         btnBuscarDireccion.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscarDireccion.setPreferredSize(new java.awt.Dimension(40, 40));
         btnBuscarDireccion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarDireccionMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarDireccionMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnBuscarDireccionMousePressed(evt);
             }
         });
         btnBuscarDireccion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
-        btnBuscarDireccion.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 20, 20));
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
+        btnBuscarDireccion.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel2.add(btnBuscarDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+        jPanel2.add(btnBuscarDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 40, 40));
 
-        btnGuardar4.setBackground(new java.awt.Color(0, 0, 0));
+        btnGuardar6.setBackground(new java.awt.Color(0, 0, 0));
+        btnGuardar6.setEnabled(false);
 
-        javax.swing.GroupLayout btnGuardar4Layout = new javax.swing.GroupLayout(btnGuardar4);
-        btnGuardar4.setLayout(btnGuardar4Layout);
-        btnGuardar4Layout.setHorizontalGroup(
-            btnGuardar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout btnGuardar6Layout = new javax.swing.GroupLayout(btnGuardar6);
+        btnGuardar6.setLayout(btnGuardar6Layout);
+        btnGuardar6Layout.setHorizontalGroup(
+            btnGuardar6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 40, Short.MAX_VALUE)
         );
-        btnGuardar4Layout.setVerticalGroup(
-            btnGuardar4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        btnGuardar6Layout.setVerticalGroup(
+            btnGuardar6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel2.add(btnGuardar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
+        jPanel2.add(btnGuardar6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
+        jPanel2.add(txtIdDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 53, -1));
+
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Dirección:");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jPanel2.add(txtBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 230, -1));
+        jPanel2.add(txtIdBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 53, -1));
+
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Barrio:");
+        jPanel2.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        btnBuscarBarrio.setBackground(new java.awt.Color(102, 0, 0));
+        btnBuscarBarrio.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnBuscarBarrio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarBarrioMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarBarrioMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBuscarBarrioMousePressed(evt);
+            }
+        });
+        btnBuscarBarrio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
+        btnBuscarBarrio.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jPanel2.add(btnBuscarBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 40, 40));
+
+        btnGuardar2.setBackground(new java.awt.Color(0, 0, 0));
+        btnGuardar2.setEnabled(false);
+
+        javax.swing.GroupLayout btnGuardar2Layout = new javax.swing.GroupLayout(btnGuardar2);
+        btnGuardar2.setLayout(btnGuardar2Layout);
+        btnGuardar2Layout.setHorizontalGroup(
+            btnGuardar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        btnGuardar2Layout.setVerticalGroup(
+            btnGuardar2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(btnGuardar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 40, 40));
+        jPanel2.add(txtIdPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 53, -1));
+
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Puesto:");
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        jPanel2.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 150, 170, -1));
 
         btnBuscarPuesto.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscarPuesto.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -289,7 +361,7 @@ public class frmValoresTrabajadoresNuevo extends javax.swing.JFrame {
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
         btnBuscarPuesto.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 20, 20));
 
-        jPanel2.add(btnBuscarPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 70, -1, -1));
+        jPanel2.add(btnBuscarPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, -1, -1));
 
         btnGuardar5.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -304,23 +376,11 @@ public class frmValoresTrabajadoresNuevo extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel2.add(btnGuardar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
-        jPanel2.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 170, -1));
-        jPanel2.add(txtPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 170, -1));
-        jPanel2.add(txtIdPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 53, -1));
+        jPanel2.add(btnGuardar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 40, 40));
 
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel18.setText("Puesto:");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
-        jPanel2.add(txtIdDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 53, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 400, 210));
 
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Dirección:");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 330, 210));
-
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 610, 480));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 690, 480));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -377,13 +437,6 @@ public class frmValoresTrabajadoresNuevo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnGuardarMousePressed
 
-    private void btnBuscarDireccionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarDireccionMousePressed
-        frmVistaDireccionNuevo form = new frmVistaDireccionNuevo();
-        form.setVisible(true);
-        form.toFront();
-        control = 4;
-    }//GEN-LAST:event_btnBuscarDireccionMousePressed
-
     private void btnBuscarPuestoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPuestoMousePressed
         frmVistaPuestosNuevo form = new frmVistaPuestosNuevo();
         form.setVisible(true);
@@ -413,6 +466,40 @@ public class frmValoresTrabajadoresNuevo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
         }
     }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void btnBuscarDireccionMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarDireccionMouseEntered
+        setColor(btnBuscarDireccion);
+    }//GEN-LAST:event_btnBuscarDireccionMouseEntered
+
+    private void btnBuscarDireccionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarDireccionMouseExited
+        resetColor(btnBuscarDireccion);
+    }//GEN-LAST:event_btnBuscarDireccionMouseExited
+
+    private void btnBuscarDireccionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarDireccionMousePressed
+        idBarrio = Integer.parseInt(txtIdBarrio.getText());
+        barrio = txtBarrio.getText();
+        System.out.println(idBarrio);
+        System.out.println(barrio);
+        frmVistaDireccionTrabajador form = new frmVistaDireccionTrabajador();
+        form.setVisible(true);
+        form.toFront();
+        control = 1;
+    }//GEN-LAST:event_btnBuscarDireccionMousePressed
+
+    private void btnBuscarBarrioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarBarrioMouseEntered
+        setColor(btnBuscarBarrio);
+    }//GEN-LAST:event_btnBuscarBarrioMouseEntered
+
+    private void btnBuscarBarrioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarBarrioMouseExited
+        resetColor(btnBuscarBarrio);
+    }//GEN-LAST:event_btnBuscarBarrioMouseExited
+
+    private void btnBuscarBarrioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarBarrioMousePressed
+        frmVistaZonaNuevo form = new frmVistaZonaNuevo();
+        form.setVisible(true);
+        form.toFront();
+        control = 4;
+    }//GEN-LAST:event_btnBuscarBarrioMousePressed
 
     void buscarRepetido(){
         LTrabajadores lt = new LTrabajadores();
@@ -469,38 +556,52 @@ public class frmValoresTrabajadoresNuevo extends javax.swing.JFrame {
         });
     }
 
+    void setColor(JPanel panel) {
+        panel.setBackground(new Color(51, 0, 0));
+    }
+
+    void resetColor(JPanel panel) {
+        panel.setBackground(new Color(102, 0, 0));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bar;
     private javax.swing.JPanel bg;
+    private javax.swing.JPanel btnBuscarBarrio;
     private javax.swing.JPanel btnBuscarDireccion;
     private javax.swing.JPanel btnBuscarPuesto;
     private javax.swing.JPanel btnGuardar;
     private javax.swing.JPanel btnGuardar1;
+    private javax.swing.JPanel btnGuardar2;
     private javax.swing.JPanel btnGuardar3;
-    private javax.swing.JPanel btnGuardar4;
     private javax.swing.JPanel btnGuardar5;
+    private javax.swing.JPanel btnGuardar6;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator5;
     public static javax.swing.JTextField txtApellido;
+    public static javax.swing.JTextField txtBarrio;
     public static javax.swing.JTextField txtCedula;
     public static javax.swing.JTextField txtDireccion;
     public static javax.swing.JTextField txtId;
+    public static javax.swing.JTextField txtIdBarrio;
     public static javax.swing.JTextField txtIdDireccion;
     public static javax.swing.JTextField txtIdPuesto;
     public static javax.swing.JTextField txtNombre;
