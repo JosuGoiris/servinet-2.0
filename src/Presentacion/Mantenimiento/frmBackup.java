@@ -164,7 +164,7 @@ public class frmBackup extends javax.swing.JFrame {
         String backups = "";
         if (ruta.trim().length() != 0) {
             try {
-                backups = "C:\\xampp\\mysql\\bin\\mysqldump --opt -u" + ConexionSingleton.getUser() + " -p" + ConexionSingleton.getPass() + " -B " + ConexionSingleton.getBD() + " -r " + ruta + name;
+                backups = "C:\\xampp\\mysql\\bin\\mysqldump --opt -uroot -paramiteamo16 -B servinet -r "+ruta+name;
                 Runtime rt = Runtime.getRuntime();
                 rt.exec(backups);
                 JOptionPane.showMessageDialog(null, "Backup creada: " + ruta);

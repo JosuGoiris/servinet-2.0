@@ -7,6 +7,8 @@ package Presentacion.Mantenimiento;
  */
 
 import Logica.ConexionSingleton;
+import java.io.FileInputStream;
+import java.io.OutputStream;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -162,17 +164,24 @@ public class frmRestaurar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCrearMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCrearMousePressed
-        String ruta = txtRuta.getText();
-        String backus = "";
-        if(ruta.trim().length()!=0){
-            try{
-                backus = "C:\\xampp\\mysql\\bin\\mysql -u"+ConexionSingleton.getUser()+" -p"+ConexionSingleton.getPass()+" "+ConexionSingleton.getBD()+" < "+ruta;
-                Runtime rt = Runtime.getRuntime();
-                rt.exec(backus);
-                JOptionPane.showMessageDialog(null, "Backus Importado: "+ruta);
-            }catch(Exception ex){
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+        try {
+            Process p =
+                    Runtime.getRuntime().exec("C:\\xampp\\mysql\\bin\\mysql -uroot -paramiteamo16 servinet");
+            OutputStream os = p.getOutputStream();
+            FileInputStream fis = new FileInputStream(txtRuta.getText());
+            byte[] buffer = new byte[1000];
+            
+            int leido = fis.read(buffer);
+            while(leido > 0){
+                os.write(buffer, 0, leido);
+                leido = fis.read(buffer);
             }
+            JOptionPane.showMessageDialog(null, "Base de Datos Restaurada");
+            os.flush();
+            os.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_btnCrearMousePressed
 

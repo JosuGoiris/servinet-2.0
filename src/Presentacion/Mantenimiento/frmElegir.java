@@ -43,11 +43,11 @@ public class frmElegir extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        btnBuscarBarrio = new javax.swing.JPanel();
+        btnBackup = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnGuardar4 = new javax.swing.JPanel();
-        btnBuscarBarrio1 = new javax.swing.JPanel();
+        btnRestaurar = new javax.swing.JPanel();
         jLabel21 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         btnGuardar5 = new javax.swing.JPanel();
@@ -83,23 +83,23 @@ public class frmElegir extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnBuscarBarrio.setBackground(new java.awt.Color(102, 0, 0));
-        btnBuscarBarrio.setPreferredSize(new java.awt.Dimension(40, 40));
-        btnBuscarBarrio.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBackup.setBackground(new java.awt.Color(102, 0, 0));
+        btnBackup.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnBackup.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnBuscarBarrioMousePressed(evt);
+                btnBackupMousePressed(evt);
             }
         });
-        btnBuscarBarrio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnBackup.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
-        btnBuscarBarrio.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 20, 20));
+        btnBackup.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 20, 20));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("HACER BACKUP");
-        btnBuscarBarrio.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        btnBackup.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel3.add(btnBuscarBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 180, 40));
+        jPanel3.add(btnBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 180, 40));
 
         btnGuardar4.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -116,23 +116,23 @@ public class frmElegir extends javax.swing.JFrame {
 
         jPanel3.add(btnGuardar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 180, 40));
 
-        btnBuscarBarrio1.setBackground(new java.awt.Color(102, 0, 0));
-        btnBuscarBarrio1.setPreferredSize(new java.awt.Dimension(40, 40));
-        btnBuscarBarrio1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRestaurar.setBackground(new java.awt.Color(102, 0, 0));
+        btnRestaurar.setPreferredSize(new java.awt.Dimension(40, 40));
+        btnRestaurar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnBuscarBarrio1MousePressed(evt);
+                btnRestaurarMousePressed(evt);
             }
         });
-        btnBuscarBarrio1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnRestaurar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
-        btnBuscarBarrio1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 20, 20));
+        btnRestaurar.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 20, 20));
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("RESTAURAR");
-        btnBuscarBarrio1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        btnRestaurar.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel3.add(btnBuscarBarrio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 180, 40));
+        jPanel3.add(btnRestaurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 180, 40));
 
         btnGuardar5.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -201,13 +201,17 @@ public class frmElegir extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalirMousePressed
 
-    private void btnBuscarBarrioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarBarrioMousePressed
-        
-    }//GEN-LAST:event_btnBuscarBarrioMousePressed
+    private void btnBackupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackupMousePressed
+        frmBackup form = new frmBackup();
+        form.setVisible(true);
+        form.toFront();
+    }//GEN-LAST:event_btnBackupMousePressed
 
-    private void btnBuscarBarrio1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarBarrio1MousePressed
-        
-    }//GEN-LAST:event_btnBuscarBarrio1MousePressed
+    private void btnRestaurarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRestaurarMousePressed
+        frmRestaurar form = new frmRestaurar();
+        form.setVisible(true);
+        form.toFront();
+    }//GEN-LAST:event_btnRestaurarMousePressed
 
     
     /**
@@ -263,11 +267,11 @@ public class frmElegir extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bar;
     private javax.swing.JPanel bg;
-    private javax.swing.JPanel btnBuscarBarrio;
-    private javax.swing.JPanel btnBuscarBarrio1;
+    private javax.swing.JPanel btnBackup;
     private javax.swing.JPanel btnGuardar3;
     private javax.swing.JPanel btnGuardar4;
     private javax.swing.JPanel btnGuardar5;
+    private javax.swing.JPanel btnRestaurar;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
