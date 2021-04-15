@@ -12,6 +12,7 @@ import Presentacion.Mantenimiento.*;
 import Logica.ConexionSingleton;
 import Logica.LCaja;
 import Presentacion.Clientes.frmPrincipalMenu;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
@@ -36,6 +38,8 @@ import javax.swing.Timer;
  * @author josug
  */
 public class frmCerrarCaja extends javax.swing.JFrame {
+    public int xx;
+    public int xy;
     LCaja lc = new LCaja();
     Connection cn = ConexionSingleton.getConnection();
     public static int idCaja;
@@ -57,7 +61,6 @@ public class frmCerrarCaja extends javax.swing.JFrame {
         txtIdCaja.setText(String.valueOf(idCaja));
         txtMontoApertura.setText(String.valueOf(montoApertura));
         txtMontoCierre.setText(String.valueOf(montoTotal));
-        
     }
 
     /**
@@ -71,15 +74,14 @@ public class frmCerrarCaja extends javax.swing.JFrame {
 
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        btnAbrirCaja = new javax.swing.JPanel();
+        btnCerrarCaja = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         btnNuevaSolicitud5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btnEditarSolicitud2 = new javax.swing.JPanel();
+        btnCancelar = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         btnNuevaSolicitud6 = new javax.swing.JPanel();
@@ -90,51 +92,57 @@ public class frmCerrarCaja extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtIdCaja = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jSeparator17 = new javax.swing.JSeparator();
+        jSeparator18 = new javax.swing.JSeparator();
+        jSeparator19 = new javax.swing.JSeparator();
+        mover = new javax.swing.JPanel();
+        btnSalir = new javax.swing.JPanel();
+        lblSalir = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        btnMini = new javax.swing.JPanel();
+        lblMini = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 40));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnAbrirCaja.setBackground(new java.awt.Color(102, 0, 0));
-        btnAbrirCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnAbrirCaja.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnAbrirCaja.addFocusListener(new java.awt.event.FocusAdapter() {
+        btnCerrarCaja.setBackground(new java.awt.Color(102, 0, 0));
+        btnCerrarCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarCaja.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCerrarCaja.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                btnAbrirCajaFocusGained(evt);
+                btnCerrarCajaFocusGained(evt);
             }
         });
-        btnAbrirCaja.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCerrarCaja.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnAbrirCajaMouseEntered(evt);
+                btnCerrarCajaMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnAbrirCajaMouseExited(evt);
+                btnCerrarCajaMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnAbrirCajaMousePressed(evt);
+                btnCerrarCajaMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnAbrirCajaMouseReleased(evt);
+                btnCerrarCajaMouseReleased(evt);
             }
         });
-        btnAbrirCaja.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnCerrarCaja.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(204, 204, 204));
         jLabel13.setText("Cerrar Caja");
-        btnAbrirCaja.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
-        btnAbrirCaja.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 70, 10));
+        btnCerrarCaja.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
+        btnCerrarCaja.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 70, 10));
 
-        jPanel1.add(btnAbrirCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 100, 40));
+        jPanel1.add(btnCerrarCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 100, 40));
 
-        btnNuevaSolicitud5.setBackground(new java.awt.Color(51, 0, 0));
+        btnNuevaSolicitud5.setBackground(new java.awt.Color(0, 0, 0));
         btnNuevaSolicitud5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevaSolicitud5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNuevaSolicitud5.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -168,12 +176,12 @@ public class frmCerrarCaja extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnNuevaSolicitud5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 100, 40));
+        jPanel1.add(btnNuevaSolicitud5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 100, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Gs.");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -188,39 +196,39 @@ public class frmCerrarCaja extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -30, 320, 30));
 
-        btnEditarSolicitud2.setBackground(new java.awt.Color(102, 0, 0));
-        btnEditarSolicitud2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditarSolicitud2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEditarSolicitud2.addFocusListener(new java.awt.event.FocusAdapter() {
+        btnCancelar.setBackground(new java.awt.Color(102, 0, 0));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnCancelar.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                btnEditarSolicitud2FocusGained(evt);
+                btnCancelarFocusGained(evt);
             }
         });
-        btnEditarSolicitud2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitud2MouseEntered(evt);
+                btnCancelarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitud2MouseExited(evt);
+                btnCancelarMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitud2MousePressed(evt);
+                btnCancelarMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitud2MouseReleased(evt);
+                btnCancelarMouseReleased(evt);
             }
         });
-        btnEditarSolicitud2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnCancelar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(204, 204, 204));
         jLabel14.setText("Cancelar");
-        btnEditarSolicitud2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, -1));
-        btnEditarSolicitud2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 60, 20));
+        btnCancelar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, -1));
+        btnCancelar.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 60, 20));
 
-        jPanel1.add(btnEditarSolicitud2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 210, 90, 40));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 90, 40));
 
-        btnNuevaSolicitud6.setBackground(new java.awt.Color(51, 0, 0));
+        btnNuevaSolicitud6.setBackground(new java.awt.Color(0, 0, 0));
         btnNuevaSolicitud6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevaSolicitud6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNuevaSolicitud6.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -254,32 +262,144 @@ public class frmCerrarCaja extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnNuevaSolicitud6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, -1, -1));
-        jPanel1.add(txtMontoCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 100, -1));
+        jPanel1.add(btnNuevaSolicitud6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 200, -1, -1));
+        jPanel1.add(txtMontoCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 100, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Monto de Cierre:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Monto Apertura:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, -1, -1));
-        jPanel1.add(txtMontoApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 100, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
+        jPanel1.add(txtMontoApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 130, 100, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Gs.");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, -1, -1));
-        jPanel1.add(txtIdCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 50, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, -1, -1));
+        jPanel1.add(txtIdCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 50, -1));
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Id Caja:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, -1, -1));
+        jPanel1.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 18, 320, 10));
 
-        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 370, 270));
+        jSeparator18.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 20, 160));
+
+        jSeparator19.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 18, 20, 160));
+
+        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 370, 250));
+
+        mover.setBackground(new java.awt.Color(204, 204, 204));
+        mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                moverMouseDragged(evt);
+            }
+        });
+        mover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                moverMousePressed(evt);
+            }
+        });
+        mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSalir.setBackground(new java.awt.Color(102, 0, 0));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalirMousePressed(evt);
+            }
+        });
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_close_window_20px.png"))); // NOI18N
+        lblSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSalirMousePressed(evt);
+            }
+        });
+        btnSalir.add(lblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 30, 30));
+
+        jPanel12.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
+
+        btnMini.setBackground(new java.awt.Color(102, 0, 0));
+        btnMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnMiniMousePressed(evt);
+            }
+        });
+        btnMini.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_minimize_window_20px.png"))); // NOI18N
+        lblMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblMiniMousePressed(evt);
+            }
+        });
+        btnMini.add(lblMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 30, 30));
+
+        jPanel13.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
+
+        jPanel4.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -289,9 +409,7 @@ public class frmCerrarCaja extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -317,19 +435,19 @@ public class frmCerrarCaja extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNuevaSolicitud5MouseReleased
 
-    private void btnAbrirCajaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnAbrirCajaFocusGained
+    private void btnCerrarCajaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnCerrarCajaFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAbrirCajaFocusGained
+    }//GEN-LAST:event_btnCerrarCajaFocusGained
 
-    private void btnAbrirCajaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAbrirCajaMouseEntered
+    private void btnCerrarCajaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarCajaMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAbrirCajaMouseEntered
+    }//GEN-LAST:event_btnCerrarCajaMouseEntered
 
-    private void btnAbrirCajaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAbrirCajaMouseExited
+    private void btnCerrarCajaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarCajaMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAbrirCajaMouseExited
+    }//GEN-LAST:event_btnCerrarCajaMouseExited
 
-    private void btnAbrirCajaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAbrirCajaMousePressed
+    private void btnCerrarCajaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarCajaMousePressed
         DDetalleMonto ddm = new DDetalleMonto();
         DCaja dc = new DCaja();
         LCaja fun = new LCaja();
@@ -341,11 +459,11 @@ public class frmCerrarCaja extends javax.swing.JFrame {
         dc.setIdCaja(idCaja);
         
         fun.RealizarCarga(dc, ddm);
-    }//GEN-LAST:event_btnAbrirCajaMousePressed
+    }//GEN-LAST:event_btnCerrarCajaMousePressed
 
-    private void btnAbrirCajaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAbrirCajaMouseReleased
+    private void btnCerrarCajaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarCajaMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAbrirCajaMouseReleased
+    }//GEN-LAST:event_btnCerrarCajaMouseReleased
 
     private void btnNuevaSolicitud6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud6FocusGained
         // TODO add your handling code here:
@@ -367,26 +485,94 @@ public class frmCerrarCaja extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNuevaSolicitud6MouseReleased
 
-    private void btnEditarSolicitud2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarSolicitud2FocusGained
+    private void btnCancelarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnCancelarFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitud2FocusGained
+    }//GEN-LAST:event_btnCancelarFocusGained
 
-    private void btnEditarSolicitud2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud2MouseEntered
+    private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
+        setColor(btnCancelar);
+    }//GEN-LAST:event_btnCancelarMouseEntered
+
+    private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitud2MouseEntered
+    }//GEN-LAST:event_btnCancelarMouseExited
 
-    private void btnEditarSolicitud2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud2MouseExited
+    private void btnCancelarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMousePressed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarMousePressed
+
+    private void btnCancelarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitud2MouseExited
+    }//GEN-LAST:event_btnCancelarMouseReleased
 
-    private void btnEditarSolicitud2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud2MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitud2MousePressed
+    private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirMousePressed
 
-    private void btnEditarSolicitud2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud2MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitud2MouseReleased
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseExited
 
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void lblMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseEntered
+
+    private void lblMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseExited
+
+    private void lblMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lblMiniMousePressed
+
+    private void btnMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseEntered
+
+    private void btnMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseExited
+
+    private void btnMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMiniMousePressed
+
+    private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_moverMouseDragged
+
+    private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_moverMousePressed
+
+    private void lblSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_lblSalirMousePressed
+
+    private void lblSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_lblSalirMouseEntered
+
+    private void lblSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_lblSalirMouseExited
+
+    void setColor(JPanel panel) {
+        panel.setBackground(new Color(51, 0, 0));
+    }
+
+    void resetColor(JPanel panel) {
+        panel.setBackground(new Color(102, 0, 0));
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -430,10 +616,12 @@ public class frmCerrarCaja extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnAbrirCaja;
-    private javax.swing.JPanel btnEditarSolicitud2;
+    private javax.swing.JPanel btnCancelar;
+    private javax.swing.JPanel btnCerrarCaja;
+    private javax.swing.JPanel btnMini;
     private javax.swing.JPanel btnNuevaSolicitud5;
     private javax.swing.JPanel btnNuevaSolicitud6;
+    private javax.swing.JPanel btnSalir;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
@@ -443,11 +631,18 @@ public class frmCerrarCaja extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator17;
+    private javax.swing.JSeparator jSeparator18;
+    private javax.swing.JSeparator jSeparator19;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblMini;
+    private javax.swing.JLabel lblSalir;
+    private javax.swing.JPanel mover;
     private javax.swing.JTextField txtIdCaja;
     private javax.swing.JTextField txtMontoApertura;
     private javax.swing.JTextField txtMontoCierre;

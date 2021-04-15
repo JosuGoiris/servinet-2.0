@@ -19,7 +19,7 @@ public class ConexionSingleton {
     private static String user = "root";
     private static String pass = "aramiteamo16";
     private static String bd = "servinet";
-    private static String url = "jdbc:mysql://192.168.1.10/"+bd;
+    private static String url = "jdbc:mysql://192.168.1.200/"+bd;
     
     public static String getUser(){
         return user;

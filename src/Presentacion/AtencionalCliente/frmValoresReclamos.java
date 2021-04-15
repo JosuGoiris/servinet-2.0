@@ -162,6 +162,11 @@ public class frmValoresReclamos extends javax.swing.JFrame {
 
         txtDescripcion.setColumns(20);
         txtDescripcion.setRows(5);
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(txtDescripcion);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 320, 150));
@@ -183,26 +188,11 @@ public class frmValoresReclamos extends javax.swing.JFrame {
                 btnGuardarMousePressed(evt);
             }
         });
+        btnGuardar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_save_30px.png"))); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(25, 25));
-
-        javax.swing.GroupLayout btnGuardarLayout = new javax.swing.GroupLayout(btnGuardar);
-        btnGuardar.setLayout(btnGuardarLayout);
-        btnGuardarLayout.setHorizontalGroup(
-            btnGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnGuardarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        btnGuardarLayout.setVerticalGroup(
-            btnGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnGuardarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        btnGuardar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
         jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 50, 50));
 
@@ -228,26 +218,11 @@ public class frmValoresReclamos extends javax.swing.JFrame {
                 btnSalirMousePressed(evt);
             }
         });
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_delete_30px.png"))); // NOI18N
         jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
-
-        javax.swing.GroupLayout btnSalirLayout = new javax.swing.GroupLayout(btnSalir);
-        btnSalir.setLayout(btnSalirLayout);
-        btnSalirLayout.setHorizontalGroup(
-            btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnSalirLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        btnSalirLayout.setVerticalGroup(
-            btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnSalirLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 28, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
         jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 310, 50, 50));
 
@@ -306,6 +281,11 @@ public class frmValoresReclamos extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnGuardarMousePressed
+
+    private void txtDescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyReleased
+        String descripcion = (txtDescripcion.getText()).toUpperCase();
+        txtDescripcion.setText(descripcion);
+    }//GEN-LAST:event_txtDescripcionKeyReleased
 
     /**
      * @param args the command line arguments

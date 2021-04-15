@@ -5,21 +5,15 @@
  */
 package Presentacion.Clientes;
 
-import Datos.DClientes;
-import Datos.DPersona;
 import Datos.DServiciodelCliente;
-import Datos.DSolicitud;
 import Logica.LEstados;
-import Logica.LSolicitud;
 import Logica.LVistas;
-import Presentacion.Mantenimiento.frmVistaDireccionNuevo;
 import Presentacion.Mantenimiento.frmVistaServicioNuevo;
-import Presentacion.Mantenimiento.frmVistaZonaNuevo;
 import java.awt.Color;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -28,6 +22,8 @@ import javax.swing.JPanel;
  */
 public class frmEditarServiciodelCliente extends javax.swing.JFrame {
 
+    public int xx;
+    public int xy;
     public static int control = 0;
     private LEstados es = new LEstados();
     Calendar fecha_actual = new GregorianCalendar();
@@ -58,6 +54,14 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
     public frmEditarServiciodelCliente() {
         initComponents();
         this.setLocationRelativeTo(null);
+        txtNombres.setEditable(false);
+        txtApellidos.setEditable(false);
+        txtCedula.setEditable(false);
+        txtId.setEditable(false);
+        txtVelocidad.setEditable(false);
+        txtPrecio.setEditable(false);
+        txtTipoSolicitud.setEditable(false);
+        txtIdServicio.setVisible(false);
     }
 
     void setColor(JPanel panel) {
@@ -74,7 +78,7 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
         txtApellidos.setText(frmGestionarServicios.apellidoCliente);
         txtCedula.setText(frmGestionarServicios.nroCedula);
         txtTipoSolicitud.setText(frmGestionarServicios.nombreServicio);
-        txtIdServicio.setText(String.valueOf(frmGestionarServicios.conexion));
+        txtVelocidad.setText(String.valueOf(frmGestionarServicios.conexion));
         txtPrecio.setText(String.valueOf(frmGestionarServicios.precio));
     }
 
@@ -89,10 +93,6 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
 
         jSeparator23 = new javax.swing.JSeparator();
         bg = new javax.swing.JPanel();
-        bar = new javax.swing.JPanel();
-        jSeparator5 = new javax.swing.JSeparator();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -104,7 +104,6 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
         txtCedula = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        txtIdServicio = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtTipoSolicitud = new javax.swing.JTextField();
         btnBuscarTipoServicio = new javax.swing.JPanel();
@@ -113,6 +112,8 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        txtVelocidad = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar1 = new javax.swing.JPanel();
@@ -127,28 +128,20 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
         jSeparator27 = new javax.swing.JSeparator();
         jSeparator28 = new javax.swing.JSeparator();
         jSeparator29 = new javax.swing.JSeparator();
+        mover = new javax.swing.JPanel();
+        btnSalir1 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        btnMini = new javax.swing.JPanel();
+        lblMini = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        txtIdServicio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        bar.setBackground(new java.awt.Color(204, 204, 204));
-        bar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        bar.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 200, 20));
-
-        jLabel14.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel14.setText("MODIFIQUE SUS DATOS");
-        bar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
-
-        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("SERVINET");
-        bar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
-
-        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 40));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -180,25 +173,24 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(txtIdServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 30, 50, -1));
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("MB/s");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 40, 40, -1));
-        jPanel3.add(txtTipoSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 140, -1));
+        jLabel9.setText("Gs.");
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, 40, -1));
+        jPanel3.add(txtTipoSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, -1));
 
         btnBuscarTipoServicio.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscarTipoServicio.setPreferredSize(new java.awt.Dimension(40, 40));
         btnBuscarTipoServicio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnBuscarTipoServicioMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarTipoServicioMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnBuscarTipoServicioMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuscarTipoServicioMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBuscarTipoServicioMousePressed(evt);
             }
         });
         btnBuscarTipoServicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -206,7 +198,7 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
         btnBuscarTipoServicio.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel3.add(btnBuscarTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 40, 40));
+        jPanel3.add(btnBuscarTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 40, 40));
 
         btnGuardar4.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar4.setEnabled(false);
@@ -222,7 +214,7 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel3.add(btnGuardar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
+        jPanel3.add(btnGuardar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Precio:");
@@ -233,19 +225,25 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
         jLabel10.setText("Tipo de Servicio");
         jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 340, 120));
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("MB/s");
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 40, -1));
+        jPanel3.add(txtVelocidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 50, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 390, 120));
 
         btnGuardar.setBackground(new java.awt.Color(102, 0, 0));
         btnGuardar.setPreferredSize(new java.awt.Dimension(50, 50));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnGuardarMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnGuardarMousePressed(evt);
             }
         });
         btnGuardar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -254,7 +252,7 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(25, 25));
         btnGuardar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 240, 50, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 240, 50, 50));
 
         btnGuardar1.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar1.setEnabled(false);
@@ -270,19 +268,19 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, -1, 50));
+        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, -1, 50));
 
         btnSalir.setBackground(new java.awt.Color(102, 0, 0));
         btnSalir.setPreferredSize(new java.awt.Dimension(50, 50));
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnSalirMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnSalirMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSalirMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalirMousePressed(evt);
             }
         });
         btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -291,7 +289,7 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
         jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
         btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 240, 50, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 240, 50, 50));
 
         btnGuardar3.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar3.setEnabled(false);
@@ -307,13 +305,13 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 250, 50, 50));
-        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 420, 10));
-        jPanel1.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 340, 10));
-        jPanel1.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 120, 10));
+        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 250, 50, 50));
+        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 480, 10));
+        jPanel1.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 390, 10));
+        jPanel1.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 230, 120, 10));
 
         jSeparator25.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 240, 20, 40));
+        jPanel1.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 240, 20, 40));
 
         jSeparator26.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator26, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 20, 270));
@@ -323,23 +321,114 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
         jPanel1.add(jSeparator28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 210, 20));
 
         jSeparator29.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator29, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 70, 20, 150));
+        jPanel1.add(jSeparator29, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 70, 20, 150));
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 610, 310));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 660, 310));
+
+        mover.setBackground(new java.awt.Color(204, 204, 204));
+        mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                moverMouseDragged(evt);
+            }
+        });
+        mover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                moverMousePressed(evt);
+            }
+        });
+        mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSalir1.setBackground(new java.awt.Color(102, 0, 0));
+        btnSalir1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalir1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalir1MouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalir1MousePressed(evt);
+            }
+        });
+        btnSalir1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_close_window_20px.png"))); // NOI18N
+        btnSalir1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 10, 30, 30));
+
+        jPanel12.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 30, 30));
+
+        btnMini.setBackground(new java.awt.Color(102, 0, 0));
+        btnMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnMiniMousePressed(evt);
+            }
+        });
+        btnMini.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_minimize_window_20px.png"))); // NOI18N
+        lblMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblMiniMousePressed(evt);
+            }
+        });
+        btnMini.add(lblMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 10, 30, 30));
+
+        jPanel13.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 20, 30, 30));
+        mover.add(txtIdServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, 50, -1));
+
+        bg.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 660, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -356,6 +445,9 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
         dsc.setDetalleservicioId(Integer.parseInt(txtIdServicio.getText()));
         dsc.setIdServiciodelCliente(Integer.parseInt(txtId.getText()));
         fun.actualizarVelocidad(dsc);
+        
+        JOptionPane.showMessageDialog(null, "Datos Actualizados!");
+        this.dispose();
     }//GEN-LAST:event_btnGuardarMousePressed
 
     private void btnBuscarTipoServicioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarTipoServicioMousePressed
@@ -388,6 +480,53 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
     private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
         resetColor(btnSalir);
     }//GEN-LAST:event_btnSalirMouseExited
+
+    private void btnSalir1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir1MouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_btnSalir1MouseEntered
+
+    private void btnSalir1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir1MouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_btnSalir1MouseExited
+
+    private void btnSalir1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir1MousePressed
+        this.dispose();
+    }//GEN-LAST:event_btnSalir1MousePressed
+
+    private void lblMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseEntered
+
+    private void lblMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseExited
+
+    private void lblMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lblMiniMousePressed
+
+    private void btnMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseEntered
+
+    private void btnMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseExited
+
+    private void btnMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMiniMousePressed
+
+    private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_moverMouseDragged
+
+    private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_moverMousePressed
 
     
     /**
@@ -439,19 +578,20 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bar;
     private javax.swing.JPanel bg;
     private javax.swing.JPanel btnBuscarTipoServicio;
     private javax.swing.JPanel btnGuardar;
     private javax.swing.JPanel btnGuardar1;
     private javax.swing.JPanel btnGuardar3;
     private javax.swing.JPanel btnGuardar4;
+    private javax.swing.JPanel btnMini;
     private javax.swing.JPanel btnSalir;
+    private javax.swing.JPanel btnSalir1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -460,6 +600,8 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator21;
@@ -471,7 +613,8 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator27;
     private javax.swing.JSeparator jSeparator28;
     private javax.swing.JSeparator jSeparator29;
-    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JLabel lblMini;
+    private javax.swing.JPanel mover;
     public static javax.swing.JTextField txtApellidos;
     public static javax.swing.JTextField txtCedula;
     public static javax.swing.JTextField txtId;
@@ -479,5 +622,6 @@ public class frmEditarServiciodelCliente extends javax.swing.JFrame {
     public static javax.swing.JTextField txtNombres;
     public static javax.swing.JTextField txtPrecio;
     public static javax.swing.JTextField txtTipoSolicitud;
+    public static javax.swing.JTextField txtVelocidad;
     // End of variables declaration//GEN-END:variables
 }

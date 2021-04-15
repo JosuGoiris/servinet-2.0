@@ -11,6 +11,7 @@ import Presentacion.Mantenimiento.*;
 import Logica.ConexionSingleton;
 import Logica.LCaja;
 import Presentacion.Clientes.frmPrincipalMenu;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +29,7 @@ import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 /**
@@ -35,6 +37,8 @@ import javax.swing.Timer;
  * @author josug
  */
 public class frmAbrirCaja extends javax.swing.JFrame {
+    public int xx;
+    public int xy;
     Calendar fecha_actual = new GregorianCalendar();
     SimpleDateFormat horaActual = new SimpleDateFormat("HH:mm:ss");
     /**
@@ -59,7 +63,6 @@ public class frmAbrirCaja extends javax.swing.JFrame {
 
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel4 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnAbrirCaja = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -74,7 +77,6 @@ public class frmAbrirCaja extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         btnNuevaSolicitud6 = new javax.swing.JPanel();
-        jSeparator2 = new javax.swing.JSeparator();
         txtMontoApertura = new javax.swing.JTextField();
         txtUsuario = new javax.swing.JTextField();
         txtIdUsuario = new javax.swing.JTextField();
@@ -82,20 +84,24 @@ public class frmAbrirCaja extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
+        mover = new javax.swing.JPanel();
+        btnSalir = new javax.swing.JPanel();
+        lblSalir = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        btnMini = new javax.swing.JPanel();
+        lblMini = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel4.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 370, 40));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnAbrirCaja.setBackground(new java.awt.Color(102, 0, 0));
-        btnAbrirCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAbrirCaja.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAbrirCaja.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAbrirCaja.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -124,10 +130,10 @@ public class frmAbrirCaja extends javax.swing.JFrame {
         btnAbrirCaja.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, -1));
         btnAbrirCaja.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 70, 10));
 
-        jPanel1.add(btnAbrirCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 90, 40));
+        jPanel1.add(btnAbrirCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 90, 40));
 
-        btnNuevaSolicitud5.setBackground(new java.awt.Color(51, 0, 0));
-        btnNuevaSolicitud5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevaSolicitud5.setBackground(new java.awt.Color(0, 0, 0));
+        btnNuevaSolicitud5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnNuevaSolicitud5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNuevaSolicitud5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -160,12 +166,12 @@ public class frmAbrirCaja extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnNuevaSolicitud5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 90, 40));
+        jPanel1.add(btnNuevaSolicitud5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 90, 40));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Gs.");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 90, -1, -1));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -183,18 +189,18 @@ public class frmAbrirCaja extends javax.swing.JFrame {
         lblFecha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblFecha.setForeground(new java.awt.Color(255, 255, 255));
         lblFecha.setText("Fecha de Apertura:");
-        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
 
         jdFechaApertura.setDateFormatString("yyyy/MM/dd");
-        jPanel1.add(jdFechaApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, 130, -1));
+        jPanel1.add(jdFechaApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 50, 130, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Usuario:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
         btnEditarSolicitud2.setBackground(new java.awt.Color(102, 0, 0));
-        btnEditarSolicitud2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarSolicitud2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEditarSolicitud2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEditarSolicitud2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -223,10 +229,10 @@ public class frmAbrirCaja extends javax.swing.JFrame {
         btnEditarSolicitud2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, -1));
         btnEditarSolicitud2.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 60, 20));
 
-        jPanel1.add(btnEditarSolicitud2, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 90, 40));
+        jPanel1.add(btnEditarSolicitud2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 90, 40));
 
-        btnNuevaSolicitud6.setBackground(new java.awt.Color(51, 0, 0));
-        btnNuevaSolicitud6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevaSolicitud6.setBackground(new java.awt.Color(0, 0, 0));
+        btnNuevaSolicitud6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnNuevaSolicitud6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNuevaSolicitud6.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -259,16 +265,15 @@ public class frmAbrirCaja extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnNuevaSolicitud6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 190, -1, -1));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 70, 10));
-        jPanel1.add(txtMontoApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 100, -1));
-        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 130, -1));
-        jPanel1.add(txtIdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 120, 40, -1));
+        jPanel1.add(btnNuevaSolicitud6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
+        jPanel1.add(txtMontoApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 90, 100, -1));
+        jPanel1.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 170, -1));
+        jPanel1.add(txtIdUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 40, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Monto de Apertura:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
         jPanel6.setBackground(new java.awt.Color(102, 0, 0));
         jPanel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -281,9 +286,9 @@ public class frmAbrirCaja extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px_1.png"))); // NOI18N
         jPanel6.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 20, 20));
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 110, 40, 40));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 120, 40, 40));
 
-        jPanel5.setBackground(new java.awt.Color(51, 0, 0));
+        jPanel5.setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -296,19 +301,124 @@ public class frmAbrirCaja extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 40, 40));
+        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 40, 40));
 
-        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 370, 250));
+        jPanel4.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 430, 260));
+
+        mover.setBackground(new java.awt.Color(204, 204, 204));
+        mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                moverMouseDragged(evt);
+            }
+        });
+        mover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                moverMousePressed(evt);
+            }
+        });
+        mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSalir.setBackground(new java.awt.Color(102, 0, 0));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalirMousePressed(evt);
+            }
+        });
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_close_window_20px.png"))); // NOI18N
+        lblSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSalirMousePressed(evt);
+            }
+        });
+        btnSalir.add(lblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 30, 30));
+
+        jPanel12.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+
+        btnMini.setBackground(new java.awt.Color(102, 0, 0));
+        btnMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnMiniMousePressed(evt);
+            }
+        });
+        btnMini.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_minimize_window_20px.png"))); // NOI18N
+        lblMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblMiniMousePressed(evt);
+            }
+        });
+        btnMini.add(lblMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 30, 30));
+
+        jPanel13.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
+
+        jPanel4.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -426,6 +536,73 @@ public class frmAbrirCaja extends javax.swing.JFrame {
         form.toFront();
     }//GEN-LAST:event_jPanel6MousePressed
 
+    private void lblSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_lblSalirMouseEntered
+
+    private void lblSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_lblSalirMouseExited
+
+    private void lblSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_lblSalirMousePressed
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirMousePressed
+
+    private void lblMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseEntered
+
+    private void lblMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseExited
+
+    private void lblMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lblMiniMousePressed
+
+    private void btnMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseEntered
+
+    private void btnMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseExited
+
+    private void btnMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMiniMousePressed
+
+    private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_moverMouseDragged
+
+    private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_moverMousePressed
+
+    void setColor(JPanel panel) {
+        panel.setBackground(new Color(51, 0, 0));
+    }
+
+    void resetColor(JPanel panel) {
+        panel.setBackground(new Color(102, 0, 0));
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -465,8 +642,10 @@ public class frmAbrirCaja extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAbrirCaja;
     private javax.swing.JPanel btnEditarSolicitud2;
+    private javax.swing.JPanel btnMini;
     private javax.swing.JPanel btnNuevaSolicitud5;
     private javax.swing.JPanel btnNuevaSolicitud6;
+    private javax.swing.JPanel btnSalir;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
@@ -475,16 +654,19 @@ public class frmAbrirCaja extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private com.toedter.calendar.JDateChooser jdFechaApertura;
     private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblMini;
+    private javax.swing.JLabel lblSalir;
+    private javax.swing.JPanel mover;
     public static javax.swing.JTextField txtIdUsuario;
     private javax.swing.JTextField txtMontoApertura;
     public static javax.swing.JTextField txtUsuario;

@@ -24,7 +24,8 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author hecto
  */
 public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
-
+    public int xx;
+    public int xy;
     Connection cn = ConexionSingleton.getConnection();
     /**
      * Creates new form frmElegirReporteSolicitudes
@@ -71,10 +72,16 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
         jSeparator20 = new javax.swing.JSeparator();
         jSeparator21 = new javax.swing.JSeparator();
         jSeparator22 = new javax.swing.JSeparator();
-        bar = new javax.swing.JPanel();
-        jLabel19 = new javax.swing.JLabel();
+        mover = new javax.swing.JPanel();
+        btnSalir = new javax.swing.JPanel();
+        lblSalir = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        btnMini = new javax.swing.JPanel();
+        lblMini = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -90,17 +97,17 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
             }
         });
         btnReportePendiente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReportePendienteMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnReportePendienteMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnReportePendienteMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 btnReportePendienteMouseReleased(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnReportePendienteMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReportePendienteMouseEntered(evt);
             }
         });
         btnReportePendiente.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -318,17 +325,112 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
         jPanel2.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 250, 10));
         jPanel2.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 310, 250, 10));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 430, 330));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 430, 330));
 
-        bar.setBackground(new java.awt.Color(204, 204, 204));
-        bar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        mover.setBackground(new java.awt.Color(204, 204, 204));
+        mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                moverMouseDragged(evt);
+            }
+        });
+        mover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                moverMousePressed(evt);
+            }
+        });
+        mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel19.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel19.setFont(new java.awt.Font("Arial Unicode MS", 1, 18)); // NOI18N
-        jLabel19.setText("Elige una opción");
-        bar.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 210, 40));
+        btnSalir.setBackground(new java.awt.Color(102, 0, 0));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalirMousePressed(evt);
+            }
+        });
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 40));
+        lblSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_close_window_20px.png"))); // NOI18N
+        lblSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSalirMousePressed(evt);
+            }
+        });
+        btnSalir.add(lblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, 30, 30));
+
+        jPanel12.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
+
+        btnMini.setBackground(new java.awt.Color(102, 0, 0));
+        btnMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnMiniMousePressed(evt);
+            }
+        });
+        btnMini.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_minimize_window_20px.png"))); // NOI18N
+        lblMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblMiniMousePressed(evt);
+            }
+        });
+        btnMini.add(lblMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 30, 30));
+
+        jPanel13.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
+
+        jPanel1.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -363,7 +465,7 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
     private void btnReportePendienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportePendienteMousePressed
         Map p = new HashMap();
         
-        p.put("estado", "Pendiente");
+        p.put("estado", "PENDIENTE");
         JasperReport report;
         JasperPrint print;
         
@@ -394,12 +496,12 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
     private void btnReporteAceptadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteAceptadaMousePressed
         Map q = new HashMap();
         
-        q.put("estado", "Aceptada");
+        q.put("estado", "ACEPTADA");
         JasperReport report;
         JasperPrint print;
         
         try {
-            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/Reportes/reporte_solicitud.jrxml");;
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/Reportes/reporte_solicitud_activo.jrxml");;
             print = JasperFillManager.fillReport(report, q, cn);
             JasperViewer view = new JasperViewer(print, false);
             view.setTitle("Reporte de Solicitudes Aceptadas");
@@ -452,12 +554,12 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
     private void lblReporteAceptadaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReporteAceptadaMousePressed
         Map q = new HashMap();
         
-        q.put("estado", "Aceptada");
+        q.put("estado", "ACEPTADA");
         JasperReport report;
         JasperPrint print;
         
         try {
-            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/Reportes/reporte_solicitud.jrxml");
+            report = JasperCompileManager.compileReport(new File("").getAbsolutePath()+"/src/Reportes/reporte_solicitud_activo.jrxml");
             print = JasperFillManager.fillReport(report, q, cn);
             JasperViewer view = new JasperViewer(print, false);
             view.setTitle("Reporte de Solicitudes Aceptadas");
@@ -470,7 +572,7 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
     private void lblReportePendienteMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblReportePendienteMousePressed
         Map p = new HashMap();
         
-        p.put("estado", "Pendiente");
+        p.put("estado", "PENDIENTE");
         JasperReport report;
         JasperPrint print;
         
@@ -489,8 +591,8 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
         Map p = new HashMap();
         Map q = new HashMap();
         
-        p.put("estado", "Aceptada");
-        p.put("estadodos", "Pendiente");
+        p.put("estado", "ACEPTADA");
+        p.put("estadodos", "PENDIENTE");
         
         JasperReport report;
         JasperPrint print;
@@ -506,6 +608,65 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_lblReporteTotalMousePressed
+
+    private void lblSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_lblSalirMouseEntered
+
+    private void lblSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_lblSalirMouseExited
+
+    private void lblSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_lblSalirMousePressed
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirMousePressed
+
+    private void lblMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseEntered
+
+    private void lblMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseExited
+
+    private void lblMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lblMiniMousePressed
+
+    private void btnMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseEntered
+
+    private void btnMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseExited
+
+    private void btnMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMiniMousePressed
+
+    private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_moverMouseDragged
+
+    private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_moverMousePressed
 
     void setColor(JPanel panel) {
         panel.setBackground(new Color(51, 0, 0));
@@ -551,23 +712,25 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel bar;
     private javax.swing.JPanel btnEditarSolicitudFondo;
     private javax.swing.JPanel btnEliminarSolicitudFondo;
+    private javax.swing.JPanel btnMini;
     private javax.swing.JPanel btnNuevaSolicitudFondo;
     private javax.swing.JPanel btnReporteAceptada;
     public javax.swing.JPanel btnReportePendiente;
     private javax.swing.JPanel btnReporteTotal;
+    private javax.swing.JPanel btnSalir;
     private javax.swing.JPanel btnVolver;
     private javax.swing.JPanel btnVolveralMenuFondo;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator17;
@@ -578,8 +741,11 @@ public class frmElegirReporteSolicitudes extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator21;
     private javax.swing.JSeparator jSeparator22;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel lblMini;
     private javax.swing.JLabel lblReporteAceptada;
     private javax.swing.JLabel lblReportePendiente;
     private javax.swing.JLabel lblReporteTotal;
+    private javax.swing.JLabel lblSalir;
+    private javax.swing.JPanel mover;
     // End of variables declaration//GEN-END:variables
 }

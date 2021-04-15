@@ -15,6 +15,7 @@ import Logica.LSolicitud;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -362,7 +363,7 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         btnNuevaSolicitud2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBusqueda = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -375,7 +376,6 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jdFecha2 = new com.toedter.calendar.JDateChooser();
-        mover = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         btnMostrarServiciosActivos = new javax.swing.JPanel();
         lblrevertir = new javax.swing.JLabel();
@@ -391,8 +391,16 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
         jSeparator11 = new javax.swing.JSeparator();
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator12 = new javax.swing.JSeparator();
+        mover = new javax.swing.JPanel();
+        btnSalir = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        btnMini = new javax.swing.JPanel();
+        lblMini = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -443,14 +451,14 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
         btnGenerarFacturas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnGenerarFacturas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnGenerarFacturas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnGenerarFacturasMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGenerarFacturasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGenerarFacturasMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGenerarFacturasMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnGenerarFacturasMousePressed(evt);
             }
         });
         btnGenerarFacturas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -742,14 +750,14 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
         );
 
         jPanel2.add(btnNuevaSolicitud7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 240, 50));
-        jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 40, 20));
-        jPanel2.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 40, 20));
-        jPanel2.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 40, 10));
+        jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 580, 40, 20));
+        jPanel2.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 590, 40, 20));
+        jPanel2.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 40, 10));
 
         jLabel20.setFont(new java.awt.Font("Bauhaus 93", 1, 24)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(204, 204, 204));
         jLabel20.setText("SERVINET");
-        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 550, -1, -1));
+        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 570, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Bauhaus 93", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(204, 204, 204));
@@ -764,12 +772,12 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Bauhaus 93", 1, 24)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(204, 204, 204));
         jLabel19.setText("CLIENTES");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 110, 50));
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 120, 50));
 
         jLabel22.setFont(new java.awt.Font("Bauhaus 93", 1, 24)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(204, 204, 204));
         jLabel22.setText("SERVICIOS DE LOS ");
-        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 220, 50));
+        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 240, 50));
 
         btnActualizar.setBackground(new java.awt.Color(102, 0, 0));
         btnActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -834,21 +842,29 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
 
         jPanel2.add(btnNuevaSolicitud2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 240, 50));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 590));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 610));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 32, 160, -1));
+        txtBusqueda.setBackground(new java.awt.Color(204, 204, 204));
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyTyped(evt);
+            }
+        });
+        jPanel3.add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 32, 160, -1));
 
         btnBuscar.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnBuscarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseExited(evt);
             }
         });
         btnBuscar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -930,21 +946,7 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
         jdFecha2.setDateFormatString("yyyy-MM-dd ");
         jPanel3.add(jdFecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 130, 20));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 930, 80));
-
-        mover.setBackground(new java.awt.Color(204, 204, 204));
-        mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                moverMouseDragged(evt);
-            }
-        });
-        mover.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                moverMousePressed(evt);
-            }
-        });
-        mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1210, 40));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 930, 80));
 
         jPanel10.setBackground(new java.awt.Color(51, 51, 51));
         jPanel10.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -995,7 +997,7 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
         jLabel1.setText("MOSTRAR:");
         jPanel10.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 530, 820, 60));
+        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 550, 820, 60));
 
         jScrollPane1.setBorder(null);
 
@@ -1023,7 +1025,7 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblGestion);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 790, 390));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, 790, 390));
 
         jPanel8.setBackground(new java.awt.Color(51, 51, 51));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -1046,7 +1048,101 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
         jSeparator12.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel8.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, 10, 200));
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 120, 110, 470));
+        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 140, 110, 470));
+
+        mover.setBackground(new java.awt.Color(204, 204, 204));
+        mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                moverMouseDragged(evt);
+            }
+        });
+        mover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                moverMousePressed(evt);
+            }
+        });
+        mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSalir.setBackground(new java.awt.Color(102, 0, 0));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalirMousePressed(evt);
+            }
+        });
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_close_window_20px.png"))); // NOI18N
+        btnSalir.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 10, 30, 30));
+
+        jPanel12.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1150, 20, 30, 30));
+
+        btnMini.setBackground(new java.awt.Color(102, 0, 0));
+        btnMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnMiniMousePressed(evt);
+            }
+        });
+        btnMini.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_minimize_window_20px.png"))); // NOI18N
+        lblMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblMiniMousePressed(evt);
+            }
+        });
+        btnMini.add(lblMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 10, 30, 30));
+
+        jPanel13.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 20, 30, 30));
+
+        jPanel1.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1210, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1094,24 +1190,13 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Se debe de Seleccionar un usuario");
             }
         } else {
-            JOptionPane.showMessageDialog(null, "TODAVIA NO ES LA FECHA PARA REALIZAR LA FACTURA");
+            JOptionPane.showMessageDialog(null, "Las facturas se generan desde el 24 de cada mes");
         }
     }//GEN-LAST:event_btnGenerarFacturasMousePressed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
 
     }//GEN-LAST:event_jPanel1MousePressed
-
-    private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_moverMouseDragged
-
-    private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
-        xx = evt.getX();
-        xy = evt.getY();
-    }//GEN-LAST:event_moverMousePressed
 
     private void btnVolverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMousePressed
         frmPrincipalMenu form = new frmPrincipalMenu();
@@ -1371,11 +1456,11 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesMouseExited
 
     private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
-        setColor(btnBuscar);
+       
     }//GEN-LAST:event_btnBuscarMouseEntered
 
     private void btnBuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseExited
-        resetColor(btnBuscar);
+       
     }//GEN-LAST:event_btnBuscarMouseExited
 
     private void jLabel25MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel25MousePressed
@@ -1403,6 +1488,7 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevaSolicitud2MouseEntered
 
     private void btnActualizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMousePressed
+        Connection cn = ConexionSingleton.getConnection();
         if (!lblAceptado.isVisible()) {
             mostrarBuscarInactivos("");
             ordenarTamaños();
@@ -1420,6 +1506,74 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
     private void btnActualizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseEntered
         setColor(btnActualizar);
     }//GEN-LAST:event_btnActualizarMouseEntered
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirMousePressed
+
+    private void btnMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseEntered
+
+    private void btnMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseExited
+
+    private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_moverMouseDragged
+
+    private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_moverMousePressed
+
+    private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
+        if(!lblAceptado.isVisible()){
+            mostrarBuscarInactivos(txtBusqueda.getText());
+            ordenarTamaños();
+        }else {
+            mostrarBuscar(txtBusqueda.getText());
+            ordenarTamaños();
+        }
+    }//GEN-LAST:event_txtBusquedaKeyReleased
+
+    private void lblMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lblMiniMousePressed
+
+    private void btnMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMiniMousePressed
+
+    private void lblMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseEntered
+
+    private void lblMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseExited
+
+    private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo el Nro de Cedula");
+            txtBusqueda.setText("");
+            txtBusqueda.requestFocus();
+        }
+    }//GEN-LAST:event_txtBusquedaKeyTyped
 
     void setColor(JPanel panel) {
         panel.setBackground(new Color(51, 0, 0));
@@ -1471,6 +1625,7 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
     private javax.swing.JPanel btnEditarSolicitud;
     private javax.swing.JPanel btnEliminarSolicitud;
     private javax.swing.JPanel btnGenerarFacturas;
+    private javax.swing.JPanel btnMini;
     private javax.swing.JPanel btnMostrarServiciosActivos;
     private javax.swing.JPanel btnNuevaSolicitud;
     private javax.swing.JPanel btnNuevaSolicitud1;
@@ -1480,8 +1635,10 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
     private javax.swing.JPanel btnNuevaSolicitud5;
     private javax.swing.JPanel btnNuevaSolicitud7;
     private javax.swing.JPanel btnReportes;
+    private javax.swing.JPanel btnSalir;
     private javax.swing.JPanel btnVolver;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -1504,6 +1661,8 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
@@ -1530,11 +1689,12 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextField jTextField1;
     private com.toedter.calendar.JDateChooser jdFecha2;
     private javax.swing.JLabel lblAceptado;
+    private javax.swing.JLabel lblMini;
     private javax.swing.JLabel lblrevertir;
     private javax.swing.JPanel mover;
     private javax.swing.JTable tblGestion;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }

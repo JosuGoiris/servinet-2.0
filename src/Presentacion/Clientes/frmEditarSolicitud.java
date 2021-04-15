@@ -61,7 +61,6 @@ public class frmEditarSolicitud extends javax.swing.JFrame {
         txtCedula.setText(frmPrincipalSolicitudesNuevo.cedulaIdent);
         txtIdTipo.setText(String.valueOf(frmPrincipalSolicitudesNuevo.idServicio));
         txtTipoSolicitud.setText(frmPrincipalSolicitudesNuevo.nombreServicio);
-        txtEstado.setText(frmPrincipalSolicitudesNuevo.estado);
     }
 
     /**
@@ -93,8 +92,6 @@ public class frmEditarSolicitud extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtEstado = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         btnGuardar5 = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -182,11 +179,6 @@ public class frmEditarSolicitud extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("ID:");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-        jPanel3.add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 130, -1));
-
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Estado:");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, -1, -1));
 
         btnGuardar5.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar5.setEnabled(false);
@@ -327,7 +319,6 @@ public class frmEditarSolicitud extends javax.swing.JFrame {
             
             ds.setClienteId(Integer.parseInt(txtId.getText()));
             ds.setServicioId(tiposervicioId);
-            ds.setEstado(txtEstado.getText());
             ds.setIdSolicitud(Integer.parseInt(txtId.getText()));
             
             dp.setNombre(nombres);
@@ -434,7 +425,6 @@ public class frmEditarSolicitud extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
@@ -449,7 +439,6 @@ public class frmEditarSolicitud extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator5;
     public static javax.swing.JTextField txtApellidos;
     public static javax.swing.JTextField txtCedula;
-    public static javax.swing.JTextField txtEstado;
     public static javax.swing.JTextField txtId;
     public static javax.swing.JTextField txtIdTipo;
     public static javax.swing.JTextField txtNombres;

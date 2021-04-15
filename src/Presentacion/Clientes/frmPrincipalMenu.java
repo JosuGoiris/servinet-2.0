@@ -6,43 +6,82 @@
 package Presentacion.Clientes;
 
 import Logica.ConexionSingleton;
-import Logica.LSolicitud;
-import Presentacion.Cuadrillas.frmMenuCuadrillas;
-import Presentacion.Cuadrillas.frmRevisarSolicitudes;
+import Presentacion.Mantenimiento.frmLogin;
 import java.awt.Color;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
  * @author josug
  */
 public class frmPrincipalMenu extends javax.swing.JFrame {
+
     public int xx;
     public int xy;
     Connection cn = ConexionSingleton.getConnection();
     public int control = 0;
+
+    Calendar fecha_actual = new GregorianCalendar();
+
     /**
      * Creates new form frmPrincipalSolicitudesNuevo
      */
     public frmPrincipalMenu() {
         initComponents();
         this.setLocationRelativeTo(null);
+        jdFecha.setCalendar(fecha_actual);
+        jdFecha.setVisible(false);
+        int dia = jdFecha.getCalendar().get(Calendar.DAY_OF_MONTH);
+        int mes = jdFecha.getCalendar().get(Calendar.MONTH) + 1;
+        int año = jdFecha.getCalendar().get(Calendar.YEAR);
+
+        String fecha = año + "/" + mes + "/" + dia;
+        lblHora.setText(fecha);
+        obtenerMes();
     }
-    
+
+    public void obtenerMes() {
+        int mes = jdFecha.getCalendar().get(Calendar.DAY_OF_WEEK);
+        String dia = null;
+        switch (mes) {
+            case 0: {
+                dia = "Sábado";
+                break;
+            }
+            case 1: {
+                dia = "Domingo";
+                break;
+            }
+            case 2: {
+                dia = "Lunes";
+                break;
+            }
+            case 3: {
+                dia = "Martes";
+                break;
+            }
+            case 4: {
+                dia = "Miercoles";
+                break;
+            }
+            case 5: {
+                dia = "Jueves";
+                break;
+            }
+            case 6: {
+                dia = "Viernes";
+                break;
+            }
+        }
+        lblDIa.setText(dia);
+    }
+
     void setColor(JPanel panel) {
         panel.setBackground(new Color(51, 0, 0));
     }
@@ -50,15 +89,14 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     void resetColorUser(JPanel panel) {
         panel.setBackground(new Color(102, 102, 102));
     }
-    
+
     void resetColor(JPanel panel) {
         panel.setBackground(new Color(102, 0, 0));
     }
-    
+
     void setColorUser(JPanel panel) {
         panel.setBackground(new Color(51, 51, 51));
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -79,18 +117,22 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         jSeparator40 = new javax.swing.JSeparator();
         jSeparator37 = new javax.swing.JSeparator();
         jSeparator38 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lblDIa = new javax.swing.JLabel();
+        lblHora = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator15 = new javax.swing.JSeparator();
         jSeparator14 = new javax.swing.JSeparator();
         jLabel20 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jSeparator41 = new javax.swing.JSeparator();
         jSeparator42 = new javax.swing.JSeparator();
         jSeparator43 = new javax.swing.JSeparator();
         jSeparator44 = new javax.swing.JSeparator();
-        mover = new javax.swing.JPanel();
+        btnLogout = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        btnSalir3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         btnNuevaSolicitud = new javax.swing.JPanel();
         lblSolicitudes = new javax.swing.JLabel();
@@ -107,7 +149,6 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         lblPagos = new javax.swing.JLabel();
         btnNuevaSolicitud6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jSeparator21 = new javax.swing.JSeparator();
         jSeparator22 = new javax.swing.JSeparator();
         jSeparator23 = new javax.swing.JSeparator();
@@ -125,8 +166,17 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         jSeparator35 = new javax.swing.JSeparator();
         jSeparator36 = new javax.swing.JSeparator();
         jLabel9 = new javax.swing.JLabel();
+        mover = new javax.swing.JPanel();
+        btnSalir = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        btnMini = new javax.swing.JPanel();
+        lblMini = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jdFecha = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -172,50 +222,85 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         jSeparator38.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel2.add(jSeparator38, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 10, 100));
 
-        jLabel4.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Dia:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+        lblDIa.setBackground(new java.awt.Color(102, 102, 102));
+        lblDIa.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        lblDIa.setForeground(new java.awt.Color(255, 255, 255));
+        lblDIa.setText("Dia:");
+        jPanel2.add(lblDIa, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 240, -1, -1));
 
-        jLabel11.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel11.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Hora:");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
-        jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 520, 40, 10));
-        jPanel2.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 40, 10));
-        jPanel2.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 540, 40, -1));
+        lblHora.setBackground(new java.awt.Color(102, 102, 102));
+        lblHora.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        lblHora.setForeground(new java.awt.Color(255, 255, 255));
+        lblHora.setText("FECHA");
+        jPanel2.add(lblHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 100, 20));
+        jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 40, 10));
+        jPanel2.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, 40, 10));
+        jPanel2.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 40, -1));
 
         jLabel20.setFont(new java.awt.Font("Bauhaus 93", 1, 24)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(204, 204, 204));
         jLabel20.setText("SERVINET");
-        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 510, -1, 30));
+        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, -1, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 240, 550));
+        jLabel5.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel5.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("DIA:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, -1, -1));
+
+        jLabel12.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel12.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("FECHA:");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, 20));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 240, 380));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(jSeparator41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 760, 10));
-        jPanel3.add(jSeparator42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 760, 10));
-        jPanel3.add(jSeparator43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 28, 760, 10));
-        jPanel3.add(jSeparator44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 18, 760, 10));
+        jPanel3.add(jSeparator41, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 610, 10));
+        jPanel3.add(jSeparator42, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 610, 10));
+        jPanel3.add(jSeparator43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 28, 610, 10));
+        jPanel3.add(jSeparator44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 18, 610, 10));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 800, 80));
-
-        mover.setBackground(new java.awt.Color(204, 204, 204));
-        mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                moverMouseDragged(evt);
-            }
-        });
-        mover.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLogout.setBackground(new java.awt.Color(102, 0, 0));
+        btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                moverMousePressed(evt);
+                btnLogoutMousePressed(evt);
             }
         });
-        mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 40));
+        btnLogout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_exit_30px.png"))); // NOI18N
+        btnLogout.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 31, 30));
+
+        jPanel3.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 50, 50));
+
+        btnSalir3.setBackground(new java.awt.Color(51, 0, 0));
+        btnSalir3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSalir3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalir3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalir3MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnSalir3Layout = new javax.swing.GroupLayout(btnSalir3);
+        btnSalir3.setLayout(btnSalir3Layout);
+        btnSalir3Layout.setHorizontalGroup(
+            btnSalir3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        btnSalir3Layout.setVerticalGroup(
+            btnSalir3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(btnSalir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 50, 50));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 800, 80));
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -538,7 +623,6 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
         jLabel8.setText("REVISAR FACTURAS");
         jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
-        jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 780, -1));
         jPanel4.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 170, 20));
 
         jSeparator22.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -577,7 +661,104 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         jLabel9.setText("SOLICITUDES");
         jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, 800, 470));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 800, 300));
+
+        mover.setBackground(new java.awt.Color(204, 204, 204));
+        mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                moverMouseDragged(evt);
+            }
+        });
+        mover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                moverMousePressed(evt);
+            }
+        });
+        mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSalir.setBackground(new java.awt.Color(102, 0, 0));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalirMousePressed(evt);
+            }
+        });
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_close_window_20px.png"))); // NOI18N
+        btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 10, 30, 30));
+
+        jPanel12.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 20, 30, 30));
+
+        btnMini.setBackground(new java.awt.Color(102, 0, 0));
+        btnMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnMiniMousePressed(evt);
+            }
+        });
+        btnMini.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_minimize_window_20px.png"))); // NOI18N
+        lblMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblMiniMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblMiniMousePressed(evt);
+            }
+        });
+        btnMini.add(lblMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 10, 30, 30));
+
+        jPanel13.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 20, 30, 30));
+
+        jdFecha.setDateFormatString("yyyy-MM-dd");
+        mover.add(jdFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
+
+        jPanel1.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1040, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -601,34 +782,23 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevaSolicitudMousePressed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        
+
     }//GEN-LAST:event_jPanel1MousePressed
 
-    private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_moverMouseDragged
-
-    private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
-        xx = evt.getX();
-         xy = evt.getY();
-    }//GEN-LAST:event_moverMousePressed
-
     private void btnNuevaSolicitudMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitudMouseReleased
-       
+
     }//GEN-LAST:event_btnNuevaSolicitudMouseReleased
 
     private void btnNuevaSolicitudFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevaSolicitudFocusGained
-        
+
     }//GEN-LAST:event_btnNuevaSolicitudFocusGained
 
     private void btnNuevaSolicitudMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitudMouseEntered
-        
+
     }//GEN-LAST:event_btnNuevaSolicitudMouseEntered
 
     private void btnNuevaSolicitudMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitudMouseExited
-        
+
     }//GEN-LAST:event_btnNuevaSolicitudMouseExited
 
     private void btnNuevaSolicitud1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud1FocusGained
@@ -727,7 +897,7 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevisarFacturasMouseExited
 
     private void btnRevisarFacturasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarFacturasMousePressed
-    
+
     }//GEN-LAST:event_btnRevisarFacturasMousePressed
 
     private void btnRevisarFacturasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarFacturasMouseReleased
@@ -773,16 +943,16 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(SQL);
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 estado = rs.getString("estado");
             }
-            if(estado.equals("Abierto")){
+            if (estado.equals("Abierto")) {
                 frmGestionarPagos form = new frmGestionarPagos();
                 form.setVisible(true);
                 form.toFront();
                 this.dispose();
-            }else{
+            } else {
                 frmAbrirCaja form = new frmAbrirCaja();
                 form.setVisible(true);
                 form.toFront();
@@ -856,16 +1026,16 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(SQL);
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 estado = rs.getString("estado");
             }
-            if("Abierta".equals(estado)){
+            if ("Abierta".equals(estado)) {
                 frmGestionarPagos form = new frmGestionarPagos();
                 form.setVisible(true);
                 form.toFront();
                 this.dispose();
-            }else{
+            } else {
                 frmAbrirCaja form = new frmAbrirCaja();
                 form.setVisible(true);
                 form.toFront();
@@ -881,8 +1051,71 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lblFacturasMousePressed
 
-    
-    
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirMousePressed
+
+    private void lblMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseEntered
+
+    private void lblMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_lblMiniMouseExited
+
+    private void lblMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lblMiniMousePressed
+
+    private void btnMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseEntered
+
+    private void btnMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseExited
+
+    private void btnMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMiniMousePressed
+
+    private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_moverMouseDragged
+
+    private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_moverMousePressed
+
+    private void btnLogoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMousePressed
+        int resp = JOptionPane.showConfirmDialog(null, "¿Desea salir?",
+                "YES_NO_OPTION", JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE);
+        switch (resp) {
+            case 0:
+                frmLogin form = new frmLogin();
+                form.setVisible(true);
+                form.toFront();
+                this.dispose();
+                break;
+        }
+    }//GEN-LAST:event_btnLogoutMousePressed
+
+    private void btnSalir3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalir3MousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -920,6 +1153,8 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btnLogout;
+    private javax.swing.JPanel btnMini;
     public javax.swing.JPanel btnNuevaSolicitud;
     public javax.swing.JPanel btnNuevaSolicitud1;
     public javax.swing.JPanel btnNuevaSolicitud3;
@@ -928,21 +1163,26 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     public javax.swing.JPanel btnRealizarPagos;
     public javax.swing.JPanel btnRevisarFacturas;
     public javax.swing.JPanel btnRevisarServicios;
+    private javax.swing.JPanel btnSalir;
+    private javax.swing.JPanel btnSalir3;
     private javax.swing.JPanel btnUsuario;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator15;
     private javax.swing.JSeparator jSeparator21;
@@ -970,7 +1210,11 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator43;
     private javax.swing.JSeparator jSeparator44;
     private javax.swing.JSeparator jSeparator7;
+    private com.toedter.calendar.JDateChooser jdFecha;
+    private javax.swing.JLabel lblDIa;
     private javax.swing.JLabel lblFacturas;
+    private javax.swing.JLabel lblHora;
+    private javax.swing.JLabel lblMini;
     public static javax.swing.JLabel lblNombreUsuario;
     private javax.swing.JLabel lblPagos;
     private javax.swing.JLabel lblServiciosdelCliente;

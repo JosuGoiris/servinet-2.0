@@ -9,12 +9,14 @@ import Datos.DServiciodelCliente;
 import Datos.DSolicitud;
 import Datos.DTrabajos;
 import Datos.DTrabajosSolicitud;
+import Logica.ConexionSingleton;
 import Logica.LEstados;
 import Logica.LSolicitud;
 import Logica.LTrabajos;
 import Presentacion.Clientes.frmPrincipalMenu;
 import Presentacion.Clientes.frmValoresSolicitudNuevo;
 import java.awt.Color;
+import java.sql.Connection;
 import java.sql.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -801,6 +803,7 @@ public class frmRevisarTrabajos extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel7MousePressed
 
     private void btnActualizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMousePressed
+        Connection cn = ConexionSingleton.getConnection();
         if (lblAceptado.isVisible()) {
             mostrarSolicitudesTrabajando("");
             ordenartamaños();

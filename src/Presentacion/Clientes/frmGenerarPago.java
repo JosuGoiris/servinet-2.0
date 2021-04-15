@@ -23,6 +23,7 @@ import static Presentacion.Cuadrillas.frmRegistrarEntrada.txtCedula;
 import Presentacion.Mantenimiento.frmVistaFormadePago;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -30,8 +31,16 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -55,6 +64,8 @@ public final class frmGenerarPago extends javax.swing.JFrame {
     double monto;
     int idCaja;
     public static double multa;
+    public static double montoTotal;
+    public static double total;
 
     /**
      * Creates new form frmPrincipalSolicitudesNuevo
@@ -474,17 +485,19 @@ public final class frmGenerarPago extends javax.swing.JFrame {
             LGestionarServicios fun2 = new LGestionarServicios();
 
             Calendar siguiente = new GregorianCalendar();
-            siguiente.set(Calendar.MONTH, Calendar.MONTH + 1);
+            siguiente.set(Calendar.MONTH, Calendar.MONTH);
             siguiente.set(Calendar.DAY_OF_MONTH, siguiente.getActualMaximum(Calendar.DAY_OF_MONTH));
             siguiente.set(Calendar.DATE, siguiente.getActualMaximum(Calendar.DATE));
-            String diaSiguiente = sdf2.format(siguiente.getTime());
-            String mesSiguiente = formatoMes.format(siguiente.getTime());
-            String añoSiguiente = formatoAño.format(siguiente.getTime());
-            int diaS = Integer.parseInt(diaSiguiente);
-            int mesS = Integer.parseInt(mesSiguiente);
-            int añoS = Integer.parseInt(añoSiguiente);
-            System.out.println(añoS + "-" + mesS + "-" + diaS);
-            dsc.setFechaPago(new Date((añoS - 1900), (mesS - 1), diaS));
+            int diaSiguiente = Integer.parseInt(sdf2.format(siguiente.getTime()));
+
+            int dia = jdFechaVencimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
+            int mes = jdFechaVencimiento.getCalendar().get(Calendar.MONTH);
+            int año = jdFechaVencimiento.getCalendar().get(Calendar.YEAR);
+            
+            int mesS = mes + 1; 
+            
+            System.out.println(año + "-" + mesS + "-" + diaSiguiente);
+            dsc.setFechaPago(new Date((año - 1900), mesS, diaSiguiente));
             dsc.setIdServiciodelCliente(Integer.parseInt(txtIdCliente.getText()));
             if (multa > 0) {
                 dsc.setMulta(0);
@@ -495,11 +508,12 @@ public final class frmGenerarPago extends javax.swing.JFrame {
 
             idCaja = lc.traerId();
             monto = lc.traerMonto();
-            JOptionPane.showMessageDialog(null, idCaja);
-            JOptionPane.showMessageDialog(null, monto);
-            double montoTotal;
-            double total = Double.parseDouble(txtVuelto.getText());
+
+            total = Double.parseDouble(txtVuelto.getText());
+            montoTotal = 0;
             montoTotal = monto - total;
+            frmGestionarPagos.vuelto = 0;
+            frmGestionarPagos.vuelto = total;
             dc.setMontoApertura(montoTotal);
             dc.setIdCaja(idCaja);
             fun1.restarMonto(dc);
@@ -511,18 +525,45 @@ public final class frmGenerarPago extends javax.swing.JFrame {
             dp.setFechaPago(new Date((añoV - 1900), mesV, diaV));
 
             //Guarda la fecha de emision
-            int año = jdFechaRealizado.getCalendar().get(Calendar.YEAR);
-            int mes = jdFechaRealizado.getCalendar().get(Calendar.MONTH);
-            int dia = jdFechaRealizado.getCalendar().get(Calendar.DAY_OF_MONTH);
-            dp.setFechaRealizado(new Date((año - 1900), mes, dia));
+            int añor = jdFechaRealizado.getCalendar().get(Calendar.YEAR);
+            int mesr = jdFechaRealizado.getCalendar().get(Calendar.MONTH);
+            int diar = jdFechaRealizado.getCalendar().get(Calendar.DAY_OF_MONTH);
+            dp.setFechaRealizado(new Date((añor - 1900), mesr, diar));
 
             dp.setServiciodelclienteId(Integer.parseInt(txtIdCliente.getText()));
             dp.setFormadepagoId(Integer.parseInt(txtIdFormadePago.getText()));
             dp.setDetallefacturaId(Integer.parseInt(txtIdFactura.getText()));
 
             ddf.setIdDetalleFactura(Integer.parseInt(txtIdFactura.getText()));
-            fun1.RealizarPago(dp, ddf);
-            this.dispose();
+            fun1.RealizarPago(dp, ddf, dsc);
+            
+            int resp = JOptionPane.showConfirmDialog(null, "¿Desea imprimir ticket?",
+                    "YES_NO_OPTION", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            switch (resp) {
+                case 0:
+                    Map p = new HashMap();
+
+                    p.put("busqueda", txtIdCliente.getText());
+                    JasperReport report;
+                    JasperPrint print;
+
+                    try {
+                        report = JasperCompileManager.compileReport(new File("")
+                                .getAbsolutePath() + "/src/Reportes/reporte_pagorealizado.jrxml");
+                        print = JasperFillManager.fillReport(report, p, cn);
+                        JasperViewer view = new JasperViewer(print, false);
+                        view.setTitle("Reporte de TICKET");
+                        view.setVisible(true);
+                        this.dispose();
+                    } catch (JRException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 1:
+                    this.dispose();
+            }
         }
     }//GEN-LAST:event_btnGenerarMousePressed
 

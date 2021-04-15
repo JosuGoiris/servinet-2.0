@@ -5,6 +5,11 @@
  */
 package Presentacion.Clientes;
 
+import Datos.DCaja;
+import Datos.DDetalleFactura;
+import Datos.DDetallePagos;
+import Datos.DPagos;
+import Datos.DServiciodelCliente;
 import Logica.ConexionSingleton;
 import Logica.LCaja;
 import Logica.LGestionarServicios;
@@ -12,11 +17,13 @@ import Logica.LPagos;
 import java.awt.Color;
 import java.io.File;
 import java.sql.Connection;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -29,32 +36,24 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author josug
  */
 public class frmRevisarPagos extends javax.swing.JFrame {
-
+    public static String fecha1;
+    public static String fecha2;
     public int xx;
     public int xy;
-    public static int idFactura;
-    public static int idCliente;
-    public static String nombreCliente;
-    public static String nroCedula;
-    public static String fechaVencimiento;
-    public static String servicioCliente;
-    public static double total;
-    LCaja lc = new LCaja();
-    LGestionarServicios lgs = new LGestionarServicios();
-    public static double montoD;
-    public static String estado;
-    public static double multa;
+    public static int idPagos;
     
     Connection cn = ConexionSingleton.getConnection();
 
+    LCaja lc = new LCaja();
+    
     /**
      * Creates new form frmPrincipalSolicitudesNuevo
      */
     public frmRevisarPagos() {
         initComponents();
         mostrarBuscar("");
+        ordenarTamaños();
         this.setLocationRelativeTo(null);
-        estado = lc.traerEstado();
     }
 
     public void mostrarBuscar(String buscar) {
@@ -66,6 +65,24 @@ public class frmRevisarPagos extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
+    }
+    
+    public void ordenarTamaños() {
+        TableColumnModel Modelo = tblPagos.getColumnModel();
+        Modelo.getColumn(0).setPreferredWidth(10);
+        Modelo.getColumn(0).setResizable(false);
+        Modelo.getColumn(1).setPreferredWidth(90);
+        Modelo.getColumn(1).setResizable(false);
+        Modelo.getColumn(2).setPreferredWidth(35);
+        Modelo.getColumn(2).setResizable(false);
+        Modelo.getColumn(3).setPreferredWidth(110);
+        Modelo.getColumn(3).setResizable(false);
+        Modelo.getColumn(4).setPreferredWidth(40);
+        Modelo.getColumn(4).setResizable(false);
+        Modelo.getColumn(5).setPreferredWidth(30);
+        Modelo.getColumn(5).setResizable(false);
+        Modelo.getColumn(6).setPreferredWidth(30);
+        Modelo.getColumn(6).setResizable(false);
     }
 
     /**
@@ -89,8 +106,9 @@ public class frmRevisarPagos extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator14 = new javax.swing.JSeparator();
         jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
@@ -98,14 +116,16 @@ public class frmRevisarPagos extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
+        jdFecha2 = new com.toedter.calendar.JDateChooser();
+        jdFecha1 = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPagos = new javax.swing.JTable();
         mover = new javax.swing.JPanel();
         btnSalir = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        lblSalir = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         btnMini = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        lblMini = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jSeparator16 = new javax.swing.JSeparator();
@@ -206,32 +226,48 @@ public class frmRevisarPagos extends javax.swing.JFrame {
 
         jLabel23.setFont(new java.awt.Font("Bauhaus 93", 1, 24)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel23.setText("PAGOS");
-        jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, -1, 50));
+        jLabel23.setText("REALIZADOS");
+        jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, 50));
+
+        jLabel24.setFont(new java.awt.Font("Bauhaus 93", 1, 24)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel24.setText("PAGOS");
+        jPanel2.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 200, 590));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTextField1.setBackground(new java.awt.Color(204, 204, 204));
-        jPanel3.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 32, 160, -1));
+        txtBuscar.setBackground(new java.awt.Color(204, 204, 204));
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyTyped(evt);
+            }
+        });
+        jPanel3.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(36, 32, 160, -1));
 
         btnBuscar.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseEntered(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnBuscarMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBuscarMousePressed(evt);
             }
         });
         btnBuscar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_30px.png"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_30px_1.png"))); // NOI18N
         btnBuscar.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        jPanel3.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 10, 50, 50));
+        jPanel3.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 50, 50));
 
         jPanel5.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -246,18 +282,18 @@ public class frmRevisarPagos extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 50, 50));
+        jPanel3.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 20, 50, 50));
 
         btnReportes.setBackground(new java.awt.Color(102, 0, 0));
         btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnReportesMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnReportesMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnReportesMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReportesMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnReportesMousePressed(evt);
             }
         });
         btnReportes.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -280,7 +316,7 @@ public class frmRevisarPagos extends javax.swing.JFrame {
         });
         btnReportes.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        jPanel3.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 20, 170, 40));
+        jPanel3.add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 170, 40));
 
         jPanel15.setBackground(new java.awt.Color(0, 0, 0));
         jPanel15.setEnabled(false);
@@ -296,7 +332,13 @@ public class frmRevisarPagos extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel3.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 30, 170, 40));
+        jPanel3.add(jPanel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 30, 170, 40));
+
+        jdFecha2.setDateFormatString("yyyy-MM-dd");
+        jPanel3.add(jdFecha2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 30, 150, -1));
+
+        jdFecha1.setDateFormatString("yyyy-MM-dd");
+        jPanel3.add(jdFecha1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 150, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 60, 920, 80));
 
@@ -355,8 +397,19 @@ public class frmRevisarPagos extends javax.swing.JFrame {
         });
         btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_close_window_20px.png"))); // NOI18N
-        btnSalir.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+        lblSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_close_window_20px.png"))); // NOI18N
+        lblSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblSalirMousePressed(evt);
+            }
+        });
+        btnSalir.add(lblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
 
         mover.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 10, 30, 30));
 
@@ -386,8 +439,13 @@ public class frmRevisarPagos extends javax.swing.JFrame {
         });
         btnMini.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_minimize_window_20px.png"))); // NOI18N
-        btnMini.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+        lblMini.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_minimize_window_20px.png"))); // NOI18N
+        lblMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblMiniMousePressed(evt);
+            }
+        });
+        btnMini.add(lblMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
 
         mover.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 10, 30, 30));
 
@@ -475,17 +533,7 @@ public class frmRevisarPagos extends javax.swing.JFrame {
 
     private void tblPagosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPagosMouseClicked
         int fila = tblPagos.rowAtPoint(evt.getPoint());
-        idFactura = Integer.parseInt(tblPagos.getValueAt(fila, 0).toString());
-        idCliente = Integer.parseInt(tblPagos.getValueAt(fila, 1).toString());
-        nombreCliente = tblPagos.getValueAt(fila, 2).toString();
-        nroCedula = tblPagos.getValueAt(fila, 3).toString();
-        fechaVencimiento = tblPagos.getValueAt(fila, 5).toString();
-        servicioCliente = tblPagos.getValueAt(fila, 6).toString();
-        total = Double.parseDouble(tblPagos.getValueAt(fila, 7).toString());
-        multa = lgs.traerSobrecargo(idCliente);
-        if (multa > 0) {
-            System.out.println(multa);
-        }
+        idPagos = Integer.parseInt(tblPagos.getValueAt(fila, 0).toString());
     }//GEN-LAST:event_tblPagosMouseClicked
 
     private void btnNuevaSolicitud1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud1FocusGained
@@ -509,11 +557,7 @@ public class frmRevisarPagos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevaSolicitud1MouseReleased
 
     private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
-        if ("Abierto".equals(estado)) {
-            JOptionPane.showMessageDialog(null, "La caja está abierta");
-        } else {
-            this.dispose();
-        }
+        
     }//GEN-LAST:event_btnSalirMousePressed
 
     private void btnVolverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseEntered
@@ -535,22 +579,9 @@ public class frmRevisarPagos extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel25MousePressed
 
     private void btnReportesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMousePressed
-        Map p = new HashMap();
-        
-        p.put("estado", "Pagado");
-        JasperReport report;
-        JasperPrint print;
-        
-        try {
-            report = JasperCompileManager.compileReport(new File("")
-                    .getAbsolutePath()+"/src/Reportes/reporte_pagos.jrxml");
-            print = JasperFillManager.fillReport(report, p, cn);
-            JasperViewer view = new JasperViewer(print, false);
-            view.setTitle("Reporte de Pagos");
-            view.setVisible(true);
-        } catch (JRException e) {
-            e.printStackTrace();
-        }
+        frmElegirReportePagosConBusqueda form = new frmElegirReportePagosConBusqueda();
+        form.setVisible(true);
+        form.toFront();
     }//GEN-LAST:event_btnReportesMousePressed
 
     private void btnReportesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseExited
@@ -558,7 +589,7 @@ public class frmRevisarPagos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesMouseExited
 
     private void btnReportesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseEntered
-        setColor(btnReportes);
+        
     }//GEN-LAST:event_btnReportesMouseEntered
 
     private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
@@ -584,6 +615,65 @@ public class frmRevisarPagos extends javax.swing.JFrame {
     private void btnMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseExited
         resetColor(btnMini);
     }//GEN-LAST:event_btnMiniMouseExited
+
+    private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
+        mostrarBuscar(txtBuscar.getText());
+        ordenarTamaños();
+    }//GEN-LAST:event_txtBuscarKeyReleased
+
+    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+        char validar = evt.getKeyChar();
+        if (Character.isLetter(validar)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(rootPane, "Ingresa solo el Nro de Cedula");
+            txtBuscar.setText("");
+            txtBuscar.requestFocus();
+        }
+    }//GEN-LAST:event_txtBuscarKeyTyped
+
+    private void lblMiniMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMiniMousePressed
+        this.setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_lblMiniMousePressed
+
+    private void lblSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_lblSalirMousePressed
+
+    private void lblSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_lblSalirMouseEntered
+
+    private void lblSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_lblSalirMouseExited
+
+    private void btnBuscarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMousePressed
+        int dia1 = jdFecha1.getCalendar().get(Calendar.DAY_OF_MONTH);
+        int mes1 = jdFecha1.getCalendar().get(Calendar.MONTH) + 1;
+        int año1 = jdFecha1.getCalendar().get(Calendar.YEAR);
+        
+        fecha1 = año1+"-"+mes1+"-"+dia1;
+        
+        System.out.println(fecha1);
+        
+        int dia2 = jdFecha2.getCalendar().get(Calendar.DAY_OF_MONTH);
+        int mes2 = jdFecha2.getCalendar().get(Calendar.MONTH) + 1;
+        int año2 = jdFecha2.getCalendar().get(Calendar.YEAR);
+        
+        fecha2 = año2+"-"+mes2+"-"+dia2;
+        
+        System.out.println(fecha2);
+        
+        try {
+            DefaultTableModel miModelo;
+            LPagos log = new LPagos();
+            miModelo = log.mostrarFacturasPagadasPorFecha(fecha1, fecha2);
+            tblPagos.setModel(miModelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_btnBuscarMousePressed
 
     void setColor(JPanel panel) {
         panel.setBackground(new Color(51, 0, 0));
@@ -647,11 +737,10 @@ public class frmRevisarPagos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel12;
@@ -671,8 +760,12 @@ public class frmRevisarPagos extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTextField jTextField1;
+    private com.toedter.calendar.JDateChooser jdFecha1;
+    private com.toedter.calendar.JDateChooser jdFecha2;
+    private javax.swing.JLabel lblMini;
+    private javax.swing.JLabel lblSalir;
     private javax.swing.JPanel mover;
     private javax.swing.JTable tblPagos;
+    public static javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

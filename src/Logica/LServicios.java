@@ -97,13 +97,12 @@ public class LServicios {
     public DefaultTableModel mostrarServiciosAgregar(String buscar) {
         DefaultTableModel miModelo = null;
 
-        String titulos[] = {"Id", "Nombre", "Precio", "Descripción", "Barrio"};
+        String titulos[] = {"Id", "Nombre", "Precio", "Velocidad", "Descripción"};
         String dts[] = new String[5];
 
         miModelo = new DefaultTableModel(null, titulos);
-        sSQL = "select ds.idDetalleServicio, s.idServicio, s.nombreServicio, ds.conexion, ds.precio, ds.descripcion, z.idZona, z.nombreZona, \n"
+        sSQL = "select ds.idDetalleServicio, s.idServicio, s.nombreServicio, ds.conexion, ds.precio, ds.descripcion, \n"
                 + "ds.estado from tbldetalleservicio as ds inner join tblservicio as s on ds.servicioId = s.idServicio \n"
-                + "inner join tblzona as z on ds.zonaId = z.idZona \n"
                 + "where s.idServicio = '" + buscar + "' \n"
                 + "or s.nombreServicio like '%" + buscar + "%' && ds.estado = 'Activo'";
         try {
@@ -113,8 +112,8 @@ public class LServicios {
                 dts[0] = rs.getString("idDetalleServicio");
                 dts[1] = rs.getString("nombreServicio");
                 dts[2] = rs.getString("precio");
-                dts[3] = rs.getString("descripcion");
-                dts[4] = rs.getString("nombreZona");
+                dts[3] = rs.getString("conexion");
+                dts[4] = rs.getString("descripcion");
                 miModelo.addRow(dts);
             }
             return miModelo;

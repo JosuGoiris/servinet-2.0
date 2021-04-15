@@ -10,6 +10,7 @@ import Datos.DDetalleFactura;
 import Datos.DDetallePagos;
 import Datos.DMonto;
 import Datos.DPagos;
+import Datos.DServiciodelCliente;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -48,7 +49,7 @@ public class LPagos {
                 + "inner join tblserviciodelcliente as sc on df.serviciodelclienteId = sc.idServiciodelCliente \n"
                 + "inner join tbldetalleservicio as ds on sc.detalleServicioId = ds.idDetalleServicio \n"
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
-                + "where f.idfactura = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && df.estado = 'PENDIENTE'";
+                + "where f.idfactura = '" + buscar + "' or p.cedulaIdent like '%" + buscar + "%' and df.estado = 'PENDIENTE'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -86,7 +87,7 @@ public class LPagos {
                 + "inner join tblserviciodelcliente as sc on df.serviciodelclienteId = sc.idServiciodelCliente \n"
                 + "inner join tbldetalleservicio as ds on sc.detalleServicioId = ds.idDetalleServicio \n"
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
-                + "where f.idfactura = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && df.estado = 'FACTURA SIN PAGAR'";
+                + "where f.idfactura = '" + buscar + "' or p.cedulaIdent like '%" + buscar + "%' and df.estado = 'FACTURA SIN PAGAR'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -108,6 +109,44 @@ public class LPagos {
             return null;
         }
     }
+
+    public DefaultTableModel mostrarFactura(String buscar){
+        DefaultTableModel miModelo = null;
+        
+        String titulos [] = {"IdFactura", "Nombre Cliente", "Nro. C.I.", "Emisión", "Vencimiento", "Nombre Servicio", "Total", "Estado"};
+        String dts [] = new String[8];
+        
+        miModelo = new DefaultTableModel(null, titulos);
+        sSQL = "select f.idfactura, c.idCliente, concat(p.nombres,' ', p.apellidos) as 'cliente', \n"
+                + "p.cedulaIdent, f.fechaEmision, f.fechaVencimiento, sc.idServiciodelCliente, s.nombreServicio, df.total, df.estado from tbldetallefactura as df \n"
+                + "inner join tblfactura as f on df.facturaId = f.idfactura \n"
+                + "inner join tblcliente as c on f.clienteId = c.idCliente \n" 
+                + "inner join tblpersona as p on c.personaId = p.idPersona \n"
+                + "inner join tblserviciodelcliente as sc on df.serviciodelclienteId = sc.idServiciodelCliente \n"
+                + "inner join tbldetalleservicio as ds on sc.detalleServicioId = ds.idDetalleServicio \n"
+                + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
+                + "where f.idfactura = '" + buscar + "' or p.cedulaIdent like '%" + buscar + "%' and df.estado = 'PAGADO'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                dts[0] = rs.getString("idfactura");
+                dts[1] = rs.getString("cliente");
+                dts[2] = rs.getString("cedulaIdent");
+                dts[3] = rs.getString("fechaEmision");
+                dts[4] = rs.getString("fechaVencimiento");
+                dts[5] = rs.getString("nombreServicio");
+                dts[6] = rs.getString("total");
+                dts[7] = rs.getString("estado");
+                miModelo.addRow(dts);
+            }
+            return miModelo;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
+
     
     public DefaultTableModel mostrarFacturasPagadas(String buscar){
         DefaultTableModel miModelo = null;
@@ -144,10 +183,46 @@ public class LPagos {
             return null;
         }
     }
+    
+    public DefaultTableModel mostrarFacturasPagadasPorFecha(String fecha1, String fecha2){
+        DefaultTableModel miModelo = null;
+        
+        String titulos [] = {"IdPago", "Nombre Cliente", "Nro. C.I.", "Nombre Servicio", "Fecha Pago", "Total", "Estado"};
+        String dts [] = new String[7];
+        
+        miModelo = new DefaultTableModel(null, titulos);
+        sSQL = "select pa.idpagos, c.idCliente, concat(p.nombres,' ', p.apellidos) as 'cliente', \n"
+                + "p.cedulaIdent, pa.fechaRealizado, sc.idServiciodelCliente, s.nombreServicio, df.total, pa.estado from tblpagos as pa \n"
+                + "inner join tbldetallefactura as df on pa.detallefacturaId = df.idDetalleFactura \n"
+                + "inner join tblserviciodelcliente as sc on pa.serviciodelclienteId = sc.idServiciodelCliente \n"
+                + "inner join tblcliente as c on sc.clienteId = c.idCliente \n" 
+                + "inner join tblpersona as p on c.personaId = p.idPersona \n"
+                + "inner join tbldetalleservicio as ds on sc.detalleServicioId = ds.idDetalleServicio \n"
+                + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
+                + "where pa.fechaRealizado between '" + fecha1 + "' and '" + fecha2 + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                dts[0] = rs.getString("idpagos");
+                dts[1] = rs.getString("cliente");
+                dts[2] = rs.getString("cedulaIdent");
+                dts[3] = rs.getString("nombreServicio");
+                dts[4] = rs.getString("fechaRealizado");
+                dts[5] = rs.getString("total");
+                dts[6] = rs.getString("estado");
+                miModelo.addRow(dts);
+            }
+            return miModelo;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
      
     
     
-    public String RealizarPago(DPagos dPagos, DDetalleFactura dDetalleFactura){
+    public String RealizarPago(DPagos dPagos, DDetalleFactura dDetalleFactura, DServiciodelCliente dServiciodelCliente){
         sSQL = "insert into tblpagos(fechaPago, fechaRealizado, estado, serviciodelclienteId, formapagoId, \n"
                 + "detallefacturaId) values(?,?,?,?,?,?)";
         sSQL1 = "update tbldetallepagos set cantidad = cantidad + 1 where iddetallepagos = ?";
@@ -159,7 +234,7 @@ public class LPagos {
                 + "inner join tbldetallefactura as df on m.idMonto = df.montoId \n" 
                 + "set m.cantidadMonto = m.cantidadMonto + df.total \n" 
                 + "where df.iddetallefactura = ?";
-        
+        sSQL5 = "update tblserviciodelcliente set fechaPago = ? where idServiciodelCliente = ?";
         try {
             cn.setAutoCommit(false);
             PreparedStatement pst = cn.prepareStatement(sSQL);
@@ -167,6 +242,7 @@ public class LPagos {
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);
             PreparedStatement pst3 = cn.prepareStatement(sSQL3);
             PreparedStatement pst4 = cn.prepareStatement(sSQL4);
+            PreparedStatement pst5 = cn.prepareStatement(sSQL5);
             
             pst.setDate(1, dPagos.getFechaPago());
             pst.setDate(2, dPagos.getFechaRealizado());
@@ -192,10 +268,77 @@ public class LPagos {
             pst4.setInt(1, dDetalleFactura.getIdDetalleFactura());
             pst4.executeUpdate();
             
+            pst5.setDate(1, dServiciodelCliente.getFechaPago());
+            pst5.setInt(2, dServiciodelCliente.getIdServiciodelCliente());
+            
+            pst5.executeUpdate();
+            
             cn.commit();
             
             System.out.println("Datos Insertados");
             JOptionPane.showMessageDialog(null, "Se ha realizado el pago");
+        } catch (Exception e) {
+            System.out.println("Datos no Insertados");
+            JOptionPane.showMessageDialog(null, e);
+            try {
+                cn.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(LSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+    }
+    
+    public String CancelarPago(DPagos dPagos, DDetalleFactura dDetalleFactura, DServiciodelCliente dServiciodelCliente){
+        sSQL = "update tblpagos set estado = ? where idpagos = ?";
+        sSQL1 = "update tbldetallepagos set cantidad = cantidad - 1 where iddetallepagos = ?";
+        sSQL2 = "update tbldetallefactura set estado = ? where iddetallefactura = ?";
+        sSQL3 = "update tblcantidadfacturas set facturasPendientes = facturasPendientes + 1, \n"
+                + "facturasPagadas = facturasPagadas - 1, totaldeFacturas = facturasPendientes + facturasPagadas + facturasVencidas \n"
+                + "where idCantidadFacturas = ?";
+        sSQL4 = "update tblmonto as m \n" 
+                + "inner join tbldetallefactura as df on m.idMonto = df.montoId \n" 
+                + "set m.cantidadMonto = m.cantidadMonto - df.total \n" 
+                + "where df.iddetallefactura = ?";
+        sSQL5 = "update tblserviciodelcliente set fechaPago = ? where idServiciodelCliente = ?";
+        try {
+            cn.setAutoCommit(false);
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+            PreparedStatement pst1 = cn.prepareStatement(sSQL1);
+            PreparedStatement pst2 = cn.prepareStatement(sSQL2);
+            PreparedStatement pst3 = cn.prepareStatement(sSQL3);
+            PreparedStatement pst4 = cn.prepareStatement(sSQL4);
+            PreparedStatement pst5 = cn.prepareStatement(sSQL5);
+            
+            pst.setString(1, "CANCELADO");
+            pst.setInt(2, dPagos.getIdPagos());
+            
+            pst.executeUpdate();
+            
+            pst1.setInt(1, 1);
+            
+            pst1.executeUpdate();
+            
+            pst2.setString(1, "PENDIENTE");
+            pst2.setInt(2, dDetalleFactura.getIdDetalleFactura());
+            
+            pst2.executeUpdate();
+            
+            pst3.setInt(1, 1);
+            pst3.executeUpdate();
+            
+            pst4.setInt(1, dDetalleFactura.getIdDetalleFactura());
+            pst4.executeUpdate();
+            
+            pst5.setDate(1, dServiciodelCliente.getFechaPago());
+            pst5.setInt(2, dServiciodelCliente.getIdServiciodelCliente());
+            
+            pst5.executeUpdate();
+            
+            cn.commit();
+            
+            System.out.println("Datos Insertados");
+            JOptionPane.showMessageDialog(null, "Se ha cancelado el pago");
         } catch (Exception e) {
             System.out.println("Datos no Insertados");
             JOptionPane.showMessageDialog(null, e);
@@ -223,5 +366,19 @@ public class LPagos {
         return null;
     }
     
-    
+    public int traerIdPagos(int ids){
+        int id = 0;
+        sSQL = "select idpagos from tblpagos where serviciodelclienteId = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                id = rs.getInt("idpagos");
+            }
+            return id;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
+    }
 }

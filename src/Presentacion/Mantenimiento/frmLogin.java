@@ -33,60 +33,60 @@ public class frmLogin extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     Connection cn = ConexionSingleton.getConnection();
-    
+
     public frmLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+
         frmCargando form = new frmCargando();
         form.dispose();
     }
-    
-    void acceder(String usuario, String contraseña){
+
+    void acceder(String usuario, String contraseña) {
         String cap = "";
         String nombre = "";
         int id = 0;
         String SQL = "select u.idUsuario, u.loginUsuario, u.passwordUsuario, t.tipoUsuario, concat(p.nombres,' ',p.apellidos) as usuario from tblusuario \n"
                 + "as u inner join tbltipousuario as t on u.tipousuarioId = t.idTipoUsuario \n"
                 + "inner join tblpersona as p on u.personaId = p.idPersona \n"
-                + "where u.loginUsuario='"+ usuario + "' && u.passwordUsuario='" + contraseña + "'";
+                + "where u.loginUsuario='" + usuario + "' && u.passwordUsuario='" + contraseña + "'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(SQL);
-            
-            while(rs.next()){
+
+            while (rs.next()) {
                 cap = rs.getString("t.tipoUsuario");
                 nombre = rs.getString("usuario");
                 id = rs.getInt("u.idUsuario");
             }
-            if(cap.equals("ADMINISTRADOR")){
+            if (cap.equals("ADMINISTRADOR")) {
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Bienvenido");
                 frmMenuMantenimiento menu = new frmMenuMantenimiento();
                 menu.setVisible(true);
-            }
-            if(cap.equals("ENCARGADO DE CLIENTES")){
+            }else if (cap.equals("ENCARGADO DE CLIENTES")) {
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Bienvenido");
                 frmPrincipalMenu form = new frmPrincipalMenu();
                 form.setVisible(true);
                 form.toFront();
                 form.lblNombreUsuario.setText(nombre);
-            }
-            if(cap.equals("ENCARGADO DE CUADRILLAS")){
+            }else if (cap.equals("ENCARGADO DE CUADRILLAS")) {
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Bienvenido");
                 frmMenuCuadrillas form = new frmMenuCuadrillas();
                 form.setVisible(true);
                 form.toFront();
-            }
-            if(cap.equals("ENCARGADO DE ATENCION AL CLIENTE")){
+            }else if (cap.equals("ENCARGADO DE ATENCION AL CLIENTE")) {
                 this.setVisible(false);
                 JOptionPane.showMessageDialog(null, "Bienvenido");
                 frmAtencionalCliente form = new frmAtencionalCliente();
                 form.setVisible(true);
                 form.toFront();
+            }else{
+                JOptionPane.showMessageDialog(null, "Las credenciales ingresadas no corresponden a ningun usuario registrado");
             }
+            
         } catch (Exception e) {
         }
     }
@@ -106,7 +106,7 @@ public class frmLogin extends javax.swing.JFrame {
         txtUsuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtContraseña = new javax.swing.JPasswordField();
-        btnEditarSolicitud1 = new javax.swing.JPanel();
+        btnSalir = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         btnNuevaSolicitud5 = new javax.swing.JPanel();
         btnAcceder = new javax.swing.JPanel();
@@ -118,6 +118,7 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -136,37 +137,38 @@ public class frmLogin extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
         jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 180, 30));
 
-        btnEditarSolicitud1.setBackground(new java.awt.Color(102, 0, 0));
-        btnEditarSolicitud1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnEditarSolicitud1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEditarSolicitud1.addFocusListener(new java.awt.event.FocusAdapter() {
+        btnSalir.setBackground(new java.awt.Color(102, 0, 0));
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalir.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                btnEditarSolicitud1FocusGained(evt);
+                btnSalirFocusGained(evt);
             }
         });
-        btnEditarSolicitud1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitud1MouseEntered(evt);
+                btnSalirMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitud1MouseExited(evt);
+                btnSalirMouseExited(evt);
             }
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitud1MousePressed(evt);
+                btnSalirMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitud1MouseReleased(evt);
+                btnSalirMouseReleased(evt);
             }
         });
-        btnEditarSolicitud1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_cancel_40px_1.png"))); // NOI18N
-        btnEditarSolicitud1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 40));
+        btnSalir.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 40));
 
-        jPanel1.add(btnEditarSolicitud1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 60, 60));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 220, 60, 60));
 
-        btnNuevaSolicitud5.setBackground(new java.awt.Color(51, 0, 0));
-        btnNuevaSolicitud5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevaSolicitud5.setBackground(new java.awt.Color(0, 0, 0));
+        btnNuevaSolicitud5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNuevaSolicitud5.setEnabled(false);
         btnNuevaSolicitud5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnNuevaSolicitud5.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -202,7 +204,7 @@ public class frmLogin extends javax.swing.JFrame {
         jPanel1.add(btnNuevaSolicitud5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 60, 60));
 
         btnAcceder.setBackground(new java.awt.Color(102, 0, 0));
-        btnAcceder.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAcceder.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAcceder.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAcceder.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -241,8 +243,9 @@ public class frmLogin extends javax.swing.JFrame {
 
         jPanel1.add(btnAcceder, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 60, 60));
 
-        btnAccederFondo.setBackground(new java.awt.Color(51, 0, 0));
-        btnAccederFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAccederFondo.setBackground(new java.awt.Color(0, 0, 0));
+        btnAccederFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnAccederFondo.setEnabled(false);
         btnAccederFondo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnAccederFondo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -293,7 +296,7 @@ public class frmLogin extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Bauhaus 93", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(204, 204, 204));
         jLabel8.setText("SERVINET");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 10, -1, 20));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 10, -1, 20));
 
         jPanel3.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 310));
 
@@ -305,9 +308,7 @@ public class frmLogin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -333,25 +334,25 @@ public class frmLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNuevaSolicitud5MouseReleased
 
-    private void btnEditarSolicitud1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarSolicitud1FocusGained
+    private void btnSalirFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnSalirFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitud1FocusGained
+    }//GEN-LAST:event_btnSalirFocusGained
 
-    private void btnEditarSolicitud1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitud1MouseEntered
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseEntered
 
-    private void btnEditarSolicitud1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitud1MouseExited
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseExited
 
-    private void btnEditarSolicitud1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud1MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitud1MousePressed
+    private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirMousePressed
 
-    private void btnEditarSolicitud1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud1MouseReleased
+    private void btnSalirMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitud1MouseReleased
+    }//GEN-LAST:event_btnSalirMouseReleased
 
     private void btnAccederFondoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnAccederFondoFocusGained
         // TODO add your handling code here:
@@ -379,19 +380,27 @@ public class frmLogin extends javax.swing.JFrame {
 
     private void btnAccederMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederMouseEntered
         setColor(btnAcceder);
-        setColorFondo(btnAccederFondo);
     }//GEN-LAST:event_btnAccederMouseEntered
 
     private void btnAccederMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederMouseExited
         resetColor(btnAcceder);
-        resetColorFondo(btnAccederFondo);
     }//GEN-LAST:event_btnAccederMouseExited
 
     private void btnAccederMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederMousePressed
-        setColor(btnAcceder);
-        String usuario = txtUsuario.getText();
-        String contraseña = txtContraseña.getText();
-        acceder(usuario, contraseña);
+        if ("".equals(txtContraseña.getText())) {
+            txtContraseña.setBackground(Color.red);
+            txtContraseña.requestFocus();
+            JOptionPane.showMessageDialog(null, "Debe de Ingresar las credenciales");
+        } else if ("".equals(txtUsuario.getText())) {
+            txtUsuario.setBackground(Color.red);
+            txtUsuario.requestFocus();
+            JOptionPane.showMessageDialog(null, "Debe de Ingresar las credenciales");
+        } else {
+            setColor(btnAcceder);
+            String usuario = txtUsuario.getText();
+            String contraseña = txtContraseña.getText();
+            acceder(usuario, contraseña);
+        }
     }//GEN-LAST:event_btnAccederMousePressed
 
     private void btnAccederMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAccederMouseReleased
@@ -399,38 +408,46 @@ public class frmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAccederMouseReleased
 
     private void lblAccederMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAccederMousePressed
-        
-        String usuario = txtUsuario.getText();
-        String contraseña = txtContraseña.getText();
-        acceder(usuario, contraseña);
+        if ("".equals(txtContraseña.getText())) {
+            txtContraseña.setBackground(Color.red);
+            txtContraseña.requestFocus();
+            JOptionPane.showMessageDialog(null, "Debe de Ingresar las credenciales");
+        } else if ("".equals(txtUsuario.getText())) {
+            txtUsuario.setBackground(Color.red);
+            txtUsuario.requestFocus();
+            JOptionPane.showMessageDialog(null, "Debe de Ingresar las credenciales");
+        } else {
+            setColor(btnAcceder);
+            String usuario = txtUsuario.getText();
+            String contraseña = txtContraseña.getText();
+            acceder(usuario, contraseña);
+        }
     }//GEN-LAST:event_lblAccederMousePressed
 
     private void lblAccederMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAccederMouseEntered
         setColor(btnAcceder);
-        setColorFondo(btnAccederFondo);
     }//GEN-LAST:event_lblAccederMouseEntered
 
     private void lblAccederMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblAccederMouseExited
         resetColor(btnAcceder);
-        resetColorFondo(btnAccederFondo);
     }//GEN-LAST:event_lblAccederMouseExited
 
-    void setColor(JPanel panel){
-        panel.setBackground(new Color(51,0,0));
+    void setColor(JPanel panel) {
+        panel.setBackground(new Color(51, 0, 0));
     }
-    
-    void setColorFondo(JPanel panel){
-        panel.setBackground(new Color(0,0,0));
+
+    void setColorFondo(JPanel panel) {
+        panel.setBackground(new Color(0, 0, 0));
     }
-    
-    void resetColorFondo(JPanel panel){
-        panel.setBackground(new Color(51,0,0));
+
+    void resetColorFondo(JPanel panel) {
+        panel.setBackground(new Color(51, 0, 0));
     }
-    
-    void resetColor(JPanel panel){
-        panel.setBackground(new Color(102,0,0));
+
+    void resetColor(JPanel panel) {
+        panel.setBackground(new Color(102, 0, 0));
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -469,8 +486,8 @@ public class frmLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAcceder;
     private javax.swing.JPanel btnAccederFondo;
-    private javax.swing.JPanel btnEditarSolicitud1;
     private javax.swing.JPanel btnNuevaSolicitud5;
+    private javax.swing.JPanel btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

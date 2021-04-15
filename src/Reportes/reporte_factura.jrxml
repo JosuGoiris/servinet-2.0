@@ -81,7 +81,7 @@
 			<staticText>
 				<reportElement x="533" y="30" width="22" height="20" uuid="ae43bb90-fc29-41d7-beb4-a0d9b2e26d98"/>
 				<textElement textAlignment="Center">
-					<font fontName="Agency FB" isBold="true"/>
+					<font fontName="Bauhaus 93" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Jotz]]></text>
 			</staticText>

@@ -52,58 +52,58 @@
 				<reportElement x="5" y="5" width="106" height="48" backcolor="#FFFFFF" uuid="009db317-fcda-4aad-b577-00876e32c0e5"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="5" y="0" width="106" height="36" uuid="d217f146-11cf-45ee-80e0-79d81ff23087"/>
+				<reportElement x="5" y="10" width="106" height="36" uuid="d217f146-11cf-45ee-80e0-79d81ff23087"/>
 				<textElement textAlignment="Center">
-					<font fontName="Bauhaus 93" size="24" isBold="true"/>
+					<font fontName="Arial Black" size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[JOTZPOT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="32" y="28" width="52" height="20" uuid="37149bbe-7062-4f60-8795-22451cc8c4b7"/>
+				<reportElement x="19" y="28" width="79" height="20" uuid="37149bbe-7062-4f60-8795-22451cc8c4b7"/>
 				<textElement textAlignment="Center">
-					<font fontName="Bauhaus 93" size="12" isBold="false"/>
+					<font fontName="Arial Black" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[INTERNET]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="479" y="0" width="73" height="28" uuid="745e1441-c0cf-4b05-9ef2-0e14e9ae28f4"/>
+				<reportElement x="457" y="0" width="95" height="28" uuid="745e1441-c0cf-4b05-9ef2-0e14e9ae28f4"/>
 				<textElement textAlignment="Center">
-					<font fontName="Bauhaus 93" size="14" isBold="true"/>
+					<font fontName="Arial Black" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SERVINET]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="530" y="21" width="22" height="20" uuid="771b5faa-782e-4a78-9a42-2dd16ad72119"/>
+				<reportElement x="508" y="21" width="44" height="20" uuid="771b5faa-782e-4a78-9a42-2dd16ad72119"/>
 				<textElement textAlignment="Center">
-					<font fontName="Agency FB" isBold="true"/>
+					<font fontName="Arial Black" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Jotz]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="172" y="5" width="216" height="40" uuid="ccee97e5-b4c3-45e6-b327-d1b074fd3453"/>
+				<reportElement x="146" y="13" width="272" height="40" uuid="ccee97e5-b4c3-45e6-b327-d1b074fd3453"/>
 				<textElement>
-					<font fontName="Bauhaus 93" size="24"/>
+					<font fontName="Arial Black" size="24"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE PAGOS]]></text>
 			</staticText>
 			<textField pattern="MM/dd/yyyy">
 				<reportElement x="472" y="56" width="80" height="20" uuid="b61c06c9-ad15-4c32-97ca-f968ac324daa"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="457" y="56" width="30" height="20" uuid="0858df2b-8716-42c4-a136-aa1e3793c2e9"/>
+				<reportElement x="444" y="56" width="37" height="20" uuid="0858df2b-8716-42c4-a136-aa1e3793c2e9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="18" y="53" width="79" height="20" uuid="a25d7a28-6862-44c4-9996-7f6acdf8e878"/>
+				<reportElement x="5" y="53" width="113" height="20" uuid="a25d7a28-6862-44c4-9996-7f6acdf8e878"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Telef.: 0549-20149]]></text>
 			</staticText>
@@ -119,7 +119,7 @@
 			<staticText>
 				<reportElement x="195" y="16" width="170" height="40" uuid="c88e6a3a-706d-4723-832e-2ab0e2144a41"/>
 				<textElement>
-					<font fontName="Bauhaus 93" size="24"/>
+					<font fontName="Arial Black" size="24"/>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
@@ -130,7 +130,7 @@
 			<staticText>
 				<reportElement x="0" y="1" width="555" height="30" forecolor="#999999" uuid="3c802e35-283d-48c7-92f8-96481c04c7d5"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<text><![CDATA[En ésta página se muestran las facturas realizadas en la empresa JotzPot, que se encuentran
 actualmente pagados, con los detalles de sus usuarios (Nombres, Apellidos), la fecha donde
@@ -162,37 +162,37 @@ se realizó la factura.]]></text>
 				<reportElement x="554" y="0" width="1" height="34" uuid="8c6a4d5d-a8eb-4408-bbe3-3a4b39dec16e"/>
 			</line>
 			<staticText>
-				<reportElement x="18" y="9" width="100" height="20" uuid="84d7bdee-2fa9-4e5e-ac6f-71004ef33191"/>
+				<reportElement x="9" y="9" width="118" height="20" uuid="84d7bdee-2fa9-4e5e-ac6f-71004ef33191"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[NOMBRE CLIENTE]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="131" y="9" width="72" height="20" uuid="b97c0454-53b7-49b7-bfaa-6870fa18febc"/>
+				<reportElement x="127" y="9" width="76" height="20" uuid="b97c0454-53b7-49b7-bfaa-6870fa18febc"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[NRO. CEDULA]]></text>
+				<text><![CDATA[CEDULA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="366" y="9" width="78" height="20" uuid="2de87745-393e-4970-be58-ade095de1595"/>
+				<reportElement x="364" y="9" width="96" height="20" uuid="2de87745-393e-4970-be58-ade095de1595"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SERVICIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="481" y="8" width="60" height="20" uuid="9b70f778-75a8-45f9-af15-d3221d5db9b8"/>
+				<reportElement x="492" y="9" width="49" height="20" uuid="9b70f778-75a8-45f9-af15-d3221d5db9b8"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="225" y="9" width="100" height="20" uuid="aae93f7c-5bff-4036-9180-90bb7e122719"/>
+				<reportElement x="217" y="9" width="118" height="20" uuid="aae93f7c-5bff-4036-9180-90bb7e122719"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FECHA REALIZADO]]></text>
 			</staticText>
@@ -213,37 +213,37 @@ se realizó la factura.]]></text>
 				<reportElement x="1" y="38" width="555" height="1" uuid="52ce5c7c-bf49-4be7-b24f-541baca0f329"/>
 			</line>
 			<textField>
-				<reportElement x="18" y="11" width="93" height="20" uuid="73788510-5abc-47fb-893b-7161ee271b51"/>
+				<reportElement x="19" y="11" width="93" height="20" uuid="73788510-5abc-47fb-893b-7161ee271b51"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="134" y="11" width="69" height="20" uuid="7415ea53-27a9-4a40-957c-4a7b86a8d7a9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cedulaIdent}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="361" y="11" width="93" height="20" uuid="05f7a6e1-957f-4824-a3b0-278ea3f3462a"/>
+				<reportElement x="349" y="11" width="123" height="20" uuid="05f7a6e1-957f-4824-a3b0-278ea3f3462a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombreServicio}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="481" y="11" width="60" height="20" uuid="3ccb4712-59da-4751-ad4e-20f7ee12b796"/>
+				<reportElement x="484" y="11" width="60" height="20" uuid="3ccb4712-59da-4751-ad4e-20f7ee12b796"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="228" y="12" width="100" height="20" uuid="879b38c7-6d2b-449a-913e-646f56cf44f4"/>
+				<reportElement x="225" y="12" width="100" height="20" uuid="879b38c7-6d2b-449a-913e-646f56cf44f4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fechaRealizado}]]></textFieldExpression>
 			</textField>

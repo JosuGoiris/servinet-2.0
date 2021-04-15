@@ -5,10 +5,12 @@
  */
 package Presentacion.Cuadrillas;
 
+import Logica.ConexionSingleton;
 import Logica.LEstados;
 import Logica.LHorarioTrabajo;
 import Logica.LTrabajos;
 import Presentacion.Clientes.frmPrincipalMenu;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -953,6 +955,7 @@ public class frmRegistrodeTrabajadores extends javax.swing.JFrame {
     }//GEN-LAST:event_btnActualizarMouseExited
 
     private void btnActualizarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMousePressed
+        Connection cn = ConexionSingleton.getConnection();
         if(!lblSalida.isVisible()){
             mostrarEntrada("");
         }else{

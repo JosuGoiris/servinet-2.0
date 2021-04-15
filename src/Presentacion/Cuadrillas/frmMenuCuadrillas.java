@@ -11,6 +11,7 @@ import Presentacion.Clientes.frmAbrirCaja;
 import Presentacion.Clientes.frmGestionarServicios;
 import Presentacion.Clientes.frmPrincipalSolicitudesNuevo;
 import Presentacion.Cuadrillas.frmRevisarSolicitudes;
+import Presentacion.Mantenimiento.frmLogin;
 import java.awt.Color;
 import java.io.File;
 import java.sql.Connection;
@@ -59,7 +60,9 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
-        mover = new javax.swing.JPanel();
+        btnLogout = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        btnSalir3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         btnNuevaSolicitud = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -82,8 +85,16 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btnNuevaSolicitud6 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        mover = new javax.swing.JPanel();
+        btnSalir = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        btnMini = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
 
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -102,25 +113,49 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
         jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
         jPanel2.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 200, 20));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 160, 510));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 160, 510));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 40, 670, 80));
 
-        mover.setBackground(new java.awt.Color(204, 204, 204));
-        mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                moverMouseDragged(evt);
-            }
-        });
-        mover.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnLogout.setBackground(new java.awt.Color(102, 0, 0));
+        btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnLogout.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnLogout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                moverMousePressed(evt);
+                btnLogoutMousePressed(evt);
             }
         });
-        mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 40));
+        btnLogout.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_exit_30px.png"))); // NOI18N
+        btnLogout.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 31, 30));
+
+        jPanel3.add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 10, 50, 50));
+
+        btnSalir3.setBackground(new java.awt.Color(51, 0, 0));
+        btnSalir3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSalir3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalir3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalir3MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnSalir3Layout = new javax.swing.GroupLayout(btnSalir3);
+        btnSalir3.setLayout(btnSalir3Layout);
+        btnSalir3Layout.setHorizontalGroup(
+            btnSalir3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        btnSalir3Layout.setVerticalGroup(
+            btnSalir3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(btnSalir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 50, 50));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 670, 80));
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -505,7 +540,87 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
         jLabel13.setText("ATENDER TRABAJOS ");
         jPanel4.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, 670, 430));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 670, 430));
+
+        mover.setBackground(new java.awt.Color(204, 204, 204));
+        mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                moverMouseDragged(evt);
+            }
+        });
+        mover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                moverMousePressed(evt);
+            }
+        });
+        mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSalir.setBackground(new java.awt.Color(102, 0, 0));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalirMousePressed(evt);
+            }
+        });
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_close_window_20px.png"))); // NOI18N
+        btnSalir.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 10, 30, 30));
+
+        jPanel12.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 20, 30, 30));
+
+        btnMini.setBackground(new java.awt.Color(102, 0, 0));
+        btnMini.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMiniMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMiniMouseExited(evt);
+            }
+        });
+        btnMini.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_minimize_window_20px.png"))); // NOI18N
+        btnMini.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(5, 5, 20, 20));
+
+        mover.add(btnMini, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, 30, 30));
+
+        jPanel13.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        mover.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 30, 30));
+
+        jPanel1.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 830, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -531,17 +646,6 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
 
     }//GEN-LAST:event_jPanel1MousePressed
-
-    private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
-        int x = evt.getXOnScreen();
-        int y = evt.getYOnScreen();
-        this.setLocation(x - xx, y - xy);
-    }//GEN-LAST:event_moverMouseDragged
-
-    private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
-        xx = evt.getX();
-        xy = evt.getY();
-    }//GEN-LAST:event_moverMousePressed
 
     private void btnNuevaSolicitudMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitudMouseReleased
 
@@ -592,7 +696,7 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevisarServiciosMouseExited
 
     private void btnRevisarServiciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarServiciosMousePressed
-       
+
     }//GEN-LAST:event_btnRevisarServiciosMousePressed
 
     private void btnRevisarServiciosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarServiciosMouseReleased
@@ -776,6 +880,55 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNuevaSolicitud6MouseEntered
 
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        setColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        resetColor(btnSalir);
+    }//GEN-LAST:event_btnSalirMouseExited
+
+    private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirMousePressed
+
+    private void btnMiniMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseEntered
+        setColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseEntered
+
+    private void btnMiniMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMiniMouseExited
+        resetColor(btnMini);
+    }//GEN-LAST:event_btnMiniMouseExited
+
+    private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_moverMouseDragged
+
+    private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
+        xx = evt.getX();
+        xy = evt.getY();
+    }//GEN-LAST:event_moverMousePressed
+
+    private void btnLogoutMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLogoutMousePressed
+        int resp = JOptionPane.showConfirmDialog(null, "¿Desea salir?",
+                "YES_NO_OPTION", JOptionPane.YES_NO_OPTION,
+                JOptionPane.INFORMATION_MESSAGE);
+        switch (resp) {
+            case 0:
+                frmLogin form = new frmLogin();
+                form.setVisible(true);
+                form.toFront();
+                this.dispose();
+                break;
+        }
+    }//GEN-LAST:event_btnLogoutMousePressed
+
+    private void btnSalir3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalir3MousePressed
+
     void setColor(JPanel panel) {
         panel.setBackground(new Color(51, 0, 0));
     }
@@ -823,6 +976,8 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btnLogout;
+    private javax.swing.JPanel btnMini;
     public javax.swing.JPanel btnNuevaSolicitud;
     public javax.swing.JPanel btnNuevaSolicitud1;
     public javax.swing.JPanel btnNuevaSolicitud3;
@@ -833,19 +988,26 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
     public javax.swing.JPanel btnRevisarServicios1;
     public javax.swing.JPanel btnRevisarServicios2;
     public javax.swing.JPanel btnRevisarServicios3;
+    private javax.swing.JPanel btnSalir;
+    private javax.swing.JPanel btnSalir3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

@@ -923,9 +923,9 @@ public class frmCuadrillaNuevo extends javax.swing.JFrame {
 
     private void btnAgregarNuevaCuadrillaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarNuevaCuadrillaMousePressed
         editar = "no";
-        //frmValoresCuadrillaNuevo form = new frmValoresCuadrillaNuevo();
-        //form.setVisible(true);
-        //form.toFront();
+        frmValoresCuadrillaNuevo form = new frmValoresCuadrillaNuevo();
+        form.setVisible(true);
+        form.toFront();
     }//GEN-LAST:event_btnAgregarNuevaCuadrillaMousePressed
 
     private void btnAgregarNuevaCuadrillaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarNuevaCuadrillaMouseReleased

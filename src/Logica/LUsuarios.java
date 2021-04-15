@@ -102,7 +102,7 @@ public class LUsuarios {
 
     }
 
-    public DefaultTableModel mostrarUsuariosMini(String buscar) {
+    public DefaultTableModel mostrarUsuariosMini(int buscar) {
         DefaultTableModel miModelo = null;
 
         String titulos[] = {"Id", "Nombre Usuario", "Tipo", "Estado"};
@@ -112,9 +112,9 @@ public class LUsuarios {
         sSQL = "select p.idPersona, concat(p.nombres,' ',p.apellidos) as usuario, \n"
                 + "t.idTipoUsuario, t.tipoUsuario, p.estado from tblpersona \n"
                 + "as p inner join tblusuario as u on p.idPersona = u.personaId \n"
-                + "inner join tbltipousuario as t on u.tipoUsuarioId = t.idTipoUsuario \n"
-                + "where p.idPersona = '" + buscar + "' or p.nombres like '%" + buscar + "%'\n"
-                + "or p.apellidos like '%" + buscar + "%' order by p.idPersona";
+                + "inner join tbltipousuario as t on u.tipousuarioId = t.idTipoUsuario \n"
+                + "where p.idPersona = '" + buscar + "'\n"
+                + "order by p.idPersona";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -324,6 +324,38 @@ public class LUsuarios {
             ResultSet rs = st.executeQuery(sSQL);
             while (rs.next()) {
                 id = rs.getInt("tipousuarioId");
+            }
+            return id;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
+    }
+    
+    public int traerIdTipoConBusqueda() {
+        int id = 0;
+        sSQL = "select idTipoUsuario from tbltipousuario where tipoUsuario = 'ENCARGADO DE CLIENTES'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while (rs.next()) {
+                id = rs.getInt("idTipoUsuario");
+            }
+            return id;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
+    }
+    
+    public int traerUsuario(int ids) {
+        int id = 0;
+        sSQL = "select idUsuario from tblusuario where tipousuarioId = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while (rs.next()) {
+                id = rs.getInt("idUsuario");
             }
             return id;
         } catch (Exception e) {

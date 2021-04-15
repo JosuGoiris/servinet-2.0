@@ -50,7 +50,7 @@ public class LSolicitud {
                 + "inner join tblcliente as c on sd.clienteId = c.idCliente \n"
                 + "inner join tblpersona as p on c.personaId = p.idPersona \n"
                 + "inner join tblservicio as s on sd.servicioId = s.idServicio \n"
-                + "where sd.idSolicitud = '" + buscar + "' or p.nombres like '%" + buscar + "%' and sd.estado = 'Pendiente'";
+                + "where sd.idSolicitud = '" + buscar + "' or p.nombres like '%" + buscar + "%' and sd.estado = 'PENDIENTE'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -85,7 +85,7 @@ public class LSolicitud {
                 + "inner join tblcliente as c on sd.clienteId = c.idCliente \n"
                 + "inner join tblpersona as p on c.personaId = p.idPersona \n"
                 + "inner join tblservicio as s on sd.servicioId = s.idServicio \n"
-                + "where sd.idSolicitud = '" + buscar + "' or p.nombres like '%" + buscar + "%' and sd.estado = 'Aceptada'";
+                + "where p.cedulaIdent = '" + buscar + "' or p.apellidos like '%" + buscar + "%' and sd.estado = 'ACEPTADA'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -122,7 +122,8 @@ public class LSolicitud {
                 + "where idDetalleSolicitud = ?";
         sSQL3 = "insert into tbltrabajossolicitud(idTrabajosSolicitud, solicitudId, cuadrillaId) values((select idSolicitud from tblsolicitud \n"
                 + "order by idSolicitud desc limit 1), (select idSolicitud from tblsolicitud order by idSolicitud desc limit 1), ?)";
-        sSQL6 = "insert into tbltrabajos(trabajossolicitudId, detalletrabajoId, estado) values((select idTrabajosSolicitud from \n"
+        sSQL6 = "insert into tbltrabajos(idTrabajos, trabajossolicitudId, detalletrabajoId, estado) values((select idTrabajosSolicitud from \n"
+                + "tbltrabajossolicitud order by idTrabajosSolicitud desc limit 1),(select idTrabajosSolicitud from \n"
                 + "tbltrabajossolicitud order by idTrabajosSolicitud desc limit 1),?,?)";
         sSQL4 = "insert into tblserviciodelcliente(idServiciodelCliente, fechaInicio, fechaPago, clienteId, detalleservicioId, estado, estadoFactura, multa, estadoMulta) \n"
                 + "values((select idSolicitud from tblsolicitud order by idSolicitud desc limit 1),?,?, \n"
@@ -201,9 +202,69 @@ public class LSolicitud {
         return null;
     }
     
+    public String editarSolicitud(DSolicitud dSolicitud, DPersona dPersona, DClientes dClientes, DServiciodelCliente dServiciodelCliente){
+        sSQL = "update tblpersona set nombres = ?, apellidos = ?, cedulaIdent = ?, telefono = ?, \n"
+                + "direccionId = ? where idPersona = ?";
+        sSQL1 = "update tblcliente set Ruc = ?\n"
+                + "where idCliente = ?";
+        sSQL2 = "update tblsolicitud set servicioId = ? \n"
+                + "where idSolicitud = ?";
+        sSQL4 = "update tblserviciodelcliente set detalleservicioId = ? \n"
+                + "where idServiciodelCliente = ?";
+        
+        try {
+            
+            cn.setAutoCommit(false);
+            
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+            PreparedStatement pst1 = cn.prepareStatement(sSQL1);
+            PreparedStatement pst2 = cn.prepareStatement(sSQL2);
+            PreparedStatement pst4 = cn.prepareStatement(sSQL4);
+            
+            pst.setString(1, dPersona.getNombre());
+            pst.setString(2, dPersona.getApellido());
+            pst.setString(3, dPersona.getCedulaIdent());
+            pst.setString(4, dPersona.getTelefono());
+            pst.setInt(5, dPersona.getDireccionId());
+            pst.setInt(6, dPersona.getIdPersona());
+            
+            pst.executeUpdate();
+            
+            pst1.setString(1, dClientes.getRuc());
+            pst1.setInt(2, dClientes.getId());
+            
+            pst1.executeUpdate();
+            
+            pst2.setInt(1, dSolicitud.getServicioId());
+            pst2.setInt(2, dSolicitud.getIdSolicitud());
+            
+            pst2.executeUpdate();
+            
+            pst4.setInt(1, dServiciodelCliente.getDetalleservicioId());
+            pst4.setInt(2, dServiciodelCliente.getIdServiciodelCliente());
+            
+            pst4.executeUpdate();
+            
+            cn.commit();
+            
+            System.out.println("Datos Actualizados");
+            
+            JOptionPane.showMessageDialog(null, "Datos Actualizados");
+        } catch (Exception e) {
+            System.out.println("Datos no Actualizados");
+            JOptionPane.showMessageDialog(null, e);
+            try {
+                cn.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(LSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+    }
+    
     public String updateSolicitud(DSolicitud dSolicitud, DServiciodelCliente dSer){
         sSQL = "update tblsolicitud set fechaActualizado = ?, estado = ? where idSolicitud = ?";
-        sSQL1 = "update tblserviciodelcliente set estado = 'En Espera' where idServiciodelCliente = ?";
+        sSQL1 = "update tblserviciodelcliente set estado = 'EN ESPERA' where idServiciodelCliente = ?";
         sSQL2 = "update tbldetallesolicitud set solicitudesAceptadas = solicitudesAceptadas + 1, \n"
                 + "solicitudesPendientes = solicitudesPendientes - 1 \n"
                 + "where iddetallesolicitud = ?";
@@ -215,7 +276,7 @@ public class LSolicitud {
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);
             
             pst.setDate(1, dSolicitud.getFechaActualizado());
-            pst.setString(2, "Trabajando");
+            pst.setString(2, "TRABAJANDO");
             pst.setInt(3, dSolicitud.getIdSolicitud());
             
             pst.executeUpdate();
@@ -232,7 +293,7 @@ public class LSolicitud {
             
             System.out.println("Datos Actualizados");
             
-            
+            JOptionPane.showMessageDialog(null, "La Solicitud se está trabajando...");
         } catch (Exception e) {
             System.out.println("Datos no Actualizados");
             JOptionPane.showMessageDialog(null, e);
@@ -246,8 +307,8 @@ public class LSolicitud {
     }
     
     public String editarSolicitud(DSolicitud dSolicitud, DPersona dPersona, DClientes dClientes){
-        sSQL = "update tblsolicitud set clienteId = ?, servicioId = ?, estado = ? where idSolicitud = ?";
-        sSQL1 = "update tblpersona set nombres = ?, apellidos = ?, cedulaIdent = ?, estado = 'Activo' where idPersona = ?";
+        sSQL = "update tblsolicitud set clienteId = ?, servicioId = ?, estado = 'PENDIENTE' where idSolicitud = ?";
+        sSQL1 = "update tblpersona set nombres = ?, apellidos = ?, cedulaIdent = ?, estado = 'PENDIENTE' where idPersona = ?";
         sSQL2 = "update tblcliente set personaId = ? where idCliente = ?";
         
         try {
@@ -259,8 +320,7 @@ public class LSolicitud {
             
             pst.setInt(1, dSolicitud.getClienteId());
             pst.setInt(2, dSolicitud.getServicioId());
-            pst.setString(3, dSolicitud.getEstado());
-            pst.setInt(4, dSolicitud.getIdSolicitud());
+            pst.setInt(3, dSolicitud.getIdSolicitud());
             
             pst.executeUpdate();
             
@@ -280,7 +340,7 @@ public class LSolicitud {
             
             System.out.println("Datos Actualizados");
             
-            
+            JOptionPane.showMessageDialog(null, "Se ha editado la Solicitud!");
         } catch (Exception e) {
             System.out.println("Datos no Actualizados");
             JOptionPane.showMessageDialog(null, e);
@@ -294,9 +354,9 @@ public class LSolicitud {
     }
     
     public String eliminarSolicitudPendiente(DSolicitud dSolicitud, DPersona dPersona, DServiciodelCliente dServiciodelCliente){
-        sSQL = "update tblsolicitud set estado = 'Cancelada' where idSolicitud = ?";
-        sSQL1 = "update tblpersona set estado = 'Inactivo' where idPersona = ?";
-        sSQL2 = "update tblserviciodelcliente set estado = 'Inactivo' where idServiciodelCliente = ?";
+        sSQL = "update tblsolicitud set estado = 'INACTIVO' where idSolicitud = ?";
+        sSQL1 = "update tblpersona set estado = 'INACTIVO' where idPersona = ?";
+        sSQL2 = "update tblserviciodelcliente set estado = 'INACTIVO' where idServiciodelCliente = ?";
         sSQL3 = "update tbldetallesolicitud set solicitudesPendientes = solicitudesPendientes - 1, \n"
                 + "solicitudesCanceladas = solicitudesCanceladas + 1, \n"
                 + "totaldesolicitudes = solicitudesPendientes + solicitudesAceptadas + solicitudesCanceladas";
@@ -327,7 +387,7 @@ public class LSolicitud {
             
             System.out.println("Datos Actualizados");
             
-            
+            JOptionPane.showMessageDialog(null, "La Solicitud ha sido Eliminada con exito!");
         } catch (Exception e) {
             System.out.println("Datos no Actualizados");
             JOptionPane.showMessageDialog(null, e);
@@ -340,33 +400,20 @@ public class LSolicitud {
         return null;
     }
     
-    public String eliminarSolicitudAceptada(DSolicitud dSolicitud, DPersona dPersona, DServiciodelCliente dServiciodelCliente){
-        sSQL = "update tblsolicitud set estado = 'Inactivo' where idSolicitud = ?";
-        sSQL1 = "update tblpersona set estado = 'Inactivo' where idPersona = ?";
-        sSQL2 = "update tblserviciodelcliente set estado = 'Inactivo' where idServiciodelCliente = ?";
+    public String eliminarSolicitudAceptada(DSolicitud dSolicitud){
+        sSQL = "update tblsolicitud set estado = 'INACTIVO' where idSolicitud = ?";
         sSQL3 = "update tbldetallesolicitud set solicitudesAceptadas = solicitudesAceptadas - 1, \n"
                 + "solicitudesCanceladas = solicitudesCanceladas + 1, \n"
                 + "totaldesolicitudes = solicitudesPendientes + solicitudesAceptadas + solicitudesCanceladas";
-        
         try {
             cn.setAutoCommit(false);
             
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            PreparedStatement pst1 = cn.prepareStatement(sSQL1);
-            PreparedStatement pst2 = cn.prepareStatement(sSQL2);
             PreparedStatement pst3 = cn.prepareStatement(sSQL3);
             
             pst.setInt(1, dSolicitud.getIdSolicitud());
             
             pst.executeUpdate();
-            
-            pst1.setInt(1, dPersona.getIdPersona());
-            
-            pst1.executeUpdate();
-            
-            pst2.setInt(1 , dServiciodelCliente.getIdServiciodelCliente());
-            
-            pst2.executeUpdate();
             
             pst3.executeUpdate();
             
@@ -374,7 +421,7 @@ public class LSolicitud {
             
             System.out.println("Datos Actualizados");
             
-            
+            JOptionPane.showMessageDialog(null, "La Solicitud ha sido Eliminada con exito!");
         } catch (Exception e) {
             System.out.println("Datos no Actualizados");
             JOptionPane.showMessageDialog(null, e);
@@ -387,10 +434,10 @@ public class LSolicitud {
         return null;
     }
     
-    public String Deshacer(DSolicitud dSolicitud, DPersona dPersona, DServiciodelCliente dServiciodelCliente){
-        sSQL = "update tblsolicitud set estado = 'Pendiente' where idSolicitud = ?";
-        sSQL1 = "update tblpersona set estado = 'Activo' where idPersona = ?";
-        sSQL2 = "update tblserviciodelcliente set estado = 'Activo' where idServiciodelCliente = ?";
+    public String DeshacerPendiente(DSolicitud dSolicitud, DPersona dPersona, DServiciodelCliente dServiciodelCliente){
+        sSQL = "update tblsolicitud set estado = 'PENDIENTE' where idSolicitud = ?";
+        sSQL1 = "update tblpersona set estado = 'PENDIENTE' where idPersona = ?";
+        sSQL2 = "update tblserviciodelcliente set estado = 'PENDIENTE' where idServiciodelCliente = ?";
         sSQL3 = "update tbldetallesolicitud set solicitudesAceptadas = solicitudesAceptadas + 1, \n"
                 + "solicitudesCanceladas = solicitudesCanceladas - 1, \n"
                 + "totaldesolicitudes = solicitudesPendientes + solicitudesAceptadas + solicitudesCanceladas";
@@ -421,7 +468,7 @@ public class LSolicitud {
             
             System.out.println("Datos Actualizados");
             
-            
+            JOptionPane.showMessageDialog(null, "La solicitud eliminada se ha traido de vuelta");
         } catch (Exception e) {
             System.out.println("Datos no Actualizados");
             JOptionPane.showMessageDialog(null, e);
@@ -430,6 +477,153 @@ public class LSolicitud {
             } catch (SQLException ex) {
                 Logger.getLogger(LSolicitud.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        return null;
+    }
+    
+    public String DeshacerActivo(DSolicitud dSolicitud){
+        sSQL = "update tblsolicitud set estado = 'ACEPTADA' where idSolicitud = ?";
+        sSQL3 = "update tbldetallesolicitud set solicitudesAceptadas = solicitudesAceptadas + 1, \n"
+                + "solicitudesCanceladas = solicitudesCanceladas - 1, \n"
+                + "totaldesolicitudes = solicitudesPendientes + solicitudesAceptadas + solicitudesCanceladas";
+        
+        try {
+            cn.setAutoCommit(false);
+            
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+            PreparedStatement pst3 = cn.prepareStatement(sSQL3);
+            
+            pst.setInt(1, dSolicitud.getIdSolicitud());
+            
+            pst.executeUpdate();
+            
+            pst3.executeUpdate();
+            
+            cn.commit();
+            
+            System.out.println("Datos Actualizados");
+            
+            JOptionPane.showMessageDialog(null, "La solicitud eliminada se ha traido de vuelta");
+        } catch (Exception e) {
+            System.out.println("Datos no Actualizados");
+            JOptionPane.showMessageDialog(null, e);
+            try {
+                cn.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(LSolicitud.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+    }
+    
+    public int traerIdDetalleServicio(int ids){
+        int id = 0;
+        sSQL = "select idDetalleServicio from tbldetalleservicio where servicioId = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                id = rs.getInt("idDetalleServicio");
+            }
+            return id;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
+    }
+    
+    public String traerTelefono(int ids){
+        String telefono = null;
+        sSQL = "select telefono from tblpersona where idPersona = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                telefono = rs.getString("telefono");
+            }
+            return telefono;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public String traerRUC(int ids){
+        String RUC = null;
+        sSQL = "select Ruc from tblcliente where idCliente = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                RUC = rs.getString("Ruc");
+            }
+            return RUC;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public int traerIdDireccion(int ids){
+        int id = 0;
+        sSQL = "select direccionId from tblpersona where idPersona = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                id = rs.getInt("direccionId");
+            }
+            return id;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
+    }
+    
+    public String traerDireccion(int ids){
+        String direccion = null;
+        sSQL = "select nombreDireccion from tbldireccion where idDireccion = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                direccion = rs.getString("nombreDireccion");
+            }
+            return direccion;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public int traerIdBarrio(int ids){
+        int id = 0;
+        sSQL = "select idZona from tbldireccion where idDireccion = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                id = rs.getInt("idZona");
+            }
+            return id;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
+    }
+    
+    public String traerBarrio(int ids){
+        String barrio = null;
+        sSQL = "select nombreZona from tblzona where idZona = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                barrio = rs.getString("nombreZona");
+            }
+            return barrio;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
         }
         return null;
     }

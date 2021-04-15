@@ -7,6 +7,7 @@ package Logica;
 
 import Datos.DServiciodelCliente;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -36,7 +37,7 @@ public class LGestionarServicios {
                 + "inner join tblpersona as p on c.personaId = p.idPersona \n"
                 + "inner join tbldetalleservicio as ds on sc.detalleServicioId = ds.idDetalleServicio \n"
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
-                + "where sc.idServiciodelCliente = '" + buscar + "' or p.cedulaIdent like '%" + buscar + "%' && sc.estado = 'Activo'";
+                + "where p.cedulaIdent = '" + buscar + "' or p.apellidos like '%" + buscar + "%' && sc.estado = 'ACTIVO'";
         
         try {
             Statement st = cn.createStatement();
@@ -75,7 +76,7 @@ public class LGestionarServicios {
                 + "inner join tblpersona as p on c.personaId = p.idPersona \n"
                 + "inner join tbldetalleservicio as ds on sc.detalleServicioId = ds.idDetalleServicio \n"
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
-                + "where sc.idServiciodelCliente = '" + buscar + "' or p.cedulaIdent like '%" + buscar + "%' && sc.estado = 'Inactivo'";
+                + "where p.cedulaIdent = '" + buscar + "' or p.apellidos like '%" + buscar + "%' and sc.estado = 'INACTIVO'";
         
         try {
             Statement st = cn.createStatement();
@@ -122,6 +123,23 @@ public class LGestionarServicios {
             pst.setDate(1, dServiciodelCliente.getFechaPago());
             pst.setString(2, "ACTIVO");
             pst.setString(3, "FACTURA PAGADA");
+            pst.setInt(4, dServiciodelCliente.getIdServiciodelCliente());
+            pst.executeUpdate();
+            System.out.println("Datos Insertados");
+        } catch (Exception e) {
+            System.out.println("Datos no Insertados");
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public String EstadoCancelado(DServiciodelCliente dServiciodelCliente){
+        sSQL = "update tblserviciodelcliente set fechaPago = ?, estado = ?, estadoFactura = ? where idServiciodelCliente = ?";
+        try {
+            PreparedStatement pst = cn.prepareStatement(sSQL);
+            pst.setDate(1, new Date(0,0,0));
+            pst.setString(2, "ACTIVO");
+            pst.setString(3, "CON FACTURA");
             pst.setInt(4, dServiciodelCliente.getIdServiciodelCliente());
             pst.executeUpdate();
             System.out.println("Datos Insertados");
@@ -182,6 +200,7 @@ public class LGestionarServicios {
         return 0;
     }
     
+    
     public String traerEstadoFactura(int id){
         String estado = null;
         sSQL = "select estadoFactura from tblserviciodelcliente where idServiciodelCliente = '" + id + "'";
@@ -208,6 +227,38 @@ public class LGestionarServicios {
                 estado = rs.getString("estadoMulta");
             }
             return estado;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public int traerMulta(int id){
+        int multa = 0;
+        sSQL = "select multa from tblserviciodelcliente where idServiciodelCliente = '" + id + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                multa = rs.getInt("multa");
+            }
+            return multa;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
+    }
+    
+    public Date traerFecha(int id){
+        Date fechaPago = null;
+        sSQL = "select fechaPago from tblserviciodelcliente where idServiciodelCliente = '" + id + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                fechaPago = rs.getDate("fechaPago");
+            }
+            return fechaPago;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
@@ -275,5 +326,21 @@ public class LGestionarServicios {
             JOptionPane.showMessageDialog(null, e);
         }
         return null;
+    }
+    
+    public int traerIdDetalleFactura(int ids){
+        int id = 0;
+        sSQL = "select iddetallefactura from tbldetallefactura where serviciodelclienteId = '" + id + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                id = rs.getInt("iddetallefactura");
+            }
+            return id;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
     }
 }

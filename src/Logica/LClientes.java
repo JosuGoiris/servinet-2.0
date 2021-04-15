@@ -142,7 +142,8 @@ public class LClientes {
                 + "totaldeReclamos = reclamosSinAtender + reclamosAtendidos where idDetalleReclamos = ?";
         sSQL2 = "insert into tbltrabajosreclamos(reclamosId, cuadrillaId) values((select idreclamos from \n"
                 + "tblreclamos order by idReclamos desc limit 1), ?)";
-        sSQL3 = "insert into tbltrabajos(trabajosreclamosId, detalletrabajoId, estado) values((select idTrabajosReclamos from \n"
+        sSQL3 = "insert into tbltrabajos(idTrabajos, trabajosreclamosId, detalletrabajoId, estado) values((select idTrabajosReclamos from \n"
+                + "tbltrabajosreclamos order by idTrabajosReclamos desc limit 1), (select idTrabajosReclamos from \n"
                 + "tbltrabajosreclamos order by idTrabajosReclamos desc limit 1), ?, ?)";
         try {
             cn.setAutoCommit(false);

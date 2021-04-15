@@ -68,6 +68,27 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         txtBarrio.setEditable(false);
         txtDireccion.setEditable(false);
         txtTipoSolicitud.setEditable(false);
+        cargarValores();
+    }
+    
+    public void cargarValores(){
+        if(frmPrincipalSolicitudesNuevo.id > 0) {
+            txtId.setText(String.valueOf(frmPrincipalSolicitudesNuevo.id));
+        }else{
+            txtId.setText("");
+        }
+        
+        txtNombres.setText(frmPrincipalSolicitudesNuevo.nombre);
+        txtApellidos.setText(frmPrincipalSolicitudesNuevo.apellido);
+        txtCedula.setText(frmPrincipalSolicitudesNuevo.cedulaIdent);
+        txtTelefono.setText(frmPrincipalSolicitudesNuevo.telefono);
+        txtRUC.setText(frmPrincipalSolicitudesNuevo.RUC);
+        txtIdBarrio.setText(String.valueOf(frmPrincipalSolicitudesNuevo.idBarrio));
+        txtBarrio.setText(frmPrincipalSolicitudesNuevo.barrio);
+        txtIdDireccion.setText(String.valueOf(frmPrincipalSolicitudesNuevo.idDireccion));
+        txtDireccion.setText(frmPrincipalSolicitudesNuevo.direccion);
+        txtIdTipo.setText(String.valueOf(frmPrincipalSolicitudesNuevo.idServicio));
+        txtTipoSolicitud.setText(frmPrincipalSolicitudesNuevo.nombreServicio);
     }
 
     void setColor(JPanel panel) {
@@ -184,6 +205,11 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
         jPanel2.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 53, -1));
 
+        txtNombres.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtNombresMousePressed(evt);
+            }
+        });
         txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtNombresKeyReleased(evt);
@@ -194,6 +220,12 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Apellidos:");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 123, -1, -1));
+
+        txtApellidos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApellidosKeyReleased(evt);
+            }
+        });
         jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 143, 200, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -598,10 +630,38 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             ds.setServicioId(tiposervicioId);
             fun1.insertarSolicitud(ds, dp, dc, dsc);
             this.dispose();
+        } else if("si".equals(frmPrincipalSolicitudesNuevo.editar)){
+            nombres = txtNombres.getText();
+            apellidos = txtApellidos.getText();
+            cedula = txtCedula.getText();
+            telefono = txtTelefono.getText();
+            zonaId = Integer.parseInt(txtIdBarrio.getText());
+            direccionId = Integer.parseInt(txtIdDireccion.getText());
+            tiposervicioId = Integer.parseInt(txtIdTipo.getText());
+            ruc = txtRUC.getText();
+
+            DClientes dc = new DClientes();
+            DPersona dp = new DPersona();
+            DSolicitud ds = new DSolicitud();
+            LSolicitud fun1 = new LSolicitud();
+            DServiciodelCliente dsc = new DServiciodelCliente();
+            
+            dc.setId(Integer.parseInt(txtId.getText()));
+            dp.setIdPersona(Integer.parseInt(txtId.getText()));
+            ds.setIdSolicitud(Integer.parseInt(txtId.getText()));
+            dsc.setIdServiciodelCliente(Integer.parseInt(txtId.getText()));
+            
+            dp.setNombre(nombres);
+            dp.setApellido(apellidos);
+            dp.setCedulaIdent(cedula);
+            dp.setTelefono(telefono);
+            dp.setDireccionId(direccionId);
+            dc.setRuc(txtRUC.getText());
+            ds.setServicioId(tiposervicioId);
+            dsc.setDetalleservicioId(tiposervicioId);
+            fun1.editarSolicitud(ds, dp, dc, dsc);
+            this.dispose();
         }
-        
-
-
     }//GEN-LAST:event_btnGuardarMousePressed
 
     private void btnBuscarBarrioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarBarrioMousePressed
@@ -680,7 +740,18 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
 
     private void txtNombresKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombresKeyReleased
         txtNombres.setBackground(Color.WHITE);
+        String nombre = (txtNombres.getText()).toUpperCase();
+        txtNombres.setText(nombre);
     }//GEN-LAST:event_txtNombresKeyReleased
+
+    private void txtNombresMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombresMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombresMousePressed
+
+    private void txtApellidosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidosKeyReleased
+        String apellido = (txtApellidos.getText()).toUpperCase();
+        txtApellidos.setText(apellido);
+    }//GEN-LAST:event_txtApellidosKeyReleased
 
     /**
      * @param args the command line arguments
@@ -768,7 +839,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator29;
     private javax.swing.JSeparator jSeparator30;
     private javax.swing.JSeparator jSeparator5;
-    private com.toedter.calendar.JDateChooser jdFechaSolicitud;
+    public static com.toedter.calendar.JDateChooser jdFechaSolicitud;
     public static javax.swing.JTextField txtApellidos;
     public static javax.swing.JTextField txtBarrio;
     public static javax.swing.JTextField txtCedula;

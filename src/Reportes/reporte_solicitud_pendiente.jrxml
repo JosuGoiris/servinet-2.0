@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte_solicitud_pendiente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0069ecaa-7461-4233-9c6f-80e692265aa0">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="busqueda" class="java.lang.String">
@@ -57,58 +57,58 @@
 				<reportElement x="5" y="5" width="106" height="48" backcolor="#FFFFFF" uuid="009db317-fcda-4aad-b577-00876e32c0e5"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="5" y="0" width="106" height="36" uuid="d217f146-11cf-45ee-80e0-79d81ff23087"/>
+				<reportElement x="5" y="12" width="106" height="36" uuid="d217f146-11cf-45ee-80e0-79d81ff23087"/>
 				<textElement textAlignment="Center">
-					<font fontName="Bauhaus 93" size="24" isBold="true"/>
+					<font fontName="Arial Black" size="15" isBold="true"/>
 				</textElement>
 				<text><![CDATA[JOTZPOT]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="32" y="28" width="52" height="20" uuid="37149bbe-7062-4f60-8795-22451cc8c4b7"/>
+				<reportElement x="24" y="28" width="71" height="20" uuid="37149bbe-7062-4f60-8795-22451cc8c4b7"/>
 				<textElement textAlignment="Center">
-					<font fontName="Bauhaus 93" size="12" isBold="false"/>
+					<font fontName="Arial Black" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[INTERNET]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="479" y="0" width="73" height="28" uuid="745e1441-c0cf-4b05-9ef2-0e14e9ae28f4"/>
+				<reportElement x="463" y="0" width="89" height="28" uuid="745e1441-c0cf-4b05-9ef2-0e14e9ae28f4"/>
 				<textElement textAlignment="Center">
-					<font fontName="Bauhaus 93" size="14" isBold="true"/>
+					<font fontName="Arial Black" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SERVINET]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="530" y="21" width="22" height="20" uuid="771b5faa-782e-4a78-9a42-2dd16ad72119"/>
+				<reportElement x="514" y="21" width="38" height="20" uuid="771b5faa-782e-4a78-9a42-2dd16ad72119"/>
 				<textElement textAlignment="Center">
-					<font fontName="Agency FB" isBold="true"/>
+					<font fontName="Arial Black" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Jotz]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="140" y="8" width="273" height="40" uuid="ccee97e5-b4c3-45e6-b327-d1b074fd3453"/>
+				<reportElement x="149" y="10" width="267" height="40" uuid="ccee97e5-b4c3-45e6-b327-d1b074fd3453"/>
 				<textElement>
-					<font fontName="Bauhaus 93" size="24"/>
+					<font fontName="Arial Black" size="17"/>
 				</textElement>
 				<text><![CDATA[REPORTE DE SOLICITUDES]]></text>
 			</staticText>
 			<textField pattern="MM/dd/yyyy">
 				<reportElement x="472" y="56" width="80" height="20" uuid="b61c06c9-ad15-4c32-97ca-f968ac324daa"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bauhaus 93" size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="461" y="56" width="30" height="20" uuid="0858df2b-8716-42c4-a136-aa1e3793c2e9"/>
+				<reportElement x="449" y="56" width="38" height="20" uuid="0858df2b-8716-42c4-a136-aa1e3793c2e9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bauhaus 93" size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Fecha:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="18" y="53" width="79" height="20" uuid="a25d7a28-6862-44c4-9996-7f6acdf8e878"/>
+				<reportElement x="3" y="53" width="113" height="20" uuid="a25d7a28-6862-44c4-9996-7f6acdf8e878"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Bauhaus 93" size="8" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Telef.: 0549-20149]]></text>
 			</staticText>
@@ -121,6 +121,13 @@
 			<line>
 				<reportElement x="0" y="0" width="1" height="76" uuid="ee2a87d9-0b51-4dbe-bd76-32ebc468cb6e"/>
 			</line>
+			<staticText>
+				<reportElement x="208" y="25" width="129" height="40" uuid="9de27498-031a-4452-a58a-28a39b0d8040"/>
+				<textElement>
+					<font fontName="Arial Black" size="17"/>
+				</textElement>
+				<text><![CDATA[PENDIENTES]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
@@ -132,13 +139,6 @@
 				</textElement>
 				<text><![CDATA[En ésta página se muestran las solicitudes realizadas en la empresa JotzPot, con los detalles de sus usuarios
 (Nombres, Apellidos), la fecha donde se realizó el pedido del servicio y el nombre del servicio solicitado.]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="3" y="32" width="172" height="20" uuid="26b69dd4-39bc-4749-a5f1-534e31520276"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Cantidad total de solicitudes:]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="33" width="1" height="20" uuid="73936d8d-483d-44da-a562-11c4539f118c"/>
@@ -152,13 +152,6 @@
 			<line>
 				<reportElement x="554" y="33" width="1" height="20" uuid="0d2b2b5f-9f0e-4a6c-b140-576cb8060a5e"/>
 			</line>
-			<textField>
-				<reportElement x="175" y="33" width="100" height="20" uuid="5b447a64-d7fb-4517-bbb1-08810d81f77f"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{solicitudesPendientes}]]></textFieldExpression>
-			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -173,44 +166,44 @@
 				<reportElement x="554" y="0" width="1" height="34" uuid="8c6a4d5d-a8eb-4408-bbe3-3a4b39dec16e"/>
 			</line>
 			<staticText>
-				<reportElement x="31" y="4" width="74" height="25" uuid="61b7640a-96df-418e-a65f-809fc619eef3"/>
+				<reportElement x="23" y="4" width="74" height="25" uuid="61b7640a-96df-418e-a65f-809fc619eef3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[NOMBRES]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="112" y="5" width="71" height="25" uuid="b86b0aa7-742f-461c-b810-b131fdd38742"/>
+				<reportElement x="105" y="5" width="77" height="25" uuid="b86b0aa7-742f-461c-b810-b131fdd38742"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[APELLIDOS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="257" y="5" width="92" height="25" uuid="d49ca7a8-94d8-4912-a6c7-ebefae4b81da"/>
+				<reportElement x="261" y="5" width="92" height="25" uuid="d49ca7a8-94d8-4912-a6c7-ebefae4b81da"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FECHA PEDIDO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="380" y="5" width="60" height="25" uuid="0cab33d8-d0c7-4411-8792-0ddbac378169"/>
+				<reportElement x="382" y="5" width="60" height="25" uuid="0cab33d8-d0c7-4411-8792-0ddbac378169"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[SERVICIO]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="189" y="5" width="62" height="25" uuid="7a90945a-0c34-449b-9155-c2f4bcc23086"/>
+				<reportElement x="188" y="5" width="62" height="25" uuid="7a90945a-0c34-449b-9155-c2f4bcc23086"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CEDULA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="470" y="6" width="60" height="25" uuid="1001f76a-8dfa-4a61-9525-22f238b9c385"/>
+				<reportElement x="474" y="6" width="60" height="25" uuid="1001f76a-8dfa-4a61-9525-22f238b9c385"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial" size="12" isBold="true"/>
+					<font fontName="Arial Black" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ESTADO]]></text>
 			</staticText>
@@ -219,37 +212,37 @@
 	<detail>
 		<band height="39" splitType="Stretch">
 			<textField>
-				<reportElement x="35" y="12" width="70" height="20" uuid="1d50500c-7ee5-45e3-9641-15a1ecb2dcda"/>
+				<reportElement x="25" y="12" width="70" height="20" uuid="1d50500c-7ee5-45e3-9641-15a1ecb2dcda"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="112" y="12" width="67" height="20" uuid="6b8fb9f8-5b78-46ed-9341-7394da4b9407"/>
+				<reportElement x="107" y="12" width="67" height="20" uuid="6b8fb9f8-5b78-46ed-9341-7394da4b9407"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="257" y="12" width="92" height="20" uuid="0a170a0f-54dc-4356-9b8e-4014139743f1"/>
+				<reportElement x="259" y="12" width="92" height="20" uuid="0a170a0f-54dc-4356-9b8e-4014139743f1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{fechaSolicitud}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="358" y="12" width="103" height="20" uuid="674a79e0-44ae-4178-8de9-467d5e719f2d"/>
+				<reportElement x="360" y="12" width="103" height="20" uuid="674a79e0-44ae-4178-8de9-467d5e719f2d"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nombreServicio}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="469" y="12" width="61" height="20" uuid="31b1623a-ed64-48fb-88c6-8a16bc93a46f"/>
+				<reportElement x="473" y="12" width="61" height="20" uuid="31b1623a-ed64-48fb-88c6-8a16bc93a46f"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
 			</textField>
@@ -266,9 +259,9 @@
 				<reportElement x="1" y="38" width="555" height="1" uuid="52ce5c7c-bf49-4be7-b24f-541baca0f329"/>
 			</line>
 			<textField>
-				<reportElement x="196" y="12" width="50" height="20" uuid="a5e8b704-8ba8-45fd-b578-bc965c2a1c08"/>
+				<reportElement x="194" y="12" width="50" height="20" uuid="a5e8b704-8ba8-45fd-b578-bc965c2a1c08"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Arial"/>
+					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cedulaIdent}]]></textFieldExpression>
 			</textField>

@@ -120,11 +120,13 @@ public class LCaja {
         sSQL = "insert into tbldetallemonto(idDetalleMonto, cantidadTotal, montoId, cajaId) \n"
                 + "values(?,?,?,?)";
         sSQL1 = "update tblcaja set estado = ? where idCaja = ?";
+        sSQL2 = "update tblmonto set cantidadMonto = ? where idmonto = ?";
         try {
             cn.setAutoCommit(false);
             
             PreparedStatement pst = cn.prepareStatement(sSQL);
             PreparedStatement pst1 = cn.prepareStatement(sSQL1);
+            PreparedStatement pst2 = cn.prepareStatement(sSQL2);
             
             pst.setInt(1, dDetalleMonto.getCajaId());
             pst.setDouble(2, dDetalleMonto.getCantidadTotal());
@@ -132,13 +134,19 @@ public class LCaja {
             pst.setInt(4, dDetalleMonto.getCajaId());
             pst.executeUpdate();
             
-            pst1.setString(1, "Cerrada");
+            pst1.setString(1, "CERRADA");
             pst1.setInt(2, dCaja.getIdCaja());
             pst1.executeUpdate();
+            
+            pst2.setDouble(1, 0);
+            pst2.setInt(2, 1);
+            
+            pst2.executeUpdate();
             
             cn.commit();
             
             System.out.println("Monto de la caja Guardado");
+            JOptionPane.showMessageDialog(null, "La caja ha sido cerrada");
         } catch (Exception e) {
             System.out.println("Error");
             JOptionPane.showMessageDialog(null, e);
