@@ -110,6 +110,8 @@ public class LFactura {
             cn.commit();
             
             System.out.println("Datos Insertados");
+            
+            JOptionPane.showMessageDialog(null, "Factura Realizada");
         } catch (Exception e) {
             System.out.println("Datos no Insertados");
             JOptionPane.showMessageDialog(null, e);

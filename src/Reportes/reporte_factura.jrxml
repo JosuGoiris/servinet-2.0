@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporte_factura" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b7d31fe0-3e78-4133-983e-90f57b180a78">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="busqueda" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select f.idfactura, c.idCliente, concat(p.nombres,' ', p.apellidos) as 'cliente', p.cedulaIdent, f.fechaEmision, f.fechaVencimiento, sc.idServiciodelCliente, s.nombreServicio, df.precio, df.total, df.sobrecargos, df.descripcion, df.estado from tbldetallefactura as df inner join tblfactura as f on df.facturaId = f.idfactura inner join tblcliente as c on f.clienteId = c.idCliente inner join tblpersona as p on c.personaId = p.idPersona inner join tblserviciodelcliente as sc on df.serviciodelclienteId = sc.idServiciodelCliente inner join tbldetalleservicio as ds on sc.detalleServicioId = ds.idDetalleServicio inner join tblservicio as s on ds.servicioId = s.idServicio where f.idfactura = $P{busqueda}]]>
+	</queryString>
+	<field name="idfactura" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idCliente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="cedulaIdent" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaEmision" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fechaVencimiento" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="idServiciodelCliente" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreServicio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="sobrecargos" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="descripcion" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="69" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="12" y="9" width="106" height="48" backcolor="#FFFFFF" uuid="1d363f84-a7d7-4e7c-bd8b-bf9f769e7705"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="9" width="106" height="36" uuid="e91cf3d4-b47e-48ca-9a47-3ada46ede0b1"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bauhaus 93" size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JOTZPOT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="42" y="37" width="52" height="20" uuid="ac4cac14-b217-427a-9506-c369ea5aa106"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bauhaus 93" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[INTERNET]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="137" y="10" width="293" height="45" uuid="fe61265f-87c9-45d2-bad8-af9fd400af94"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="162" y="9" width="249" height="40" uuid="a00cc270-2285-4a76-82b0-d8978e952b06"/>
+				<textElement>
+					<font fontName="Bauhaus 93" size="24"/>
+				</textElement>
+				<text><![CDATA[FACTURA DE SERVICIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="533" y="30" width="22" height="20" uuid="ae43bb90-fc29-41d7-beb4-a0d9b2e26d98"/>
+				<textElement textAlignment="Center">
+					<font fontName="Agency FB" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Jotz]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="482" y="9" width="73" height="28" uuid="d83eda7b-38dd-4eb7-af7f-92fcf9e00d1d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Bauhaus 93" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SERVINET]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="458" y="10" width="66" height="20" uuid="82f3da32-2b54-44d1-aadd-05129bec79c1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NRO FACTURA:]]></text>
+			</staticText>
+			<textField pattern="MM/dd/yyyy">
+				<reportElement x="25" y="10" width="80" height="20" uuid="b7ca5848-e3f9-4d5d-bd36-6a61ebb3c710"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="511" y="10" width="40" height="20" uuid="da518e4d-1e28-4618-b64e-bf8b20101c62"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idfactura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="10" width="30" height="20" uuid="34e83017-96c3-4516-bdf9-8626b23f76e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="159" y="11" width="100" height="20" uuid="e08338b6-fa3f-4de2-81ee-70fabc1f7a53"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA EMISION]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="11" width="100" height="20" uuid="6e05bf4e-d0e3-4bed-92bb-f6b28291d6ad"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE CLIENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="12" width="110" height="20" uuid="012a7d15-8a73-419f-be74-6fa2219a9f9a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA VENCIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="433" y="13" width="100" height="20" uuid="c8dc6b34-d483-4683-88f4-941cecaf4f2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SERVICIO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="133" splitType="Stretch">
+			<textField>
+				<reportElement x="31" y="13" width="100" height="20" uuid="4c104747-f9a1-4c8b-bef7-5eb8366f6a0d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="159" y="13" width="100" height="20" uuid="bfe4206b-7249-49c9-8b19-d1dc40198971"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaEmision}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="294" y="13" width="100" height="20" uuid="95851e82-56dc-48b7-8658-a9dc5e380741"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaVencimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="13" width="100" height="20" uuid="2f9750c0-f2a4-49e2-8af5-9d182725c206"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombreServicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="101" width="74" height="20" uuid="4f15c61e-e5ab-47fc-b92c-b3a4daa2b0dc"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="32" y="58" width="73" height="20" uuid="611b28e1-03bd-4bce-98f8-f4cd525b16cd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="445" y="76" width="74" height="20" uuid="faed12dd-3dcd-4ddb-bee2-f8f0f8461c30"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{sobrecargos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="366" y="78" width="81" height="20" uuid="e72d3b88-9d55-434c-8c54-2a0345d201dd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SOBRECARGO:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="397" y="54" width="43" height="20" uuid="dffa8d89-1308-414b-aa75-d6ed9af9572d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRECIO:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="112" y="59" width="228" height="55" uuid="cc3c1050-8813-424d-b032-4c156795c0e1"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="51" width="74" height="20" uuid="248a45a6-1197-4640-9919-0ae62701bd15"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="399" y="101" width="45" height="20" uuid="1d5d1d6b-55e9-450e-b0a1-43ea7d40eef0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

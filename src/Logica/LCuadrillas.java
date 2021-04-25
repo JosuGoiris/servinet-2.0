@@ -52,6 +52,32 @@ public class LCuadrillas {
         }
     }
     
+    public DefaultTableModel mostrarCuadrillasReclamos(String buscar){
+        DefaultTableModel miModelo = null;
+        
+        String titulos [] = {"Id", "Nombre de la Cuadrilla", "Descripcion"};
+        String dts [] = new String[3];
+        
+        miModelo = new DefaultTableModel(null, titulos);
+        sSQL = "select idCuadrilla, nombreCuadrilla, cantidadTrabajadores, descripcion, estado from tblcuadrilla \n"
+             + "where idCuadrilla = '" + buscar + "' or nombreCuadrilla like '%" + buscar + "%' \n"
+                + "&& estado = 'Activo' order by idCuadrilla";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                dts[0] = rs.getString("idCuadrilla");
+                dts[1] = rs.getString("nombreCuadrilla");;
+                dts[2] = rs.getString("descripcion");
+                miModelo.addRow(dts);
+            }
+            return miModelo;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
+    
     public DefaultTableModel mostrarCuadrillasInactivas(String buscar){
         DefaultTableModel miModelo = null;
         

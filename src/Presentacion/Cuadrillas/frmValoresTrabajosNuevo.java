@@ -124,6 +124,7 @@ public class frmValoresTrabajosNuevo extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jdFechaAtencion = new com.toedter.calendar.JDateChooser();
         btnGuardar2 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar1 = new javax.swing.JPanel();
@@ -206,7 +207,7 @@ public class frmValoresTrabajosNuevo extends javax.swing.JFrame {
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Elegir Cuadrilla:");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         btnBuscarCuadrilla.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscarCuadrilla.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -244,6 +245,10 @@ public class frmValoresTrabajosNuevo extends javax.swing.JFrame {
         );
 
         jPanel3.add(btnGuardar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("*");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 390, 250));
 
@@ -354,13 +359,13 @@ public class frmValoresTrabajosNuevo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMousePressed
 
     private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
-        if ("".equals(txtIdCuadrilla.getText()) || "".equals(txtCuadrilla.getText())) {
-            txtCuadrilla.setBackground(Color.red);
-            txtIdCuadrilla.setBackground(Color.red);
-            JOptionPane.showMessageDialog(null, "Se necesita registrar la cuadrilla");
+        if ("SIN CUADRILLA".equals(txtCuadrilla.getText())) {
+            txtIdCuadrilla.setBackground(Color.RED);
+            txtCuadrilla.setBackground(Color.RED);
+            JOptionPane.showMessageDialog(this, "Debe de agregar la cuadrilla para el trabajo");
         } else {
             JOptionPane.showMessageDialog(null, "Se han registrado los datos");
-            
+
             DTrabajosSolicitud dts = new DTrabajosSolicitud();
             DTrabajos dt = new DTrabajos();
             DSolicitud ds = new DSolicitud();
@@ -386,7 +391,6 @@ public class frmValoresTrabajosNuevo extends javax.swing.JFrame {
 
             this.dispose();
         }
-
     }//GEN-LAST:event_btnGuardarMousePressed
 
     private void btnBuscarCuadrillaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarCuadrillaMousePressed
@@ -448,6 +452,7 @@ public class frmValoresTrabajosNuevo extends javax.swing.JFrame {
     private javax.swing.JPanel btnGuardar3;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

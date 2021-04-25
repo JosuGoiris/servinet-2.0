@@ -137,6 +137,12 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         txtCedula = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtIdDetalleCuadrilla = new javax.swing.JTextField();
+        jSeparator22 = new javax.swing.JSeparator();
+        jSeparator23 = new javax.swing.JSeparator();
+        jSeparator30 = new javax.swing.JSeparator();
+        jSeparator24 = new javax.swing.JSeparator();
+        jSeparator32 = new javax.swing.JSeparator();
+        jSeparator31 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -151,7 +157,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jLabel14.setText("INSERTE LA CUADRILLA PARA EL TRABAJO");
         bar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
-        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 40));
+        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 650, 40));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -205,7 +211,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
         jPanel3.add(txtCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, 230, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 330, 250));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 330, 250));
 
         btnGuardar.setBackground(new java.awt.Color(102, 0, 0));
         btnGuardar.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -220,7 +226,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jLabel2.setPreferredSize(new java.awt.Dimension(25, 25));
         btnGuardar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 28));
 
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, 50, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 320, 50, 50));
 
         btnGuardar1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -235,7 +241,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 330, -1, 50));
+        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 330, -1, 50));
 
         btnSalir.setBackground(new java.awt.Color(102, 0, 0));
         btnSalir.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -250,7 +256,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
         btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 50, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 320, 50, 50));
 
         btnGuardar3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -265,7 +271,7 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 50, 50));
+        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, 50, 50));
 
         jPanel4.setBackground(new java.awt.Color(51, 51, 51));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -297,10 +303,22 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
         jLabel11.setText("Ingrese el Nro de Cedula:");
         jPanel4.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 200, 70));
-        jPanel1.add(txtIdDetalleCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 53, -1));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 200, 70));
+        jPanel1.add(txtIdDetalleCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 53, -1));
+        jPanel1.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 310, 120, 20));
+        jPanel1.add(jSeparator23, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 600, 20));
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 680, 390));
+        jSeparator30.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator30, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, 20, 280));
+        jPanel1.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 470, 20));
+
+        jSeparator32.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator32, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 20, 330));
+
+        jSeparator31.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel1.add(jSeparator31, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 20, 40));
+
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 650, 390));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -423,6 +441,12 @@ public class frmRegistrarEntrada extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JSeparator jSeparator22;
+    private javax.swing.JSeparator jSeparator23;
+    private javax.swing.JSeparator jSeparator24;
+    private javax.swing.JSeparator jSeparator30;
+    private javax.swing.JSeparator jSeparator31;
+    private javax.swing.JSeparator jSeparator32;
     private com.toedter.calendar.JDateChooser jdFechaSolicitud;
     public static javax.swing.JTextField txtApellidos;
     public static javax.swing.JTextField txtCedula;

@@ -8,18 +8,29 @@ package Presentacion.Clientes;
 import Datos.DDetalleFactura;
 import Datos.DFactura;
 import Datos.DServiciodelCliente;
+import Logica.ConexionSingleton;
 import Logica.LFactura;
 import Logica.LSolicitud;
 import static Presentacion.Clientes.frmValoresSolicitudNuevo.diasActuales;
 import static Presentacion.Clientes.frmValoresSolicitudNuevo.diasdeverdad;
 import java.awt.Color;
+import java.io.File;
+import java.sql.Connection;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -36,6 +47,10 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
     int faltantes;
     double sobrecargo;
 
+    Connection cn = ConexionSingleton.getConnection();
+
+    LFactura lf = new LFactura();
+
     /**
      * Creates new form frmPrincipalSolicitudesNuevo
      */
@@ -43,6 +58,7 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         GenerarFechas();
+        txtDescripcion.setText("FACTURA DE INTERNET");
     }
 
     public void cargarValores() {
@@ -183,6 +199,8 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         jSeparator10 = new javax.swing.JSeparator();
         jSeparator17 = new javax.swing.JSeparator();
         jSeparator18 = new javax.swing.JSeparator();
+        jSeparator13 = new javax.swing.JSeparator();
+        jSeparator14 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -203,7 +221,6 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         lblmespago = new javax.swing.JLabel();
         jdFechaEmision = new com.toedter.calendar.JDateChooser();
         jdFechaVencimiento = new com.toedter.calendar.JDateChooser();
-        jLabel19 = new javax.swing.JLabel();
         txtServicio = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
@@ -219,11 +236,11 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator11 = new javax.swing.JSeparator();
         jSeparator12 = new javax.swing.JSeparator();
-        jSeparator13 = new javax.swing.JSeparator();
-        jSeparator14 = new javax.swing.JSeparator();
         jSeparator15 = new javax.swing.JSeparator();
         jLabel3 = new javax.swing.JLabel();
         jSeparator16 = new javax.swing.JSeparator();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -244,7 +261,7 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         jLabel1.setText("DATOS DE LA FACTURA DEL CLIENTE");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 960, 50));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 990, 50));
 
         mover.setBackground(new java.awt.Color(204, 204, 204));
         mover.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -258,7 +275,7 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
             }
         });
         mover.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 40));
+        jPanel1.add(mover, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 990, 40));
 
         jPanel7.setBackground(new java.awt.Color(51, 51, 51));
         jPanel7.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -272,17 +289,17 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
             }
         });
         btnGenerar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGenerarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGenerarMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnGenerarMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 btnGenerarMouseReleased(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGenerarMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGenerarMouseEntered(evt);
             }
         });
         btnGenerar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -296,7 +313,7 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         btnGenerar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 12, -1, -1));
         btnGenerar.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 38, 97, 10));
 
-        jPanel7.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 170, 50));
+        jPanel7.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 170, 50));
 
         btnSalir.setBackground(new java.awt.Color(102, 0, 0));
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -317,15 +334,15 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         btnSalir.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 12, -1, -1));
         btnSalir.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 38, 109, 10));
 
-        jPanel7.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 170, 50));
+        jPanel7.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 170, 50));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(204, 204, 204));
         jLabel17.setText("SERVINET");
-        jPanel7.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, -1, -1));
-        jPanel7.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 140, 20));
+        jPanel7.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+        jPanel7.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 140, 20));
 
-        btnSalir3.setBackground(new java.awt.Color(51, 0, 0));
+        btnSalir3.setBackground(new java.awt.Color(0, 0, 0));
         btnSalir3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSalir3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSalir3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -345,9 +362,9 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel7.add(btnSalir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 170, 50));
+        jPanel7.add(btnSalir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 170, 50));
 
-        btnSalir5.setBackground(new java.awt.Color(51, 0, 0));
+        btnSalir5.setBackground(new java.awt.Color(0, 0, 0));
         btnSalir5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSalir5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnSalir5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -367,12 +384,18 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel7.add(btnSalir5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, 170, 50));
-        jPanel7.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 160, 20));
-        jPanel7.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 160, 20));
-        jPanel7.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 160, 20));
+        jPanel7.add(btnSalir5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 170, 50));
+        jPanel7.add(jSeparator10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, 160, 20));
+        jPanel7.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 160, 20));
+        jPanel7.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 160, 20));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 210, 420));
+        jSeparator13.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel7.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 20, 380));
+
+        jSeparator14.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        jPanel7.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 20, 320));
+
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 80, 240, 420));
 
         jPanel4.setBackground(new java.awt.Color(0, 0, 0));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -383,7 +406,7 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         jLabel11.setBackground(new java.awt.Color(0, 0, 0));
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("C.I.:");
-        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 90, -1, -1));
+        jPanel5.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 90, -1, -1));
 
         jLabel18.setBackground(new java.awt.Color(0, 0, 0));
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
@@ -418,9 +441,9 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         jLabel12.setBackground(new java.awt.Color(0, 0, 0));
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("DESCRIPCION:");
-        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
+        jPanel5.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, -1, -1));
         jPanel5.add(txtIdFactura, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 70, -1));
-        jPanel5.add(txtNumeroCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 100, -1));
+        jPanel5.add(txtNumeroCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 110, 100, -1));
         jPanel5.add(txtIdCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 70, -1));
         jPanel5.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 120, -1));
         jPanel5.add(txtApellidoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 130, -1));
@@ -442,39 +465,37 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
 
         jdFechaVencimiento.setDateFormatString("yyyy/MM/dd");
         jPanel5.add(jdFechaVencimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 50, 180, -1));
-
-        jLabel19.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("SERVICIO A PAGAR:");
-        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 90, -1, -1));
-        jPanel5.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 110, 130, -1));
+        jPanel5.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 110, 130, -1));
 
         jLabel23.setBackground(new java.awt.Color(0, 0, 0));
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("PRECIO:");
-        jPanel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 150, -1, -1));
-        jPanel5.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 170, 100, -1));
+        jPanel5.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 150, -1, -1));
+        jPanel5.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 100, -1));
 
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("Gs.");
-        jPanel5.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 150, -1, -1));
+        jPanel5.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 170, -1, -1));
 
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
         jLabel24.setText("Gs.");
-        jPanel5.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, -1, -1));
-        jPanel5.add(txtSobrecargos, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 230, 100, -1));
+        jPanel5.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 230, -1, -1));
+        jPanel5.add(txtSobrecargos, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 230, 100, -1));
 
         jLabel22.setBackground(new java.awt.Color(0, 0, 0));
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
         jLabel22.setText("SOBRECARGOS:");
-        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 210, -1, -1));
+        jPanel5.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 210, -1, -1));
 
         jLabel20.setBackground(new java.awt.Color(0, 0, 0));
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("TOTAL:");
-        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 270, -1, -1));
-        jPanel5.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 290, 100, -1));
+        jPanel5.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 270, -1, -1));
+        jPanel5.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 290, 100, -1));
 
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Gs.");
-        jPanel5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 270, -1, -1));
+        jPanel5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 290, -1, -1));
         jPanel5.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 700, 20));
 
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -485,12 +506,6 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         jPanel5.add(jSeparator11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 700, 20));
         jPanel5.add(jSeparator12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 660, 20));
 
-        jSeparator13.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel5.add(jSeparator13, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 10, 380));
-
-        jSeparator14.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel5.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 30, 10, 320));
-
         jSeparator15.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel5.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 10, 350));
 
@@ -499,6 +514,16 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         jLabel3.setText("ID FACTURA:");
         jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
         jPanel5.add(jSeparator16, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 660, 20));
+
+        jLabel26.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("SERVICIO A PAGAR:");
+        jPanel5.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
+
+        jLabel14.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("*");
+        jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 410));
 
@@ -519,35 +544,71 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMousePressed
-        DFactura df = new DFactura();
-        DDetalleFactura ddf = new DDetalleFactura();
-        LFactura fun = new LFactura();
-        DServiciodelCliente dsc = new DServiciodelCliente();
+        if ("".equals(txtDescripcion.getText())) {
+            txtDescripcion.setBackground(Color.red);
+            txtDescripcion.requestFocus();
+            JOptionPane.showMessageDialog(null, "Debe de agregar una descripción de la factura");
+        } else {
+            DFactura df = new DFactura();
+            DDetalleFactura ddf = new DDetalleFactura();
+            LFactura fun = new LFactura();
+            DServiciodelCliente dsc = new DServiciodelCliente();
 
-        //Guarda la fecha de emision
-        int año = jdFechaEmision.getCalendar().get(Calendar.YEAR);
-        int mes = jdFechaEmision.getCalendar().get(Calendar.MONTH);
-        int dia = jdFechaEmision.getCalendar().get(Calendar.DAY_OF_MONTH);
-        df.setFechaEmision(new Date((año - 1900), mes, dia));
+            //Guarda la fecha de emision
+            int año = jdFechaEmision.getCalendar().get(Calendar.YEAR);
+            int mes = jdFechaEmision.getCalendar().get(Calendar.MONTH);
+            int dia = jdFechaEmision.getCalendar().get(Calendar.DAY_OF_MONTH);
+            df.setFechaEmision(new Date((año - 1900), mes, dia));
 
-        //Guarda la fecha de vencimiento
-        int añoV = jdFechaVencimiento.getCalendar().get(Calendar.YEAR);
-        int mesV = jdFechaVencimiento.getCalendar().get(Calendar.MONTH);
-        int diaV = jdFechaVencimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
-        df.setFechaVencimiento(new Date((añoV - 1900), mesV, diaV));
+            //Guarda la fecha de vencimiento
+            int añoV = jdFechaVencimiento.getCalendar().get(Calendar.YEAR);
+            int mesV = jdFechaVencimiento.getCalendar().get(Calendar.MONTH);
+            int diaV = jdFechaVencimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
+            df.setFechaVencimiento(new Date((añoV - 1900), mesV, diaV));
 
-        df.setClienteId(Integer.parseInt(txtIdCliente.getText()));
-        ddf.setDescripcion(txtDescripcion.getText());
-        ddf.setMesPago(lblmespago.getText());
-        ddf.setPrecio(Double.parseDouble(txtPrecio.getText()));
+            df.setClienteId(Integer.parseInt(txtIdCliente.getText()));
+            ddf.setDescripcion(txtDescripcion.getText());
+            ddf.setMesPago(lblmespago.getText());
+            ddf.setPrecio(Double.parseDouble(txtPrecio.getText()));
 
-        ddf.setSobrecargos(Double.parseDouble(txtSobrecargos.getText()));
-        ddf.setTotal(Double.parseDouble(txtTotal.getText()));
-        ddf.setServiciodelclienteId(Integer.parseInt(txtIdCliente.getText()));
+            ddf.setSobrecargos(Double.parseDouble(txtSobrecargos.getText()));
+            ddf.setTotal(Double.parseDouble(txtTotal.getText()));
+            ddf.setServiciodelclienteId(Integer.parseInt(txtIdCliente.getText()));
 
-        dsc.setIdServiciodelCliente(Integer.parseInt(txtIdCliente.getText()));
+            dsc.setIdServiciodelCliente(Integer.parseInt(txtIdCliente.getText()));
 
-        fun.insertarFactura(df, ddf, dsc);
+            fun.insertarFactura(df, ddf, dsc);
+
+            int resp = JOptionPane.showConfirmDialog(null, "¿Desea imprimir la factura?",
+                    "YES_NO_OPTION", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE);
+
+            switch (resp) {
+                case 0:
+                    Map p = new HashMap();
+
+                    int id = lf.traerIdFactura(Integer.parseInt(txtIdCliente.getText()));
+
+                    p.put("busqueda", id);
+                    JasperReport report;
+                    JasperPrint print;
+
+                    try {
+                        report = JasperCompileManager.compileReport(new File("")
+                                .getAbsolutePath() + "/src/Reportes/reporte_factura.jrxml");
+                        print = JasperFillManager.fillReport(report, p, cn);
+                        JasperViewer view = new JasperViewer(print, false);
+                        view.setTitle("Reporte de Factura del Cliente");
+                        view.setVisible(true);
+                        this.dispose();
+                    } catch (JRException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 1:
+                    this.dispose();
+            }
+        }
     }//GEN-LAST:event_btnGenerarMousePressed
 
     private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
@@ -647,10 +708,10 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -658,6 +719,7 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

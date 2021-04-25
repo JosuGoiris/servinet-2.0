@@ -34,7 +34,7 @@ public class frmVistaCuadrillaNuevo extends javax.swing.JFrame {
         try {
             DefaultTableModel miModelo;
             LCuadrillas fun = new LCuadrillas();
-            miModelo = fun.mostrarCuadrillas(buscar);
+            miModelo = fun.mostrarCuadrillasReclamos(buscar);
             tblCuadrilla.setModel(miModelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

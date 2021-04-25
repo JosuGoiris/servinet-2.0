@@ -21,6 +21,7 @@ import Presentacion.Mantenimiento.frmVistaCuadrillaNuevo;
 import Presentacion.Mantenimiento.frmVistaDireccionNuevo;
 import Presentacion.Mantenimiento.frmVistaServicioNuevo;
 import Presentacion.Mantenimiento.frmVistaZonaNuevo;
+import java.awt.Color;
 import java.sql.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -31,12 +32,13 @@ import javax.swing.JOptionPane;
  * @author josug
  */
 public class frmValoresReclamos extends javax.swing.JFrame {
+
     public static int control = 0;
     private LEstados es = new LEstados();
     Calendar fecha_actual = new GregorianCalendar();
-    
+
     String accion = null;
-    
+
     /**
      * Creates new form frmValoresSolicitudNuevo
      */
@@ -46,8 +48,8 @@ public class frmValoresReclamos extends javax.swing.JFrame {
         cargarValores();
         jdFechaReclamo.setCalendar(fecha_actual);
     }
-    
-    public void cargarValores(){
+
+    public void cargarValores() {
         frmAtencionalCliente form = new frmAtencionalCliente();
         txtIdCliente.setText(String.valueOf(form.id));
         txtNombres.setText(form.nombre);
@@ -69,7 +71,6 @@ public class frmValoresReclamos extends javax.swing.JFrame {
         bg = new javax.swing.JPanel();
         bar = new javax.swing.JPanel();
         jSeparator5 = new javax.swing.JSeparator();
-        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -90,6 +91,7 @@ public class frmValoresReclamos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescripcion = new javax.swing.JTextArea();
         jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar1 = new javax.swing.JPanel();
@@ -105,11 +107,6 @@ public class frmValoresReclamos extends javax.swing.JFrame {
         bar.setBackground(new java.awt.Color(204, 204, 204));
         bar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         bar.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 200, 20));
-
-        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel14.setText("INSERTE LA CUADRILLA PARA EL TRABAJO");
-        bar.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -157,7 +154,7 @@ public class frmValoresReclamos extends javax.swing.JFrame {
         jPanel3.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 130, -1));
 
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Descripción:");
+        jLabel12.setText("*");
         jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, -1, -1));
 
         jdFechaReclamo.setDateFormatString("yyyy/MM/dd");
@@ -172,6 +169,10 @@ public class frmValoresReclamos extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Fecha de Reclamo:");
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Descripción:");
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, 340, 290));
 
@@ -286,20 +287,26 @@ public class frmValoresReclamos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMousePressed
 
     private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
-        DReclamos dr = new DReclamos();
-        LClientes fun = new LClientes();
-        
-        int a, m, d;
-        a = jdFechaReclamo.getCalendar().get(Calendar.YEAR);
-        m = jdFechaReclamo.getCalendar().get(Calendar.MONTH);
-        d = jdFechaReclamo.getCalendar().get(Calendar.DAY_OF_MONTH);
-        dr.setFechaReclamo(new Date((a - 1900), m, d));
-        dr.setDescripcion(txtDescripcion.getText());
-        dr.setServiciodelclientId(Integer.parseInt(txtIdCliente.getText()));
-        fun.insertarReclamos(dr);
-        this.dispose();
+        if ("".equals(txtDescripcion.getText())) {
+            txtDescripcion.setBackground(Color.RED);
+            txtDescripcion.requestFocus();
+            JOptionPane.showMessageDialog(null, "Debe de Ingresar una descripcion del reclamo");
+        } else {
+            DReclamos dr = new DReclamos();
+            LClientes fun = new LClientes();
+
+            int a, m, d;
+            a = jdFechaReclamo.getCalendar().get(Calendar.YEAR);
+            m = jdFechaReclamo.getCalendar().get(Calendar.MONTH);
+            d = jdFechaReclamo.getCalendar().get(Calendar.DAY_OF_MONTH);
+            dr.setFechaReclamo(new Date((a - 1900), m, d));
+            dr.setDescripcion(txtDescripcion.getText());
+            dr.setServiciodelclientId(Integer.parseInt(txtIdCliente.getText()));
+            fun.insertarReclamos(dr);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnGuardarMousePressed
-        
+
     /**
      * @param args the command line arguments
      */
@@ -348,9 +355,9 @@ public class frmValoresReclamos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

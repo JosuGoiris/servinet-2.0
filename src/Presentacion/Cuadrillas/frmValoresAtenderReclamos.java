@@ -122,6 +122,7 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         btnGuardar2 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar1 = new javax.swing.JPanel();
@@ -204,7 +205,7 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Elegir Cuadrilla:");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         btnBuscarCuadrilla.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscarCuadrilla.setPreferredSize(new java.awt.Dimension(40, 40));
@@ -239,6 +240,10 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Fecha de Solicitud:");
         jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("*");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 70, 400, 250));
 
@@ -364,10 +369,10 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMousePressed
 
     private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
-        if ("".equals(txtCuadrilla.getText()) || "".equals(txtIdCuadrilla.getText())) {
+        if ("SIN CUADRILLA".equals(txtCuadrilla.getText())) {
             txtCuadrilla.setBackground(Color.red);
             txtIdCuadrilla.setBackground(Color.red);
-            JOptionPane.showMessageDialog(null, "Se necesita registrar la cuadrilla");
+            JOptionPane.showMessageDialog(null, "Se necesita ingresar la cuadrilla para atender el reclamo");
         } else {
             JOptionPane.showMessageDialog(null, "Se han registrado los datos");
 
@@ -454,6 +459,7 @@ public class frmValoresAtenderReclamos extends javax.swing.JFrame {
     private javax.swing.JPanel btnGuardar3;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

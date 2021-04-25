@@ -176,7 +176,7 @@ public class LClientes {
             cn.commit();
             
             System.out.println("Datos Insertados");
-            
+            JOptionPane.showMessageDialog(null, "Reclamo Enviado");
         } catch (Exception e) {
             System.out.println("Datos no Insertados");
             JOptionPane.showMessageDialog(null, e);

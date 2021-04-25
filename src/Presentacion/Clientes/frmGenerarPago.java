@@ -62,9 +62,9 @@ public final class frmGenerarPago extends javax.swing.JFrame {
     public frmGenerarPago() {
         initComponents();
         this.setLocationRelativeTo(null);
-        cmbFormadePago.setModel(es.llenarComboFormadePago());
         GenerarFechas();
         cargarValores();
+        txtPagando.requestFocus();
     }
 
     public void cargarValores() {
@@ -85,14 +85,6 @@ public final class frmGenerarPago extends javax.swing.JFrame {
     public void GenerarFechas() {
         //Se Inserta la fecha actual para la fecha de emision de la factura
         jdFechaRealizado.setCalendar(fecha_actual);
-    }
-
-    public void traerIdFormadePago() {
-        if (cmbFormadePago.getSelectedItem().equals("Tarjeta")) {
-            txtIdFormadePago.setText("2");
-        } else if (cmbFormadePago.getSelectedItem().equals("Efectivo")) {
-            txtIdFormadePago.setText("3");
-        }
     }
 
     /**
@@ -120,7 +112,6 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         btnSalir3 = new javax.swing.JPanel();
         btnSalir5 = new javax.swing.JPanel();
-        cmbFormadePago = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -143,7 +134,6 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         jdFechaRealizado = new com.toedter.calendar.JDateChooser();
         txtIdFormadePago = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         txtForma = new javax.swing.JTextField();
         btnBuscarForma = new javax.swing.JPanel();
         lblBuscarForma = new javax.swing.JLabel();
@@ -295,13 +285,6 @@ public final class frmGenerarPago extends javax.swing.JFrame {
 
         jPanel7.add(btnSalir5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 170, 50));
 
-        cmbFormadePago.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbFormadePagoActionPerformed(evt);
-            }
-        });
-        jPanel7.add(cmbFormadePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, -1));
-
         jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 210, 370));
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
@@ -378,14 +361,6 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("ID FORMA:");
         jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
-
-        jButton1.setText("Prueba");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
         jPanel5.add(txtForma, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 140, -1));
 
         btnBuscarForma.setBackground(new java.awt.Color(102, 0, 0));
@@ -485,63 +460,70 @@ public final class frmGenerarPago extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMousePressed
-        DPagos dp = new DPagos();
-        DDetalleFactura ddf = new DDetalleFactura();
-        DDetallePagos ddp = new DDetallePagos();
-        LPagos fun1 = new LPagos();
-        DCaja dc = new DCaja();
-        DServiciodelCliente dsc = new DServiciodelCliente();
-        LGestionarServicios fun2 = new LGestionarServicios();
+        if ("".equals(txtForma.getText())) {
+            txtIdFormadePago.setBackground(Color.red);
+            txtForma.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Debe de ingresar una forma de pago");
+        } else {
+            DPagos dp = new DPagos();
+            DDetalleFactura ddf = new DDetalleFactura();
+            DDetallePagos ddp = new DDetallePagos();
+            LPagos fun1 = new LPagos();
+            DCaja dc = new DCaja();
+            DServiciodelCliente dsc = new DServiciodelCliente();
+            LGestionarServicios fun2 = new LGestionarServicios();
 
-        Calendar siguiente = new GregorianCalendar();
-        siguiente.set(Calendar.MONTH, Calendar.MONTH + 1);
-        siguiente.set(Calendar.DAY_OF_MONTH, siguiente.getActualMaximum(Calendar.DAY_OF_MONTH));
-        siguiente.set(Calendar.DATE, siguiente.getActualMaximum(Calendar.DATE));
-        String diaSiguiente = sdf2.format(siguiente.getTime());
-        String mesSiguiente = formatoMes.format(siguiente.getTime());
-        String añoSiguiente = formatoAño.format(siguiente.getTime());
-        int diaS = Integer.parseInt(diaSiguiente);
-        int mesS = Integer.parseInt(mesSiguiente);
-        int añoS = Integer.parseInt(añoSiguiente);
-        System.out.println(añoS + "-" + mesS + "-" + diaS);
-        dsc.setFechaPago(new Date((añoS - 1900), (mesS - 1), diaS));
-        dsc.setIdServiciodelCliente(Integer.parseInt(txtIdCliente.getText()));
-        if(multa > 0){
-            dsc.setMulta(0);
-            dsc.setEstadoMulta("NO");
-            fun2.multa(dsc);
+            Calendar siguiente = new GregorianCalendar();
+            siguiente.set(Calendar.MONTH, Calendar.MONTH + 1);
+            siguiente.set(Calendar.DAY_OF_MONTH, siguiente.getActualMaximum(Calendar.DAY_OF_MONTH));
+            siguiente.set(Calendar.DATE, siguiente.getActualMaximum(Calendar.DATE));
+            String diaSiguiente = sdf2.format(siguiente.getTime());
+            String mesSiguiente = formatoMes.format(siguiente.getTime());
+            String añoSiguiente = formatoAño.format(siguiente.getTime());
+            int diaS = Integer.parseInt(diaSiguiente);
+            int mesS = Integer.parseInt(mesSiguiente);
+            int añoS = Integer.parseInt(añoSiguiente);
+            System.out.println(añoS + "-" + mesS + "-" + diaS);
+            dsc.setFechaPago(new Date((añoS - 1900), (mesS - 1), diaS));
+            dsc.setIdServiciodelCliente(Integer.parseInt(txtIdCliente.getText()));
+            if (multa > 0) {
+                dsc.setMulta(0);
+                dsc.setEstadoMulta("NO");
+                fun2.multa(dsc);
+            }
+            fun2.EstadoActivo(dsc);
+
+            idCaja = lc.traerId();
+            monto = lc.traerMonto();
+            JOptionPane.showMessageDialog(null, idCaja);
+            JOptionPane.showMessageDialog(null, monto);
+            double montoTotal;
+            double total = Double.parseDouble(txtVuelto.getText());
+            montoTotal = monto - total;
+            dc.setMontoApertura(montoTotal);
+            dc.setIdCaja(idCaja);
+            fun1.restarMonto(dc);
+
+            //Guarda la fecha de vencimiento
+            int añoV = jdFechaVencimiento.getCalendar().get(Calendar.YEAR);
+            int mesV = jdFechaVencimiento.getCalendar().get(Calendar.MONTH);
+            int diaV = jdFechaVencimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
+            dp.setFechaPago(new Date((añoV - 1900), mesV, diaV));
+
+            //Guarda la fecha de emision
+            int año = jdFechaRealizado.getCalendar().get(Calendar.YEAR);
+            int mes = jdFechaRealizado.getCalendar().get(Calendar.MONTH);
+            int dia = jdFechaRealizado.getCalendar().get(Calendar.DAY_OF_MONTH);
+            dp.setFechaRealizado(new Date((año - 1900), mes, dia));
+
+            dp.setServiciodelclienteId(Integer.parseInt(txtIdCliente.getText()));
+            dp.setFormadepagoId(Integer.parseInt(txtIdFormadePago.getText()));
+            dp.setDetallefacturaId(Integer.parseInt(txtIdFactura.getText()));
+
+            ddf.setIdDetalleFactura(Integer.parseInt(txtIdFactura.getText()));
+            fun1.RealizarPago(dp, ddf);
+            this.dispose();
         }
-        fun2.EstadoActivo(dsc);
-
-        idCaja = lc.traerId();
-        monto = lc.traerMonto();
-        JOptionPane.showMessageDialog(null, idCaja);
-        JOptionPane.showMessageDialog(null, monto);
-        double montoTotal;
-        double total = Double.parseDouble(txtVuelto.getText());
-        montoTotal = monto - total;
-        dc.setMontoApertura(montoTotal);
-        dc.setIdCaja(idCaja);
-        fun1.restarMonto(dc);
-
-        //Guarda la fecha de vencimiento
-        int añoV = jdFechaVencimiento.getCalendar().get(Calendar.YEAR);
-        int mesV = jdFechaVencimiento.getCalendar().get(Calendar.MONTH);
-        int diaV = jdFechaVencimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
-        dp.setFechaPago(new Date((añoV - 1900), mesV, diaV));
-
-        //Guarda la fecha de emision
-        int año = jdFechaRealizado.getCalendar().get(Calendar.YEAR);
-        int mes = jdFechaRealizado.getCalendar().get(Calendar.MONTH);
-        int dia = jdFechaRealizado.getCalendar().get(Calendar.DAY_OF_MONTH);
-        dp.setFechaRealizado(new Date((año - 1900), mes, dia));
-
-        dp.setServiciodelclienteId(Integer.parseInt(txtIdCliente.getText()));
-        dp.setFormadepagoId(Integer.parseInt(txtIdFormadePago.getText()));
-        dp.setDetallefacturaId(Integer.parseInt(txtIdFactura.getText()));
-
-        ddf.setIdDetalleFactura(Integer.parseInt(txtIdFactura.getText()));
-        fun1.RealizarPago(dp, ddf);
     }//GEN-LAST:event_btnGenerarMousePressed
 
     private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
@@ -587,10 +569,6 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSalir5MousePressed
 
-    private void cmbFormadePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFormadePagoActionPerformed
-        traerIdFormadePago();
-    }//GEN-LAST:event_cmbFormadePagoActionPerformed
-
     private void txtPagandoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPagandoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPagandoActionPerformed
@@ -605,20 +583,6 @@ public final class frmGenerarPago extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_txtPagandoKeyPressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Calendar siguiente = new GregorianCalendar();
-        siguiente.set(Calendar.MONTH, Calendar.MONTH + 1);
-        siguiente.set(Calendar.DAY_OF_MONTH, siguiente.getActualMaximum(Calendar.DAY_OF_MONTH));
-        siguiente.set(Calendar.DATE, siguiente.getActualMaximum(Calendar.DATE));
-        String diaSiguiente = sdf2.format(siguiente.getTime());
-        String mesSiguiente = formatoMes.format(siguiente.getTime());
-        String añoSiguiente = formatoAño.format(siguiente.getTime());
-        int diaS = Integer.parseInt(diaSiguiente);
-        int mesS = Integer.parseInt(mesSiguiente);
-        int añoS = Integer.parseInt(añoSiguiente);
-        System.out.println(añoS + "-" + diaS + "-" + mesS);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnBuscarFormaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarFormaMouseEntered
         setColor(btnBuscarForma);
@@ -656,7 +620,6 @@ public final class frmGenerarPago extends javax.swing.JFrame {
     void resetColor(JPanel panel) {
         panel.setBackground(new Color(102, 0, 0));
     }
-
 
     /**
      * @param args the command line arguments
@@ -702,8 +665,6 @@ public final class frmGenerarPago extends javax.swing.JFrame {
     private javax.swing.JPanel btnSalir;
     private javax.swing.JPanel btnSalir3;
     private javax.swing.JPanel btnSalir5;
-    private javax.swing.JComboBox<String> cmbFormadePago;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

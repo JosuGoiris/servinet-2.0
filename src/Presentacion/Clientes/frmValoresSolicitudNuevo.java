@@ -97,7 +97,6 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         txtNombres = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtApellidos = new javax.swing.JTextField();
@@ -107,6 +106,12 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         txtTelefono = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtRUC = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         txtBarrio = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -128,6 +133,9 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         btnGuardar2 = new javax.swing.JPanel();
         btnGuardar4 = new javax.swing.JPanel();
         btnGuardar5 = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnGuardar1 = new javax.swing.JPanel();
@@ -163,7 +171,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel15.setText("SERVINET");
         bar.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 10, -1, -1));
 
-        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 40));
+        bg.add(bar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 40));
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -175,10 +183,6 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel3.setText("ID:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
         jPanel2.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 31, 53, -1));
-
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Nombres:");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
 
         txtNombres.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -213,7 +217,31 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 297, -1, -1));
         jPanel2.add(txtRUC, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 317, 120, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 230, 360));
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Nombres:");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 65, -1, -1));
+
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("*");
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 20, 20));
+
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("*");
+        jPanel2.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 20, 20));
+
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("*");
+        jPanel2.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 20, 20));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("*");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 20, 20));
+
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("*");
+        jPanel2.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 20, 20));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 250, 360));
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -246,14 +274,14 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         btnBuscarBarrio.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscarBarrio.setPreferredSize(new java.awt.Dimension(40, 40));
         btnBuscarBarrio.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnBuscarBarrioMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarBarrioMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnBuscarBarrioMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuscarBarrioMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBuscarBarrioMousePressed(evt);
             }
         });
         btnBuscarBarrio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -261,19 +289,19 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
         btnBuscarBarrio.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel3.add(btnBuscarBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 40, 40));
+        jPanel3.add(btnBuscarBarrio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 40, 40));
 
         btnBuscarDireccion.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscarDireccion.setPreferredSize(new java.awt.Dimension(40, 40));
         btnBuscarDireccion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnBuscarDireccionMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarDireccionMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnBuscarDireccionMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuscarDireccionMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBuscarDireccionMousePressed(evt);
             }
         });
         btnBuscarDireccion.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -281,19 +309,19 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
         btnBuscarDireccion.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel3.add(btnBuscarDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 70, 40, 40));
+        jPanel3.add(btnBuscarDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 70, 40, 40));
 
         btnBuscarSolicitud.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscarSolicitud.setPreferredSize(new java.awt.Dimension(40, 40));
         btnBuscarSolicitud.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnBuscarSolicitudMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarSolicitudMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnBuscarSolicitudMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnBuscarSolicitudMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBuscarSolicitudMousePressed(evt);
             }
         });
         btnBuscarSolicitud.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -301,7 +329,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px.png"))); // NOI18N
         btnBuscarSolicitud.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        jPanel3.add(btnBuscarSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, -1, 40));
+        jPanel3.add(btnBuscarSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 130, -1, 40));
 
         btnGuardar2.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar2.setEnabled(false);
@@ -317,7 +345,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel3.add(btnGuardar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 40, 40));
+        jPanel3.add(btnGuardar2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, 40, 40));
 
         btnGuardar4.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar4.setEnabled(false);
@@ -333,7 +361,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel3.add(btnGuardar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, -1, -1));
+        jPanel3.add(btnGuardar4, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, -1, -1));
 
         btnGuardar5.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar5.setEnabled(false);
@@ -349,21 +377,33 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
-        jPanel3.add(btnGuardar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 140, -1, -1));
+        jPanel3.add(btnGuardar5, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 400, 250));
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("*");
+        jPanel3.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 20, 20));
+
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("*");
+        jPanel3.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 20, 20));
+
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("*");
+        jPanel3.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, 20, 20));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 430, 250));
 
         btnGuardar.setBackground(new java.awt.Color(102, 0, 0));
         btnGuardar.setPreferredSize(new java.awt.Dimension(50, 50));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnGuardarMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGuardarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnGuardarMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnGuardarMousePressed(evt);
             }
         });
         btnGuardar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -372,7 +412,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(25, 25));
         btnGuardar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 390, 50, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 390, 50, 50));
 
         btnGuardar1.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar1.setEnabled(false);
@@ -388,19 +428,19 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 400, -1, 50));
+        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 400, -1, 50));
 
         btnSalir.setBackground(new java.awt.Color(102, 0, 0));
         btnSalir.setPreferredSize(new java.awt.Dimension(50, 50));
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnSalirMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnSalirMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSalirMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalirMousePressed(evt);
             }
         });
         btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -409,7 +449,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
         jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
         btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 390, 50, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 390, 50, 50));
 
         btnGuardar3.setBackground(new java.awt.Color(0, 0, 0));
         btnGuardar3.setEnabled(false);
@@ -425,25 +465,25 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 400, 50, 50));
-        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 580, 10));
-        jPanel1.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 400, 10));
-        jPanel1.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 120, 10));
+        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 400, 50, 50));
+        jPanel1.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 600, 20));
+        jPanel1.add(jSeparator22, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 440, 10));
+        jPanel1.add(jSeparator24, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 380, 130, 10));
 
         jSeparator25.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 390, 20, 30));
+        jPanel1.add(jSeparator25, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 390, 20, 40));
 
         jSeparator27.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator27, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 20, 30));
         jPanel1.add(jSeparator28, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 270, 20));
 
         jSeparator29.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator29, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 70, 20, 300));
+        jPanel1.add(jSeparator29, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 70, 20, 300));
 
         jSeparator30.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel1.add(jSeparator30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 20, 400));
+        jPanel1.add(jSeparator30, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 20, 420));
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 760, 460));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 790, 460));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -480,7 +520,11 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             txtTelefono.requestFocus();
             txtTelefono.setBackground(Color.red);
             JOptionPane.showMessageDialog(null, "Ingrese el nro de telefono");
-        } else if ("".equals(txtIdBarrio.getText()) || "".equals(txtBarrio.getText())) {
+        } else if ("".equals(txtRUC.getText())) {
+            txtRUC.requestFocus();
+            txtRUC.setBackground(Color.red);
+            JOptionPane.showMessageDialog(null, "Ingrese el RUC");
+        }else if ("".equals(txtIdBarrio.getText()) || "".equals(txtBarrio.getText())) {
             txtIdBarrio.setBackground(Color.red);
             txtBarrio.setBackground(Color.red);
             JOptionPane.showMessageDialog(null, "Ingrese el barrio");
@@ -687,6 +731,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
     private javax.swing.JPanel btnGuardar5;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -695,7 +740,14 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

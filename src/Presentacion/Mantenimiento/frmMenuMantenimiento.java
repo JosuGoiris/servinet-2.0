@@ -60,6 +60,9 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         jSeparator42 = new javax.swing.JSeparator();
         jSeparator43 = new javax.swing.JSeparator();
         jSeparator44 = new javax.swing.JSeparator();
+        btnSalir = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        btnSalir3 = new javax.swing.JPanel();
         mover = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         btnUsuarios = new javax.swing.JPanel();
@@ -161,6 +164,43 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         jPanel3.add(jSeparator43, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 28, 760, 10));
         jPanel3.add(jSeparator44, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 18, 760, 10));
 
+        btnSalir.setBackground(new java.awt.Color(102, 0, 0));
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSalir.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalirMousePressed(evt);
+            }
+        });
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_exit_30px.png"))); // NOI18N
+        btnSalir.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 31, 30));
+
+        jPanel3.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 10, 50, 50));
+
+        btnSalir3.setBackground(new java.awt.Color(51, 0, 0));
+        btnSalir3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnSalir3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        btnSalir3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnSalir3MousePressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btnSalir3Layout = new javax.swing.GroupLayout(btnSalir3);
+        btnSalir3.setLayout(btnSalir3Layout);
+        btnSalir3Layout.setHorizontalGroup(
+            btnSalir3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        btnSalir3Layout.setVerticalGroup(
+            btnSalir3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(btnSalir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 50, 50));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 1020, 80));
 
         mover.setBackground(new java.awt.Color(204, 204, 204));
@@ -204,16 +244,16 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         });
         btnUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_pencil_100px_3.png"))); // NOI18N
+        lblUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/usuario_100px.png"))); // NOI18N
         lblUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblUsuariosMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblUsuariosMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblUsuariosMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblUsuariosMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblUsuariosMousePressed(evt);
             }
         });
         btnUsuarios.add(lblUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, -1, -1));
@@ -285,7 +325,7 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         });
         btnCuadrillas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblCuadrillas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_check_document_100px.png"))); // NOI18N
+        lblCuadrillas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cuadrillas_100px.png"))); // NOI18N
         lblCuadrillas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblCuadrillasMousePressed(evt);
@@ -361,7 +401,7 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         });
         btnTrabajadores.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTrabajadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_credit_control_100px.png"))); // NOI18N
+        lblTrabajadores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/trabajadores_100px.png"))); // NOI18N
         lblTrabajadores.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblTrabajadoresMousePressed(evt);
@@ -442,7 +482,7 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         });
         btnDirecciones.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblDirecciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_card_payment_100px.png"))); // NOI18N
+        lblDirecciones.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/direcciones_100px.png"))); // NOI18N
         lblDirecciones.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblDireccionesMousePressed(evt);
@@ -529,7 +569,7 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         });
         btnZonas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblZonas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_safety_hat_100px.png"))); // NOI18N
+        lblZonas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/zonas_100px.png"))); // NOI18N
         lblZonas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblZonasMousePressed(evt);
@@ -658,7 +698,7 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         });
         btnFormasdePago.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblFormasdePago.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_safety_hat_100px.png"))); // NOI18N
+        lblFormasdePago.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/formasdepago_100px.png"))); // NOI18N
         lblFormasdePago.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblFormasdePagoMouseEntered(evt);
@@ -739,7 +779,7 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         });
         btnPuestos.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblPuestos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_safety_hat_100px.png"))); // NOI18N
+        lblPuestos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/puestodetrabajo_100px.png"))); // NOI18N
         lblPuestos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblPuestosMousePressed(evt);
@@ -828,7 +868,7 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         });
         btnTiposDeUsuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblTiposdeUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_safety_hat_100px.png"))); // NOI18N
+        lblTiposdeUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/tiposdeusuario_100px.png"))); // NOI18N
         lblTiposdeUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblTiposdeUsuariosMousePressed(evt);
@@ -930,7 +970,7 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         });
         btnServicios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblServicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_card_payment_100px.png"))); // NOI18N
+        lblServicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/servicios_100px.png"))); // NOI18N
         lblServicios.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 lblServiciosMousePressed(evt);
@@ -1015,16 +1055,16 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         });
         btnBackup.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_safety_hat_100px.png"))); // NOI18N
+        lblBackup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/backup_100px.png"))); // NOI18N
         lblBackup.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblBackupMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblBackupMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lblBackupMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblBackupMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblBackupMousePressed(evt);
             }
         });
         btnBackup.add(lblBackup, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
@@ -1682,6 +1722,14 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNuevaSolicitud10MouseReleased
 
+    private void btnSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalirMousePressed
+
+    private void btnSalir3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalir3MousePressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSalir3MousePressed
+
     
     
     /**
@@ -1738,6 +1786,8 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
     public javax.swing.JPanel btnNuevaSolicitud8;
     public javax.swing.JPanel btnNuevaSolicitud9;
     public javax.swing.JPanel btnPuestos;
+    private javax.swing.JPanel btnSalir;
+    private javax.swing.JPanel btnSalir3;
     public javax.swing.JPanel btnServicios;
     public javax.swing.JPanel btnTiposDeUsuarios;
     public javax.swing.JPanel btnTrabajadores;
@@ -1750,6 +1800,7 @@ public class frmMenuMantenimiento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

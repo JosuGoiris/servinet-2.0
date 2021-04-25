@@ -592,10 +592,7 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRevisarServiciosMouseExited
 
     private void btnRevisarServiciosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarServiciosMousePressed
-        frmGestionarServicios form = new frmGestionarServicios();
-        form.setVisible(true);
-        form.toFront();
-        this.dispose();
+       
     }//GEN-LAST:event_btnRevisarServiciosMousePressed
 
     private void btnRevisarServiciosMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarServiciosMouseReleased

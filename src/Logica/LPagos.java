@@ -195,6 +195,7 @@ public class LPagos {
             cn.commit();
             
             System.out.println("Datos Insertados");
+            JOptionPane.showMessageDialog(null, "Se ha realizado el pago");
         } catch (Exception e) {
             System.out.println("Datos no Insertados");
             JOptionPane.showMessageDialog(null, e);
