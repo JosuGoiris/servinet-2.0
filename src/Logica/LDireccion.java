@@ -33,7 +33,7 @@ public class LDireccion {
         miModelo = new DefaultTableModel(null, titulos);
         sSQL = "select d.idDireccion, d.nombreDireccion, z.idZona, z.nombreZona, d.descripcion, d.estado \n"
              + "from tbldireccion as d inner join tblzona as z on d.idZona = z.idZona \n"
-             + "where d.idDireccion = '" + buscar + "' or d.nombreDireccion like '%" + buscar + "%' && d.estado = 'Activo' order by d.idDireccion";
+             + "where d.idDireccion = '" + buscar + "' or d.nombreDireccion like '%" + buscar + "%' && d.estado = 'ACTIVO' order by d.idDireccion";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -59,8 +59,8 @@ public class LDireccion {
         
         miModelo = new DefaultTableModel(null, titulos);
         sSQL = "select d.idDireccion, d.nombreDireccion, z.idZona, z.nombreZona, d.descripcion, d.estado \n"
-             + "from tbldireccion as d inner join tblzona as z on d.idZona = z.idZona \n"
-             + "where d.idDireccion = '" + buscar + "'";
+             + "from tblzona as z inner join tbldireccion as d on z.idZona = d.idZona \n"
+             + "where z.idZona = '" + buscar + "' && d.estado = 'ACTIVO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -103,7 +103,7 @@ public class LDireccion {
         miModelo = new DefaultTableModel(null, titulos);
         sSQL = "select d.idDireccion, d.nombreDireccion, z.idZona, z.nombreZona, d.descripcion, d.estado \n"
              + "from tbldireccion as d inner join tblzona as z on d.idZona = z.idZona \n"
-             + "where d.idDireccion = '" + buscar + "' or d.nombreDireccion like '%" + buscar + "%' && d.estado = 'Inactivo' order by d.idDireccion";
+             + "where d.idDireccion = '" + buscar + "' or d.nombreDireccion like '%" + buscar + "%' && d.estado = 'INACTIVO' order by d.idDireccion";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -130,7 +130,7 @@ public class LDireccion {
             pst.setString(1, dir.getNombreDireccion());
             pst.setString(2, dir.getDescripcion());
             pst.setInt(3, dir.getZonaId());
-            pst.setString(4, "Activo");
+            pst.setString(4, "ACTIVO");
             
             pst.executeUpdate();
             
@@ -171,7 +171,7 @@ public class LDireccion {
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             
-            pst.setString(1, "Inactivo");
+            pst.setString(1, "INACTIVO");
             pst.setInt(2, dir.getIdDireccion());
             
             pst.executeUpdate();
@@ -191,7 +191,7 @@ public class LDireccion {
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             
-            pst.setString(1, "Activo");
+            pst.setString(1, "ACTIVO");
             pst.setInt(2, dir.getIdDireccion());
             
             pst.executeUpdate();

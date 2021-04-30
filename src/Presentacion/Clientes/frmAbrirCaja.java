@@ -413,7 +413,7 @@ public class frmAbrirCaja extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarSolicitud2MouseExited
 
     private void btnEditarSolicitud2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud2MousePressed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnEditarSolicitud2MousePressed
 
     private void btnEditarSolicitud2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitud2MouseReleased

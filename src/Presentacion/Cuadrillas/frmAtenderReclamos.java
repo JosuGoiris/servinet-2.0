@@ -691,7 +691,7 @@ public class frmAtenderReclamos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRealizarTrabajoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRealizarTrabajoMousePressed
-        int mensaje = JOptionPane.showConfirmDialog(rootPane, "¿Desea atender el reclamo?");
+        int mensaje = JOptionPane.showConfirmDialog(rootPane, "¿Desea terminar el reclamo?");
         if (mensaje == 0) {
             DTrabajosReclamos dtr = new DTrabajosReclamos();
             DTrabajos dt = new DTrabajos();
@@ -736,7 +736,7 @@ public class frmAtenderReclamos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevaSolicitud5MouseReleased
 
     private void btnVolverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMousePressed
-        frmPrincipalMenu form = new frmPrincipalMenu();
+        frmMenuCuadrillas form = new frmMenuCuadrillas();
         form.setVisible(true);
         form.toFront();
         this.dispose();

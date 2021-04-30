@@ -34,7 +34,7 @@ public final class frmVistaDireccionTrabajador extends javax.swing.JFrame {
     }
     
     public void mostrar(int id){
-        id = ld.traerIdDireccion(frmValoresTrabajadoresNuevo.idBarrio);
+        id = frmValoresTrabajadoresNuevo.idBarrio;
         try {
             DefaultTableModel miModelo;
             LDireccion fun = new LDireccion();

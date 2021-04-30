@@ -742,7 +742,7 @@ public class frmRevisarTrabajos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevaSolicitud5MouseReleased
 
     private void btnVolverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMousePressed
-        frmPrincipalMenu form = new frmPrincipalMenu();
+        frmMenuCuadrillas form = new frmMenuCuadrillas();
         form.setVisible(true);
         form.toFront();
         this.dispose();

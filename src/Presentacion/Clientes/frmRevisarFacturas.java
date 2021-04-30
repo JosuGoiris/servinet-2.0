@@ -44,7 +44,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
     Calendar fecha_actual = new GregorianCalendar();
 
     SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
-    
+
     LGestionarServicios lgs = new LGestionarServicios();
 
     /**
@@ -72,7 +72,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     public void mostrarNoPagado(String buscar) {
         try {
             DefaultTableModel miModelo;
@@ -85,7 +85,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
     }
 
     void revisarFechas() {
-        if ("No".equals(frmGestionarServicios.estado)) {
+        if ("NO".equals(frmGestionarServicios.estado)) {
             int dia = jdFecha2.getCalendar().get(Calendar.DAY_OF_MONTH);
             int mes = jdFecha2.getCalendar().get(Calendar.MONTH);
             int año = jdFecha2.getCalendar().get(Calendar.YEAR);
@@ -114,8 +114,8 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
 
                     ddf.setIdDetalleFactura(idFactura[i]);
                     fun1.actualizarFactura(ddf);
-                    
-                    frmGestionarServicios.estado = "Si";
+
+                    frmGestionarServicios.estado = "SI";
                     System.out.println(frmGestionarServicios.estado);
                 } else {
                     System.out.println("Todavia puede pagarse");
@@ -125,7 +125,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
             System.out.println("YA SE HIZO");
         }
     }
-    
+
     public void ponerMasMulta() {
         if ("No".equals(frmGestionarServicios.multapuesta)) {
             String estadoV = null;
@@ -151,7 +151,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
                 System.out.println("Estado Factura: " + estado[i]);
                 //verifica cada fecha de vencimiento con la fecha real del dia
                 //y si se cumple realiza el corte del servicio si este todavia no se ha pagado
-                if ("Factura Sin Pagar".equals(estado[i]) && "No".equals(estadoMulta)) {
+                if ("FACTURA SIN PAGAR".equals(estado[i]) && "NO".equals(estadoMulta)) {
                     int diaNuevo = 23;
                     if (diaNuevo < dia) {
                         DServiciodelCliente dsc = new DServiciodelCliente();
@@ -166,10 +166,10 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
                         dsc.setMulta(total);
                         dsc.setIdServiciodelCliente(id[i]);
                         fun.actualizarMulta(dsc);
-                        String estadoM = "Si";
+                        String estadoM = "SI";
                         dsc.setEstadoMulta(estadoM);
                         fun.estadoMulta(dsc);
-                        frmGestionarServicios.multapuesta = "Si";
+                        frmGestionarServicios.multapuesta = "SI";
                         System.out.println(frmGestionarServicios.multapuesta);
                     }
                 } else {
@@ -180,7 +180,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
             System.out.println("La multa ya esta puesta");
         }
     }
-    
+
     public void ordenarTamaños() {
         TableColumnModel Modelo = tblFacturas.getColumnModel();
         Modelo.getColumn(0).setPreferredWidth(10);
@@ -241,11 +241,6 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         jSeparator14 = new javax.swing.JSeparator();
         jLabel23 = new javax.swing.JLabel();
-        btnEditarSolicitud = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jSeparator5 = new javax.swing.JSeparator();
-        btnNuevaSolicitud6 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         btnBuscar = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -305,17 +300,17 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
             }
         });
         btnNuevaSolicitud.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNuevaSolicitudMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNuevaSolicitudMouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnNuevaSolicitudMousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 btnNuevaSolicitudMouseReleased(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitudMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitudMouseEntered(evt);
             }
         });
         btnNuevaSolicitud.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -335,14 +330,14 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
         btnRevisarFacturas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRevisarFacturas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnRevisarFacturas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnRevisarFacturasMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnRevisarFacturasMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnRevisarFacturasMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnRevisarFacturasMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnRevisarFacturasMousePressed(evt);
             }
         });
         btnRevisarFacturas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -362,14 +357,14 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
         btnEliminarSolicitud.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEliminarSolicitud.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnEliminarSolicitud.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnEliminarSolicitudMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEliminarSolicitudMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnEliminarSolicitudMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEliminarSolicitudMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnEliminarSolicitudMousePressed(evt);
             }
         });
         btnEliminarSolicitud.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -383,20 +378,20 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
         btnEliminarSolicitud.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 12, -1, -1));
         btnEliminarSolicitud.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 38, 167, 10));
 
-        jPanel2.add(btnEliminarSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 240, 50));
+        jPanel2.add(btnEliminarSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 240, 50));
 
         btnVolver.setBackground(new java.awt.Color(102, 0, 0));
         btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVolver.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnVolverMousePressed(evt);
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVolverMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnVolverMouseExited(evt);
             }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVolverMouseEntered(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnVolverMousePressed(evt);
             }
         });
         btnVolver.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -410,7 +405,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
         btnVolver.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 12, -1, -1));
         btnVolver.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 38, 179, 10));
 
-        jPanel2.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 460, 240, 50));
+        jPanel2.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 390, 240, 50));
 
         btnNuevaSolicitud1.setBackground(new java.awt.Color(0, 0, 0));
         btnNuevaSolicitud1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -421,17 +416,17 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
             }
         });
         btnNuevaSolicitud1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNuevaSolicitud1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNuevaSolicitud1MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnNuevaSolicitud1MousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 btnNuevaSolicitud1MouseReleased(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud1MouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud1MouseEntered(evt);
             }
         });
 
@@ -446,7 +441,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel2.add(btnNuevaSolicitud1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 240, 50));
+        jPanel2.add(btnNuevaSolicitud1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 240, 50));
 
         btnNuevaSolicitud2.setBackground(new java.awt.Color(0, 0, 0));
         btnNuevaSolicitud2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -529,17 +524,17 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
             }
         });
         btnNuevaSolicitud4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNuevaSolicitud4MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNuevaSolicitud4MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 btnNuevaSolicitud4MousePressed(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 btnNuevaSolicitud4MouseReleased(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud4MouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud4MouseEntered(evt);
             }
         });
 
@@ -554,7 +549,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel2.add(btnNuevaSolicitud4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 240, 50));
+        jPanel2.add(btnNuevaSolicitud4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 240, 50));
 
         jLabel21.setFont(new java.awt.Font("Bauhaus 93", 1, 10)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(204, 204, 204));
@@ -578,69 +573,6 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
         jLabel23.setForeground(new java.awt.Color(204, 204, 204));
         jLabel23.setText("FACTURAS DE CLIENTES");
         jPanel2.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 270, 50));
-
-        btnEditarSolicitud.setBackground(new java.awt.Color(102, 0, 0));
-        btnEditarSolicitud.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnEditarSolicitud.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnEditarSolicitud.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitudMousePressed(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitudMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnEditarSolicitudMouseEntered(evt);
-            }
-        });
-        btnEditarSolicitud.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_edit_30px.png"))); // NOI18N
-        btnEditarSolicitud.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 12, 31, 36));
-
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel19.setText("Editar Factura");
-        btnEditarSolicitud.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 12, -1, -1));
-        btnEditarSolicitud.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(61, 38, 167, 10));
-
-        jPanel2.add(btnEditarSolicitud, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 240, 50));
-
-        btnNuevaSolicitud6.setBackground(new java.awt.Color(0, 0, 0));
-        btnNuevaSolicitud6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnNuevaSolicitud6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNuevaSolicitud6.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                btnNuevaSolicitud6FocusGained(evt);
-            }
-        });
-        btnNuevaSolicitud6.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud6MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud6MouseReleased(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud6MouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud6MouseEntered(evt);
-            }
-        });
-
-        javax.swing.GroupLayout btnNuevaSolicitud6Layout = new javax.swing.GroupLayout(btnNuevaSolicitud6);
-        btnNuevaSolicitud6.setLayout(btnNuevaSolicitud6Layout);
-        btnNuevaSolicitud6Layout.setHorizontalGroup(
-            btnNuevaSolicitud6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
-        );
-        btnNuevaSolicitud6Layout.setVerticalGroup(
-            btnNuevaSolicitud6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(btnNuevaSolicitud6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 240, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 590));
 
@@ -756,6 +688,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
 
             }
         ));
+        tblFacturas.setEnabled(false);
         tblFacturas.setGridColor(new java.awt.Color(255, 255, 255));
         tblFacturas.setRowHeight(25);
         tblFacturas.setSelectionBackground(new java.awt.Color(102, 0, 0));
@@ -939,7 +872,7 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevaSolicitudMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitudMousePressed
-        frmGenerarPago form = new frmGenerarPago();
+        frmGestionarPagos form = new frmGestionarPagos();
         form.setVisible(true);
         form.toFront();
     }//GEN-LAST:event_btnNuevaSolicitudMousePressed
@@ -1008,8 +941,6 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
         fechaVencimiento = tblFacturas.getValueAt(fila, 5).toString();
         servicioCliente = tblFacturas.getValueAt(fila, 6).toString();
         total = Double.parseDouble(tblFacturas.getValueAt(fila, 7).toString());
-
-
     }//GEN-LAST:event_tblFacturasMouseClicked
 
     private void btnNuevaSolicitud1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud1FocusGained
@@ -1093,7 +1024,6 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevaSolicitud4MouseReleased
 
     private void btnMostrarServiciosActivosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarServiciosActivosMousePressed
-
         if (lblAceptado.isVisible()) {
             lblAceptado.setVisible(false);
             lblrevertir.setVisible(true);
@@ -1114,30 +1044,6 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnSalirMousePressed
-
-    private void btnNuevaSolicitud6FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud6FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaSolicitud6FocusGained
-
-    private void btnNuevaSolicitud6MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud6MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaSolicitud6MousePressed
-
-    private void btnNuevaSolicitud6MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud6MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaSolicitud6MouseReleased
-
-    private void btnNuevaSolicitud6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud6MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaSolicitud6MouseExited
-
-    private void btnNuevaSolicitud6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud6MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaSolicitud6MouseEntered
-
-    private void btnEditarSolicitudMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitudMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditarSolicitudMousePressed
 
     private void jLabel11MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MousePressed
         frmElegirReporteServicios form = new frmElegirReporteServicios();
@@ -1170,14 +1076,6 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
     private void btnRevisarFacturasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRevisarFacturasMouseExited
         resetColor(btnRevisarFacturas);
     }//GEN-LAST:event_btnRevisarFacturasMouseExited
-
-    private void btnEditarSolicitudMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitudMouseEntered
-        setColor(btnEditarSolicitud);
-    }//GEN-LAST:event_btnEditarSolicitudMouseEntered
-
-    private void btnEditarSolicitudMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarSolicitudMouseExited
-        resetColor(btnEditarSolicitud);
-    }//GEN-LAST:event_btnEditarSolicitudMouseExited
 
     private void btnEliminarSolicitudMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarSolicitudMouseEntered
         setColor(btnEliminarSolicitud);
@@ -1279,7 +1177,6 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnBuscar;
-    private javax.swing.JPanel btnEditarSolicitud;
     private javax.swing.JPanel btnEliminarSolicitud;
     private javax.swing.JPanel btnMini;
     private javax.swing.JPanel btnMostrarServiciosActivos;
@@ -1288,20 +1185,17 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
     private javax.swing.JPanel btnNuevaSolicitud2;
     private javax.swing.JPanel btnNuevaSolicitud3;
     private javax.swing.JPanel btnNuevaSolicitud4;
-    private javax.swing.JPanel btnNuevaSolicitud6;
     private javax.swing.JPanel btnReportes;
     private javax.swing.JPanel btnRevisarFacturas;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JPanel btnVolver;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -1337,7 +1231,6 @@ public class frmRevisarFacturas extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator20;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;

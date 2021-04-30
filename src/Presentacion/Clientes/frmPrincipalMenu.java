@@ -108,14 +108,6 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         btnNuevaSolicitud6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel12 = new javax.swing.JLabel();
-        btnGestionarCuadrillas = new javax.swing.JPanel();
-        lblCuadrillas = new javax.swing.JLabel();
-        btnNuevaSolicitud2 = new javax.swing.JPanel();
-        jSeparator17 = new javax.swing.JSeparator();
-        jSeparator18 = new javax.swing.JSeparator();
-        jSeparator19 = new javax.swing.JSeparator();
-        jSeparator20 = new javax.swing.JSeparator();
         jSeparator21 = new javax.swing.JSeparator();
         jSeparator22 = new javax.swing.JSeparator();
         jSeparator23 = new javax.swing.JSeparator();
@@ -547,95 +539,6 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         jLabel8.setText("REVISAR FACTURAS");
         jPanel4.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, -1, -1));
         jPanel4.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 780, -1));
-
-        jLabel12.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel12.setFont(new java.awt.Font("Arial Black", 1, 12)); // NOI18N
-        jLabel12.setText("Gestionar Cuadrillas");
-        jPanel4.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
-
-        btnGestionarCuadrillas.setBackground(new java.awt.Color(102, 0, 0));
-        btnGestionarCuadrillas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnGestionarCuadrillas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnGestionarCuadrillas.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                btnGestionarCuadrillasFocusGained(evt);
-            }
-        });
-        btnGestionarCuadrillas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnGestionarCuadrillasMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnGestionarCuadrillasMouseReleased(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGestionarCuadrillasMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGestionarCuadrillasMouseEntered(evt);
-            }
-        });
-        btnGestionarCuadrillas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        lblCuadrillas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_safety_hat_100px.png"))); // NOI18N
-        lblCuadrillas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                lblCuadrillasMousePressed(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lblCuadrillasMouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lblCuadrillasMouseEntered(evt);
-            }
-        });
-        btnGestionarCuadrillas.add(lblCuadrillas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jPanel4.add(btnGestionarCuadrillas, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 120, 120));
-
-        btnNuevaSolicitud2.setBackground(new java.awt.Color(0, 0, 0));
-        btnNuevaSolicitud2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnNuevaSolicitud2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnNuevaSolicitud2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                btnNuevaSolicitud2FocusGained(evt);
-            }
-        });
-        btnNuevaSolicitud2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud2MousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud2MouseReleased(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud2MouseExited(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnNuevaSolicitud2MouseEntered(evt);
-            }
-        });
-
-        javax.swing.GroupLayout btnNuevaSolicitud2Layout = new javax.swing.GroupLayout(btnNuevaSolicitud2);
-        btnNuevaSolicitud2.setLayout(btnNuevaSolicitud2Layout);
-        btnNuevaSolicitud2Layout.setHorizontalGroup(
-            btnNuevaSolicitud2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-        btnNuevaSolicitud2Layout.setVerticalGroup(
-            btnNuevaSolicitud2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 120, Short.MAX_VALUE)
-        );
-
-        jPanel4.add(btnNuevaSolicitud2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 280, 120, 120));
-
-        jSeparator17.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel4.add(jSeparator17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 10, 170));
-        jPanel4.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 170, 20));
-        jPanel4.add(jSeparator19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 170, 20));
-
-        jSeparator20.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        jPanel4.add(jSeparator20, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 10, 170));
         jPanel4.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 170, 20));
 
         jSeparator22.setOrientation(javax.swing.SwingConstants.VERTICAL);
@@ -892,56 +795,6 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRealizarPagosMouseReleased
 
-    private void btnNuevaSolicitud2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud2FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaSolicitud2FocusGained
-
-    private void btnNuevaSolicitud2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud2MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaSolicitud2MouseEntered
-
-    private void btnNuevaSolicitud2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud2MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaSolicitud2MouseExited
-
-    private void btnNuevaSolicitud2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud2MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaSolicitud2MousePressed
-
-    private void btnNuevaSolicitud2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevaSolicitud2MouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnNuevaSolicitud2MouseReleased
-
-    private void btnGestionarCuadrillasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnGestionarCuadrillasFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGestionarCuadrillasFocusGained
-
-    private void btnGestionarCuadrillasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionarCuadrillasMouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGestionarCuadrillasMouseEntered
-
-    private void btnGestionarCuadrillasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionarCuadrillasMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGestionarCuadrillasMouseExited
-
-    private void btnGestionarCuadrillasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionarCuadrillasMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGestionarCuadrillasMousePressed
-
-    private void btnGestionarCuadrillasMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionarCuadrillasMouseReleased
-        frmRevisarSolicitudes form = new frmRevisarSolicitudes();
-        form.setVisible(true);
-        form.toFront();
-        this.dispose();
-    }//GEN-LAST:event_btnGestionarCuadrillasMouseReleased
-
-    private void lblCuadrillasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCuadrillasMousePressed
-        frmMenuCuadrillas form = new frmMenuCuadrillas();
-        form.setVisible(true);
-        form.toFront();
-        this.dispose();
-    }//GEN-LAST:event_lblCuadrillasMousePressed
-
     private void btnUsuarioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUsuarioMouseEntered
         setColorUser(btnUsuario);
     }//GEN-LAST:event_btnUsuarioMouseEntered
@@ -981,14 +834,6 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     private void lblPagosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPagosMouseExited
         resetColor(btnRealizarPagos);
     }//GEN-LAST:event_lblPagosMouseExited
-
-    private void lblCuadrillasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCuadrillasMouseEntered
-        setColor(btnGestionarCuadrillas);
-    }//GEN-LAST:event_lblCuadrillasMouseEntered
-
-    private void lblCuadrillasMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCuadrillasMouseExited
-        resetColor(btnGestionarCuadrillas);
-    }//GEN-LAST:event_lblCuadrillasMouseExited
 
     private void lblSolicitudesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSolicitudesMousePressed
         frmPrincipalSolicitudesNuevo form = new frmPrincipalSolicitudesNuevo();
@@ -1075,10 +920,8 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JPanel btnGestionarCuadrillas;
     public javax.swing.JPanel btnNuevaSolicitud;
     public javax.swing.JPanel btnNuevaSolicitud1;
-    public javax.swing.JPanel btnNuevaSolicitud2;
     public javax.swing.JPanel btnNuevaSolicitud3;
     public javax.swing.JPanel btnNuevaSolicitud4;
     public javax.swing.JPanel btnNuevaSolicitud6;
@@ -1088,7 +931,6 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     private javax.swing.JPanel btnUsuario;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel4;
@@ -1103,10 +945,6 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator15;
-    private javax.swing.JSeparator jSeparator17;
-    private javax.swing.JSeparator jSeparator18;
-    private javax.swing.JSeparator jSeparator19;
-    private javax.swing.JSeparator jSeparator20;
     private javax.swing.JSeparator jSeparator21;
     private javax.swing.JSeparator jSeparator22;
     private javax.swing.JSeparator jSeparator23;
@@ -1132,7 +970,6 @@ public class frmPrincipalMenu extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator43;
     private javax.swing.JSeparator jSeparator44;
     private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JLabel lblCuadrillas;
     private javax.swing.JLabel lblFacturas;
     public static javax.swing.JLabel lblNombreUsuario;
     private javax.swing.JLabel lblPagos;

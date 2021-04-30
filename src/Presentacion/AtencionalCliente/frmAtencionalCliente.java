@@ -6,33 +6,15 @@
 package Presentacion.AtencionalCliente;
 
 import Presentacion.Clientes.*;
-import Datos.DClientes;
-import Datos.DPersona;
-import Datos.DReclamos;
-import Datos.DServiciodelCliente;
-import Datos.DSolicitud;
-import Datos.DTrabajos;
-import Datos.DTrabajosSolicitud;
 import Logica.ConexionSingleton;
 import Logica.LClientes;
 import Logica.LSolicitud;
-import Logica.LTrabajos;
 import java.awt.Color;
-import java.io.File;
 import java.sql.Connection;
-import java.sql.Date;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -143,16 +125,11 @@ public class frmAtencionalCliente extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnVolver = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jSeparator4 = new javax.swing.JSeparator();
-        jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         btnRealizarReclamos = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lblRealizarReclamo = new javax.swing.JLabel();
         jSeparator21 = new javax.swing.JSeparator();
-        btnVolveralMenuFondo = new javax.swing.JPanel();
         jSeparator7 = new javax.swing.JSeparator();
         jSeparator14 = new javax.swing.JSeparator();
         jSeparator15 = new javax.swing.JSeparator();
@@ -219,33 +196,6 @@ public class frmAtencionalCliente extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnVolver.setBackground(new java.awt.Color(102, 0, 0));
-        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnVolver.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVolverMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVolverMouseExited(evt);
-            }
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnVolverMousePressed(evt);
-            }
-        });
-        btnVolver.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_back_30px.png"))); // NOI18N
-        btnVolver.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 31, 36));
-        btnVolver.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 37, 170, 10));
-
-        jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel16.setText("Volver al Menu");
-        btnVolver.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
-
-        jPanel2.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, 240, 50));
-
         jLabel17.setFont(new java.awt.Font("Bauhaus 93", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(204, 204, 204));
         jLabel17.setText("JOTZPOT");
@@ -285,29 +235,6 @@ public class frmAtencionalCliente extends javax.swing.JFrame {
         btnRealizarReclamos.add(jSeparator21, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 171, 10));
 
         jPanel2.add(btnRealizarReclamos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 240, 50));
-
-        btnVolveralMenuFondo.setBackground(new java.awt.Color(0, 0, 0));
-        btnVolveralMenuFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btnVolveralMenuFondo.setEnabled(false);
-        btnVolveralMenuFondo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        btnVolveralMenuFondo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnVolveralMenuFondoMousePressed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout btnVolveralMenuFondoLayout = new javax.swing.GroupLayout(btnVolveralMenuFondo);
-        btnVolveralMenuFondo.setLayout(btnVolveralMenuFondoLayout);
-        btnVolveralMenuFondoLayout.setHorizontalGroup(
-            btnVolveralMenuFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
-        );
-        btnVolveralMenuFondoLayout.setVerticalGroup(
-            btnVolveralMenuFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(btnVolveralMenuFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 240, 50));
         jPanel2.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 560, 40, 20));
         jPanel2.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 580, 40, 10));
         jPanel2.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 570, 40, 20));
@@ -710,13 +637,6 @@ public class frmAtencionalCliente extends javax.swing.JFrame {
         control = 1;
     }//GEN-LAST:event_btnAtenderReclamoMousePressed
 
-    private void btnVolverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMousePressed
-        frmPrincipalMenu form = new frmPrincipalMenu();
-        form.setVisible(true);
-        form.toFront();
-        this.dispose();
-    }//GEN-LAST:event_btnVolverMousePressed
-
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
         
     }//GEN-LAST:event_jPanel1MousePressed
@@ -758,23 +678,11 @@ public class frmAtencionalCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNuevaSolicitudFondoMousePressed
 
-    private void btnVolveralMenuFondoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolveralMenuFondoMousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolveralMenuFondoMousePressed
-
     private void btnReportesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMousePressed
         frmReportesReclamos form = new frmReportesReclamos();
         form.setVisible(true);
         form.toFront();
     }//GEN-LAST:event_btnReportesMousePressed
-
-    private void btnVolverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseEntered
-        setColor(btnVolver);
-    }//GEN-LAST:event_btnVolverMouseEntered
-
-    private void btnVolverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseExited
-        resetColor(btnVolver);
-    }//GEN-LAST:event_btnVolverMouseExited
 
     private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
         if(accion == "cliente"){
@@ -935,12 +843,9 @@ public class frmAtencionalCliente extends javax.swing.JFrame {
     private javax.swing.JPanel btnReportes;
     private javax.swing.JPanel btnRevisarReclamos;
     private javax.swing.JPanel btnRevisarServicios;
-    private javax.swing.JPanel btnVolver;
-    private javax.swing.JPanel btnVolveralMenuFondo;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -949,7 +854,6 @@ public class frmAtencionalCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
@@ -974,7 +878,6 @@ public class frmAtencionalCliente extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator20;
     private javax.swing.JSeparator jSeparator21;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;

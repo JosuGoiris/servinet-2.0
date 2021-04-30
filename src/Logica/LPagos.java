@@ -48,7 +48,7 @@ public class LPagos {
                 + "inner join tblserviciodelcliente as sc on df.serviciodelclienteId = sc.idServiciodelCliente \n"
                 + "inner join tbldetalleservicio as ds on sc.detalleServicioId = ds.idDetalleServicio \n"
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
-                + "where f.idfactura = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && df.estado = 'Pendiente'";
+                + "where f.idfactura = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && df.estado = 'PENDIENTE'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -86,7 +86,7 @@ public class LPagos {
                 + "inner join tblserviciodelcliente as sc on df.serviciodelclienteId = sc.idServiciodelCliente \n"
                 + "inner join tbldetalleservicio as ds on sc.detalleServicioId = ds.idDetalleServicio \n"
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
-                + "where f.idfactura = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && df.estado = 'Factura Sin Pagar'";
+                + "where f.idfactura = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && df.estado = 'FACTURA SIN PAGAR'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -124,7 +124,7 @@ public class LPagos {
                 + "inner join tblpersona as p on c.personaId = p.idPersona \n"
                 + "inner join tbldetalleservicio as ds on sc.detalleServicioId = ds.idDetalleServicio \n"
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
-                + "where pa.idpagos = '" + buscar + "' or p.cedulaIdent like '%" + buscar + "%' && pa.estado = 'Pagado'";
+                + "where pa.idpagos = '" + buscar + "' or p.cedulaIdent like '%" + buscar + "%' && pa.estado = 'PAGADO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -170,7 +170,7 @@ public class LPagos {
             
             pst.setDate(1, dPagos.getFechaPago());
             pst.setDate(2, dPagos.getFechaRealizado());
-            pst.setString(3, "Pagado");
+            pst.setString(3, "PAGADO");
             pst.setInt(4, dPagos.getServiciodelclienteId());
             pst.setInt(5, dPagos.getFormadepagoId());
             pst.setInt(6, dPagos.getDetallefacturaId());
@@ -181,7 +181,7 @@ public class LPagos {
             
             pst1.executeUpdate();
             
-            pst2.setString(1, "Pagado");
+            pst2.setString(1, "PAGADO");
             pst2.setInt(2, dDetalleFactura.getIdDetalleFactura());
             
             pst2.executeUpdate();

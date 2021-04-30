@@ -66,7 +66,7 @@ public class frmTrabajadoresNuevo extends javax.swing.JFrame {
         try {
             DefaultTableModel miModelo;
             LTrabajadores log = new LTrabajadores();
-            miModelo = log.mostrarTrabajadores(buscar);
+            miModelo = log.mostrarTrabajadoresActivos(buscar);
             tblTrabajador.setModel(miModelo);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);

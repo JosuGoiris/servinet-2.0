@@ -5,21 +5,13 @@
  */
 package Presentacion.Mantenimiento;
 
-import Presentacion.Clientes.*;
-import Datos.DClientes;
 import Datos.DCuadrillas;
-import Datos.DDetalleServicio;
-import Datos.DPersona;
-import Datos.DServicios;
-import Datos.DSolicitud;
+import Datos.DFormadePago;
+import Datos.DZonas;
 import Logica.LCuadrillas;
 import Logica.LEstados;
-import Logica.LServicios;
-import Logica.LSolicitud;
-import Presentacion.Mantenimiento.frmVistaDireccionNuevo;
-import Presentacion.Mantenimiento.frmVistaServicioNuevo;
-import Presentacion.Mantenimiento.frmVistaZonaNuevo;
-import java.sql.Date;
+import Logica.LFormadePago;
+import Logica.LZonas;
 import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -29,7 +21,7 @@ import javax.swing.JOptionPane;
  *
  * @author josug
  */
-public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
+public final class frmValoresFormadePagoNuevo extends javax.swing.JFrame {
     public static int control = 0;
     private LEstados es = new LEstados();
     Calendar fecha_actual = new GregorianCalendar();
@@ -46,19 +38,18 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
     /**
      * Creates new form frmValoresSolicitudNuevo
      */
-    public frmValoresCuadrillaNuevo() {
+    public frmValoresFormadePagoNuevo() {
         initComponents();
         this.setLocationRelativeTo(null);
         cargarValores();
-        txtNombreCuadrilla.requestFocus();
         txtId.setEnabled(false);
     }
     
     public void cargarValores(){
-        if("si".equals(frmCuadrillaNuevo.editar)){
-            txtId.setText(String.valueOf(frmCuadrillaNuevo.idCuadrilla));
-            txtNombreCuadrilla.setText(frmCuadrillaNuevo.nombreCuadrilla);
-            txtDescripcion.setText(frmCuadrillaNuevo.descripcion);
+        if("si".equals(frmFormadePagoNuevo.editar)){
+            txtId.setText(String.valueOf(frmFormadePagoNuevo.idForma));
+            txtFormadePago.setText(frmFormadePagoNuevo.nombreForma);
+            txtDescripcion.setText(frmFormadePagoNuevo.descripcion);
         }
     }
 
@@ -78,7 +69,7 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        txtNombreCuadrilla = new javax.swing.JTextField();
+        txtFormadePago = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -120,20 +111,23 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        txtNombreCuadrilla.addFocusListener(new java.awt.event.FocusAdapter() {
+        txtFormadePago.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                txtNombreCuadrillaFocusLost(evt);
+                txtFormadePagoFocusLost(evt);
             }
         });
-        txtNombreCuadrilla.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtFormadePago.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFormadePagoKeyTyped(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtNombreCuadrillaKeyReleased(evt);
+                txtFormadePagoKeyReleased(evt);
             }
         });
-        jPanel3.add(txtNombreCuadrilla, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 190, -1));
+        jPanel3.add(txtFormadePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, 180, -1));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Nombre de la Cuadrilla:");
+        jLabel5.setText("FORMA DE PAGO:");
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,7 +135,7 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Descripción:");
+        jLabel8.setText("DESCRIPCION:");
         jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
 
         txtDescripcion.setColumns(20);
@@ -154,9 +148,19 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtDescripcion);
 
         jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 270, -1));
+
+        txtId.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                txtIdAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
         jPanel3.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 53, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 290, 260));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 290, 250));
 
         btnGuardar.setBackground(new java.awt.Color(102, 0, 0));
         btnGuardar.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -171,7 +175,7 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(25, 25));
         btnGuardar.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 320, 50, 50));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 50, 50));
 
         btnGuardar1.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -186,7 +190,7 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, -1, 50));
+        jPanel1.add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, -1, 50));
 
         btnSalir.setBackground(new java.awt.Color(102, 0, 0));
         btnSalir.setPreferredSize(new java.awt.Dimension(50, 50));
@@ -201,7 +205,7 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
         jLabel13.setPreferredSize(new java.awt.Dimension(25, 25));
         btnSalir.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 30, 30));
 
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, 50, 50));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 50, 50));
 
         btnGuardar3.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -216,9 +220,9 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
             .addGap(0, 50, Short.MAX_VALUE)
         );
 
-        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 50, 50));
+        jPanel1.add(btnGuardar3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 310, 50, 50));
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 360, 390));
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 360, 370));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -240,50 +244,58 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
 
     private void btnGuardarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMousePressed
         if(txtId.getText().equals("")){
-            DCuadrillas dc = new DCuadrillas();
-            LCuadrillas fun = new LCuadrillas();
+            DFormadePago dfp = new DFormadePago();
+            LFormadePago fun = new LFormadePago();
             
-            dc.setNombreCuadrilla(txtNombreCuadrilla.getText());
-            dc.setDescripcion(txtDescripcion.getText());
+            dfp.setNombreForma(txtFormadePago.getText());
+            dfp.setDescripcion(txtDescripcion.getText());
             
-            fun.insertarCuadrillas(dc);
-        }else if("si".equals(frmCuadrillaNuevo.editar)){
-            DCuadrillas dc = new DCuadrillas();
-            LCuadrillas fun = new LCuadrillas();
+            fun.insertarFormas(dfp);
+        }else if("si".equals(frmFormadePagoNuevo.editar)){
+            DFormadePago dfp = new DFormadePago();
+            LFormadePago fun = new LFormadePago();
             
-            dc.setIdCuadrilla(Integer.parseInt(txtId.getText()));
-            dc.setNombreCuadrilla(txtNombreCuadrilla.getText());
-            dc.setDescripcion(txtDescripcion.getText());
+            dfp.setIdFormadePago(Integer.parseInt(txtId.getText()));
+            dfp.setNombreForma(txtFormadePago.getText());
+            dfp.setDescripcion(txtDescripcion.getText());
             
-            fun.editarCuadrilla(dc);
+            fun.editarForma(dfp);
         }
         this.dispose();
     }//GEN-LAST:event_btnGuardarMousePressed
 
-    private void txtNombreCuadrillaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtNombreCuadrillaFocusLost
-        buscarRepetido();
-    }//GEN-LAST:event_txtNombreCuadrillaFocusLost
+    private void txtFormadePagoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormadePagoKeyTyped
+        
+    }//GEN-LAST:event_txtFormadePagoKeyTyped
 
-    private void txtNombreCuadrillaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreCuadrillaKeyReleased
-        String nombre = (txtNombreCuadrilla.getText()).toUpperCase();
-        txtNombreCuadrilla.setText(nombre);
-    }//GEN-LAST:event_txtNombreCuadrillaKeyReleased
+    private void txtFormadePagoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFormadePagoKeyReleased
+        String nombre = txtFormadePago.getText().toUpperCase();
+        txtFormadePago.setText(nombre);
+    }//GEN-LAST:event_txtFormadePagoKeyReleased
 
     private void txtDescripcionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyReleased
         String descripcion = txtDescripcion.getText().toUpperCase();
         txtDescripcion.setText(descripcion);
     }//GEN-LAST:event_txtDescripcionKeyReleased
 
+    private void txtFormadePagoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFormadePagoFocusLost
+        buscarRepetido();
+    }//GEN-LAST:event_txtFormadePagoFocusLost
+
+    private void txtIdAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_txtIdAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdAncestorAdded
+
     void buscarRepetido(){
-        LCuadrillas lc = new LCuadrillas();
-        String nombre = txtNombreCuadrilla.getText();
+        LZonas lz = new LZonas();
+        String nombre = txtFormadePago.getText();
         try {
-            ResultSet rs = lc.buscarRepetido(nombre);
+            ResultSet rs = lz.buscarRepetido(nombre);
             if(!rs.next()){
                 
             }else{
-                JOptionPane.showMessageDialog(rootPane, "Ya existe la Cuadrilla");
-                txtNombreCuadrilla.requestFocus();
+                JOptionPane.showMessageDialog(rootPane, "Ya existe la zona");
+                txtFormadePago.requestFocus();
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -308,14 +320,26 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmValoresCuadrillaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmValoresFormadePagoNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmValoresCuadrillaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmValoresFormadePagoNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmValoresCuadrillaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmValoresFormadePagoNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmValoresCuadrillaNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmValoresFormadePagoNuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -324,7 +348,7 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmValoresCuadrillaNuevo().setVisible(true);
+                new frmValoresFormadePagoNuevo().setVisible(true);
             }
         });
     }
@@ -348,7 +372,7 @@ public class frmValoresCuadrillaNuevo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JTextArea txtDescripcion;
+    public static javax.swing.JTextField txtFormadePago;
     public static javax.swing.JTextField txtId;
-    public static javax.swing.JTextField txtNombreCuadrilla;
     // End of variables declaration//GEN-END:variables
 }

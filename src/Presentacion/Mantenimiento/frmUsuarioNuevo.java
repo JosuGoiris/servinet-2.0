@@ -34,6 +34,8 @@ public final class frmUsuarioNuevo extends javax.swing.JFrame {
     public static String direccion;
     public static int idTipo;
     public static String tipo;
+    public static int idBarrio;
+    public static String barrio;
     public static String nombre;
     public static String apellido;
     public static String cedulaIdent;
@@ -1156,6 +1158,8 @@ public final class frmUsuarioNuevo extends javax.swing.JFrame {
         cedulaIdent = tblusuarios.getValueAt(fila, 5).toString();
         idDireccion = lu.traerIdDireccion(idUsuario);
         direccion = tblusuarios.getValueAt(fila, 6).toString();
+        idBarrio = lu.traerIdBarrio(idDireccion);
+        barrio = lu.traerBarrio(idBarrio);
         telefono = tblusuarios.getValueAt(fila, 7).toString();
         idTipo = lu.traerIdTipo(idUsuario);
         tipo = tblusuarios.getValueAt(fila, 8).toString();

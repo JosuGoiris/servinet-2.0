@@ -150,7 +150,7 @@ public class LUsuarios {
             pst.setString(3, misDPersona.getCedulaIdent());
             pst.setString(4, misDPersona.getTelefono());
             pst.setInt(5, misDPersona.getDireccionId());
-            pst.setString(6, "Activo");
+            pst.setString(6, "ACTIVO");
 
             pst.executeUpdate();
 
@@ -226,7 +226,7 @@ public class LUsuarios {
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
 
-            pst.setString(1, "Inactivo");
+            pst.setString(1, "INACTIVO");
             pst.setInt(2, misDPersona.getIdPersona());
 
             pst.executeUpdate();
@@ -250,7 +250,7 @@ public class LUsuarios {
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
 
-            pst.setString(1, "Activo");
+            pst.setString(1, "ACTIVO");
             pst.setInt(2, misDPersona.getIdPersona());
 
             pst.executeUpdate();
@@ -276,6 +276,38 @@ public class LUsuarios {
             ResultSet rs = st.executeQuery(sSQL);
             while (rs.next()) {
                 id = rs.getInt("direccionId");
+            }
+            return id;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return 0;
+    }
+    
+    public String traerBarrio(int ids) {
+        String nombre = null;
+        sSQL = "select nombreZona from tblzona where idZona = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while (rs.next()) {
+                nombre = rs.getString("nombreZona");
+            }
+            return nombre;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public int traerIdBarrio(int ids) {
+        int id = 0;
+        sSQL = "select idZona from tbldireccion where idDireccion = '" + ids + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while (rs.next()) {
+                id = rs.getInt("idZona");
             }
             return id;
         } catch (Exception e) {

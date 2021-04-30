@@ -734,7 +734,9 @@ public class frmMenuCuadrillas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevaSolicitud5MouseEntered
 
     private void jLabel7MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MousePressed
-        // TODO add your handling code here:
+        frmAtenderReclamos form = new frmAtenderReclamos();
+        form.setVisible(true);
+        form.toFront();
     }//GEN-LAST:event_jLabel7MousePressed
 
     private void btnRevisarServicios3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnRevisarServicios3FocusGained

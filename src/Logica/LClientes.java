@@ -43,7 +43,7 @@ public class LClientes {
                 + "c.personaId = p.idPersona inner join tbldetalleservicio as ds on sc.detalleservicioId = ds.idDetalleServicio \n"
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
                 + "inner join tblreclamos as r on sc.idServiciodelCliente = r.serviciodelclienteId \n"
-                + "where sc.idServiciodelCliente = '" + buscar + "' or p.nombres like '%" + buscar + "%' && r.estado = 'Pendiente'";
+                + "where sc.idServiciodelCliente = '" + buscar + "' or p.nombres like '%" + buscar + "%' && r.estado = 'PENDIENTE'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -79,7 +79,7 @@ public class LClientes {
                 + "c.personaId = p.idPersona inner join tbldetalleservicio as ds on sc.detalleservicioId = ds.idDetalleServicio \n"
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
                 + "inner join tblreclamos as r on sc.idServiciodelCliente = r.serviciodelclienteId \n"
-                + "where sc.idServiciodelCliente = '" + buscar + "' or p.nombres like '%" + buscar + "%' && r.estado = 'Atendido'";
+                + "where sc.idServiciodelCliente = '" + buscar + "' or p.nombres like '%" + buscar + "%' && r.estado = 'ATENDIDO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -154,7 +154,7 @@ public class LClientes {
             
             pst.setString(1, dReclamos.getDescripcion());
             pst.setDate(2, dReclamos.getFechaReclamo());
-            pst.setString(3, "Pendiente");
+            pst.setString(3, "PENDIENTE");
             pst.setInt(4, dReclamos.getServiciodelclientId());
             pst.setInt(5, 1);
             
@@ -169,7 +169,7 @@ public class LClientes {
             pst2.executeUpdate();
             
             pst3.setInt(1, 1);
-            pst3.setString(2, "Pendiente");
+            pst3.setString(2, "PENDIENTE");
             
             pst3.executeUpdate();
             
@@ -200,12 +200,12 @@ public class LClientes {
             PreparedStatement pst1 = cn.prepareStatement(sSQL1);
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);
             
-            pst.setString(1, "Trabajando");
+            pst.setString(1, "TRABAJANDO");
             pst.setInt(2, dTrabajos.getIdTrabajos());
             
             pst.executeUpdate();
             
-            pst1.setString(1, "En revisión");
+            pst1.setString(1, "EN REVISION");
             pst1.setInt(2, dReclamos.getIdReclamos());
             
             pst1.executeUpdate();
@@ -240,12 +240,12 @@ public class LClientes {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             PreparedStatement pst1 = cn.prepareStatement(sSQL1);
             
-            pst.setString(1, "Terminado");
+            pst.setString(1, "TERMINADO");
             pst.setInt(2, dTrabajos.getIdTrabajos());
             
             pst.executeUpdate();
             
-            pst1.setString(1, "Atendido");
+            pst1.setString(1, "ATENDIDO");
             pst1.setInt(2, dReclamos.getIdReclamos());
             
             pst1.executeUpdate();
@@ -277,12 +277,12 @@ public class LClientes {
             PreparedStatement pst1 = cn.prepareStatement(sSQL1);
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);
             
-            pst.setString(1, "Eliminado");
+            pst.setString(1, "ELIMINADO");
             pst.setInt(2, dTrabajos.getIdTrabajos());
             
             pst.executeUpdate();
             
-            pst1.setString(1, "Pendiente");
+            pst1.setString(1, "PENDIENTE");
             pst1.setInt(2, dReclamos.getIdReclamos());
             
             pst1.executeUpdate();

@@ -34,9 +34,11 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
     public static int zonaId = 0;
     public static String descripcion = "";
     public static String estado = "";
-    
+
     public static int idBarrio = 0;
     public static String barrio = "";
+    public static int idDireccion = 0;
+    public static String direccion = "";
 
     /**
      * Creates new form frmValoresSolicitudNuevo
@@ -66,6 +68,8 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
             txtDireccion.setText(String.valueOf(frmUsuarioNuevo.direccion));
             txtIdTipo.setText(String.valueOf(frmUsuarioNuevo.idTipo));
             txtTipoUsuario.setText(frmUsuarioNuevo.tipo);
+            txtIdBarrio.setText(String.valueOf(frmUsuarioNuevo.idBarrio));
+            txtBarrio.setText(frmUsuarioNuevo.barrio);
         }
     }
 
@@ -451,6 +455,7 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
             du.setTipoUsuarioId(Integer.parseInt(txtIdTipo.getText()));
 
             fun.insertarUsuarios(du, dp);
+            
         } else if ("si".equals(frmUsuarioNuevo.editar)) {
             DUsuarios du = new DUsuarios();
             DPersona dp = new DPersona();
@@ -462,7 +467,7 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
             dp.setCedulaIdent(txtCedula.getText());
             dp.setTelefono(txtTelefono.getText());
             dp.setDireccionId(Integer.parseInt(txtIdDireccion.getText()));
-            
+
             du.setIdUsuario(Integer.parseInt(txtId.getText()));
             du.setLoginUsuario(txtUsuario.getText());
             du.setPasswordUsuario(txtContraseña.getText());
@@ -470,6 +475,7 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
 
             fun.editarUsuarios(du, dp);
         }
+        this.dispose();
     }//GEN-LAST:event_btnGuardarMousePressed
 
     private void btnBuscarUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarUsuarioMousePressed
@@ -480,11 +486,15 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarUsuarioMousePressed
 
     private void txtUsuarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUsuarioFocusLost
-        buscarUsuarioRepetido();
+        if ("no".equals(frmUsuarioNuevo.editar)) {
+            buscarUsuarioRepetido();
+        }
     }//GEN-LAST:event_txtUsuarioFocusLost
 
     private void txtCedulaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCedulaFocusLost
-        buscarPersonaRepetido();
+         if ("no".equals(frmUsuarioNuevo.editar)) {
+            buscarPersonaRepetido();
+        }
     }//GEN-LAST:event_txtCedulaFocusLost
 
     private void txtUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsuarioKeyReleased
@@ -509,7 +519,7 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
         char validar = evt.getKeyChar();
-        if(Character.isLetter(validar)){
+        if (Character.isLetter(validar)) {
             getToolkit().beep();
             evt.consume();
             JOptionPane.showMessageDialog(rootPane, "Ingresar solo numeros");
@@ -540,6 +550,7 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarDireccionMouseExited
 
     private void btnBuscarDireccionMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarDireccionMousePressed
+        idBarrio = 0;
         idBarrio = Integer.parseInt(txtIdBarrio.getText());
         barrio = txtBarrio.getText();
         System.out.println(idBarrio);
@@ -550,14 +561,14 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
         control = 1;
     }//GEN-LAST:event_btnBuscarDireccionMousePressed
 
-    void buscarUsuarioRepetido(){
+    void buscarUsuarioRepetido() {
         LUsuarios lu = new LUsuarios();
         String usuario = txtUsuario.getText();
         try {
             ResultSet rs = lu.buscarUsuarioRepetido(usuario);
-            if(!rs.next()){
-                
-            }else{
+            if (!rs.next()) {
+
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Ya existe el usuario");
                 txtUsuario.requestFocus();
             }
@@ -565,15 +576,15 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
-    void buscarPersonaRepetido(){
+
+    void buscarPersonaRepetido() {
         LUsuarios lu = new LUsuarios();
         String cedula = txtCedula.getText();
         try {
             ResultSet rs = lu.buscarPersonaRepetido(cedula);
-            if(!rs.next()){
-                
-            }else{
+            if (!rs.next()) {
+
+            } else {
                 JOptionPane.showMessageDialog(rootPane, "Ya existe la persona");
                 txtCedula.requestFocus();
             }
@@ -581,7 +592,7 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-    
+
     void setColor(JPanel panel) {
         panel.setBackground(new Color(51, 0, 0));
     }
@@ -589,7 +600,7 @@ public class frmValoresUsuarioNuevo extends javax.swing.JFrame {
     void resetColor(JPanel panel) {
         panel.setBackground(new Color(102, 0, 0));
     }
-    
+
     /**
      * @param args the command line arguments
      */

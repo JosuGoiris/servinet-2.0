@@ -124,9 +124,9 @@ public class LSolicitud {
                 + "order by idSolicitud desc limit 1), (select idSolicitud from tblsolicitud order by idSolicitud desc limit 1), ?)";
         sSQL6 = "insert into tbltrabajos(trabajossolicitudId, detalletrabajoId, estado) values((select idTrabajosSolicitud from \n"
                 + "tbltrabajossolicitud order by idTrabajosSolicitud desc limit 1),?,?)";
-        sSQL4 = "insert into tblserviciodelcliente(idServiciodelCliente, fechaInicio, fechaPago, clienteId, servicioId, estado) \n"
+        sSQL4 = "insert into tblserviciodelcliente(idServiciodelCliente, fechaInicio, fechaPago, clienteId, detalleservicioId, estado, estadoFactura, multa, estadoMulta) \n"
                 + "values((select idSolicitud from tblsolicitud order by idSolicitud desc limit 1),?,?, \n"
-                + "(select idCliente from tblcliente order by idCliente desc limit 1),?,?)";
+                + "(select idCliente from tblcliente order by idCliente desc limit 1),?,?,?,?,?)";
         
         try {
             
@@ -145,7 +145,7 @@ public class LSolicitud {
             pst.setString(3, dPersona.getCedulaIdent());
             pst.setString(4, dPersona.getTelefono());
             pst.setInt(5, dPersona.getDireccionId());
-            pst.setString(6, "Pendiente");
+            pst.setString(6, "PENDIENTE");
             
             pst.executeUpdate();
             
@@ -157,7 +157,7 @@ public class LSolicitud {
             pst2.setDate(2, dSolicitud.getFechaActualizado());
             pst2.setInt(3, dSolicitud.getServicioId());
             pst2.setInt(4, 1);
-            pst2.setString(5, "Pendiente");
+            pst2.setString(5, "PENDIENTE");
             
             pst2.executeUpdate();
             
@@ -167,8 +167,11 @@ public class LSolicitud {
             
             pst4.setDate(1,  dServiciodelCliente.getFechaInicio());
             pst4.setDate(2, dServiciodelCliente.getFechaPago());
-            //pst4.setInt(3, dServiciodelCliente.getServicioId());
-            pst4.setString(4, "Pendiente");
+            pst4.setInt(3, dServiciodelCliente.getDetalleservicioId());
+            pst4.setString(4, "PENDIENTE");
+            pst4.setString(5, "SIN FACTURA");
+            pst4.setDouble(6, 0);
+            pst4.setString(7, "NO");
             
             pst4.executeUpdate();
             
@@ -178,7 +181,7 @@ public class LSolicitud {
             
             pst6.setInt(1, 1);
             
-            pst6.setString(2, "Pendiente");
+            pst6.setString(2, "PENDIENTE");
             
             pst6.executeUpdate();
             

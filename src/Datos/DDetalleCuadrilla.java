@@ -11,16 +11,14 @@ package Datos;
  */
 public class DDetalleCuadrilla {
     int idDetalleCuadrilla;
-    String cantidad;
     int cuadrillaId;
     int trabajadorId;
 
     public DDetalleCuadrilla() {
     }
 
-    public DDetalleCuadrilla(int idDetalleCuadrilla, String cantidad, int cuadrillaId, int trabajadorId) {
+    public DDetalleCuadrilla(int idDetalleCuadrilla, int cuadrillaId, int trabajadorId) {
         this.idDetalleCuadrilla = idDetalleCuadrilla;
-        this.cantidad = cantidad;
         this.cuadrillaId = cuadrillaId;
         this.trabajadorId = trabajadorId;
     }
@@ -31,14 +29,6 @@ public class DDetalleCuadrilla {
 
     public void setIdDetalleCuadrilla(int idDetalleCuadrilla) {
         this.idDetalleCuadrilla = idDetalleCuadrilla;
-    }
-
-    public String getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(String cantidad) {
-        this.cantidad = cantidad;
     }
 
     public int getCuadrillaId() {

@@ -165,14 +165,6 @@ public class LHorarioTrabajo {
     
     public int traerIdTrabajador(String cedula){
         int id = 0;
-        String idDetalle = "";
-        String nombre = "";
-        String apellido = "";
-        String cedulaIdent = "";
-        String puesto = "";
-        String idPuesto = "";
-        String idCuadrilla = "";
-        String Cuadrilla = "";
         sSQL = "select idTrabajador, p.cedulaIdent from tbltrabajador as t \n"
                 + "inner join tblpersona as p on t.personaId = p.idPersona\n"
                 + "where p.cedulaIdent = '" + cedula + "'";
@@ -207,15 +199,7 @@ public class LHorarioTrabajo {
     }
     
     public int traerIdDetalleCuadrilla(String cedula){
-        String id = "";
         int idDetalle = 0;
-        String nombre = "";
-        String apellido = "";
-        String cedulaIdent = "";
-        String puesto = "";
-        String idPuesto = "";
-        String idCuadrilla = "";
-        String Cuadrilla = "";
         sSQL = "select dc.idDetalleCuadrilla, t.idTrabajador, p.cedulaIdent from tbldetallecuadrilla as dc\n"
                 + "inner join tbltrabajador as t on dc.trabajadorId = t.idTrabajador\n"
                 + "inner join tblpersona as p on t.personaId = p.idPersona\n"
@@ -234,15 +218,7 @@ public class LHorarioTrabajo {
     }
     
     public String traerNombreTrabajador(String cedula){
-        String id = "";
-        String idDetalle = "";
         String nombre = "";
-        String apellido = "";
-        String cedulaIdent = "";
-        String puesto = "";
-        String idPuesto = "";
-        String idCuadrilla = "";
-        String Cuadrilla = "";
         sSQL = "select dc.idDetalleCuadrilla, t.idTrabajador, p.nombres, p.apellidos, p.cedulaIdent, pt.idPuestoTrabajo, pt.nombrePuesto,\n"
                 + "c.idCuadrilla, c.nombreCuadrilla from tbldetallecuadrilla as dc\n"
                 + "inner join tbltrabajador as t on dc.trabajadorId = t.idTrabajador\n"
@@ -264,15 +240,7 @@ public class LHorarioTrabajo {
     }
     
     public String traerApellidoTrabajador(String cedula){
-        String id = "";
-        String idDetalle = "";
-        String nombre = "";
         String apellido = "";
-        String cedulaIdent = "";
-        String puesto = "";
-        String idPuesto = "";
-        String idCuadrilla = "";
-        String Cuadrilla = "";
         sSQL = "select dc.idDetalleCuadrilla, t.idTrabajador, p.nombres, p.apellidos, p.cedulaIdent, pt.idPuestoTrabajo, pt.nombrePuesto,\n"
                 + "c.idCuadrilla, c.nombreCuadrilla from tbldetallecuadrilla as dc\n"
                 + "inner join tbltrabajador as t on dc.trabajadorId = t.idTrabajador\n"
@@ -294,15 +262,7 @@ public class LHorarioTrabajo {
     }
     
     public String traerCedulaIdentidad(String cedula){
-        String id = "";
-        String idDetalle = "";
-        String nombre = "";
-        String apellido = "";
         String cedulaIdent = "";
-        String puesto = "";
-        String idPuesto = "";
-        String idCuadrilla = "";
-        String Cuadrilla = "";
         sSQL = "select dc.idDetalleCuadrilla, t.idTrabajador, p.nombres, p.apellidos, p.cedulaIdent, pt.idPuestoTrabajo, pt.nombrePuesto,\n"
                 + "c.idCuadrilla, c.nombreCuadrilla from tbldetallecuadrilla as dc\n"
                 + "inner join tbltrabajador as t on dc.trabajadorId = t.idTrabajador\n"
@@ -345,6 +305,36 @@ public class LHorarioTrabajo {
             ResultSet rs = st.executeQuery(sSQL);
             while(rs.next()){
                 puesto = rs.getString("nombrePuesto");
+            }
+            return puesto; 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return null;
+    }
+    
+    public String traerTelefono(String cedula){
+        String id = "";
+        String idDetalle = "";
+        String nombre = "";
+        String apellido = "";
+        String cedulaIdent = "";
+        String puesto = "";
+        String idPuesto = "";
+        String idCuadrilla = "";
+        String Cuadrilla = "";
+        sSQL = "select dc.idDetalleCuadrilla, t.idTrabajador, p.nombres, p.apellidos, p.cedulaIdent, p.telefono, pt.idPuestoTrabajo, pt.nombrePuesto,\n"
+                + "c.idCuadrilla, c.nombreCuadrilla from tbldetallecuadrilla as dc\n"
+                + "inner join tbltrabajador as t on dc.trabajadorId = t.idTrabajador\n"
+                + "inner join tblpersona as p on t.personaId = p.idPersona\n"
+                + "inner join tblpuestotrabajo as pt on t.puestotrabajoId = pt.idPuestoTrabajo\n"
+                + "inner join tblcuadrilla as c on dc.cuadrillaId = c.idCuadrilla\n"
+                + "where p.cedulaIdent = '" + cedula + "'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                puesto = rs.getString("telefono");
             }
             return puesto; 
         } catch (Exception e) {

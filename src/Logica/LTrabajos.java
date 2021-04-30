@@ -45,7 +45,7 @@ public class LTrabajos {
                 + "c.personaId = p.idPersona inner join tblservicio as s on sd.servicioId = s.idServicio \n"
                 + "inner join tblcuadrilla as cd on ts.cuadrillaId = cd.idCuadrilla \n"
                 + "inner join tbltrabajos as t on ts.idTrabajosSolicitud = t.trabajossolicitudId \n"
-                + "where ts.idTrabajosSolicitud = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && t.estado = 'Pendiente'";
+                + "where ts.idTrabajosSolicitud = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && t.estado = 'PENDIENTE'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -82,7 +82,7 @@ public class LTrabajos {
                 + "c.personaId = p.idPersona inner join tblservicio as s on sd.servicioId = s.idServicio \n"
                 + "inner join tblcuadrilla as cd on ts.cuadrillaId = cd.idCuadrilla \n"
                 + "inner join tbltrabajos as t on ts.idTrabajosSolicitud = t.trabajossolicitudId \n"
-                + "where ts.idTrabajosSolicitud = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && t.estado = 'Trabajando'";
+                + "where ts.idTrabajosSolicitud = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && t.estado = 'TRABAJANDO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -119,7 +119,7 @@ public class LTrabajos {
                 + "c.personaId = p.idPersona inner join tblservicio as s on sd.servicioId = s.idServicio \n"
                 + "inner join tblcuadrilla as cd on ts.cuadrillaId = cd.idCuadrilla \n"
                 + "inner join tbltrabajos as t on ts.idTrabajosSolicitud = t.trabajossolicitudId \n"
-                + "where ts.idTrabajosSolicitud = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && t.estado = 'Terminado'";
+                + "where ts.idTrabajosSolicitud = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && t.estado = 'TERMINADO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -156,7 +156,7 @@ public class LTrabajos {
                 + "c.personaId = p.idPersona inner join tblservicio as s on sd.servicioId = s.idServicio \n"
                 + "inner join tblcuadrilla as cd on ts.cuadrillaId = cd.idCuadrilla \n"
                 + "inner join tbltrabajos as t on ts.idTrabajosSolicitud = t.trabajossolicitudId \n"
-                + "where ts.idTrabajosSolicitud = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && sd.estado = 'Aceptada'";
+                + "where ts.idTrabajosSolicitud = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && sd.estado = 'ACEPTADA'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -195,7 +195,7 @@ public class LTrabajos {
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
                 + "inner join tblcuadrilla as cd on tr.cuadrillaId = cd.idCuadrilla \n"
                 + "inner join tbltrabajos as t on tr.idTrabajosReclamos = t.trabajosreclamosId \n"
-                + "where tr.idTrabajosReclamos = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && rs.estado = 'Pendiente'";
+                + "where tr.idTrabajosReclamos = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && rs.estado = 'PENDIENTE'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -233,7 +233,7 @@ public class LTrabajos {
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
                 + "inner join tblcuadrilla as cd on tr.cuadrillaId = cd.idCuadrilla \n"
                 + "inner join tbltrabajos as t on tr.idTrabajosReclamos = t.trabajosreclamosId \n"
-                + "where tr.idTrabajosReclamos = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && t.estado = 'Trabajando'";
+                + "where tr.idTrabajosReclamos = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && t.estado = 'TRABAJANDO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -271,7 +271,7 @@ public class LTrabajos {
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
                 + "inner join tblcuadrilla as cd on tr.cuadrillaId = cd.idCuadrilla \n"
                 + "inner join tbltrabajos as t on tr.idTrabajosReclamos = t.trabajosreclamosId \n"
-                + "where tr.idTrabajosReclamos = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && t.estado = 'Terminado'";
+                + "where tr.idTrabajosReclamos = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && t.estado = 'TERMINADO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -309,7 +309,7 @@ public class LTrabajos {
                 + "inner join tblservicio as s on ds.servicioId = s.idServicio \n"
                 + "inner join tblcuadrilla as cd on tr.cuadrillaId = cd.idCuadrilla \n"
                 + "inner join tbltrabajos as t on tr.idTrabajosReclamos = t.trabajosreclamosId \n"
-                + "where tr.idTrabajosReclamos = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && rs.estado = 'En Revisión'";
+                + "where tr.idTrabajosReclamos = '" + buscar + "' or s.nombreServicio like '%" + buscar + "%' && rs.estado = 'ATENDIDO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -345,7 +345,7 @@ public class LTrabajos {
             
             pst.executeUpdate();
             
-            pst1.setString(1, "Trabajando");
+            pst1.setString(1, "TRABAJANDO");
             pst1.setInt(2, dTrabajos.getIdTrabajos());
             
             pst1.executeUpdate();
@@ -384,17 +384,17 @@ public class LTrabajos {
             
             pst.executeUpdate();
             
-            pst1.setString(1, "Eliminado");
+            pst1.setString(1, "ELIMINADO");
             pst1.setInt(2, dTrabajos.getIdTrabajos());
             
             pst1.executeUpdate();
             
-            pst2.setString(1, "Pendiente");
+            pst2.setString(1, "PENDIENTE");
             pst2.setInt(2, dServiciodelCliente.getIdServiciodelCliente());
             
             pst2.executeUpdate();
             
-            pst3.setString(1, "Rechazada");
+            pst3.setString(1, "RECHAZADA");
             pst3.setInt(2, dSolicitud.getIdSolicitud());
             
             pst3.executeUpdate();
@@ -586,17 +586,17 @@ public class LTrabajos {
             PreparedStatement pst1 = cn.prepareStatement(sSQL1);
             PreparedStatement pst2 = cn.prepareStatement(sSQL2);
             
-            pst.setString(1, "Terminado");
+            pst.setString(1, "TERMINADO");
             pst.setInt(2, dTrabajos.getIdTrabajos());
             
             pst.executeUpdate();
             
-            pst1.setString(1, "Activo");
+            pst1.setString(1, "ACTIVO");
             pst1.setInt(2, dServiciodelCliente.getIdServiciodelCliente());
             
             pst1.executeUpdate();
             
-            pst2.setString(1, "Aceptada");
+            pst2.setString(1, "ACEPTADA");
             pst2.setInt(2, dSolicitud.getIdSolicitud());
             
             pst2.executeUpdate();

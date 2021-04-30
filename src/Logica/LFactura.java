@@ -96,13 +96,13 @@ public class LFactura {
             pst1.setInt(6, dDetalleFactura.getServiciodelclienteId());
             pst1.setInt(7, 1);
             pst1.setInt(8, 1);
-            pst1.setString(9, "Pendiente");
+            pst1.setString(9, "PENDIENTE");
             
             pst1.executeUpdate();
             
             pst2.executeUpdate();
             
-            pst3.setString(1, "Con Factura");
+            pst3.setString(1, "CON FACTURA");
             pst3.setInt(2, dServiciodelCliente.getIdServiciodelCliente());
             
             pst3.executeUpdate();
@@ -126,7 +126,7 @@ public class LFactura {
         sSQL = "update tbldetallefactura set estado = ? where idDetalleFactura = ?";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            pst.setString(1, "Factura Sin Pagar");
+            pst.setString(1, "FACTURA SIN PAGAR");
             pst.setInt(2, dDetalleFactura.getIdDetalleFactura());
             pst.executeUpdate();
             System.out.println("Datos Insertados");

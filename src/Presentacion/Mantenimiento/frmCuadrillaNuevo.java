@@ -160,6 +160,8 @@ public class frmCuadrillaNuevo extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
+        btnConfigurar = new javax.swing.JPanel();
+        jPanel6 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jSeparator16 = new javax.swing.JSeparator();
         jSeparator9 = new javax.swing.JSeparator();
@@ -681,11 +683,11 @@ public class frmCuadrillaNuevo extends javax.swing.JFrame {
 
         btnBuscar.setBackground(new java.awt.Color(102, 0, 0));
         btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnBuscarMouseExited(evt);
-            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnBuscarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseExited(evt);
             }
         });
         btnBuscar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -766,6 +768,36 @@ public class frmCuadrillaNuevo extends javax.swing.JFrame {
         );
 
         jPanel3.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 30, 170, 40));
+
+        btnConfigurar.setBackground(new java.awt.Color(102, 0, 0));
+        btnConfigurar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConfigurarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConfigurarMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnConfigurarMousePressed(evt);
+            }
+        });
+        btnConfigurar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(btnConfigurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 10, 50, 50));
+
+        jPanel6.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        jPanel3.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, 930, 80));
 
@@ -891,9 +923,9 @@ public class frmCuadrillaNuevo extends javax.swing.JFrame {
 
     private void btnAgregarNuevaCuadrillaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarNuevaCuadrillaMousePressed
         editar = "no";
-        frmValoresCuadrillaNuevo form = new frmValoresCuadrillaNuevo();
-        form.setVisible(true);
-        form.toFront();
+        //frmValoresCuadrillaNuevo form = new frmValoresCuadrillaNuevo();
+        //form.setVisible(true);
+        //form.toFront();
     }//GEN-LAST:event_btnAgregarNuevaCuadrillaMousePressed
 
     private void btnAgregarNuevaCuadrillaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarNuevaCuadrillaMouseReleased
@@ -1008,9 +1040,9 @@ public class frmCuadrillaNuevo extends javax.swing.JFrame {
 
     private void btnEditarCuadrillaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarCuadrillaMousePressed
         editar = "si";
-        frmValoresCuadrillaNuevo form = new frmValoresCuadrillaNuevo();
-        form.setVisible(true);
-        form.toFront();
+        //frmValoresCuadrillaNuevo form = new frmValoresCuadrillaNuevo();
+        //form.setVisible(true);
+        //form.toFront();
     }//GEN-LAST:event_btnEditarCuadrillaMousePressed
 
     private void btnEditarCuadrillaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarCuadrillaMouseExited
@@ -1223,6 +1255,21 @@ public class frmCuadrillaNuevo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnVolveraActivarSombraMouseEntered
 
+    private void btnConfigurarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfigurarMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConfigurarMouseEntered
+
+    private void btnConfigurarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfigurarMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConfigurarMouseExited
+
+    private void btnConfigurarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfigurarMousePressed
+        frmAgregarTrabajadores form = new frmAgregarTrabajadores();
+        form.setVisible(true);
+        form.toFront();
+        this.dispose();
+    }//GEN-LAST:event_btnConfigurarMousePressed
+
     void setColor(JPanel panel) {
         panel.setBackground(new Color(51, 0, 0));
     }
@@ -1271,6 +1318,7 @@ public class frmCuadrillaNuevo extends javax.swing.JFrame {
     private javax.swing.JPanel btnActualizar;
     private javax.swing.JPanel btnAgregarNuevaCuadrilla;
     private javax.swing.JPanel btnBuscar;
+    private javax.swing.JPanel btnConfigurar;
     private javax.swing.JPanel btnEditarCuadrilla;
     private javax.swing.JPanel btnEliminarCuadrilla;
     private javax.swing.JPanel btnEliminarServicioSombra;
@@ -1313,6 +1361,7 @@ public class frmCuadrillaNuevo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;

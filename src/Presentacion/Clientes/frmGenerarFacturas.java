@@ -26,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * @author josug
  */
 public final class frmGenerarFacturas extends javax.swing.JFrame {
+
     public int xx;
     public int xy;
     Calendar fecha_actual = new GregorianCalendar();
@@ -34,6 +35,7 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
     int ultimoDia;
     int faltantes;
     double sobrecargo;
+
     /**
      * Creates new form frmPrincipalSolicitudesNuevo
      */
@@ -42,8 +44,8 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         GenerarFechas();
     }
-    
-    public void cargarValores(){
+
+    public void cargarValores() {
         frmGestionarServicios form = new frmGestionarServicios();
         txtIdCliente.setText(String.valueOf(frmGestionarServicios.idCliente));
         txtNombreCliente.setText(String.valueOf(frmGestionarServicios.nombreCliente));
@@ -52,14 +54,14 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         txtServicio.setText(String.valueOf(frmGestionarServicios.nombreServicio));
         txtPrecio.setText(String.valueOf(frmGestionarServicios.precio));
         jdFechaVencimiento.setDate(frmGestionarServicios.fvencimiento);
-        txtSobrecargos.setText("Sin Sobrecargo");
+        txtSobrecargos.setText("0");
         double precio = Double.parseDouble(txtPrecio.getText());
         double total;
         total = precio;
         txtTotal.setText(String.valueOf(total));
     }
-    
-    public void cargarValoresConSobrecargo(){
+
+    public void cargarValoresConSobrecargo() {
         frmGestionarServicios form = new frmGestionarServicios();
         txtIdCliente.setText(String.valueOf(frmGestionarServicios.idCliente));
         txtNombreCliente.setText(String.valueOf(frmGestionarServicios.nombreCliente));
@@ -75,13 +77,14 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         total = precio + sobrecargo;
         txtTotal.setText(String.valueOf(total));
     }
-    
-    public void GenerarFechas(){
+
+    public void GenerarFechas() {
         //Se Inserta la fecha actual para la fecha de emision de la factura
-            jdFechaEmision.setCalendar(fecha_actual);
-            
+        jdFechaEmision.setCalendar(fecha_actual);
+
+        //YA TENGO OTRO QUE HACE LO MISMO
         //Se inserta la fecha final del mes siguiente para la fecha de pago
-            /*Calendar mesActual = Calendar.getInstance();
+        /*Calendar mesActual = Calendar.getInstance();
             mesActual.set(Calendar.DAY_OF_MONTH, 1);
             mesActual.set(Calendar.DATE, mesActual.getActualMaximum(Calendar.DATE));
             diasActuales = Integer.parseInt(sdf2.format(mesActual.getTime()));
@@ -90,15 +93,15 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
             int dia = jdFechaEmision.getCalendar().get(Calendar.DAY_OF_MONTH);
             mesSiguiente = mes - 1;
             ultimoDia = Integer.parseInt(sdf2.format(mesActual.getTime()));
-            jdFechaVencimiento.setDate(new Date(año - 1900, mesSiguiente, ultimoDia));*/
-            
-            obtenerMes();
+            jdFechaVencimiento.setDate(new Date(año - 1900, mesSiguiente, ultimoDia));
+         */
+        obtenerMes();
     }
-    
-    public void obtenerMes(){
+
+    public void obtenerMes() {
         int mes = jdFechaEmision.getCalendar().get(Calendar.MONTH);
         String mesPago = null;
-        switch(mes){
+        switch (mes) {
             case 0: {
                 mesPago = "Enero";
                 break;
@@ -150,7 +153,7 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         }
         lblmespago.setText(mesPago);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -520,29 +523,30 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
         DDetalleFactura ddf = new DDetalleFactura();
         LFactura fun = new LFactura();
         DServiciodelCliente dsc = new DServiciodelCliente();
-        
+
         //Guarda la fecha de emision
         int año = jdFechaEmision.getCalendar().get(Calendar.YEAR);
-        int mes  = jdFechaEmision.getCalendar().get(Calendar.MONTH);
+        int mes = jdFechaEmision.getCalendar().get(Calendar.MONTH);
         int dia = jdFechaEmision.getCalendar().get(Calendar.DAY_OF_MONTH);
         df.setFechaEmision(new Date((año - 1900), mes, dia));
-        
+
         //Guarda la fecha de vencimiento
         int añoV = jdFechaVencimiento.getCalendar().get(Calendar.YEAR);
-        int mesV  = jdFechaVencimiento.getCalendar().get(Calendar.MONTH);
+        int mesV = jdFechaVencimiento.getCalendar().get(Calendar.MONTH);
         int diaV = jdFechaVencimiento.getCalendar().get(Calendar.DAY_OF_MONTH);
         df.setFechaVencimiento(new Date((añoV - 1900), mesV, diaV));
-        
+
         df.setClienteId(Integer.parseInt(txtIdCliente.getText()));
         ddf.setDescripcion(txtDescripcion.getText());
         ddf.setMesPago(lblmespago.getText());
         ddf.setPrecio(Double.parseDouble(txtPrecio.getText()));
+
         ddf.setSobrecargos(Double.parseDouble(txtSobrecargos.getText()));
         ddf.setTotal(Double.parseDouble(txtTotal.getText()));
         ddf.setServiciodelclienteId(Integer.parseInt(txtIdCliente.getText()));
-        
+
         dsc.setIdServiciodelCliente(Integer.parseInt(txtIdCliente.getText()));
-        
+
         fun.insertarFactura(df, ddf, dsc);
     }//GEN-LAST:event_btnGenerarMousePressed
 
@@ -551,7 +555,7 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMousePressed
 
     private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
-        
+
     }//GEN-LAST:event_jPanel1MousePressed
 
     private void moverMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMouseDragged
@@ -562,15 +566,15 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
 
     private void moverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_moverMousePressed
         xx = evt.getX();
-         xy = evt.getY();
+        xy = evt.getY();
     }//GEN-LAST:event_moverMousePressed
 
     private void btnGenerarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseReleased
-       
+
     }//GEN-LAST:event_btnGenerarMouseReleased
 
     private void btnGenerarFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnGenerarFocusGained
-        
+
     }//GEN-LAST:event_btnGenerarFocusGained
 
     private void btnGenerarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseEntered
@@ -596,7 +600,7 @@ public final class frmGenerarFacturas extends javax.swing.JFrame {
     void resetColor(JPanel panel) {
         panel.setBackground(new Color(102, 0, 0));
     }
-    
+
     /**
      * @param args the command line arguments
      */

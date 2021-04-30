@@ -20,6 +20,7 @@ import Logica.LGestionarServicios;
 import Logica.LPagos;
 import static Presentacion.Clientes.frmValoresSolicitudNuevo.diasActuales;
 import static Presentacion.Cuadrillas.frmRegistrarEntrada.txtCedula;
+import Presentacion.Mantenimiento.frmVistaFormadePago;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -119,6 +120,7 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         btnSalir3 = new javax.swing.JPanel();
         btnSalir5 = new javax.swing.JPanel();
+        cmbFormadePago = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -136,13 +138,16 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         txtTotal = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
-        cmbFormadePago = new javax.swing.JComboBox<>();
         jLabel21 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jdFechaRealizado = new com.toedter.calendar.JDateChooser();
         txtIdFormadePago = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        txtForma = new javax.swing.JTextField();
+        btnBuscarForma = new javax.swing.JPanel();
+        lblBuscarForma = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         txtVuelto = new javax.swing.JTextField();
         txtPagar = new javax.swing.JTextField();
@@ -206,41 +211,16 @@ public final class frmGenerarPago extends javax.swing.JFrame {
                 btnGenerarMouseReleased(evt);
             }
         });
+        btnGenerar.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_plus_math_30px.png"))); // NOI18N
+        btnGenerar.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 31, 38));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(204, 204, 204));
         jLabel13.setText("Generar");
-
-        javax.swing.GroupLayout btnGenerarLayout = new javax.swing.GroupLayout(btnGenerar);
-        btnGenerar.setLayout(btnGenerarLayout);
-        btnGenerarLayout.setHorizontalGroup(
-            btnGenerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnGenerarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(btnGenerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(btnGenerarLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(0, 47, Short.MAX_VALUE))
-                    .addComponent(jSeparator1))
-                .addContainerGap())
-        );
-        btnGenerarLayout.setVerticalGroup(
-            btnGenerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnGenerarLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnGenerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(btnGenerarLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
+        btnGenerar.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 6, -1, -1));
+        btnGenerar.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 32, 109, 10));
 
         jPanel7.add(btnGenerar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 170, 50));
 
@@ -252,48 +232,24 @@ public final class frmGenerarPago extends javax.swing.JFrame {
                 btnSalirMousePressed(evt);
             }
         });
+        btnSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_exit_30px.png"))); // NOI18N
+        btnSalir.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 31, 38));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(204, 204, 204));
         jLabel16.setText("Salir");
-
-        javax.swing.GroupLayout btnSalirLayout = new javax.swing.GroupLayout(btnSalir);
-        btnSalir.setLayout(btnSalirLayout);
-        btnSalirLayout.setHorizontalGroup(
-            btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnSalirLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(btnSalirLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addContainerGap(85, Short.MAX_VALUE))
-                    .addComponent(jSeparator4)))
-        );
-        btnSalirLayout.setVerticalGroup(
-            btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnSalirLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(btnSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(btnSalirLayout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
+        btnSalir.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 6, -1, -1));
+        btnSalir.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 32, 115, 10));
 
         jPanel7.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 170, 50));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(204, 204, 204));
         jLabel17.setText("SERVINET");
-        jPanel7.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
-        jPanel7.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 140, 20));
+        jPanel7.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+        jPanel7.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 360, 140, 20));
 
         btnSalir3.setBackground(new java.awt.Color(51, 0, 0));
         btnSalir3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -339,7 +295,14 @@ public final class frmGenerarPago extends javax.swing.JFrame {
 
         jPanel7.add(btnSalir5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 170, 50));
 
-        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 210, 340));
+        cmbFormadePago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbFormadePagoActionPerformed(evt);
+            }
+        });
+        jPanel7.add(cmbFormadePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 140, -1));
+
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 210, 370));
 
         jPanel4.setBackground(new java.awt.Color(153, 153, 153));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -383,7 +346,7 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         jLabel19.setBackground(new java.awt.Color(0, 0, 0));
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("FORMA DE PAGO:");
-        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, -1, -1));
+        jPanel5.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
         jPanel5.add(txtServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 140, -1));
 
         jLabel20.setBackground(new java.awt.Color(0, 0, 0));
@@ -395,13 +358,6 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         jLabel25.setForeground(new java.awt.Color(255, 255, 255));
         jLabel25.setText("Gs.");
         jPanel5.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, -1, -1));
-
-        cmbFormadePago.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbFormadePagoActionPerformed(evt);
-            }
-        });
-        jPanel5.add(cmbFormadePago, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 140, -1));
 
         jLabel21.setBackground(new java.awt.Color(0, 0, 0));
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
@@ -420,7 +376,7 @@ public final class frmGenerarPago extends javax.swing.JFrame {
 
         jLabel14.setBackground(new java.awt.Color(0, 0, 0));
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("ID CLIENTE:");
+        jLabel14.setText("ID FORMA:");
         jPanel5.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         jButton1.setText("Prueba");
@@ -429,9 +385,44 @@ public final class frmGenerarPago extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, -1, -1));
+        jPanel5.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, -1, -1));
+        jPanel5.add(txtForma, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 140, -1));
 
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 400, 240));
+        btnBuscarForma.setBackground(new java.awt.Color(102, 0, 0));
+        btnBuscarForma.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarFormaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarFormaMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnBuscarFormaMousePressed(evt);
+            }
+        });
+        btnBuscarForma.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblBuscarForma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/icons8_search_20px_1.png"))); // NOI18N
+        btnBuscarForma.add(lblBuscarForma, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        jPanel5.add(btnBuscarForma, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 40, 40));
+
+        jPanel6.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        jPanel5.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, 40, 40));
+
+        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 400, 270));
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -475,9 +466,9 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         jLabel18.setText("Importe");
         jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
-        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 400, 70));
+        jPanel4.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 400, 70));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 420, 340));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 420, 370));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -517,7 +508,7 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         dsc.setIdServiciodelCliente(Integer.parseInt(txtIdCliente.getText()));
         if(multa > 0){
             dsc.setMulta(0);
-            dsc.setEstadoMulta("No");
+            dsc.setEstadoMulta("NO");
             fun2.multa(dsc);
         }
         fun2.EstadoActivo(dsc);
@@ -629,6 +620,20 @@ public final class frmGenerarPago extends javax.swing.JFrame {
         System.out.println(añoS + "-" + diaS + "-" + mesS);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnBuscarFormaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarFormaMouseEntered
+        setColor(btnBuscarForma);
+    }//GEN-LAST:event_btnBuscarFormaMouseEntered
+
+    private void btnBuscarFormaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarFormaMouseExited
+        resetColor(btnBuscarForma);
+    }//GEN-LAST:event_btnBuscarFormaMouseExited
+
+    private void btnBuscarFormaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarFormaMousePressed
+        frmVistaFormadePago form = new frmVistaFormadePago();
+        form.setVisible(true);
+        form.toFront();
+    }//GEN-LAST:event_btnBuscarFormaMousePressed
+
     int obtenerMonto() {
         int id = 0;
         String SQL = "select idCaja, montoApertura from tblcaja order by idCaja desc limit 1";
@@ -645,12 +650,13 @@ public final class frmGenerarPago extends javax.swing.JFrame {
     }
 
     void setColor(JPanel panel) {
-        panel.setBackground(new Color(85, 65, 118));
+        panel.setBackground(new Color(51, 0, 0));
     }
 
     void resetColor(JPanel panel) {
-        panel.setBackground(new Color(153, 51, 255));
+        panel.setBackground(new Color(102, 0, 0));
     }
+
 
     /**
      * @param args the command line arguments
@@ -691,6 +697,7 @@ public final class frmGenerarPago extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel btnBuscarForma;
     private javax.swing.JPanel btnGenerar;
     private javax.swing.JPanel btnSalir;
     private javax.swing.JPanel btnSalir3;
@@ -723,16 +730,19 @@ public final class frmGenerarPago extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private com.toedter.calendar.JDateChooser jdFechaRealizado;
     private com.toedter.calendar.JDateChooser jdFechaVencimiento;
+    private javax.swing.JLabel lblBuscarForma;
     private javax.swing.JPanel mover;
+    public static javax.swing.JTextField txtForma;
     private javax.swing.JTextField txtIdCliente;
     private javax.swing.JTextField txtIdFactura;
-    private javax.swing.JTextField txtIdFormadePago;
+    public static javax.swing.JTextField txtIdFormadePago;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNumeroCedula;
     private javax.swing.JTextField txtPagando;

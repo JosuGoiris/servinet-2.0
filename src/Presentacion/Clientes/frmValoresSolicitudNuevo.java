@@ -543,6 +543,7 @@ public class frmValoresSolicitudNuevo extends javax.swing.JFrame {
             }
             dsc.setFechaInicio(new Date((año - 1900), mes, dia));
             dsc.setDetalleservicioId(Integer.parseInt(txtIdTipo.getText()));
+            
 
             dp.setNombre(nombres);
             dp.setApellido(apellidos);

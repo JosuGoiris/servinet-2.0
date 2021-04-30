@@ -104,7 +104,7 @@ public class LGestionarServicios {
         sSQL = "update tblserviciodelcliente set estado = ? where idServiciodelCliente = ?";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            pst.setString(1, "Inactivo");
+            pst.setString(1, "INACTIVO");
             pst.setInt(2, dServiciodelCliente.getIdServiciodelCliente());
             pst.executeUpdate();
             System.out.println("Datos Insertados");
@@ -120,8 +120,8 @@ public class LGestionarServicios {
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             pst.setDate(1, dServiciodelCliente.getFechaPago());
-            pst.setString(2, "Activo");
-            pst.setString(3, "Factura Pagada");
+            pst.setString(2, "ACTIVO");
+            pst.setString(3, "FACTURA PAGADA");
             pst.setInt(4, dServiciodelCliente.getIdServiciodelCliente());
             pst.executeUpdate();
             System.out.println("Datos Insertados");
@@ -137,7 +137,7 @@ public class LGestionarServicios {
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             pst.setDouble(1, 0);
-            pst.setString(2, "No");
+            pst.setString(2, "NO");
             pst.setInt(3, dServiciodelCliente.getIdServiciodelCliente());
             pst.executeUpdate();
             System.out.println("Datos Insertados");
@@ -149,13 +149,14 @@ public class LGestionarServicios {
     }
     
     public String actualizarEstados(DServiciodelCliente dServiciodelCliente){
-        sSQL = "update tblserviciodelcliente set estado = ?, estadoFactura = ?, multa = ? where idServiciodelCliente = ?";
+        sSQL = "update tblserviciodelcliente set estado = ?, estadoFactura = ?, multa = ?, estadoMulta = ? where idServiciodelCliente = ?";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            pst.setString(1, "Inactivo");
-            pst.setString(2, "Factura Sin Pagar");
+            pst.setString(1, "INACTIVO");
+            pst.setString(2, "FACTURA SIN PAGAR");
             pst.setDouble(3, 50000);
-            pst.setInt(4, dServiciodelCliente.getIdServiciodelCliente());
+            pst.setString(4, "SI");
+            pst.setInt(5, dServiciodelCliente.getIdServiciodelCliente());
             pst.executeUpdate();
             System.out.println("Datos Insertados");
         } catch (Exception e) {

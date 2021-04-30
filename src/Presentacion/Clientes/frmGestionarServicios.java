@@ -85,11 +85,11 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
                 System.out.println(" Factura: " + estadoMulta[i]);
                 //verifica cada fecha de vencimiento con la fecha real del dia
                 //y si se cumple realiza el corte del servicio si este todavia no se ha pagado
-                if ("Si".equals(estadoMulta[i])) {
+                if ("SI".equals(estadoMulta[i])) {
                     DServiciodelCliente dsc = new DServiciodelCliente();
                     LGestionarServicios fun = new LGestionarServicios();
                     System.out.println("Cliente " + id[i]);
-                    String estado = "No";
+                    String estado = "NO";
                     dsc.setEstadoMulta(estado);
                     dsc.setIdServiciodelCliente(id[i]);
                     fun.estadoMulta(dsc);
@@ -103,65 +103,73 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
     }
 
     public void obtenerEstados() {
-        String estado = "Atrasado";
+        String estado = "ATRASADO";
         String[] nombres = new String[tblGestion.getRowCount()];
         String[] estados = new String[tblGestion.getRowCount()];
         for (int i = 0; i < tblGestion.getRowCount(); i++) {
             estados[i] = tblGestion.getValueAt(i, 9).toString();
             nombres[i] = tblGestion.getValueAt(i, 1).toString();
-            if ("Atrasado".equals(estados[i])) {
+            if ("ATRASADO".equals(estados[i])) {
                 System.out.println("El cliente " + nombres[i] + " está " + estados[i]);
             }
         }
     }
 
     public void obtenerFecha() {
-        if ("No".equals(estado)) {
-            //optiene la fecha del jdatechooser
-            int dia = jdFecha2.getCalendar().get(Calendar.DAY_OF_MONTH);
-            int mes = jdFecha2.getCalendar().get(Calendar.MONTH);
-            int año = jdFecha2.getCalendar().get(Calendar.YEAR);
-            Date fVencimiento = new Date((año - 1900), mes, dia);
-            System.out.println("hola " + fVencimiento);
+        int[] ids = new int[tblGestion.getRowCount()];
+        String[] estadoMulta = new String[tblGestion.getRowCount()];
+        for (int i = 0; i < tblGestion.getRowCount(); i++) {
+            ids[i] = Integer.parseInt(tblGestion.getValueAt(i, 0).toString());
+            estadoMulta[i] = lgs.traerEstadoMulta(ids[i]);
+            System.out.println(" Factura: " + estadoMulta[i]);
+            
+            if ("NO".equals(estadoMulta[i])) {
+                //optiene la fecha del jdatechooser
+                int dia = jdFecha2.getCalendar().get(Calendar.DAY_OF_MONTH);
+                int mes = jdFecha2.getCalendar().get(Calendar.MONTH);
+                int año = jdFecha2.getCalendar().get(Calendar.YEAR);
+                Date fVencimiento = new Date((año - 1900), mes, dia);
+                System.out.println("hola " + fVencimiento);
 
-            //crea los arrays para el id del cliente y la fecha de vencimiento de sus servicios
-            int[] id = new int[tblGestion.getRowCount()];
-            Date[] fechas = new Date[tblGestion.getRowCount()];
+                //crea los arrays para el id del cliente y la fecha de vencimiento de sus servicios
+                int[] id = new int[tblGestion.getRowCount()];
+                Date[] fechas = new Date[tblGestion.getRowCount()];
 
-            for (int i = 0; i < tblGestion.getRowCount(); i++) {
-                fechas[i] = Date.valueOf(tblGestion.getValueAt(i, 8).toString());
-                id[i] = Integer.parseInt(tblGestion.getValueAt(i, 0).toString());
+                for (int y = 0; y < tblGestion.getRowCount(); y++) {
+                    fechas[y] = Date.valueOf(tblGestion.getValueAt(y, 8).toString());
+                    id[y] = Integer.parseInt(tblGestion.getValueAt(y, 0).toString());
 
-                //verifica cada fecha de vencimiento con la fecha real del dia
-                //y si se cumple realiza el corte del servicio si este todavia no se ha pagado
-                if (fVencimiento.equals(fechas[i])) {
-                    System.out.println("Funciona " + fVencimiento + " " + fechas[i]);
-                    DServiciodelCliente dsc = new DServiciodelCliente();
-                    LGestionarServicios fun = new LGestionarServicios();
-                    DDetalleFactura ddf = new DDetalleFactura();
-                    LFactura fun1 = new LFactura();
+                    //verifica cada fecha de vencimiento con la fecha real del dia
+                    //y si se cumple realiza el corte del servicio si este todavia no se ha pagado
+                    if (fVencimiento.equals(fechas[y])) {
+                        System.out.println("Funciona " + fVencimiento + " " + fechas[i]);
+                        DServiciodelCliente dsc = new DServiciodelCliente();
+                        LGestionarServicios fun = new LGestionarServicios();
+                        DDetalleFactura ddf = new DDetalleFactura();
+                        LFactura fun1 = new LFactura();
 
-                    System.out.println("Cliente " + id[i]);
-                    int idFactura = lf.traerIdFactura(id[i]);
-                    System.out.println("Factura " + idFactura);
-                    dsc.setIdServiciodelCliente(id[i]);
-                    fun.actualizarEstados(dsc);
+                        System.out.println("Cliente " + id[y]);
+                        int idFactura = lf.traerIdFactura(id[y]);
+                        System.out.println("Factura " + idFactura);
+                        dsc.setIdServiciodelCliente(id[y]);
+                        fun.actualizarEstados(dsc);
 
-                    ddf.setIdDetalleFactura(idFactura);
-                    fun1.actualizarFactura(ddf);
-                    estado = "Si";
-                    System.out.println(estado);
-                } else {
-                    System.out.println("Hola " + fVencimiento + " " + fechas[i]);
+                        ddf.setIdDetalleFactura(idFactura);
+                        fun1.actualizarFactura(ddf);
+                        estado = "SI";
+                        System.out.println(estado);
+                    } else {
+                        System.out.println("Hola " + fVencimiento + " " + fechas[i]);
+                    }
                 }
+            } else {
+                System.out.println("YA SE HIZO");
             }
-        }else{
-            System.out.println("YA SE HIZO");
         }
     }
 
     public void ponerMasMulta() {
-        if ("No".equals(multapuesta)) {
+        if ("NO".equals(multapuesta)) {
             String estadoV = null;
 
             //optiene la fecha del jdatechooser
@@ -185,7 +193,7 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
                 System.out.println("Estado Factura: " + estado[i]);
                 //verifica cada fecha de vencimiento con la fecha real del dia
                 //y si se cumple realiza el corte del servicio si este todavia no se ha pagado
-                if ("Factura Sin Pagar".equals(estado[i]) && "No".equals(estadoMulta)) {
+                if ("FACTURA SIN PAGAR".equals(estado[i]) && "NO".equals(estadoMulta)) {
                     int diaNuevo = 23;
                     if (diaNuevo < dia) {
                         DServiciodelCliente dsc = new DServiciodelCliente();
@@ -200,10 +208,10 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
                         dsc.setMulta(total);
                         dsc.setIdServiciodelCliente(id[i]);
                         fun.actualizarMulta(dsc);
-                        String estadoM = "Si";
+                        String estadoM = "SI";
                         dsc.setEstadoMulta(estadoM);
                         fun.estadoMulta(dsc);
-                        multapuesta = "Si";
+                        multapuesta = "SI";
                         System.out.println(multapuesta);
                     }
                 } else {
@@ -1056,28 +1064,37 @@ public final class frmGestionarServicios extends javax.swing.JFrame {
 
     private void btnGenerarFacturasMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarFacturasMousePressed
         //compara los estados del servicio y facturas para poder realizar una accion
-        if (tblGestion.getSelectedRows().length > 0) {
-            String estado = lgs.traerEstadoFactura(idCliente);
-            System.out.println(estado);
-            if ("Con Factura".equals(estado)) {
-                frmGenerarFacturas form = new frmGenerarFacturas();
-                //accion = "cargar";
-                form.cargarValores();
-                form.setVisible(true);
-                form.toFront();
-            } else if ("Sin Factura".equals(estado)) {
-                JOptionPane.showMessageDialog(null, "Ya tiene la factura de este mes");
-            }
-            if ("Factura Sin Pagar".equals(estado)) {
-                frmGenerarFacturas form = new frmGenerarFacturas();
-                //accion = "cargar";
-                form.cargarValoresConSobrecargo();
-                form.setVisible(true);
-                form.toFront();
-            }
+        Calendar fecha = new GregorianCalendar();
+        int dia = fecha.get(Calendar.DATE);
 
+        System.out.println(dia);
+        int diaRealizar = 23;
+
+        if (diaRealizar < dia) {
+            if (tblGestion.getSelectedRows().length > 0) {
+                String estado = lgs.traerEstadoFactura(idCliente);
+                System.out.println(estado);
+                if ("SIN FACTURA".equals(estado)) {
+                    frmGenerarFacturas form = new frmGenerarFacturas();
+                    //accion = "cargar";
+                    form.cargarValores();
+                    form.setVisible(true);
+                    form.toFront();
+                } else if ("CON FACTURA".equals(estado)) {
+                    JOptionPane.showMessageDialog(null, "Ya tiene la factura de este mes");
+                }
+                if ("FACTURA SIN PAGAR".equals(estado)) {
+                    frmGenerarFacturas form = new frmGenerarFacturas();
+                    //accion = "cargar";
+                    form.cargarValoresConSobrecargo();
+                    form.setVisible(true);
+                    form.toFront();
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Se debe de Seleccionar un usuario");
+            }
         } else {
-            JOptionPane.showMessageDialog(null, "Se debe de Seleccionar un usuario");
+            JOptionPane.showMessageDialog(null, "TODAVIA NO ES LA FECHA PARA REALIZAR LA FACTURA");
         }
     }//GEN-LAST:event_btnGenerarFacturasMousePressed
 

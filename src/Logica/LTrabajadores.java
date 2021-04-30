@@ -31,6 +31,38 @@ public class LTrabajadores {
     public DefaultTableModel mostrarTrabajadores(String buscar){
         DefaultTableModel miModelo = null;
         
+        String titulos [] = {"Id", "Nombres", "Apellidos", "Cédula", "Teléfono", "Puesto"};
+        String dts [] = new String[6];
+        
+        miModelo = new DefaultTableModel(null, titulos);
+        sSQL = "select t.idTrabajador, p.nombres, p.apellidos, d.idDireccion, d.nombreDireccion, pt.idPuestoTrabajo ,pt.nombrePuesto, p.cedulaIdent, p.telefono, \n"
+                + "p.estado from tbltrabajador as t \n"
+                + "inner join tblpersona as p on t.personaId = p.idPersona \n"
+                + "inner join tblpuestotrabajo as pt on t.puestotrabajoId  = pt.idPuestoTrabajo \n"
+                + "inner join tbldireccion as d on p.direccionId = d.idDireccion \n"
+                + "where t.idTrabajador = '" + buscar + "' or p.nombres like '%" + buscar + "%' && p.estado = 'ACTIVO'";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sSQL);
+            while(rs.next()){
+                dts[0] = rs.getString("idTrabajador");
+                dts[1] = rs.getString("nombres");
+                dts[2] = rs.getString("apellidos");
+                dts[3] = rs.getString("cedulaIdent");
+                dts[4] = rs.getString("telefono");
+                dts[5] = rs.getString("nombrePuesto");
+                miModelo.addRow(dts);
+            }
+            return miModelo;
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+            return null;
+        }
+    }
+    
+    public DefaultTableModel mostrarTrabajadoresActivos(String buscar){
+        DefaultTableModel miModelo = null;
+        
         String titulos [] = {"Id", "Nombres", "Apellidos", "Cédula", "Teléfono", "Dirección", "Puesto", "Estado"};
         String dts [] = new String[8];
         
@@ -40,7 +72,7 @@ public class LTrabajadores {
                 + "inner join tblpersona as p on t.personaId = p.idPersona \n"
                 + "inner join tblpuestotrabajo as pt on t.puestotrabajoId  = pt.idPuestoTrabajo \n"
                 + "inner join tbldireccion as d on p.direccionId = d.idDireccion \n"
-                + "where t.idTrabajador = '" + buscar + "' or p.nombres like '%" + buscar + "%' && p.estado = 'Activo'";
+                + "where t.idTrabajador = '" + buscar + "' or p.nombres like '%" + buscar + "%' && p.estado = 'ACTIVO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);
@@ -74,7 +106,7 @@ public class LTrabajadores {
                 + "inner join tblpersona as p on t.personaId = p.idPersona \n"
                 + "inner join tblpuestotrabajo as pt on t.puestotrabajoId  = pt.idPuestoTrabajo \n"
                 + "inner join tbldireccion as d on p.direccionId = d.idDireccion \n"
-                + "where t.idTrabajador = '" + buscar + "' or p.nombres like '%" + buscar + "%' && p.estado = 'Inactivo'";
+                + "where t.idTrabajador = '" + buscar + "' or p.nombres like '%" + buscar + "%' && p.estado = 'INACTIVO'";
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sSQL);

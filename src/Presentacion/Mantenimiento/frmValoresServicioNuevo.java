@@ -10,7 +10,7 @@ import Datos.DServicios;
 import Logica.LCuadrillas;
 import Logica.LEstados;
 import Logica.LServicios;
-import static Presentacion.Mantenimiento.frmValoresCuadrillaNuevo.txtNombreCuadrilla;
+//import static Presentacion.Mantenimiento.frmValoresCuadrillaNuevo.txtNombreCuadrilla;
 import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
